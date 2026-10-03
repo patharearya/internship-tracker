@@ -1,78 +1,154 @@
-# NC Power Grid — Project Brief
+# Internship Tracker — Project Brief
 
 ## Problem
-People can't see when their electricity is cleanest or when the grid is under
-strain. The data is public (EIA) but raw and hard to read. This app turns it
-into a plain answer: how clean and how strained NC's grid is now, and which
-hours are usually cleanest.
+Students check dozens of career pages and lists every day to catch internships
+the moment they open, because early applicants are seen first. Postings are
+scattered across employers' own sites, there is no single place that shows when
+each one opened and closed, and nothing predicts when a company will open again.
+NC students have it worst: national lists are dominated by big-city roles.
 
-## User
-Anyone in North Carolina. Browse-only: the app works the moment it opens, with
-no input beyond choosing a region. No user-supplied data, no crowdsourcing.
+## User and promise
+A college student, NC-focused. Browse-only: the app is useful the moment it
+opens. Users filter and plan; they never supply the data.
 
-## Decisions log
-- Project: NC power grid dashboard (replaced gas prices and research finder:
-  no free per-station gas prices; research finder not what we wanted).
-- Data: free public data only. Source: EIA API v2 (free key).
-- Main answer: cleanest hours as the headline, grid strain alongside.
-  Electricity cost is out of v1.
-- Regions: NC balancing authorities only (Duke Energy's). Exact codes come
-  from the data, not memory.
-- Carbon: computed in our code from hourly fuel mix x emission factors kept
-  in a file. Not EIA's spreadsheets.
-- History: backfill about a year on first run, then poll hourly.
-- Language: Java 21, Maven. SQLite for storage. JUnit for tests.
-- Build order: terminal first in VS Code; UI only after terminal output is right.
-- Runs locally for v1; hosting decided later.
+The app shows:
+- Live internship postings, updated hourly.
+- When each posting opened and when it closed (recorded by our own monitoring).
+- Deadlines where the source publishes one.
+- Filters: NC / remote / national; in person / hybrid / remote; undergrad / grad.
+- Full descriptions where the source provides them.
+- A planner: save postings and see them as a schedule.
+- "Opening soon" predictions from last season's recorded open dates.
 
-## Known limits (the app must say these plainly)
-- EIA has a demand forecast but no fuel-mix forecast. "Best hours today" means
-  "typically cleanest hours", from history, never presented as a forecast.
-- Data is hourly and delayed. Every output shows "data as of <hour>".
-- No capacity figure in hourly data, so strain must be defined relative to the
-  region's own recent demand.
+## Project parameters (fixed)
+1. Free (data, tools, hosting choices).
+2. Java.
+3. Solves a real problem; at minimum, a real convenience.
+4. Real-world data from original (first-party) sources.
+5. Live: updates constantly.
+6. Works without users entering data.
+7. Passes the test "would people actually open it?"
 
-## Data source
-EIA API v2 (https://www.eia.gov/opendata/):
-- electricity/rto/fuel-type-data: hourly generation by fuel, per region.
-- electricity/rto/region-data: hourly demand, demand forecast, net generation,
-  interchange.
-- Values arrive as strings (since Jan 2024) and must be parsed explicitly.
-- Hourly data is offered in UTC and local time; pick one deliberately.
-- EIA echoes the API key in responses: saved files must have it removed.
+## Data sources
+Postings come ONLY from first-party sources:
+- **Greenhouse, Lever, Ashby** public job board feeds: each employer's own
+  openings (title, location, description, dates, link). No key believed needed.
+- **USAJOBS API** (official, free key): federal internships incl. Pathways,
+  with real closing dates.
+- Later candidate: **NSF REU Sites** (funded undergrad research programmes,
+  many at NC universities, real deadlines).
+
+Community lists (e.g. SimplifyJobs Summer2027-Internships on GitHub) are used
+ONLY for discovery: their application links reveal which companies use which
+hiring system. No posting data is taken from them. Their repo states no
+licence; permission question open (see SimplifyJobs issue #9700).
+
+Not used: LinkedIn, Handshake, Indeed, Glassdoor, Nextdoor (no free public API,
+terms prohibit scraping). Reddit deferred: low signal, terms risk.
+
+Known coverage gap: employers on Workday (and others without public feeds) are
+not visible. The app must say coverage is partial, never imply completeness.
+
+## How it works
+Two jobs, both plain code. No AI in the pipeline (models judge, code computes).
+
+**Discovery (builds the watch list)**
+1. Harvest application links from community lists (and their git history);
+   extract (company, hiring system, board name), e.g.
+   `boards.greenhouse.io/acme` -> Acme, Greenhouse, `acme`.
+2. Probe a seed list of company names (NC employers + large national ones)
+   against each hiring system's board address. Hits are added; misses logged
+   with a reason.
+
+**Monitoring (hourly)**
+For each watched board, and for USAJOBS:
+1. Fetch the feed; save the raw response unchanged (data/raw/).
+2. Keep internships (title and other signals); log every rejected posting with
+   its reason.
+3. Compare with stored state: new -> opened; gone -> closed; changed -> record
+   the change.
+4. Store in SQLite. The website reads only from the database.
+
+    discovery -> watch list
+    hourly: fetch feed -> raw snapshot -> internship filter -> diff vs DB -> SQLite -> site
+                                               |
+                                               +-> rejections logged with reasons
+
+## Stack
+- Java 21, Maven, Java's built-in HTTP client, Jackson for JSON.
+- SQLite via JDBC (sqlite-jdbc). JUnit 5.
+- Later: Javalin for the web server; plain HTML/CSS/JavaScript front end.
+- Runs locally first; hosting decided later (needs persistent disk for SQLite).
+
+## Field availability (what we can honestly show)
+| Field | Source | Notes |
+|---|---|---|
+| Opened date | Our monitoring (first seen) | Feed posting date where provided |
+| Closed date | Our monitoring (disappeared) | Only from when we start recording |
+| Deadline | USAJOBS, REU | Most company internships are rolling |
+| Undergrad / grad | Title, description text | Label uncertain cases as uncertain |
+| In person / hybrid / remote | Location field, text | Only when stated |
+| NC / national | Location field | Normalise messy location text |
+| Description | Greenhouse, Lever, Ashby, USAJOBS | Fetched from source |
 
 ## To measure in the spike (do not assume)
-- Which region codes cover NC.
-- How many hours behind "now" the data runs, per region and per fuel.
-- Which fuel types appear, and how often hours are missing or values empty.
-- Which fields actually come back.
+- Exact endpoints and fields for Greenhouse, Lever, Ashby board feeds; whether
+  descriptions and posting dates are included; rate limits or terms.
+- USAJOBS: key/registration requirements (believed: key plus an email in the
+  User-Agent), fields, NC and internship filters.
+- From the Simplify list: how many application links point to Greenhouse,
+  Lever, Ashby, Workday, or other; i.e. how much a first-party pipeline covers.
+- How many NC internships those boards actually contain right now.
+- Typical feed sizes and response times (sets a polite polling rate).
 
 ## Open questions (for grill-me)
-1. Grid strain: exact definition (e.g. percentile of trailing N days of demand?)
-   and how it's labelled (low / normal / high?).
-2. "Typical cleanest hours": grouped by month, weekday vs weekend, season?
-   How many weeks of history before a pattern is trusted?
-3. Emission factors: which published source, and per which fuels?
-   What about imports from neighbouring regions and "other" fuel?
-4. Missing or late data: skip the hour, show a gap, or carry forward?
-   When is data too stale to show at all?
-5. Time zone: store UTC and display Eastern? Daylight saving edge cases.
-6. Terminal commands: what exactly do `now` and `best` print?
-7. Raw snapshots: commit them to git or keep them local?
-8. Polling: what runs the hourly job locally (cron / Task Scheduler)?
-9. Anything else the interview uncovers.
+1. Scope of roles: CS/tech only, or all majors?
+2. Which companies: NC criteria, and what makes a national company "large"
+   enough to include?
+3. Internship detection rules: intern, co-op, summer, part-time? New-grad roles
+   excluded? How do we check the filter isn't missing real internships?
+4. Undergrad vs grad classification and how uncertainty is labelled.
+5. Remote / hybrid / in-person classification from messy location text.
+6. Closure: a posting missing from one fetch could be a glitch. How many
+   consecutive misses before "closed"? (named constant)
+7. Duplicates: the same internship in two sources or two locations.
+8. Deadlines: shown only where published; how rolling postings are labelled.
+9. Planner: what users can do (save, status, notes?) and where it's stored
+   (browser only vs accounts).
+10. "Opening soon": what history counts, and minimum evidence before predicting.
+11. Discovery sources in v1, and how we measure companies we're missing.
+12. Polling politeness: rate limits, identifying User-Agent, backoff on errors.
+13. REU in v1 or later.
+14. Permission for using community lists as a discovery index.
 
 ## Milestones
-1. Spike: list regions, pull 7 days for NC, save raw, print a data summary.
-2. Second grill on the spike's real output.
-3. Ingest: clean, reject-with-reason, load SQLite; replayable from raw files.
-4. Compute: carbon intensity, strain, typical-hour profiles.
-5. Terminal report: `now` and `best`.
-6. Hourly polling.
-7. UI.
+1. **Spike:** verify each feed's endpoints and fields with real requests; save
+   raw responses; harvest and count links by hiring system; count NC internships.
+2. **Second grill** on the spike's real output.
+3. **Discovery:** build the watch list from links and name probing; log misses.
+4. **Monitoring:** hourly fetch, internship filter, diff, opened/closed history,
+   SQLite. Replayable from raw snapshots.
+5. **Terminal commands:** e.g. `new`, `closing`, `search --nc --remote`, to
+   check results before any UI.
+6. **USAJOBS** adapter into the same common record.
+7. **UI:** list, filters, posting detail, planner.
+8. **Opening-soon predictions** once history exists.
+9. **Hosting** so it is a live website.
 
 ## Verification
-- Tests replay saved raw responses, not live calls.
+- Tests replay saved raw responses, never live calls.
 - Every test is broken on purpose once to confirm it fails.
-- Dev log (docs/devlog.md): one entry per significant defect, including the
-  first diagnosis.
+- The internship filter is checked against a hand-labelled sample of real
+  postings (kept, and wrongly rejected), and re-checked after every rule change.
+- Rejections and discovery misses are always logged with reasons.
+- Dev log (docs/devlog.md): one entry per significant defect: what broke, the
+  first diagnosis, and the measurement that settled it.
+
+## Decisions log
+- Project: NC-focused live internship tracker and planner (replaced gas prices,
+  research finder, and power grid ideas).
+- Data: first-party sources only (employer hiring feeds, USAJOBS). Community
+  lists used only to discover companies.
+- No AI in the pipeline.
+- Language: Java 21, Maven. Storage: SQLite.
+- Build order: terminal first; UI after results are right. Local first.
