@@ -133,8 +133,9 @@ One Java program, run hourly by GitHub Actions. No AI in the pipeline.
   `etap.nsf.gov` application portal; see devlog). No deadline field.
   `dirAbbr` (BIO, CISE, ENG, MPS...) maps to majors.
 - USAJOBS (needs `Authorization-Key` header and the registered email as
-  User-Agent): `Keyword=intern` gives 632, 25/25 sampled titles are
-  internships, each with occupational series code, `PublicationStartDate`,
+  User-Agent): `Keyword=intern` gives 632; the first 25 (relevance-ordered)
+  are all internships, but across all 632 only ~40 are (the search also
+  matches "internal" and description text; see devlog). Each has occupational series code, `PublicationStartDate`,
   `ApplicationCloseDate`, `HiringPath`, `RemoteIndicator`, `TeleworkEligible`.
   `HiringPath=student` is imprecise (123, only 3/25 titles internships: it
   means "students may apply", not "internship"). Some intern postings are
