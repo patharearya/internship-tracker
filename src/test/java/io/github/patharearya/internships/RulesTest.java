@@ -18,7 +18,11 @@ class RulesTest {
     void internshipFilterKeeps() {
         for (String t : List.of("Software Engineer Intern", "Product Manager Intern", "Summer Analyst - Investment Banking",
                 "Co-op, Mechanical Engineering", "Data Science Internship (Summer 2027)", "Student Trainee (Accounting)",
-                "Apprentice Electrician", "Graduate Intern - PhD", "Marketing Interns", "Student Volunteer"))
+                "Apprentice Electrician", "Graduate Intern - PhD", "Marketing Interns", "Student Volunteer",
+                // from the labelled sample (2026-10-04)
+                "Engineering/Manufacturing Co-op_Spring 2027", "Thermal Associate Engineer (Summer 2027)",
+                "Payments, Alternate Solutions Group, Summer 2027 Analyst", "Early Career Intern - ETF Product",
+                "Product Manager, Intern", "Junior IWMS Project Manager - Intern"))
             assertNull(Rules.reject(job(t)), t);
     }
 
@@ -31,6 +35,10 @@ class RulesTest {
         assertTrue(Rules.reject(job("Recruiter, Early Talent & Interns")).startsWith("runs the programme"));
         assertTrue(Rules.reject(job("Postdoctoral Fellow, Genomics")).startsWith("not a student role"));
         assertTrue(Rules.reject(job("New Grad Software Engineer (Intern Conversion)")).startsWith("not a student role"));
+        assertTrue(Rules.reject(job("Coordinator, Internship Programs")).startsWith("runs the programme"));
+        assertTrue(Rules.reject(job("2027 Early Career Program - Associate Underwriter")).startsWith("no internship keyword"));
+        assertTrue(Rules.reject(job("Associate Product Manager (starting summer 2027)")).startsWith("no internship keyword"));
+        assertTrue(Rules.reject(job("Materials Engineer (New Grad Summer 2027)")).startsWith("not a student role"));
     }
 
     @Test

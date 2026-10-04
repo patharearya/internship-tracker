@@ -92,3 +92,60 @@ break-on-purpose test had compiled `DESCRIPTION_SHARDS = 32` and the source
 was restored without recompiling. The round trip still said "identical",
 since writer and reader shared the wrong constant. A round trip through the
 same code cannot catch a wrong constant; the file count did.
+
+## 2026-10-04 — a queued run computed on stale data
+
+**What broke:** the 15:48 scheduled run failed after 49 minutes with a
+rebase conflict on `data/` when pushing.
+
+**First diagnosis:** two runs writing `data/` at once, i.e. the `concurrency`
+group not working.
+
+**What settled it:** the run log. Concurrency worked: the run waited in the
+queue until the manual run finished at 16:33. But `actions/checkout` checks
+out the commit that triggered the run (`318ffa1`), not the branch head, so it
+compared against the previous `postings.json` and then collided with the
+manual run's data commit. A clean rebase would have been worse: results from
+stale data published silently. Every Workday run (81 min) queues the next
+hourly run, so this was going to recur every third hour. Fix: check out
+`ref: main`, read when the queued job actually starts.
+
+## 2026-10-04 — the labelled sample: first reading of the labels was backwards
+
+**What broke:** the first scoring of the 197 hand labels said 96 of 97
+rejected postings were wrongly rejected, including "Vice President,
+Operations", "Dean, College of Aeronautics" and "Plumber (South West)".
+
+**First diagnosis:** none adopted; it looked like the labelling page (wrong
+row saved, or keyboard shortcut hitting the wrong row).
+
+**What settled it:** the saved answers' timestamps and the owner. Answers
+were in page order, one write each, the rejected rows at 0.6-1.7 s per row
+against 4.6 s on kept rows. Asked directly: Yes meant "the rule was right",
+not "belongs in the app". The page showed "Rule: rejected" under each title
+and never said which question Yes answered. Read the right way round, the
+labels agreed with the rules on all but one rejected row; going through the
+fast-labelled rows with the owner found 14 real misses (agreed), in four
+rules. Next labelling page asks one unmistakable question per row.
+
+## 2026-10-04 — four filter rules wrong on the labelled sample
+
+**What broke:** 14 of 97 sampled rejections were real student roles:
+"Engineering/Manufacturing Co-op_Spring 2027" (no keyword),
+"Product Manager, Intern" and "Junior IWMS Project Manager - Intern" (runs
+the programme), "Early Career Intern - ETF Product" (not a student role),
+"Thermal Associate Engineer (Summer 2027)" (no keyword).
+
+**First diagnosis:** the keyword list too short.
+
+**What settled it:** reading the regexes against each title. Only the last
+was a short list. `_` is a word character, so `\bco-?op\b` cannot match
+"Co-op_Spring"; fixed for every title rule (type, major, level, arrangement
+too), not just the filter. "Manager, Intern" matched the programme-runner
+pattern; it now needs "intern program(me)". "Early career" vetoed an explicit
+"Intern"; now not when followed by it. A dated term ("Summer 2027") now keeps,
+except "starting summer 2027", a full-time start date found by replaying the
+change over the whole run. Replay over all 75,220 title rejections and 8,882
+kept postings: 77 rejected -> kept (all read, all student roles), 0 kept ->
+rejected. `LabelledSampleTest` replays the 197 rows; 14 wrong -> 0; one row
+not replayable (USAJOBS eligibility is not in rejections.tsv).

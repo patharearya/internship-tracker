@@ -19,22 +19,33 @@ public final class Rules {
 
     // ---------- internship filter ----------
 
+    // "summer 2027" dates a term, which a regular job never has ("Summer 2027 Analyst", "Associate Engineer (Summer 2027)");
+    // "starting summer 2027" is a full-time start date
     private static final Pattern KEEP = Pattern.compile(
             "\\b(interns?|internships?|co-?ops?|apprentices?|apprenticeships?|fellows?|fellowships?"
-                    + "|student trainee|student volunteer|summer (analyst|associate|scholar)s?)\\b", Pattern.CASE_INSENSITIVE);
+                    + "|student trainee|student volunteer|summer (analyst|associate|scholar)s?|(?<!start(ing)? )summer 20\\d\\d|20\\d\\d summer)\\b",
+            Pattern.CASE_INSENSITIVE);
+    /** "Early Career Intern" is an internship; "early career" alone is a new-grad job. */
     private static final Pattern NOT_STUDENT = Pattern.compile(
-            "\\b(new grad(uate)?s?|university grad(uate)?s?|recent grad(uate)?s?|entry[- ]level|early career"
+            "\\b(new grad(uate)?s?|university grad(uate)?s?|recent grad(uate)?s?|entry[- ]level|early career(?! intern)"
                     + "|post-?doc(toral)?|distinguished fellow|senior fellow|clinical fellow|medical fellow)\\b", Pattern.CASE_INSENSITIVE);
-    /** Jobs running an internship programme, e.g. "Internship Program Manager", "Recruiter, Early Talent & Interns". */
+    /**
+     * Jobs running an internship programme, e.g. "Internship Program Manager", "Recruiter, Early Talent & Interns".
+     * "Product Manager, Intern" is an intern: after the role, a bare "intern" names the job's level, not its subject.
+     */
     private static final Pattern RUNS_PROGRAMME = Pattern.compile(
             "\\b(internships?|interns?) (program(me)?s? )?(manager|coordinator|director|recruiter|lead|partner)\\b"
-                    + "|\\b(manager|coordinator|director|recruiter|lead|partner)(,| of| for| -) (the )?(early talent|university|campus|internships?|interns?)\\b",
+                    + "|\\b(manager|coordinator|director|recruiter|lead|partner)(,| of| for| -) (the )?(early talent|university|campus"
+                    + "|(internships?|interns?) program(me)?s?)\\b",
             Pattern.CASE_INSENSITIVE);
+
+    /** Titles as words: "_" is a word character to regex, so "Co-op_Spring 2027" had no "co-op" (labelled sample). */
+    static String words(String title) { return title.replace('_', ' '); }
 
     /** Why a posting is rejected, or null to keep it. */
     public static String reject(Posting p) {
         if (isResearch(p)) return outsideUs(p) ? "outside US" : null;
-        String t = p.title();
+        String t = words(p.title());
         if (!KEEP.matcher(t).find()) return "no internship keyword in title";
         Matcher m = NOT_STUDENT.matcher(t);
         if (m.find()) return "not a student role: \"" + m.group() + "\"";
@@ -55,7 +66,7 @@ public final class Rules {
 
     static String type(Posting p) {
         if (isResearch(p)) return "research programme";
-        String t = p.title().toLowerCase(Locale.ROOT);
+        String t = words(p.title()).toLowerCase(Locale.ROOT);
         if (t.matches(".*\\bapprentice(ship)?s?\\b.*")) return "apprenticeship";
         if (t.matches(".*\\bfellow(ship)?s?\\b.*")) return "fellowship";
         if (t.matches(".*\\bco-?ops?\\b.*")) return "co-op";
@@ -103,7 +114,7 @@ public final class Rules {
 
     /** Title first, then the source's own category (department, series code, directorate), then Other. */
     static Label major(Posting p) {
-        Label byTitle = matchMajor(p.title(), "title");
+        Label byTitle = matchMajor(words(p.title()), "title");
         if (byTitle != null) return byTitle;
         String c = p.category();
         if (c != null) {
@@ -144,7 +155,7 @@ public final class Rules {
 
     /** undergrad / grad / both / unknown. Never bare "graduate": "graduating in 2027" describes a senior. */
     static Label level(Posting p) {
-        String text = p.title() + "\n" + Objects.toString(p.description(), "");
+        String text = words(p.title()) + "\n" + Objects.toString(p.description(), "");
         Matcher g = GRAD.matcher(text), u = UNDERGRAD.matcher(text);
         boolean isG = g.find(), isU = u.find();
         if (isG && isU) return new Label("both", "\"" + u.group() + "\" and \"" + g.group() + "\"");
@@ -175,7 +186,7 @@ public final class Rules {
             if (l.contains("remote")) return new Label("remote", "source field \"" + w + "\"");
             if (l.contains("onsite") || l.contains("on-site") || l.contains("office")) return new Label("in-person", "source field \"" + w + "\"");
         }
-        String head = p.title() + " | " + String.join(" | ", p.locations());
+        String head = words(p.title()) + " | " + String.join(" | ", p.locations());
         Label l = firstOf(head, "title/location", HYBRID, REMOTE, ONSITE);
         if (l != null) return l;
         l = firstOf(Objects.toString(p.description(), ""), "description", DESC_HYBRID, DESC_REMOTE, DESC_ONSITE);
