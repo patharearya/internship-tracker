@@ -128,8 +128,17 @@ One Java program, run hourly by GitHub Actions. No AI in the pipeline.
   gives `startDate`, country, full description. "intern" search is precise
   (20/20 titles) but worldwide (6/20 US); `Location_Country` and
   `jobFamilyGroup` facets exist. List call ~2.4 s.
-- NSF: 724 active "REU Site" awards; only 5 of 25 sampled abstracts contain a
-  URL. No deadline field.
+- NSF: 724 active "REU Site" awards. Only 3 of 25 sampled abstracts link to a
+  programme page (5 contain a URL, but 2 of those are only the generic
+  `etap.nsf.gov` application portal; see devlog). No deadline field.
+  `dirAbbr` (BIO, CISE, ENG, MPS...) maps to majors.
+- USAJOBS (needs `Authorization-Key` header and the registered email as
+  User-Agent): `Keyword=intern` gives 632, 25/25 sampled titles are
+  internships, each with occupational series code, `PublicationStartDate`,
+  `ApplicationCloseDate`, `HiringPath`, `RemoteIndicator`, `TeleworkEligible`.
+  `HiringPath=student` is imprecise (123, only 3/25 titles internships: it
+  means "students may apply", not "internship"). Some intern postings are
+  internal-only (`fed-internal-search`), which students can't apply to.
 - NIH R25 FY2026: 881 total, mostly faculty/trainee programmes, not student
   openings. Text filter "undergraduate summer research" gives 222, all real
   summer undergraduate programmes in the sample.
