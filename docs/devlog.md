@@ -35,6 +35,25 @@ the defect is upstream, not in `merge`. Splitting by state was worse (672).
 Fix: NSF closes after 24 consecutive misses instead of 3; entries carry
 over, so the published set fills in across runs.
 
+## 2026-10-04 — one employer's 403 paused all 1,158 Workday boards
+
+**What broke:** the first full run skipped 1,090 Workday boards. One tenant
+(`amplify.wd1.myworkdayjobs.com`) answered 403, and the rule "a refusal
+pauses the whole hiring system" (grill Q9) applied it to every Workday
+employer, persisted in `state.json`, so every later run would skip them too.
+
+**First diagnosis:** none needed; the run report listed 1,090 "skipped:
+system paused" lines. The cause was the rule's premise: one system = one
+server. True for Lever, Greenhouse and Ashby; false for Workday, where every
+employer is its own host.
+
+**What settled it:** a test with a fake fetcher refusing one tenant
+(`PauseTest`): pausing by system skips the other tenant's board, pausing by
+host does not. Fix: pause per host (grill Q22); stale pause cleared.
+Also fixed from the same run: Ashby board names with spaces (6 boards, URL
+not encoded) and Greenhouse EU boards (10, `boards-api.eu.greenhouse.io` does
+not resolve; EU boards are served by the main API host).
+
 ## 2026-10-04 — USAJOBS "25/25 are internships" was the first page only
 
 **What broke:** the spike recorded that `Keyword=intern` results are all

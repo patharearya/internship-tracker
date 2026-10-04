@@ -19,12 +19,13 @@ import java.util.List;
 import java.util.Map;
 
 /** Live HTTP. Everything here is thin: parsing lives in Parse, so tests replay saved responses instead. */
-public final class Fetch {
+public class Fetch {
     static final ObjectMapper JSON = new ObjectMapper();
 
-    /** Thrown for 403/429: the whole system must stop and be looked at by a person. */
+    /** Thrown for 403/429: that server must not be called again until a person has looked (grill Q9, Q22). */
     static final class Refused extends IOException {
-        Refused(String msg) { super(msg); }
+        final String host;
+        Refused(String host, String msg) { super(msg); this.host = host; }
     }
 
     /** {@code rawCount} is every posting on the board before filtering, for the sudden-drop check. */
@@ -169,7 +170,7 @@ public final class Fetch {
                 .setHeader("User-Agent", req.build().headers().firstValue("User-Agent").orElse(userAgent)).build();
         HttpResponse<String> res = http.send(r, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
         int s = res.statusCode();
-        if (s == 403 || s == 429) throw new Refused("HTTP " + s + " from " + r.uri().getHost());
+        if (s == 403 || s == 429) throw new Refused(r.uri().getHost(), "HTTP " + s + " from " + r.uri().getHost());
         if (s != 200) throw new IOException("HTTP " + s + " for " + r.uri());
         return res.body();
     }

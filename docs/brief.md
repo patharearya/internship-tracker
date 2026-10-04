@@ -217,3 +217,9 @@ Grill held 2026-10-03. Superseded entries are kept, marked, for the record.
   research". REU entries without a programme link point to NSF's public award
   page (linked, not fetched). Workday frequency set after timing the first
   full run: over an hour -> Workday every 3 hours, rest hourly.
+- First full run (2026-10-04): 3,396 open postings in 342 s, but Workday
+  measured ~5 s per board (~95 min for all), so Workday runs every 3rd hour.
+- Q22 a 403/429 pauses only the server that sent it, not the whole hiring
+  system (supersedes that part of Q9). Workday is one server per employer;
+  Greenhouse, Lever, Ashby each one shared server. Pauses persist in
+  `data/state.json` until a person removes them.

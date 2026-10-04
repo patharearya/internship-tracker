@@ -866,7 +866,7 @@
   "system" : "ashby",
   "key" : "hippocratic ai",
   "company" : "Hippocratic AI",
-  "api" : "https://api.ashbyhq.com/posting-api/job-board/Hippocratic AI",
+  "api" : "https://api.ashbyhq.com/posting-api/job-board/Hippocratic%20AI",
   "from" : "simplify"
 }, {
   "system" : "ashby",
@@ -1094,7 +1094,7 @@
   "system" : "ashby",
   "key" : "marathon fusion",
   "company" : "Marathon Fusion",
-  "api" : "https://api.ashbyhq.com/posting-api/job-board/Marathon Fusion",
+  "api" : "https://api.ashbyhq.com/posting-api/job-board/Marathon%20Fusion",
   "from" : "simplify"
 }, {
   "system" : "ashby",
@@ -1628,7 +1628,7 @@
   "system" : "ashby",
   "key" : "remedy scientific",
   "company" : "Remedy Scientific",
-  "api" : "https://api.ashbyhq.com/posting-api/job-board/Remedy Scientific",
+  "api" : "https://api.ashbyhq.com/posting-api/job-board/Remedy%20Scientific",
   "from" : "simplify"
 }, {
   "system" : "ashby",
@@ -1832,7 +1832,7 @@
   "system" : "ashby",
   "key" : "superhuman platform inc",
   "company" : "Superhuman",
-  "api" : "https://api.ashbyhq.com/posting-api/job-board/Superhuman Platform Inc",
+  "api" : "https://api.ashbyhq.com/posting-api/job-board/Superhuman%20Platform%20Inc",
   "from" : "simplify"
 }, {
   "system" : "ashby",
@@ -1904,7 +1904,7 @@
   "system" : "ashby",
   "key" : "the browser company",
   "company" : "The Browser Company",
-  "api" : "https://api.ashbyhq.com/posting-api/job-board/the browser company",
+  "api" : "https://api.ashbyhq.com/posting-api/job-board/the%20browser%20company",
   "from" : "simplify"
 }, {
   "system" : "ashby",
@@ -2048,7 +2048,7 @@
   "system" : "ashby",
   "key" : "verne robotics",
   "company" : "Verne Robotics",
-  "api" : "https://api.ashbyhq.com/posting-api/job-board/Verne Robotics",
+  "api" : "https://api.ashbyhq.com/posting-api/job-board/Verne%20Robotics",
   "from" : "simplify"
 }, {
   "system" : "ashby",
@@ -2474,7 +2474,7 @@
   "system" : "greenhouse",
   "key" : "axiomaticai",
   "company" : "Axiomatic AI",
-  "api" : "https://boards-api.eu.greenhouse.io/v1/boards/axiomaticai/jobs?content=true",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/axiomaticai/jobs?content=true",
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
@@ -3338,7 +3338,7 @@
   "system" : "greenhouse",
   "key" : "gensyn",
   "company" : "Gensyn",
-  "api" : "https://boards-api.eu.greenhouse.io/v1/boards/gensyn/jobs?content=true",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/gensyn/jobs?content=true",
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
@@ -3542,7 +3542,7 @@
   "system" : "greenhouse",
   "key" : "imc",
   "company" : "IMC Trading",
-  "api" : "https://boards-api.eu.greenhouse.io/v1/boards/imc/jobs?content=true",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/imc/jobs?content=true",
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
@@ -3806,7 +3806,7 @@
   "system" : "greenhouse",
   "key" : "lhvuk",
   "company" : "LHV Bank",
-  "api" : "https://boards-api.eu.greenhouse.io/v1/boards/lhvuk/jobs?content=true",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/lhvuk/jobs?content=true",
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
@@ -3878,7 +3878,7 @@
   "system" : "greenhouse",
   "key" : "mangroup",
   "company" : "Man Group",
-  "api" : "https://boards-api.eu.greenhouse.io/v1/boards/mangroup/jobs?content=true",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/mangroup/jobs?content=true",
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
@@ -4040,7 +4040,7 @@
   "system" : "greenhouse",
   "key" : "nice",
   "company" : "NICE",
-  "api" : "https://boards-api.eu.greenhouse.io/v1/boards/nice/jobs?content=true",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/nice/jobs?content=true",
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
@@ -4220,7 +4220,7 @@
   "system" : "greenhouse",
   "key" : "physicsx",
   "company" : "PhysicsX",
-  "api" : "https://boards-api.eu.greenhouse.io/v1/boards/physicsx/jobs?content=true",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/physicsx/jobs?content=true",
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
@@ -4664,7 +4664,7 @@
   "system" : "greenhouse",
   "key" : "speechmatics",
   "company" : "Speechmatics",
-  "api" : "https://boards-api.eu.greenhouse.io/v1/boards/speechmatics/jobs?content=true",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/speechmatics/jobs?content=true",
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
@@ -4712,7 +4712,7 @@
   "system" : "greenhouse",
   "key" : "superbet",
   "company" : "Superbet",
-  "api" : "https://boards-api.eu.greenhouse.io/v1/boards/superbet/jobs?content=true",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/superbet/jobs?content=true",
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
@@ -4958,7 +4958,7 @@
   "system" : "greenhouse",
   "key" : "veeamsoftware",
   "company" : "Veeam Software",
-  "api" : "https://boards-api.eu.greenhouse.io/v1/boards/veeamsoftware/jobs?content=true",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/veeamsoftware/jobs?content=true",
   "from" : "simplify"
 }, {
   "system" : "greenhouse",

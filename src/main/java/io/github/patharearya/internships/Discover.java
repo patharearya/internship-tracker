@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import java.net.URI;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
@@ -56,26 +57,32 @@ public final class Discover {
         }
         String from = "simplify";
         if (host.endsWith("greenhouse.io")) {
+            // EU boards (job-boards.eu.greenhouse.io) are served by the same API host; boards-api.eu does not resolve
             String b = !path.isEmpty() && !path.get(0).equals("embed") ? path.get(0) : query(u, "for");
-            String api = host.contains(".eu.") ? "https://boards-api.eu.greenhouse.io" : "https://boards-api.greenhouse.io";
-            return b == null ? null : new Board("greenhouse", b.toLowerCase(Locale.ROOT), null, api + "/v1/boards/" + b.toLowerCase(Locale.ROOT) + "/jobs?content=true", from);
+            return b == null ? null : new Board("greenhouse", b.toLowerCase(Locale.ROOT), null,
+                    "https://boards-api.greenhouse.io/v1/boards/" + enc(b.toLowerCase(Locale.ROOT)) + "/jobs?content=true", from);
         }
         if (host.endsWith("lever.co") && !path.isEmpty()) {
             String b = path.get(0).toLowerCase(Locale.ROOT);
             String api = host.contains(".eu.") ? "https://api.eu.lever.co" : "https://api.lever.co";
-            return new Board("lever", b, null, api + "/v0/postings/" + b + "?mode=json", from);
+            return new Board("lever", b, null, api + "/v0/postings/" + enc(b) + "?mode=json", from);
         }
         if (host.equals("jobs.ashbyhq.com") && !path.isEmpty()) {
-            String b = path.get(0);
-            return new Board("ashby", b.toLowerCase(Locale.ROOT), null, "https://api.ashbyhq.com/posting-api/job-board/" + b, from);
+            String b = path.get(0);   // case-sensitive and may contain spaces, e.g. "Hippocratic AI"
+            return new Board("ashby", b.toLowerCase(Locale.ROOT), null, "https://api.ashbyhq.com/posting-api/job-board/" + enc(b), from);
         }
         if (host.endsWith(".myworkdayjobs.com") && !path.isEmpty()) {
             // optional language segment: /en-US/{site}/job/...
             String site = path.get(0).matches("[a-z]{2}-[A-Z]{2}") && path.size() > 1 ? path.get(1) : path.get(0);
             String tenant = host.substring(0, host.indexOf('.'));
-            return new Board("workday", host + "/" + site, null, "https://" + host + "/wday/cxs/" + tenant + "/" + site, from);
+            return new Board("workday", host + "/" + site, null, "https://" + host + "/wday/cxs/" + tenant + "/" + enc(site), from);
         }
         return null;
+    }
+
+    /** One URL path segment: spaces as %20, not "+". */
+    private static String enc(String segment) {
+        return URLEncoder.encode(segment, StandardCharsets.UTF_8).replace("+", "%20");
     }
 
     private static String query(URI u, String name) {

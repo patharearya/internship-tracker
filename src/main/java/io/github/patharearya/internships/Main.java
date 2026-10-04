@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
+import java.net.URI;
 import java.time.Instant;
+import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.*;
@@ -31,6 +33,7 @@ public final class Main {
     static final int DROP_CHECK_MIN = 5;
     static final double DROP_RATIO = 0.2;
     static final int MAX_BACKOFF_HOURS = 24;
+    static final int WORKDAY_EVERY_HOURS = 3;
 
     /** One posting as published. {@code closed} is the time of the first miss once MISSES_TO_CLOSE is reached. */
     public record Entry(String key, Posting posting, Rules.Labels labels, String firstSeen, String lastSeen,
@@ -43,7 +46,7 @@ public final class Main {
     }
 
     /** Outcome of fetching one board or source. Only "ok" units are compared with the previous run. */
-    record Unit(String id, String system, String status, String detail, int rawCount, List<Posting> postings) {}
+    record Unit(String id, String system, String host, String status, String detail, int rawCount, List<Posting> postings) {}
 
     public static void main(String[] args) throws Exception {
         String email = System.getenv("CONTACT_EMAIL");
@@ -80,10 +83,14 @@ public final class Main {
         // one thread per system, one request at a time within it (grill Q9)
         Map<String, List<Board>> bySystem = new TreeMap<>(boards.stream().collect(Collectors.groupingBy(Board::system)));
         // single-feed sources; keys must equal the board Parse gives their postings, or merge never sees them missing
-        bySystem.put("usajobs", List.of(new Board("usajobs", "usajobs", null, null, "usajobs")));
-        bySystem.put("nsf", List.of(new Board("nsf", "nsf-reu", null, null, "nsf")));
-        bySystem.put("nih", List.of(new Board("nih", "nih-r25", null, null, "nih")));
+        bySystem.put("usajobs", List.of(new Board("usajobs", "usajobs", null, "https://data.usajobs.gov/api/search", "usajobs")));
+        bySystem.put("nsf", List.of(new Board("nsf", "nsf-reu", null, "https://api.nsf.gov/services/v1/awards.json", "nsf")));
+        bySystem.put("nih", List.of(new Board("nih", "nih-r25", null, "https://api.reporter.nih.gov/v2/projects/search", "nih")));
         if (only != null) bySystem.keySet().retainAll(Set.of(only));
+        // Workday takes ~95 min for all boards (first full run), so it runs every third hour (grill Q21); its postings
+        // are simply not compared in the other hours
+        boolean workdayHour = started.atZone(ZoneOffset.UTC).getHour() % WORKDAY_EVERY_HOURS == 0;
+        if (only == null && !workdayHour) bySystem.remove("workday");
         final State st = state;
         ExecutorService pool = Executors.newFixedThreadPool(bySystem.size());
         Map<String, Future<List<Unit>>> futures = new TreeMap<>();
@@ -107,7 +114,7 @@ public final class Main {
                     long hours = Math.min(1L << Math.min(n - 1, 5), MAX_BACKOFF_HOURS);   // 1h, 2h, 4h ... capped at 24h
                     state.failures().put(u.id(), new Failure(n, started.plus(Duration.ofHours(hours)).truncatedTo(ChronoUnit.SECONDS).toString(), u.detail()));
                 }
-                case "refused" -> state.paused().put(u.system(), now + " " + u.detail());
+                case "refused" -> state.paused().put(u.host(), now + " " + u.detail());
                 default -> {}
             }
         }
@@ -152,20 +159,22 @@ public final class Main {
 
     record Kept(Posting posting, Rules.Labels labels) {}
 
-    private static List<Unit> system(Fetch fetch, String system, List<Board> boards, Map<String, Posting> knownWorkday,
+    static List<Unit> system(Fetch fetch, String system, List<Board> boards, Map<String, Posting> knownWorkday,
                                      State state, String now) throws InterruptedException {
         List<Unit> out = new ArrayList<>();
         long gap = system.equals("lever") ? 1000 : 200;   // Lever's robots.txt asks for Crawl-delay: 1
-        String refused = state.paused().get(system);   // state is only read here; the main thread writes it after
+        Map<String, String> refusedNow = new HashMap<>();   // state is only read here; the main thread writes it after
         for (Board b : boards) {
             String id = system + ":" + b.key();
-            if (refused != null) {
-                out.add(new Unit(id, system, "skipped", "system paused: " + refused, 0, List.of()));
+            String host = URI.create(b.api()).getHost();   // Workday: one host per employer; Lever, Greenhouse...: one shared host
+            String paused = refusedNow.getOrDefault(host, state.paused().get(host));
+            if (paused != null) {
+                out.add(new Unit(id, system, host, "skipped", "server paused: " + paused, 0, List.of()));
                 continue;
             }
             Failure f = state.failures().get(id);
             if (f != null && f.nextTry().compareTo(now) > 0) {
-                out.add(new Unit(id, system, "skipped", "backing off until " + f.nextTry() + " after: " + f.lastError(), 0, List.of()));
+                out.add(new Unit(id, system, host, "skipped", "backing off until " + f.nextTry() + " after: " + f.lastError(), 0, List.of()));
                 continue;
             }
             try {
@@ -177,15 +186,15 @@ public final class Main {
                 };
                 Integer last = state.lastCount().get(id);
                 if (last != null && last >= DROP_CHECK_MIN && r.rawCount() < last * DROP_RATIO) {
-                    out.add(new Unit(id, system, "anomaly", "sudden drop " + last + " -> " + r.rawCount() + "; postings left unchanged", r.rawCount(), List.of()));
+                    out.add(new Unit(id, system, host, "anomaly", "sudden drop " + last + " -> " + r.rawCount() + "; postings left unchanged", r.rawCount(), List.of()));
                 } else {
-                    out.add(new Unit(id, system, "ok", null, r.rawCount(), r.postings()));
+                    out.add(new Unit(id, system, host, "ok", null, r.rawCount(), r.postings()));
                 }
             } catch (Fetch.Refused e) {
-                out.add(new Unit(id, system, "refused", e.getMessage(), 0, List.of()));
-                refused = now + " " + e.getMessage();   // stops the rest of this system's boards this run
+                out.add(new Unit(id, system, e.host, "refused", e.getMessage(), 0, List.of()));
+                refusedNow.put(e.host, now + " " + e.getMessage());   // later boards on the same server are skipped this run
             } catch (Exception e) {
-                out.add(new Unit(id, system, "failed", e.getClass().getSimpleName() + ": " + e.getMessage(), 0, List.of()));
+                out.add(new Unit(id, system, host, "failed", e.getClass().getSimpleName() + ": " + e.getMessage(), 0, List.of()));
             }
             Fetch.pause(gap);
         }

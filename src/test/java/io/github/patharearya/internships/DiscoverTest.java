@@ -18,8 +18,10 @@ class DiscoverTest {
         assertEquals("samsungresearchamericainternship", gh.key());
         assertEquals("https://boards-api.greenhouse.io/v1/boards/samsungresearchamericainternship/jobs?content=true", gh.api());
 
-        assertEquals("https://boards-api.eu.greenhouse.io/v1/boards/imc/jobs?content=true",
-                Discover.board("https://job-boards.eu.greenhouse.io/imc/jobs/4823945101").api());
+        assertEquals("https://boards-api.greenhouse.io/v1/boards/imc/jobs?content=true",
+                Discover.board("https://job-boards.eu.greenhouse.io/imc/jobs/4823945101").api(), "EU boards use the main API host");
+        assertEquals("https://api.ashbyhq.com/posting-api/job-board/Hippocratic%20AI",
+                Discover.board("https://jobs.ashbyhq.com/Hippocratic AI/0b1c/application").api(), "spaces encoded, case kept");
         assertEquals("acme", Discover.board("https://boards.greenhouse.io/embed/job_app?for=acme&token=123").key());
 
         Board lv = Discover.board("https://jobs.lever.co/Xpansiv%20/8a1649ec-ef5f-425d-8a36-34f28d67e8a7/apply");
