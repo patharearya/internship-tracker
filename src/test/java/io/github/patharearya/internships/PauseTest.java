@@ -34,7 +34,7 @@ class PauseTest {
         assertEquals("amplify.wd1.myworkdayjobs.com", units.get(0).host());
 
         // a pause saved from an earlier run is also per server
-        Main.State saved = new Main.State(new TreeMap<>(), new TreeMap<>(), new TreeMap<>(Map.of("amplify.wd1.myworkdayjobs.com", "T0 HTTP 403")));
+        Main.State saved = new Main.State(new TreeMap<>(), new TreeMap<>(), new TreeMap<>(Map.of("amplify.wd1.myworkdayjobs.com", "T0 HTTP 403")), null);
         units = Main.system(fake, "workday", boards, Map.of(), saved, "T1");
         assertEquals(List.of("skipped", "skipped", "ok"), units.stream().map(Main.Unit::status).toList());
     }

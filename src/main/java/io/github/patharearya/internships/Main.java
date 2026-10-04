@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.time.Duration;
 import java.net.URI;
 import java.time.Instant;
-import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.*;
@@ -46,8 +45,21 @@ public final class Main {
 
     public record Failure(int count, String nextTry, String lastError) {}
 
-    public record State(Map<String, Integer> lastCount, Map<String, Failure> failures, Map<String, String> paused) {
-        static State empty() { return new State(new TreeMap<>(), new TreeMap<>(), new TreeMap<>()); }
+    /** {@code workdayStarted}: start of the last run that fetched Workday; null before the first. */
+    public record State(Map<String, Integer> lastCount, Map<String, Failure> failures, Map<String, String> paused,
+                        String workdayStarted) {
+        static State empty() { return new State(new TreeMap<>(), new TreeMap<>(), new TreeMap<>(), null); }
+    }
+
+    /**
+     * Workday is due once its last run started WORKDAY_EVERY_HOURS ago. Measured from the last Workday run, not the
+     * clock hour: GitHub drops scheduled runs (5 of ~13 hourly slots fired on 2026-10-04), and with clock hours
+     * Workday went 8 h without a run (devlog 2026-10-04). The slack stops a run started a few minutes early from
+     * pushing Workday a whole hour later.
+     */
+    static boolean workdayDue(String lastStarted, Instant started) {
+        return lastStarted == null || !Instant.parse(lastStarted)
+                .plus(Duration.ofHours(WORKDAY_EVERY_HOURS)).minus(Duration.ofMinutes(30)).isAfter(started);
     }
 
     /** Outcome of fetching one board or source. Only "ok" units are compared with the previous run. */
@@ -77,7 +89,8 @@ public final class Main {
         List<Entry> previous = read("postings.json", new TypeReference<List<Entry>>() {}, List.of());
         Map<String, String> descriptions = readDescriptions();
         State state = read("state.json", new TypeReference<State>() {}, State.empty());
-        state = new State(new TreeMap<>(state.lastCount()), new TreeMap<>(state.failures()), new TreeMap<>(state.paused()));
+        state = new State(new TreeMap<>(state.lastCount()), new TreeMap<>(state.failures()), new TreeMap<>(state.paused()),
+                state.workdayStarted());
 
         Map<String, Posting> knownWorkday = new HashMap<>();
         for (Entry e : previous) {
@@ -93,9 +106,9 @@ public final class Main {
         bySystem.put("nih", List.of(new Board("nih", "nih-r25", null, "https://api.reporter.nih.gov/v2/projects/search", "nih")));
         if (only != null) bySystem.keySet().retainAll(Set.of(only));
         // Workday takes ~95 min for all boards (first full run), so it runs every third hour (grill Q21); its postings
-        // are simply not compared in the other hours
-        boolean workdayHour = started.atZone(ZoneOffset.UTC).getHour() % WORKDAY_EVERY_HOURS == 0;
-        if (only == null && !workdayHour) bySystem.remove("workday");
+        // are simply not compared in the other runs
+        if (only == null && !workdayDue(state.workdayStarted(), started)) bySystem.remove("workday");
+        if (bySystem.containsKey("workday")) state = new State(state.lastCount(), state.failures(), state.paused(), now);
         final State st = state;
         ExecutorService pool = Executors.newFixedThreadPool(bySystem.size());
         Map<String, Future<List<Unit>>> futures = new TreeMap<>();

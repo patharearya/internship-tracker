@@ -29,9 +29,11 @@ Last session: 2026-10-04 (second session that day). Plan and decisions:
 
 ## Next session, in order
 
-1. **Check the first runs on this session's code:** 64 description files
-   committed, no stale-checkout conflict, open count up by roughly the 77
-   newly kept postings (some are outside the US and will still be rejected).
+1. **Check the first Workday run on the `workdayStarted` code** (third
+   session, 2026-10-04): it should run on the first scheduled run after the
+   push, and the Workday open count should rise by most of the ~52 remaining
+   newly kept postings. Already confirmed: 64 description files committed, no
+   stale-checkout conflict, the 25 non-Workday postings all rule flips (devlog).
 2. **Majors.** "Other" is 1,659 of 8,882 (19%). The owner was unsure of the
    major on 18 sampled rows (14 in Other). Sample Other titles, label the
    major only, add missing major rules, extend `labelled-sample.json` and

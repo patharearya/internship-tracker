@@ -149,3 +149,22 @@ change over the whole run. Replay over all 75,220 title rejections and 8,882
 kept postings: 77 rejected -> kept (all read, all student roles), 0 kept ->
 rejected. `LabelledSampleTest` replays the 197 rows; 14 wrong -> 0; one row
 not replayable (USAJOBS eligibility is not in rejections.tsv).
+
+## 2026-10-04 — Workday skipped for 8 hours by dropped scheduled runs
+
+**What broke:** after the filter fix, the open count rose by 25, not the ~77
+the replay predicted. All 5,844 open Workday postings were last seen at
+15:12Z; the two runs on the new code (19:36Z, 23:08Z) did not fetch Workday.
+
+**First diagnosis:** Workday simply had not come round yet; wait for the next
+third hour.
+
+**What settled it:** the run start times. Workday ran only when a run started
+in a UTC hour divisible by 3, and GitHub fired 5 of ~13 hourly slots that day
+(11:06, 12:09, 15:48, 19:36, 23:08), so no run landed in 18, 21 or 00 and
+Workday could wait indefinitely. The 25 were all checked against the 16:33Z
+run's rejections.tsv: every one was a rejection the fixed rules now keep,
+none brand new; the rest of the 77 are on Workday. Workday now runs when its
+last run started 3 h ago (30 min slack), recorded as `workdayStarted` in
+`state.json`; `WorkdayDueTest`. No posting was harmed: skipped systems are
+not compared, so Workday postings gained no misses.

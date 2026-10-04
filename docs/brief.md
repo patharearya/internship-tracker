@@ -223,3 +223,5 @@ Grill held 2026-10-03. Superseded entries are kept, marked, for the record.
   system (supersedes that part of Q9). Workday is one server per employer;
   Greenhouse, Lever, Ashby each one shared server. Pauses persist in
   `data/state.json` until a person removes them.
+- Workday's 3 hours are measured from its last run, not the clock hour:
+  GitHub dropped 8 of ~13 scheduled runs on 2026-10-04 (devlog).
