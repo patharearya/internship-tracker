@@ -34,6 +34,11 @@ public final class Main {
     static final double DROP_RATIO = 0.2;
     static final int MAX_BACKOFF_HOURS = 24;
     static final int WORKDAY_EVERY_HOURS = 3;
+    /**
+     * Descriptions are ~5 KB each and never removed, so one file passes GitHub's 100 MB limit within a season
+     * (43 MB at 8,880 postings). They are split into data/descriptions/{shard}.json; the page computes the same shard.
+     */
+    static final int DESCRIPTION_SHARDS = 64;
 
     /** One posting as published. {@code closed} is the time of the first miss once MISSES_TO_CLOSE is reached. */
     public record Entry(String key, Posting posting, Rules.Labels labels, String firstSeen, String lastSeen,
@@ -70,7 +75,7 @@ public final class Main {
         String now = started.truncatedTo(ChronoUnit.SECONDS).toString();
         List<Board> boards = read("boards.json", new TypeReference<List<Board>>() {}, List.of());
         List<Entry> previous = read("postings.json", new TypeReference<List<Entry>>() {}, List.of());
-        Map<String, String> descriptions = read("descriptions.json", new TypeReference<Map<String, String>>() {}, Map.of());
+        Map<String, String> descriptions = readDescriptions();
         State state = read("state.json", new TypeReference<State>() {}, State.empty());
         state = new State(new TreeMap<>(state.lastCount()), new TreeMap<>(state.failures()), new TreeMap<>(state.paused()));
 
@@ -149,7 +154,7 @@ public final class Main {
         }
 
         write("postings.json", published);
-        write("descriptions.json", newDescriptions);
+        writeDescriptions(newDescriptions);
         write("state.json", state);
         Files.writeString(DATA.resolve("rejections.tsv"), "unit\tid\ttitle\treason\n" + String.join("\n", rejections) + "\n");
         Map<String, Object> report = report(units, merged, rejectedBy, seconds, started, state);
@@ -261,6 +266,25 @@ public final class Main {
     static Posting withDescription(Posting p, String d) {
         return new Posting(p.source(), p.board(), p.id(), p.title(), p.org(), p.url(), p.locations(), p.country(), p.category(),
                 p.workplace(), p.employment(), p.eligibility(), p.posted(), p.deadline(), d);
+    }
+
+    /** Java's String.hashCode; the page must compute the same: h = (31 * h + charCodeAt(i)) | 0 over UTF-16 units. */
+    static int shard(String key) { return Math.floorMod(key.hashCode(), DESCRIPTION_SHARDS); }
+
+    static Map<String, String> readDescriptions() throws IOException {
+        Map<String, String> out = new HashMap<>();
+        for (int i = 0; i < DESCRIPTION_SHARDS; i++)
+            out.putAll(read("descriptions/" + i + ".json", new TypeReference<Map<String, String>>() {}, Map.of()));
+        return out;
+    }
+
+    /** Every shard is written, empty ones as {}, so a shard never keeps descriptions that should be gone. */
+    static void writeDescriptions(Map<String, String> descriptions) throws IOException {
+        List<Map<String, String>> shards = new ArrayList<>();
+        for (int i = 0; i < DESCRIPTION_SHARDS; i++) shards.add(new TreeMap<>());
+        descriptions.forEach((k, v) -> shards.get(shard(k)).put(k, v));
+        Files.createDirectories(DATA.resolve("descriptions"));
+        for (int i = 0; i < DESCRIPTION_SHARDS; i++) write("descriptions/" + i + ".json", shards.get(i));
     }
 
     private static String clean(String s) { return Objects.toString(s, "").replaceAll("[\\t\\n\\r]+", " "); }

@@ -67,3 +67,28 @@ keyword in the title.
 matches "internal" and description text; results are relevance-ordered, so
 the 25 sampled in the spike were the best matches, not a fair sample. The
 filter was right; the spike sample was biased.
+
+## 2026-10-04 — descriptions.json heading for GitHub's 100 MB file limit
+
+**What broke:** nothing yet. After the first complete Workday pass,
+`descriptions.json` was 43 MB for 8,880 postings and only grows (closed
+postings keep theirs). GitHub rejects files over 100 MB, which would fail the
+hourly push and stop the job.
+
+**First diagnosis:** wasted space: HTML-escaped markup, or descriptions kept
+for closed postings.
+
+**What settled it:** measuring the file. No entity escaping, 2.6 MB of tags in
+43 MB, no closed postings yet: it is real text, ~5 KB per posting (Workday 30
+MB). Fix: split into 64 files by Java `String.hashCode` of the key
+(`data/descriptions/{n}.json`, 0.5–0.8 MB each now); the page computes the
+same hash. Migration done with the Java code itself: 8,880 in, 8,880 back,
+identical; the JS formula finds the right file for all 8,880 keys.
+`ShardTest` pins Java to the JS values and went red when the count or the
+negative-hash handling was changed.
+
+**Slip on the way:** the first migration produced 32 files, because the
+break-on-purpose test had compiled `DESCRIPTION_SHARDS = 32` and the source
+was restored without recompiling. The round trip still said "identical",
+since writer and reader shared the wrong constant. A round trip through the
+same code cannot catch a wrong constant; the file count did.

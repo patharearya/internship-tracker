@@ -37,12 +37,21 @@ and how they were settled: [devlog.md](devlog.md).
    (state / remote, arrangement, level), posting detail, saved list
    (browser storage), coverage sentence. Decide first:
    - Pages source: repo root or `/docs`.
-   - Size: `postings.json` is 4 MB and `descriptions.json` 14 MB; load
-     descriptions only when a posting is opened.
+   - Size: `postings.json` is 11 MB (0.5 MB gzipped). Descriptions are in
+     `data/descriptions/{n}.json`, 64 files; load one when a posting is
+     opened, `n` = Java `String.hashCode` of the key, non-negative mod 64
+     (formula in `Main.shard`, pinned by `ShardTest`).
 5. **Thin majors:** Education (19) and Social Sciences (23) are thin. If they
    stay thin after the full Workday pass, hand-add employers for them (Q21).
 
 ## Small items
+
+- From the first complete run (2026-10-04 16:33Z, 8,882 open): 37 Workday
+  boards answer HTTP 422 (Activision, Netflix, Comcast, Lilly, Takeda...),
+  likely one shared cause; 49 Greenhouse/Lever/Ashby boards 404 (moved
+  systems?). Pause times in `state.json` record the run start, not the 403.
+- `postings.json` also only grows (closed entries kept); ~80k entries before
+  100 MB. Decide a retention rule for closed postings before then.
 
 - Tune the "sudden drop" constants (`DROP_CHECK_MIN`, `DROP_RATIO`) once a
   few days of runs are logged.
