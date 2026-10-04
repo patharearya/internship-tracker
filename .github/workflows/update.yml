@@ -27,7 +27,11 @@ jobs:
       CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
       USAJOBS_API_KEY: ${{ secrets.USAJOBS_API_KEY }}
     steps:
+      # the branch head, not the triggering commit: a run queued behind an 81-min Workday run would otherwise
+      # compare against stale data and conflict on push (devlog 2026-10-04)
       - uses: actions/checkout@v7
+        with:
+          ref: main
       - uses: actions/setup-java@v6
         with:
           distribution: temurin
