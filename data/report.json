@@ -1,21 +1,21 @@
 {
-  "started" : "2026-10-05T01:41:47Z",
-  "seconds" : 286,
+  "started" : "2026-10-05T02:00:01Z",
+  "seconds" : 262,
   "open" : 9012,
   "byMajor" : {
-    "Arts, Design & Media" : 141,
-    "Business & Management" : 1256,
-    "Computer Science & IT" : 930,
-    "Data & Mathematics" : 655,
-    "Education" : 36,
-    "Engineering" : 2025,
-    "Finance & Accounting" : 992,
-    "Government, Law & Policy" : 207,
-    "Life Sciences & Health" : 559,
-    "Marketing & Communications" : 310,
-    "Other" : 1539,
-    "Physical Sciences" : 327,
-    "Social Sciences & Psychology" : 35
+    "Arts, Design & Media" : 142,
+    "Business & Management" : 1253,
+    "Computer Science & IT" : 1031,
+    "Data & Mathematics" : 646,
+    "Education" : 41,
+    "Engineering" : 2113,
+    "Finance & Accounting" : 1083,
+    "Government, Law & Policy" : 212,
+    "Life Sciences & Health" : 586,
+    "Marketing & Communications" : 345,
+    "Other" : 1196,
+    "Physical Sciences" : 328,
+    "Social Sciences & Psychology" : 36
   },
   "systems" : {
     "ashby" : {
@@ -29,7 +29,7 @@
         "not a student role" : 1,
         "outside US" : 89
       },
-      "seconds" : 74
+      "seconds" : 75
     },
     "greenhouse" : {
       "units" : {
@@ -38,11 +38,11 @@
       },
       "open" : 1337,
       "rejected" : {
-        "no internship keyword in title" : 30535,
+        "no internship keyword in title" : 30538,
         "not a student role" : 33,
         "outside US" : 292
       },
-      "seconds" : 141
+      "seconds" : 198
     },
     "lever" : {
       "units" : {
@@ -55,7 +55,7 @@
         "not a student role" : 4,
         "outside US" : 112
       },
-      "seconds" : 282
+      "seconds" : 246
     },
     "nih" : {
       "units" : {
