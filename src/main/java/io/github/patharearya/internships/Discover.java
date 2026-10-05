@@ -28,7 +28,25 @@ public final class Discover {
     static final List<Board> HAND = List.of(
             new Board("lever", "brookings", "Brookings Institution", "https://api.lever.co/v0/postings/brookings?mode=json", "hand"),
             new Board("ashby", "morningconsult", "Morning Consult", "https://api.ashbyhq.com/posting-api/job-board/morningconsult", "hand"),
-            new Board("greenhouse", "khanacademy", "Khan Academy", "https://boards-api.greenhouse.io/v1/boards/khanacademy/jobs?content=true", "hand"));
+            new Board("greenhouse", "khanacademy", "Khan Academy", "https://boards-api.greenhouse.io/v1/boards/khanacademy/jobs?content=true", "hand"),
+            // Workday tenants found by probing hosts for a "site not found" answer, sites from their public career links
+            workday("rand", "wd5", "External_Career_Site", "RAND Corporation"),
+            workday("pewtrusts", "wd5", "CenterInternships", "Pew Research Center"),
+            workday("pewtrusts", "wd5", "CenterExternal", "Pew Research Center"),
+            workday("teachforamerica", "wd1", "TFA_Careers", "Teach For America"),
+            workday("successacademies", "wd1", "Success_Academy_Careers", "Success Academy"),
+            workday("uncommonschools", "wd1", "External_Careers", "Uncommon Schools"),
+            workday("cityyear", "wd5", "Cityyear", "City Year"),
+            workday("collegeboard", "wd1", "Careers", "College Board"),
+            workday("scholastic", "wd5", "External", "Scholastic"),
+            workday("cengage", "wd5", "CengageNorthAmericaCareers", "Cengage"),
+            workday("wiley", "wd1", "Wiley_Careers", "Wiley"),
+            workday("curriculumassociates", "wd5", "External", "Curriculum Associates"));
+
+    private static Board workday(String tenant, String wd, String site, String company) {
+        String host = tenant + "." + wd + ".myworkdayjobs.com";
+        return new Board("workday", (host + "/" + site).toLowerCase(Locale.ROOT), company, "https://" + host + "/wday/cxs/" + tenant + "/" + site, "hand");
+    }
 
     public static List<Board> fromListings(JsonNode rows) {
         // one board per system + case-insensitive key; company name counts so the most common spelling wins

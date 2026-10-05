@@ -375,3 +375,23 @@ boundary, so it matched inside "undergraduate students". Replay over all
 open postings with their descriptions: 783 move from both to undergrad, no
 other change; every sampled one is an undergraduate programme (REU sites,
 summer undergraduate research). "both" 3,306 -> 2,523.
+
+## 2026-10-05 — thin majors: misfiled postings and Workday tenants
+
+**What broke:** Education 41 and Social Sciences 36 open postings.
+
+**First diagnosis:** postings in those fields filed under other majors.
+
+**What settled it:** scanning open titles for education and psychology words.
+Few were misfiled: bare "network" sent "Atlas Network" and "In-Patient
+Network" roles to CS (now a weak word; "network engineer", "networking" stay
+CS), and "Therapist Internship (MSW and LPC)" and a psychology REU went to
+Life Sciences (counselling and psychology degrees now ruled first). The same
+scan found "Post Doctoral" (with a space) passing the postdoc filter: 3
+fellowships now rejected. Net: Education 42, Social Sciences 38. The real gap
+is sources: Workday tenants can be found without links, because a made-up
+site on a real tenant answers "not found: Job_Posting_Site_ID". 45 likely
+employers on 13 hosts gave 13 tenants; site names came from their public
+career links. 12 added by hand (RAND, Pew Research internships, Teach For
+America, City Year, Success Academy, College Board, Scholastic...). Few have
+internships posted in October; they are watched for the season.

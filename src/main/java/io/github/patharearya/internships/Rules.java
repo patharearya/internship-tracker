@@ -28,7 +28,7 @@ public final class Rules {
     /** "Early Career Intern" is an internship; "early career" alone is a new-grad job. */
     private static final Pattern NOT_STUDENT = Pattern.compile(
             "\\b(new grad(uate)?s?|university grad(uate)?s?|recent grad(uate)?s?|entry[- ]level|early career(?! intern)"
-                    + "|post-?doc(toral)?|distinguished fellow|senior fellow|clinical fellow|medical fellow"
+                    + "|post[- ]?doc(toral)?|distinguished fellow|senior fellow|clinical fellow|medical fellow"
                     // DoD SkillBridge internships are for transitioning service members only (labelled sample, 2026-10-05)
                     + "|skill ?bridge)\\b", Pattern.CASE_INSENSITIVE);
     /**
@@ -89,8 +89,11 @@ public final class Rules {
      */
     private static final List<Map.Entry<String, Pattern>> MAJOR_RULES = List.of(
             rule("Computer Science & IT", "\\b(ai|ml|machine learning) engineer|deep learning|reinforcement learning|\\bllms?\\b|application development"),
+            // counselling and psychology degrees before Life Sciences' "therap"/"neuro": "Therapist Internship (MSW and LPC)",
+            // "REU in Psychology and Neuroscience". Not "counsel" (General Counsel is legal), not "behavioral health" (nurses too).
+            rule("Social Sciences & Psychology", "\\b(msw|lmsw|lcsw|lpc|counsel(ing|or|ors)|psychotherap\\w*|psycholog\\w*)\\b"),
             rule("Data & Mathematics", "data scien|data analy|data engineer|machine learning|\\bml\\b|\\bai\\b|artificial intelligence|statistic|mathemat|\\bmath\\b|analytics|quantitative research|actuar"),
-            rule("Computer Science & IT", "software|developer|programmer|computer|\\bit\\b|information technology|information systems|cyber|security engineer|devops|\\bcloud|network|\\bweb\\b|front-?end|back-?end|full[- ]stack|\\bsre\\b|database"),
+            rule("Computer Science & IT", "software|developer|programmer|computer|\\bit\\b|information technology|information systems|cyber|security engineer|devops|\\bcloud|network (engineer|security|admin|infrastructure|operations|analyst|technician|automation)|networking|\\bweb\\b|front-?end|back-?end|full[- ]stack|\\bsre\\b|database"),
             rule("Engineering", "engineer|mechanical|electrical|civil|hardware|manufactur|aerospace|industrial|robotic|embedded|semiconductor|\\brf\\b|process tech"
                     + "|concrete|installation|public works|machinist|machining|machine assembly|fabricat|\\bsystems? test|technical staff|\\bthermo|thermal"
                     + "|power electronics|avionics|propulsion|\\bfpga\\b|\\basic\\b|systems of systems|maintenance|land survey|surveying"),
@@ -122,7 +125,8 @@ public final class Rules {
             rule("Finance & Accounting", "\\bquantitative\\b"),   // "Quantitative Intern" at a bank; "Quantitative Biology" is Life Sciences
             rule("Marketing & Communications", "\\bsports\\b"),
             rule("Arts, Design & Media", "\\bcurat|museum"),
-            rule("Computer Science & IT", "\\btechnology\\b"));
+            // bare "network" named employers ("Atlas Network", "In-Patient Network", "Health Network") as often as IT work
+            rule("Computer Science & IT", "\\btechnology\\b|\\bnetworks?\\b"));
 
     /** USAJOBS occupational series by group (first two digits), from OPM's handbook of occupational groups. */
     private static final Map<String, String> SERIES = Map.ofEntries(

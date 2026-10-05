@@ -71,14 +71,14 @@ and how they were settled: [devlog.md](devlog.md).
      (formula in `Main.shard`, pinned by `ShardTest`).
 4. **Daily discovery** first ran on schedule 2026-10-05 06:05Z: check it
    rebuilt `boards.json`.
-5. **Thin majors:** Education (41) and Social Sciences (36). Done what can
-   be done now (2026-10-05): USAJOBS student hiring path added; Brookings,
-   Morning Consult, Khan Academy hand-added (`from: hand`). 90 likely
-   employers were probed on Greenhouse/Lever/Ashby; almost none has
-   internships up in October, and the field's big employers use Workday,
-   whose addresses cannot be guessed. Recheck in January, when summer
-   internships in these fields are posted; the page says these majors are
-   thin (brief).
+5. **Thin majors:** Education 42, Social Sciences 38 after today's rules.
+   Done now (2026-10-05): USAJOBS student hiring path; 15 hand-added boards
+   (`from: hand` in Discover.HAND): Brookings, Morning Consult, Khan Academy,
+   RAND, Pew Research Center (incl. its internship site), Teach For America,
+   City Year, Success Academy, Uncommon Schools, College Board, Scholastic,
+   Cengage, Wiley, Curriculum Associates. Few have internships up in October.
+   Recheck in January, when these fields post summer internships. More
+   Workday tenants can be found the same way (devlog 2026-10-05).
 
 ## Settled
 
