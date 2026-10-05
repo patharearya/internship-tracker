@@ -149,7 +149,7 @@ public final class Main {
                 if (reason == null) {
                     k.add(new Kept(p, Rules.label(p)));
                 } else {
-                    rejections.add(String.join("\t", u.id(), Objects.toString(p.id(), ""), clean(p.title()), reason));
+                    rejections.add(rejectionRow(u.id(), p, reason));
                     rejectedBy.computeIfAbsent(u.system(), x -> new TreeMap<>()).merge(reason.replaceAll(":.*", ""), 1, Integer::sum);
                 }
             }
@@ -169,7 +169,7 @@ public final class Main {
         write("postings.json", published);
         writeDescriptions(newDescriptions);
         write("state.json", state);
-        Files.writeString(DATA.resolve("rejections.tsv"), "unit\tid\ttitle\treason\n" + String.join("\n", rejections) + "\n");
+        Files.writeString(DATA.resolve("rejections.tsv"), REJECTION_HEADER + "\n" + String.join("\n", rejections) + "\n");
         Map<String, Object> report = report(units, merged, rejectedBy, seconds, started, state);
         write("report.json", report);
         System.out.println(JSON.writeValueAsString(report.get("systems")));
@@ -298,6 +298,17 @@ public final class Main {
         descriptions.forEach((k, v) -> shards.get(shard(k)).put(k, v));
         Files.createDirectories(DATA.resolve("descriptions"));
         for (int i = 0; i < DESCRIPTION_SHARDS; i++) write("descriptions/" + i + ".json", shards.get(i));
+    }
+
+    static final String REJECTION_HEADER = "unit\tid\ttitle\treason\tlocations\tcountry\teligibility";
+
+    /**
+     * One rejections.tsv row. Locations, country and USAJOBS eligibility are what the "outside US" and "not open to
+     * students" rules read, so a sampled rejection can be replayed (labelled sample row i196 could not be).
+     */
+    static String rejectionRow(String unit, Posting p, String reason) {
+        return String.join("\t", unit, clean(p.id()), clean(p.title()), clean(reason),
+                clean(p.locations() == null ? "" : String.join(" | ", p.locations())), clean(p.country()), clean(p.eligibility()));
     }
 
     private static String clean(String s) { return Objects.toString(s, "").replaceAll("[\\t\\n\\r]+", " "); }

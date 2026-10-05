@@ -64,6 +64,16 @@ public class Fetch {
         return i < 0 ? null : p.board() + p.url().substring(i);
     }
 
+    /**
+     * Id for a Workday search result, so a rejected row carries the same id as a kept posting (the detail call's
+     * jobReqId): the first bullet field is the requisition id in Workday's default setup, but tenants can configure
+     * it, so it is used only when the posting path ends with it ("..._REQ-26320", "..._31149049-1"); otherwise the
+     * path, which never matches a kept id (devlog 2026-10-05).
+     */
+    static String listId(String bullet, String path) {
+        return !bullet.isBlank() && path.matches(".*_" + java.util.regex.Pattern.quote(bullet) + "(-\\d+)?") ? bullet : path;
+    }
+
     // ponytail: Workday search is relevance-ordered and "intern" also matches internal/international; stop at the
     // first page with no internship title, capped at MAX_WORKDAY_PAGES. Use facets if real internships get cut off.
     static final int MAX_WORKDAY_PAGES = 10;
@@ -80,7 +90,7 @@ public class Fetch {
             for (JsonNode p : list.path("jobPostings")) {
                 String path = p.path("externalPath").asText();
                 String title = p.path("title").asText();
-                Posting stub = new Posting("workday", b.key(), path, title, b.company(), site + path,
+                Posting stub = new Posting("workday", b.key(), listId(p.path("bulletFields").path(0).asText(""), path), title, b.company(), site + path,
                         List.of(p.path("locationsText").asText("")), null, null, null, null, null, null, null, null);
                 if (Rules.reject(withLocations(stub, List.of())) == null) anyInternTitle = true;
                 if (Rules.reject(stub) != null) {   // rejected on title or location: keep the stub so the rejection is logged

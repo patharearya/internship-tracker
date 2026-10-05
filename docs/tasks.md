@@ -29,16 +29,24 @@ and how they were settled: [devlog.md](devlog.md).
     SkillBridge rejected. Replay over the 23:38Z run: Other 1,648 -> 1,183
     (18% -> 13%), 466 out of Other, 120 moved between majors (read through),
     28 SkillBridge postings now rejected. The next run applies it.
-  - 30 tests. Every new rule was broken on purpose and goes red.
+  - `rejections.tsv` gained locations, country, eligibility; Workday
+    rejected rows now carry the requisition id (item 2).
+  - 32 tests. Every new rule was broken on purpose and goes red.
 
 ## Next session, in order
 
-1. **Check the first run on the new major rules:** Other near 1,183 and no
-   NSF award in Other unless its directorate is O/D.
-2. **Log location and eligibility in `rejections.tsv`**, and the same id for
-   rejected and kept Workday rows (list path vs requisition id today, devlog
-   2026-10-05). Without them "outside US" and USAJOBS-eligibility rejections
-   cannot be sampled or replayed (i196 is unreplayable).
+1. **Check the first runs on this session's code:**
+   - Major rules: Other near 1,183, no NSF award in Other unless its
+     directorate is O/D.
+   - `rejections.tsv` (run artifact) has the new `locations`, `country`,
+     `eligibility` columns, and in the first Workday run most Workday rows
+     carry a requisition id, not a `/job/...` path. Rows that keep the path
+     come from tenants whose first bullet field is not the id; count them
+     before deciding whether that matters.
+2. **Done (2026-10-05):** `rejections.tsv` logs locations, country and
+   USAJOBS eligibility; Workday search results use the requisition id when
+   the posting path confirms it (`Fetch.listId`), so rejected and kept
+   Workday rows join by id. `RejectionLogTest`.
 3. **Day 3: the page** (GitHub Pages). Postings grouped by major, filters
    (state / remote, arrangement, level), posting detail, saved list
    (browser storage), coverage sentence. Decide first:
