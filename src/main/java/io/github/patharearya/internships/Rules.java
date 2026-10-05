@@ -266,7 +266,11 @@ public final class Rules {
                     + "|morocco|united arab emirates|\\bUAE\\b|saudi|qatar|europe|\\bEMEA\\b|\\bAPAC\\b|\\bLATAM\\b"
                     + "|toronto|vancouver|montreal|london|dublin|berlin|munich|paris|amsterdam|zurich|madrid|barcelona|warsaw"
                     + "|bangalore|bengaluru|hyderabad|mumbai|pune|chennai|delhi|gurgaon|shanghai|beijing|shenzhen|tokyo|seoul"
-                    + "|sydney|melbourne|manila|tel aviv|são paulo|sao paulo|mexico city)\\b",
+                    + "|sydney|melbourne|manila|tel aviv|são paulo|sao paulo|mexico city"
+                    // seen as state-less "US" locations on 2026-10-05
+                    + "|auckland|wellington|\\bnz\\b|stockholm|cape town|sofia|belgrade|serbia|bulgaria|cologne|köln|dusseldorf|düsseldorf"
+                    + "|münchen|stuttgart|frankfurt|hamburg|courbevoie|wroclaw|wrocław|krakow|kraków|dubai|abu dhabi|calgary|ottawa"
+                    + "|edmonton|ontario|surrey|kuala lumpur|\\bmys\\b|latin america|santiago)\\b",
             Pattern.CASE_INSENSITIVE);
     private static final Pattern COUNTRY_US = Pattern.compile("us|usa|united states.*", Pattern.CASE_INSENSITIVE);
 
@@ -299,7 +303,9 @@ public final class Rules {
             rest = rest.replaceAll("(?i)washington,?\\s*(d\\.?c\\.?|district of columbia)", " ");
         }
         for (String name : NAMES_LONGEST_FIRST) {
-            Matcher m = Pattern.compile("\\b" + Pattern.quote(name) + "\\b", Pattern.CASE_INSENSITIVE).matcher(rest);
+            // "Kansas City" is mostly Missouri; "Kansas City, KS" still gets KS from its code
+            String after = name.equals("Kansas") ? "\\b(?! city)" : "\\b";
+            Matcher m = Pattern.compile("\\b" + Pattern.quote(name) + after, Pattern.CASE_INSENSITIVE).matcher(rest);
             if (m.find()) {
                 out.add(STATES.get(name));
                 rest = m.replaceAll(" ");
@@ -307,6 +313,65 @@ public final class Rules {
         }
         Matcher c = CODE.matcher(rest);
         while (c.find()) if (STATES.containsValue(c.group(1))) out.add(c.group(1));
+        for (Pattern p : List.of(CODE_MORE, CODE_LEADING, CODE_TRAILING)) {
+            Matcher m = p.matcher(rest);
+            while (m.find()) if (STATES.containsValue(m.group(1)) && !(p == CODE_LEADING && m.group(1).equals("LA"))) out.add(m.group(1));
+        }
+        if (out.isEmpty() && !FOREIGN.matcher(rest).find()) {   // "San José, Costa Rica" is not San Jose, CA
+            Matcher m = CITY.matcher(rest);
+            while (m.find()) out.add(CITIES.get(m.group(1).toLowerCase(Locale.ROOT)));
+        }
         return out;
     }
+
+    // Code positions CODE misses, seen in 1,931 state-less postings on 2026-10-05; kept apart so CODE's matches never change.
+    /** "TX-Dallas", "TX - Dallas", "VA, Portsmouth", a bare "FL", "MN-Mankato; WI-Baldwin", "US.CO.Denver", "USA_NC_Holly Springs". */
+    private static final Pattern CODE_MORE = Pattern.compile("(?:^|;\\s*|(?<![A-Za-z])USA?[._]|[._])([A-Z]{2})(?=\\s*$|\\s*[-,;.]|_)");
+    /** "WI Madison", "MO St Louis"; not "UT MAIN CAMPUS" (next word in capitals) and not "LA" (Los Angeles as often as Louisiana). */
+    private static final Pattern CODE_LEADING = Pattern.compile("^([A-Z]{2})\\s+(?=[A-Z][a-z])");
+    /** "Atlanta GA", "Indianapolis IN USA", "Omaha NE-6750": after a lower-case word, at the end or before USA or a number. */
+    private static final Pattern CODE_TRAILING = Pattern.compile("(?<=[a-z.]\\s)([A-Z]{2})(?=\\s*$|\\s+USA?\\b|-\\d)");
+
+    /**
+     * US cities that name one state, tried only when no state name or code was found. Names shared with another state
+     * or country are left out on purpose (Portland, Columbus, Rochester, Cambridge, Birmingham, Kingston, Manhattan).
+     */
+    // ponytail: hand list from the 2026-10-05 state-less locations; add names when "unknown" counts show them
+    private static final Map<String, String> CITIES = new HashMap<>();
+    static {
+        String[][] byState = {
+                {"CA", "san francisco", "south san francisco", "sf", "bay area", "silicon valley", "palo alto", "mountain view",
+                        "sunnyvale", "san jose", "santa clara", "redwood city", "los altos", "berkeley", "oakland", "emeryville",
+                        "fremont", "menlo park", "irvine", "long beach", "los angeles", "el segundo", "santa monica", "culver city",
+                        "torrance", "san diego", "la jolla", "oxnard", "newport beach", "scotts valley", "sacramento"},
+                {"IL", "chicago", "naperville", "downers grove", "rosemont", "northbrook", "schaumburg", "westmont"},
+                {"MA", "boston", "braintree", "waltham", "woburn"},
+                {"TX", "austin", "dallas", "houston", "plano", "san antonio", "richardson", "mckinney", "fort worth", "irving", "dfw"},
+                {"WA", "seattle", "bothell", "redmond"},
+                {"NY", "new york city", "nyc", "brooklyn", "queens", "bronx", "tarrytown", "sleepy hollow", "buffalo", "utica",
+                        "binghamton", "poughkeepsie", "fishkill", "long island", "syracuse", "albany"},
+                {"GA", "atlanta", "alpharetta", "macon"},
+                {"CO", "denver", "boulder"},
+                {"AZ", "phoenix", "scottsdale", "chandler", "tempe", "tucson"},
+                {"PA", "philadelphia", "pittsburgh", "king of prussia", "canonsburg"},
+                {"MN", "minneapolis", "mpls", "st. paul", "saint paul", "chaska", "mankato", "lakeville", "edina", "minnetonka"},
+                {"IN", "indianapolis", "fort wayne", "evansville"},
+                {"WI", "milwaukee", "sun prairie", "fond du lac"},
+                {"MI", "detroit", "dearborn", "ann arbor", "grand rapids"},
+                {"FL", "miami", "orlando", "tampa", "jacksonville", "fort lauderdale", "sarasota"},
+                {"TN", "nashville", "memphis", "knoxville"},
+                {"NC", "charlotte", "raleigh", "chapel hill"},
+                {"MD", "baltimore", "bethesda", "hunt valley"},
+                {"OH", "cincinnati", "cleveland", "akron", "dayton"},
+                {"LA", "new orleans", "baton rouge", "lake charles", "shreveport"},
+                {"NE", "omaha"}, {"IA", "des moines", "cedar rapids"}, {"UT", "salt lake city", "lehi"},
+                {"NV", "las vegas"}, {"MO", "st. louis", "st louis", "saint louis"}, {"AR", "bentonville", "little rock"},
+                {"VA", "ashburn", "reston", "mclean"}, {"NJ", "iselin", "parsippany", "trenton", "jersey city", "princeton"},
+                {"KS", "topeka"}, {"ID", "boise"}, {"VT", "essex junction"}, {"CT", "hartford"}, {"KY", "louisville"},
+                {"OK", "oklahoma city", "tulsa"}};
+        for (String[] s : byState) for (int i = 1; i < s.length; i++) CITIES.put(s[i], s[0]);
+    }
+    private static final Pattern CITY = Pattern.compile("(?<![\\w.])(" + CITIES.keySet().stream()
+            .sorted(Comparator.comparingInt(String::length).reversed()).map(Pattern::quote).collect(java.util.stream.Collectors.joining("|"))
+            + ")(?![\\w-])", Pattern.CASE_INSENSITIVE);   // not "SF-57th & I-229" (Sioux Falls)
 }

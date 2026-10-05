@@ -158,6 +158,19 @@ class RulesTest {
         assertEquals(List.of("OR"), List.copyOf(Rules.statesIn("Portland, OR")));
         assertEquals(List.of("IA"), List.copyOf(Rules.statesIn("IOWA CITY, IA")));
         assertEquals(List.of(), List.copyOf(Rules.statesIn("IT Department, Remote")));
+        // positions and cities from the 1,931 state-less postings of 2026-10-05
+        String[][] more = {{"TX-Dallas", "TX"}, {"TX - Dallas", "TX"}, {"VA, Portsmouth", "VA"}, {"FL", "FL"}, {"WI Madison", "WI"},
+                {"US.CO.Denver", "CO"}, {"USA_NC_Holly Springs_161 Tradition Trail", "NC"}, {"Atlanta GA", "GA"},
+                {"Indianapolis IN USA", "IN"}, {"Omaha NE-6750", "NE"}, {"San Francisco", "CA"}, {"Chicago - 125 S Franklin", "IL"},
+                {"St. Louis", "MO"}, {"MO - Kansas City Downtown", "MO"}};
+        for (String[] c : more) assertEquals(List.of(c[1]), List.copyOf(Rules.statesIn(c[0])), c[0]);
+        assertEquals(List.of("WI", "MN"), List.copyOf(Rules.statesIn("MN-Mankato; WI-Baldwin")).reversed());
+        assertEquals(List.of(), List.copyOf(Rules.statesIn("UT MAIN CAMPUS")), "UT Austin, not Utah");
+        assertEquals(List.of(), List.copyOf(Rules.statesIn("LA Office")), "Los Angeles as often as Louisiana");
+        assertEquals(List.of(), List.copyOf(Rules.statesIn("Portland")), "Oregon or Maine");
+        assertEquals(List.of(), List.copyOf(Rules.statesIn("SF-57th & I-229")), "Sioux Falls");
+        assertEquals(List.of(), List.copyOf(Rules.statesIn("San Jose, Costa Rica")), "feeds often drop the accent");
+        assertEquals("outside US", Rules.reject(p("lever", "Software Intern", List.of("Auckland, NZ"), null, null, null)));
         var w = Rules.where(p("lever", "Intern", List.of("Remote (United States | Canada)", "Raleigh, NC"), null, null, null));
         assertEquals(List.of("NC"), w.states());
         assertTrue(w.remoteUs());

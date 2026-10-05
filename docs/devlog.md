@@ -279,3 +279,26 @@ never matches. The same slip had already broken three anchors in Rules.java
 (caught by the "Thermofluids" row). A Python runner then called `./mvnw`
 through cmd.exe, which ran nothing and reported 0 failures. Applied from a
 script file and run through bash, all three breaks go red in two tests each.
+
+## 2026-10-05 — one posting in five had no state
+
+**What broke:** 1,931 of 8,995 open postings (21%) had no state and were not
+remote-US, so any state filter would hide them. 45 of them were abroad
+(Auckland, Stuttgart, Belgrade, Calgary, Surrey BC, Kuala Lumpur) and should
+have been rejected as outside US.
+
+**First diagnosis:** Workday's free-text locations ("Office - Boise",
+"Carmel Headquarters") that no rule can read.
+
+**What settled it:** counting the state-less locations. Most were readable:
+bare major cities ("San Francisco" x155, Chicago, Boston, Austin) and state
+codes in positions the code pattern did not accept ("TX-Dallas", "WI
+Madison", "Atlanta GA", "US.CO.Denver", "MN-Mankato; WI-Baldwin"). Added
+those positions as separate patterns (the old pattern's matches cannot
+change), a table of US cities that name one state (ambiguous names such as
+Portland, Columbus, Rochester left out), and the foreign cities seen. Replay:
+1,931 -> 408 state-less; every existing state kept except about 60 wrong
+KS. Same shape found in passing: the state name "Kansas" matched inside
+"Kansas City", so Kansas City, Missouri postings were listed under Kansas.
+Labelled row i055 (three German cities, page-1 "keep") was relabelled: the
+brief rejects non-US-only roles.

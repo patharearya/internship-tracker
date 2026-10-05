@@ -31,6 +31,11 @@ and how they were settled: [devlog.md](devlog.md).
     28 SkillBridge postings now rejected. The next run applies it.
   - `rejections.tsv` gained locations, country, eligibility; Workday
     rejected rows now carry the requisition id (item 2).
+  - Location rules: 1,931 -> 408 postings with no state, 45 foreign postings
+    now rejected, Kansas City, MO no longer under Kansas (devlog).
+  - Owner: updates at least daily are enough (Q24); level and arrangement
+    rules checked by me, not by labels (their numbers fit the design: 78%
+    "not stated" arrangement is the bare-city rule working).
   - 32 tests. Every new rule was broken on purpose and goes red.
 
 ## Next session, in order
@@ -38,6 +43,8 @@ and how they were settled: [devlog.md](devlog.md).
 1. **Check the first runs on this session's code:**
    - Major rules: Other near 1,183, no NSF award in Other unless its
      directorate is O/D.
+   - Location rules: about 408 open postings with no state (was 1,931), no
+     Kansas City, MO posting under KS.
    - `rejections.tsv` (run artifact) has the new `locations`, `country`,
      `eligibility` columns, and in the first Workday run most Workday rows
      carry a requisition id, not a `/job/...` path. Rows that keep the path
@@ -55,7 +62,9 @@ and how they were settled: [devlog.md](devlog.md).
      `data/descriptions/{n}.json`, 64 files; load one when a posting is
      opened, `n` = Java `String.hashCode` of the key, non-negative mod 64
      (formula in `Main.shard`, pinned by `ShardTest`).
-4. **Thin majors:** Education (41) and Social Sciences (36) after the new
+4. **Daily discovery** first ran on schedule 2026-10-05 06:05Z: check it
+   rebuilt `boards.json`.
+5. **Thin majors:** Education (41) and Social Sciences (36) after the new
    rules. Hand-add employers (Q21) if still thin after a day of runs.
 
 ## Settled
@@ -67,7 +76,7 @@ and how they were settled: [devlog.md](devlog.md).
   students (owner default, 2026-10-04).
 - "Research Analyst (Economics) - July 2027" stays rejected: a full-time job.
 - Majors follow the work, not the employer (Q23). SkillBridge is rejected.
-- Still open: "AI Residency".
+- "AI Residency" stays rejected: a research job (Q25).
 
 ## Small items
 
@@ -91,6 +100,9 @@ and how they were settled: [devlog.md](devlog.md).
   few days of runs are logged.
 - No test covers the leading word boundary on foreign country names (no real
   US place name found that would exercise it).
+- Still no state (408): mostly employer site names ("Carmel Headquarters",
+  "UT MAIN CAMPUS", "Stamford Hub") and ambiguous cities. Add to the city
+  table only with a count behind it.
 - `ubuntu-latest` moves to Ubuntu 26 from 2026-10-19 (Actions annotation);
   watch the first run after that.
 - Working on this repo from this machine's shell: `\\` in a command reaches

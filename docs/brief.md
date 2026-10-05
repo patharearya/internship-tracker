@@ -12,8 +12,8 @@ opens. Users filter and save; they never supply the data. Target: built in a
 few days, kept simple.
 
 The app shows:
-- Live internship postings and funded research programmes, updated hourly,
-  grouped by major.
+- Live internship postings and funded research programmes, updated several
+  times a day (at least daily, Q24), grouped by major.
 - When each posting was first seen and when it closed (our own monitoring).
 - Deadlines where the source publishes one.
 - Filters: state / remote; in person / hybrid / remote; undergrad / grad.
@@ -232,3 +232,8 @@ Grill held 2026-10-03. Superseded entries are kept, marked, for the record.
   dropped (171 decisions, about half wrong). Claims, equity research -> Finance;
   learning/training & development -> Education; EHS/HSE/HES -> Life Sciences.
   DoD SkillBridge internships are rejected (service members only).
+- Q24 (2026-10-05) updates at least daily are enough. The hourly schedule
+  stays; GitHub fires only some of its slots, which still gives several
+  updates a day. The page must not promise "hourly".
+- Q25 (2026-10-05) "AI Residency" is a research job, not an internship or a
+  funded student programme: stays rejected.

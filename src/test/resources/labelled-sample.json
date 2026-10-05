@@ -1827,9 +1827,9 @@
     "deadline": null,
     "description": null
    },
-   "keep": true,
-   "major": "Business & Management",
-   "answered": "yes",
+   "keep": false,
+   "major": null,
+   "answered": "yes ; keep replaced 2026-10-05: all three locations are in Germany, and the brief rejects non-US-only roles (page 1 showed \"Rule: kept\" beside it)",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
