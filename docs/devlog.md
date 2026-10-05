@@ -168,3 +168,24 @@ none brand new; the rest of the 77 are on Workday. Workday now runs when its
 last run started 3 h ago (30 min slack), recorded as `workdayStarted` in
 `state.json`; `WorkdayDueTest`. No posting was harmed: skipped systems are
 not compared, so Workday postings gained no misses.
+
+## 2026-10-05 — rule-fix postings looked missing from the Workday run
+
+**What broke (apparently):** the first Workday run on the new rules
+(37244506396) added 90 Workday postings, and matching them against the 16:33Z
+run's rejections.tsv found none of the expected rule flips; 39 postings the
+fixed rules should keep (e.g. all 23 GE Appliances "Co-op_Spring 2027") were
+neither kept nor rejected.
+
+**First diagnosis:** the Workday fetch was returning fewer postings, since the
+run took 34 min against 81.
+
+**What settled it:** querying the GE Appliances board directly: the co-ops
+were on page 2 of the "intern" search, and in postings.json under
+`REQ-24832`-style ids. The analysis was wrong, not the fetch. rejections.tsv
+logs a Workday row by its list path (`/job/.../..._REQ-24832`) and a kept
+Workday posting carries the requisition id from the detail call, so joining
+rejections to postings by id finds nothing for Workday. Matched by board and
+title: 44 of the 90 were rule flips, 46 new; with the 25 Greenhouse/Ashby
+flips, 69 of the 77, plus 6 now rejected as outside US. The shorter run is
+the detail cache: known postings skip the detail call.

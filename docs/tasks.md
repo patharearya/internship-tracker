@@ -29,12 +29,14 @@ Last session: 2026-10-04 (second session that day). Plan and decisions:
 
 ## Next session, in order
 
-1. **Check the first Workday run on the `workdayStarted` code** (third
-   session, 2026-10-04): it should run on the first scheduled run after the
-   push, and the Workday open count should rise by most of the ~52 remaining
-   newly kept postings. Already confirmed: 64 description files committed, no
-   stale-checkout conflict, the 25 non-Workday postings all rule flips (devlog).
-2. **Majors.** "Other" is 1,659 of 8,882 (19%). The owner was unsure of the
+1. **Done (2026-10-05):** the first Workday run on the new code
+   (37244506396, 34 min) ran Workday, wrote `workdayStarted`, and kept 69 of
+   the 77 rule flips (6 more now rejected as outside US). See devlog.
+2. **Majors.** Labelling page published 2026-10-05:
+   https://claude.ai/artifact/XSKuirRcRQiYWwkwLHmMSB (148 rows: 48 re-asked
+   because the old page pre-filled the major, 100 new Other postings; answers
+   in its `majors` collection; note "desc" = decided from the description,
+   which title rules cannot match). "Other" is 1,659 of 8,882 (19%). The owner was unsure of the
    major on 18 sampled rows (14 in Other). Sample Other titles, label the
    major only, add missing major rules, extend `labelled-sample.json` and
    re-run `LabelledSampleTest`. Labelling page lesson: one unmistakable
@@ -65,6 +67,10 @@ Last session: 2026-10-04 (second session that day). Plan and decisions:
 - Still open: "AI Residency".
 
 ## Small items
+
+- Workday rows in `rejections.tsv` carry the list path as id, kept Workday
+  postings the requisition id, so the two cannot be joined by id (devlog
+  2026-10-05). Fix alongside item 3: log the same id for both.
 
 - 37 Workday boards answer HTTP 422 (Activision, Netflix, Comcast, Lilly,
   Takeda...), likely one shared cause. 49 Greenhouse/Lever/Ashby boards 404
