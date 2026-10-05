@@ -21,6 +21,15 @@ public final class Discover {
     /** A board to watch. {@code api} is the base URL Fetch calls; {@code key} is the board's identity within its system. */
     public record Board(String system, String key, String company, String api, String from) {}
 
+    /**
+     * Boards added by hand for majors the tech-leaning Simplify list leaves thin (grill Q21): Education and Social
+     * Sciences had 41 and 36 postings on 2026-10-05. Each answered its public API that day; tagged "hand".
+     */
+    static final List<Board> HAND = List.of(
+            new Board("lever", "brookings", "Brookings Institution", "https://api.lever.co/v0/postings/brookings?mode=json", "hand"),
+            new Board("ashby", "morningconsult", "Morning Consult", "https://api.ashbyhq.com/posting-api/job-board/morningconsult", "hand"),
+            new Board("greenhouse", "khanacademy", "Khan Academy", "https://boards-api.greenhouse.io/v1/boards/khanacademy/jobs?content=true", "hand"));
+
     public static List<Board> fromListings(JsonNode rows) {
         // one board per system + case-insensitive key; company name counts so the most common spelling wins
         Map<String, Board> boards = new LinkedHashMap<>();
@@ -32,6 +41,8 @@ public final class Discover {
             boards.putIfAbsent(id, b);
             names.computeIfAbsent(id, k -> new HashMap<>()).merge(r.path("company_name").asText("").strip(), 1, Integer::sum);
         }
+        for (Board b : HAND) boards.putIfAbsent(b.system() + ":" + b.key(), b);
+        for (Board b : HAND) names.computeIfAbsent(b.system() + ":" + b.key(), k -> new HashMap<>()).merge(b.company(), 1, Integer::sum);
         List<Board> out = new ArrayList<>();
         boards.forEach((id, b) -> {
             String company = names.get(id).entrySet().stream().max(Map.Entry.comparingByValue()).map(Map.Entry::getKey).orElse("");
@@ -40,6 +51,14 @@ public final class Discover {
         out.sort(Comparator.comparing(Board::system).thenComparing(Board::key));
         return out;
     }
+
+    /**
+     * Workday tenants whose Simplify links point at a host that now shows Workday's maintenance page (HTTP 422 from
+     * the API), with the host that answers. Found 2026-10-05 by trying the tenant on other hosts (devlog).
+     */
+    // ponytail: hand list; a tenant that moves again shows up as a 422 in state.json failures
+    private static final Map<String, String> MOVED = Map.of("cambiahealth", "wd504", "cff", "wd504", "insmed", "wd504",
+            "otis", "wd504", "plexus", "wd504", "symbotic", "wd504", "netflix", "wd108", "takeda", "wd502");
 
     /** The board an application URL points to, or null if it is not a system we read. Company is filled in later. */
     static Board board(String url) {
@@ -72,10 +91,16 @@ public final class Discover {
             return new Board("ashby", b.toLowerCase(Locale.ROOT), null, "https://api.ashbyhq.com/posting-api/job-board/" + enc(b), from);
         }
         if (host.endsWith(".myworkdayjobs.com") && !path.isEmpty()) {
-            // optional language segment: /en-US/{site}/job/...
-            String site = path.get(0).matches("[a-z]{2}-[A-Z]{2}") && path.size() > 1 ? path.get(1) : path.get(0);
+            // optional language segment: /en-US/{site}/job/..., also "en-us" and "en" (read as sites until 2026-10-05:
+            // Intel, Ticketmaster). 14 working sites are two letters themselves (KLA /UR/job/..., J&J /JJ/details/...),
+            // so a bare two-letter segment is a language only when a site and then job/details follow it.
+            boolean language = path.size() > 1 && (path.get(0).matches("(?i)[a-z]{2}-[a-z]{2}")
+                    || path.get(0).matches("(?i)[a-z]{2}") && path.size() > 2 && path.get(2).matches("(?i)job|details"));
+            String site = language ? path.get(1) : path.get(0);
             String tenant = host.substring(0, host.indexOf('.'));
-            return new Board("workday", host + "/" + site, null, "https://" + host + "/wday/cxs/" + tenant + "/" + enc(site), from);
+            if (MOVED.containsKey(tenant)) host = tenant + "." + MOVED.get(tenant) + ".myworkdayjobs.com";
+            // the API's tenant has "_" where the host name has "-": /cxs/osv-chegg/ answers 422, /cxs/osv_chegg/ 200
+            return new Board("workday", host + "/" + site, null, "https://" + host + "/wday/cxs/" + tenant.replace('-', '_') + "/" + enc(site), from);
         }
         return null;
     }

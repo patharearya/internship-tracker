@@ -15,6 +15,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -118,19 +119,27 @@ public class Fetch {
 
     // ---------- government and research sources ----------
 
+    /**
+     * Two searches, merged by posting id: "intern" anywhere in the text, and the student hiring path, which reaches
+     * Pathways "Student Trainee (...)" postings whose text never says intern (education, social science and
+     * psychology series among them; thin majors, 2026-10-05). The title filter decides what is kept.
+     */
     public Result usajobs() throws IOException, InterruptedException {
-        List<Posting> out = new ArrayList<>();
-        int total = Integer.MAX_VALUE;
-        for (int page = 1; out.size() < total; page++) {
-            String body = send(HttpRequest.newBuilder(URI.create("https://data.usajobs.gov/api/search?Keyword=intern&ResultsPerPage=500&Page=" + page))
-                    .header("User-Agent", contactEmail).header("Authorization-Key", usajobsKey).GET());
-            total = JSON.readTree(body).path("SearchResult").path("SearchResultCountAll").asInt(0);
-            List<Posting> ps = Parse.usajobs(body);
-            if (ps.isEmpty()) break;
-            out.addAll(ps);
-            pause(500);
+        Map<String, Posting> out = new LinkedHashMap<>();
+        for (String query : List.of("Keyword=intern", "HiringPath=student")) {
+            int total = Integer.MAX_VALUE, seen = 0;
+            for (int page = 1; seen < total; page++) {
+                String body = send(HttpRequest.newBuilder(URI.create("https://data.usajobs.gov/api/search?" + query + "&ResultsPerPage=500&Page=" + page))
+                        .header("User-Agent", contactEmail).header("Authorization-Key", usajobsKey).GET());
+                total = JSON.readTree(body).path("SearchResult").path("SearchResultCountAll").asInt(0);
+                List<Posting> ps = Parse.usajobs(body);
+                if (ps.isEmpty()) break;
+                seen += ps.size();
+                for (Posting p : ps) out.putIfAbsent(p.id(), p);
+                pause(500);
+            }
         }
-        return new Result(out, out.size());
+        return new Result(new ArrayList<>(out.values()), out.size());
     }
 
     public Result nsf() throws IOException, InterruptedException {

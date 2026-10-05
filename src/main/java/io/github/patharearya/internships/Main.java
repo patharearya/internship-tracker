@@ -71,7 +71,9 @@ public final class Main {
         Fetch fetch = new Fetch(email.strip(), Objects.toString(System.getenv("USAJOBS_API_KEY"), "").strip());
         Files.createDirectories(DATA);
         if (args.length > 0 && args[0].equals("discover")) {
-            List<Board> boards = Discover.fromListings(fetch.listings());
+            List<Board> boards = keepBoardsWithOpenPostings(Discover.fromListings(fetch.listings()),
+                    read("boards.json", new TypeReference<List<Board>>() {}, List.of()),
+                    read("postings.json", new TypeReference<List<Entry>>() {}, List.of()));
             write("boards.json", boards);
             Map<String, Long> bySystem = boards.stream().collect(Collectors.groupingBy(Board::system, TreeMap::new, Collectors.counting()));
             System.out.println("boards: " + boards.size() + " " + bySystem);
@@ -80,6 +82,27 @@ public final class Main {
         String only = flag(args, "--only");
         int limit = Integer.parseInt(Objects.toString(flag(args, "--limit"), "0"));
         run(fetch, only, limit);
+    }
+
+    /**
+     * The fresh board list plus any previous board that still has open postings. Only fetched boards count misses,
+     * so a board Simplify drops would otherwise leave its postings open forever (6 at Sereact, 2026-10-05, devlog).
+     * Kept until its postings close; boards with nothing open drop out as before.
+     */
+    static List<Board> keepBoardsWithOpenPostings(List<Board> fresh, List<Board> previous, List<Entry> postings) {
+        Set<String> open = postings.stream().filter(e -> e.closed() == null)
+                .map(e -> e.posting().source() + ":" + e.posting().board()).collect(Collectors.toSet());
+        Set<String> listed = fresh.stream().map(b -> b.system() + ":" + b.key()).collect(Collectors.toSet());
+        List<Board> out = new ArrayList<>(fresh);
+        for (Board b : previous) {
+            String id = b.system() + ":" + b.key();
+            if (!listed.contains(id) && open.contains(id)) {
+                out.add(b);
+                System.out.println("kept, no longer in the listings but has open postings: " + id);
+            }
+        }
+        out.sort(Comparator.comparing(Board::system).thenComparing(Board::key));
+        return out;
     }
 
     static void run(Fetch fetch, String only, int limit) throws Exception {

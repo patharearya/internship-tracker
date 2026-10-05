@@ -45,6 +45,11 @@ and how they were settled: [devlog.md](devlog.md).
      directorate is O/D.
    - Location rules: about 408 open postings with no state (was 1,931), no
      Kansas City, MO posting under KS.
+   - Discovery (run with discover on, or the 06:05Z run): boards.json has the
+     19 revived Workday boards (underscore tenants, moved hosts, Intel) and
+     the 3 hand-added boards; their failures stop in state.json.
+   - USAJOBS now merges a HiringPath=student search: compare USAJOBS open
+     postings with 40 and count new Education / Social Sciences ones.
    - `rejections.tsv` (run artifact) has the new `locations`, `country`,
      `eligibility` columns, and in the first Workday run most Workday rows
      carry a requisition id, not a `/job/...` path. Rows that keep the path
@@ -64,8 +69,14 @@ and how they were settled: [devlog.md](devlog.md).
      (formula in `Main.shard`, pinned by `ShardTest`).
 4. **Daily discovery** first ran on schedule 2026-10-05 06:05Z: check it
    rebuilt `boards.json`.
-5. **Thin majors:** Education (41) and Social Sciences (36) after the new
-   rules. Hand-add employers (Q21) if still thin after a day of runs.
+5. **Thin majors:** Education (41) and Social Sciences (36). Done what can
+   be done now (2026-10-05): USAJOBS student hiring path added; Brookings,
+   Morning Consult, Khan Academy hand-added (`from: hand`). 90 likely
+   employers were probed on Greenhouse/Lever/Ashby; almost none has
+   internships up in October, and the field's big employers use Workday,
+   whose addresses cannot be guessed. Recheck in January, when summer
+   internships in these fields are posted; the page says these majors are
+   thin (brief).
 
 ## Settled
 
@@ -90,9 +101,12 @@ and how they were settled: [devlog.md](devlog.md).
   the page.
 - Page-1 labels in "kept: random" that agree with the rules may still be
   unverified pre-fills (devlog 2026-10-05).
-- 37 Workday boards answer HTTP 422 (Activision, Netflix, Comcast, Lilly,
-  Takeda...), likely one shared cause. 49 Greenhouse/Lever/Ashby boards 404
-  (moved systems?).
+- 16 Workday tenants answer on no host (Activision, Comcast, Lilly, IDEXX...)
+  and 47 Greenhouse/Lever/Ashby boards are gone (devlog 2026-10-05). One
+  request a day each; prune if the failure list gets in the way.
+- A board that fails for good keeps its open postings open (failed fetches
+  count no misses). 0 such postings today; decide a rule (e.g. close after
+  N days of 404) before it happens.
 - Pause times in `state.json` record the run start, not when the 403 came.
 - `postings.json` only grows (closed entries kept); ~80k entries before
   100 MB. Decide a retention rule for closed postings before then.

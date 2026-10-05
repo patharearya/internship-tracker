@@ -302,3 +302,48 @@ KS. Same shape found in passing: the state name "Kansas" matched inside
 "Kansas City", so Kansas City, Missouri postings were listed under Kansas.
 Labelled row i055 (three German cities, page-1 "keep") was relabelled: the
 brief rejects non-US-only roles.
+
+## 2026-10-05 — 39 Workday boards failing, three different causes
+
+**What broke:** 37 Workday boards answered HTTP 422 and 2 answered 404 on
+every run (Activision, Netflix, Comcast, Lilly, Takeda, Intel...).
+
+**First diagnosis:** one shared cause, likely a request shape some tenants
+reject.
+
+**What settled it:** probing each board by hand. A wrong site name gives 404
+with "not found: Job_Posting_Site_ID", so 422 is not a bad site. Three
+causes:
+1. Hyphenated tenants (osv-chegg, vhr-otsuka, sallie-mae; 12 boards): the
+   page config names the tenant `osv_chegg`; the API path needs the
+   underscore. Fixed in discovery.
+2. Tenants whose site page redirects to Workday's maintenance page (28):
+   moved hosts or left Workday. Trying other hosts found 8 (Cambia, CFF,
+   Insmed, Otis, Plexus, Symbotic on wd504, Netflix on wd108, Takeda on
+   wd502), now in a hand table. 16 answer nowhere (Activision, Comcast,
+   Lilly, IDEXX...) and stay failing at one request a day.
+3. A language segment read as the site: the pattern accepted only "en-US",
+   so "en-us" (Intel) and "en" (Ticketmaster) became sites. 14 working
+   boards have real two-letter sites (Transamerica "us", J&J "JJ"), so a
+   bare two-letter segment counts as a language only when a site and then
+   job/details follow.
+Every new or changed board address was called once: 23 of 24 answer 200.
+The 50 Greenhouse/Lever/Ashby 404s are boards that moved to systems we have
+no link for: none of their names exists on the other two systems; 3
+employers already have a working board under another name.
+
+## 2026-10-05 — postings on a dropped board could never close
+
+**What broke:** found while diffing a rebuilt board list against the
+committed one: Simplify had deleted rows for 9 boards since the last
+discovery, and 3 of those boards had 8 open postings (6 at Sereact).
+
+**First diagnosis:** none needed; the merge code shows it. Misses are counted
+only for boards fetched successfully, so a board that leaves the list keeps
+its postings open forever.
+
+**What settled it:** `keepBoardsWithOpenPostings`: discovery keeps a dropped
+board while it has open postings, so they close normally. Boards with
+nothing open still drop out. A board that starts failing for good has the
+same problem (failed fetches count no misses); 0 open postings sit on failing
+boards today, so it is a task, not a fix.
