@@ -347,3 +347,31 @@ board while it has open postings, so they close normally. Boards with
 nothing open still drop out. A board that starts failing for good has the
 same problem (failed fetches count no misses); 0 open postings sit on failing
 boards today, so it is a task, not a fix.
+
+## 2026-10-05 — rule changes reached Workday postings hours late
+
+**What broke:** the first run on the new major and location rules showed
+Other 1,539 and 1,527 postings without a state, against 1,183 and 408 in the
+replay.
+
+**First diagnosis:** the replay and the pipeline label differently.
+
+**What settled it:** splitting by source: non-Workday postings matched the
+replay (Other 212, no state 99); the 5,934 Workday postings still had labels
+from their last fetch (23:39Z). Labels were computed only for postings
+fetched in the run, so a rule change waited for the next Workday run, and
+never reached open postings on a board that stops answering. Every open
+posting is now relabelled each run (`Main.relabel`); closed ones keep theirs.
+
+## 2026-10-05 — "undergraduate students" read as a graduate posting
+
+**What broke:** 37% of open postings were level "both".
+
+**First diagnosis:** none; found by the test written for `Main.relabel`,
+whose description "Open to undergraduate students." came back "both".
+
+**What settled it:** the grad pattern `graduate student` had no leading word
+boundary, so it matched inside "undergraduate students". Replay over all
+open postings with their descriptions: 783 move from both to undergrad, no
+other change; every sampled one is an undergraduate programme (REU sites,
+summer undergraduate research). "both" 3,306 -> 2,523.

@@ -23,6 +23,21 @@ class MergeTest {
     }
 
     @Test
+    void openPostingsTakeTheCurrentRulesEvenWhenNotFetched() {
+        Posting p = new Posting("workday", "b", "1", "Software Engineer Intern", "Org", "https://x", List.of("San Francisco"), null,
+                null, null, null, null, null, null, null);
+        Rules.Labels stale = new Rules.Labels("internship", new Rules.Label("Other", "old rules"), new Rules.Label("unknown", "old"),
+                new Rules.Label("not stated", "old"), List.of(), false);
+        Entry open = new Entry("workday:b:1", p, stale, "T0", "T0", 0, null, null, false);
+        Entry closed = new Entry("workday:b:2", p, stale, "T0", "T0", 3, "T1", "T1", false);
+        List<Entry> out = Main.relabel(List.of(open, closed), Map.of("workday:b:1", "Open to undergraduate students."));
+        assertEquals("Computer Science & IT", out.get(0).labels().major().value());
+        assertEquals(List.of("CA"), out.get(0).labels().states());
+        assertEquals("undergrad", out.get(0).labels().level().value(), "description from the shard files is used");
+        assertSame(stale, out.get(1).labels(), "closed postings keep the labels they closed with");
+    }
+
+    @Test
     void lifecycle() {
         List<Entry> r1 = Main.merge(List.of(), Map.of("lever:a", List.of(kept("a", "1"), kept("a", "2"))), "T1");
         assertEquals("T1", find(r1, "1").firstSeen());

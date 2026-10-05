@@ -179,8 +179,9 @@ public final class Rules {
     // ---------- level ----------
 
     private static final Pattern GRAD = Pattern.compile(
-            "\\bph\\.?d\\b|doctoral|master['’]?s|\\bm\\.?s\\.? (student|degree|candidate)|\\bmba\\b|graduate student|graduate degree"
-                    + "|graduate program|graduate school|pursuing an? (advanced|graduate)", Pattern.CASE_INSENSITIVE);
+            // leading \b: "graduate student" matched inside "undergraduate students", labelling undergrad postings "both" (devlog 2026-10-05)
+            "\\bph\\.?d\\b|doctoral|\\bmaster['’]?s|\\bm\\.?s\\.? (student|degree|candidate)|\\bmba\\b|\\bgraduate (students?|degrees?|programs?|school)"
+                    + "|pursuing an? (advanced|graduate)", Pattern.CASE_INSENSITIVE);
     private static final Pattern UNDERGRAD = Pattern.compile(
             "undergrad|bachelor['’]?s|\\bb\\.?[sa]\\.? (student|degree|candidate)|\\bbs/ms\\b|rising (freshman|sophomore|junior|senior)"
                     + "|\\bfreshman\\b|\\bsophomore\\b|(4|four)[- ]year (college|university|degree|program)|associate['’]?s degree|community college",

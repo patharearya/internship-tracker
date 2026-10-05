@@ -48,8 +48,10 @@ and how they were settled: [devlog.md](devlog.md).
    - Discovery (run with discover on, or the 06:05Z run): boards.json has the
      19 revived Workday boards (underscore tenants, moved hosts, Intel) and
      the 3 hand-added boards; their failures stop in state.json.
-   - USAJOBS now merges a HiringPath=student search: compare USAJOBS open
-     postings with 40 and count new Education / Social Sciences ones.
+   - USAJOBS student hiring path: done, 40 -> 55 open on the 01:41Z run
+     (no Education posting among them yet; Social Sciences 2).
+   - Every open posting is relabelled each run now: Other near 1,183, no
+     state near 408, level "both" near 2,523 on the next run.
    - `rejections.tsv` (run artifact) has the new `locations`, `country`,
      `eligibility` columns, and in the first Workday run most Workday rows
      carry a requisition id, not a `/job/...` path. Rows that keep the path

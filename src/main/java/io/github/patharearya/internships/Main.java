@@ -105,6 +105,22 @@ public final class Main {
         return out;
     }
 
+    /**
+     * Labels every open posting with the current rules, not only those fetched this run: Workday is fetched every
+     * third hour and a failing board not at all, so a rule change otherwise reached 5,934 Workday postings hours
+     * late (devlog 2026-10-05). Closed postings keep the labels they closed with.
+     */
+    static List<Entry> relabel(List<Entry> entries, Map<String, String> descriptions) {
+        List<Entry> out = new ArrayList<>(entries.size());
+        for (Entry e : entries) {
+            if (e.closed() != null) { out.add(e); continue; }
+            String d = e.posting().description() != null ? e.posting().description() : descriptions.get(e.key());
+            out.add(new Entry(e.key(), e.posting(), Rules.label(withDescription(e.posting(), d)), e.firstSeen(), e.lastSeen(),
+                    e.misses(), e.firstMiss(), e.closed(), e.reopened()));
+        }
+        return out;
+    }
+
     static void run(Fetch fetch, String only, int limit) throws Exception {
         Instant started = Instant.now();
         String now = started.truncatedTo(ChronoUnit.SECONDS).toString();
@@ -179,7 +195,7 @@ public final class Main {
             kept.put(u.id(), k);
         }
 
-        List<Entry> merged = merge(previous, kept, now);
+        List<Entry> merged = relabel(merge(previous, kept, now), descriptions);
         Map<String, String> newDescriptions = new TreeMap<>();
         List<Entry> published = new ArrayList<>();
         for (Entry e : merged) {
