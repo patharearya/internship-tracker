@@ -79,7 +79,9 @@ One Java program, run hourly by GitHub Actions. No AI in the pipeline.
   Sciences; Social Sciences & Psychology; Government, Law & Policy; Education;
   Arts, Design & Media; Other. Keyword rules on title/department, first match
   wins in a fixed order. USAJOBS maps by occupational series, NSF by programme,
-  NIH to Life Sciences & Health. Other is always shown.
+  NIH to Life Sciences & Health. Generic title words ("quality", "technology")
+  count only when neither the title's subject words nor the category decide.
+  The employer's name is not used. Other is always shown.
 - **Level.** `undergrad`, `grad`, `both`, `unknown` by keyword. Grad uses
   phrases ("graduate student"), never bare "graduate". Unknown shows as "level
   not stated" and appears under both filters.
@@ -225,3 +227,8 @@ Grill held 2026-10-03. Superseded entries are kept, marked, for the record.
   `data/state.json` until a person removes them.
 - Workday's 3 hours are measured from its last run, not the clock hour:
   GitHub dropped 8 of ~13 scheduled runs on 2026-10-04 (devlog).
+- Q23 (2026-10-05, from the second labelling page) majors follow the work,
+  not the employer's industry; the employer-name fallback was tried and
+  dropped (171 decisions, about half wrong). Claims, equity research -> Finance;
+  learning/training & development -> Education; EHS/HSE/HES -> Life Sciences.
+  DoD SkillBridge internships are rejected (service members only).

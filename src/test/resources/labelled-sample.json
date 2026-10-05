@@ -1,5 +1,5 @@
 {
- "about": "Hand-labelled sample, run 37212093164 (2026-10-04). keep/major are the adjudicated truth; major null = not checked (owner unsure). Rejected rows carry only the title: their locations and USAJOBS eligibility were not in rejections.tsv.",
+ "about": "Hand-labelled sample, run 37212093164 (2026-10-04). keep/major are the adjudicated truth; major null = not checked (owner unsure). Rejected rows carry only the title: their locations and USAJOBS eligibility were not in rejections.tsv. Second labelling 2026-10-05 (https://claude.ai/artifact/XSKuirRcRQiYWwkwLHmMSB): major only, nothing pre-filled; re-asked every kept row whose major came from the first page's pre-fill, plus 100 new Other postings (data 4c7062e, seed 20261005). major null = can't tell. majorFrom 'description' = only the description settles it, so title rules are not expected to match. Corrections agreed with the owner are marked.",
  "seed": 20261004,
  "strata": {
   "kept: random": 70,
@@ -8,7 +8,8 @@
   "rejected: no keyword, random": 20,
   "rejected: not a student role": 15,
   "rejected: runs the programme": 11,
-  "rejected: not open to students": 1
+  "rejected: not open to students": 1,
+  "kept: major Other, second sample": 100
  },
  "rows": [
   {
@@ -66,8 +67,8 @@
     "description": null
    },
    "keep": true,
-   "major": "Other",
-   "answered": "yes",
+   "major": "Life Sciences & Health",
+   "answered": "yes ; major was pre-filled 'Other', replaced 2026-10-05: same as m048 \"EHS Intern\"",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
@@ -556,8 +557,8 @@
     "description": null
    },
    "keep": true,
-   "major": "Other",
-   "answered": "yes",
+   "major": "Finance & Accounting",
+   "answered": "yes ; major was pre-filled 'Other', replaced 2026-10-05: FP&A is financial planning and analysis",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
@@ -655,14 +656,15 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "unsure",
+   "major": "Computer Science & IT",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Data & Mathematics",
     "why": "title \"AI\""
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i020",
@@ -687,8 +689,8 @@
     "description": null
    },
    "keep": true,
-   "major": "Other",
-   "answered": "yes",
+   "major": "Computer Science & IT",
+   "answered": "yes ; major was pre-filled 'Other', replaced 2026-10-05: same title as m003, labelled on page 2",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
@@ -1118,14 +1120,15 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "unsure",
+   "major": "Finance & Accounting",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i034",
@@ -1246,14 +1249,15 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "unsure",
+   "major": "Arts, Design & Media",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i038",
@@ -1662,8 +1666,8 @@
     "description": null
    },
    "keep": true,
-   "major": "Arts, Design & Media",
-   "answered": "yes",
+   "major": "Life Sciences & Health",
+   "answered": "yes ; major was pre-filled 'Arts, Design & Media', replaced 2026-10-05: biofilms; page 1 kept the pre-filled \"Arts\" from the film-in-Biofilms match",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "research programme",
@@ -1983,15 +1987,16 @@
     "deadline": null,
     "description": null
    },
-   "keep": true,
+   "keep": false,
    "major": null,
-   "answered": "unsure",
+   "answered": "major page 2026-10-05 ; SkillBridge: military only, not a student role",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i061",
@@ -2307,14 +2312,15 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "unsure",
+   "major": "Computer Science & IT",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i071",
@@ -2339,14 +2345,15 @@
     "description": null
    },
    "keep": true,
-   "major": "Other",
-   "answered": "yes",
+   "major": "Life Sciences & Health",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i072",
@@ -2371,14 +2378,15 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "unsure",
+   "major": "Data & Mathematics",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i073",
@@ -2403,14 +2411,15 @@
     "description": null
    },
    "keep": true,
-   "major": "Other",
-   "answered": "yes",
+   "major": "Computer Science & IT",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i074",
@@ -2436,13 +2445,14 @@
    },
    "keep": true,
    "major": null,
-   "answered": "unsure",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i075",
@@ -2467,14 +2477,15 @@
     "description": null
    },
    "keep": true,
-   "major": "Other",
-   "answered": "yes",
+   "major": null,
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i076",
@@ -2499,14 +2510,15 @@
     "description": null
    },
    "keep": true,
-   "major": "Other",
-   "answered": "yes",
+   "major": "Engineering",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i077",
@@ -2531,14 +2543,15 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "unsure",
+   "major": "Marketing & Communications",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i078",
@@ -2563,14 +2576,15 @@
     "description": null
    },
    "keep": true,
-   "major": "Other",
-   "answered": "yes",
+   "major": "Business & Management",
+   "answered": "major page 2026-10-05 (corrected with owner)",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i079",
@@ -2595,14 +2609,15 @@
     "description": null
    },
    "keep": true,
-   "major": "Other",
-   "answered": "yes",
+   "major": null,
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i080",
@@ -2628,14 +2643,15 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "unsure",
+   "major": "Business & Management",
+   "answered": "major page 2026-10-05 (corrected with owner)",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i081",
@@ -2660,14 +2676,15 @@
     "description": null
    },
    "keep": true,
-   "major": "Other",
-   "answered": "yes",
+   "major": "Physical Sciences",
+   "answered": "major page 2026-10-05 (corrected with owner)",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i082",
@@ -2692,14 +2709,15 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "unsure",
+   "major": "Data & Mathematics",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i083",
@@ -2723,15 +2741,16 @@
     "deadline": null,
     "description": null
    },
-   "keep": true,
+   "keep": false,
    "major": null,
-   "answered": "unsure",
+   "answered": "major page 2026-10-05 ; SkillBridge: military only, not a student role",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i084",
@@ -2756,14 +2775,15 @@
     "description": null
    },
    "keep": true,
-   "major": "Other",
-   "answered": "yes",
+   "major": "Engineering",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i085",
@@ -2788,14 +2808,15 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "unsure",
+   "major": "Life Sciences & Health",
+   "answered": "major page 2026-10-05 (corrected with owner)",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i086",
@@ -2825,14 +2846,15 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "unsure",
+   "major": "Business & Management",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i087",
@@ -2857,14 +2879,15 @@
     "description": null
    },
    "keep": true,
-   "major": "Other",
-   "answered": "yes",
+   "major": "Marketing & Communications",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i088",
@@ -2889,14 +2912,15 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "unsure",
+   "major": "Engineering",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i089",
@@ -2921,14 +2945,15 @@
     "description": null
    },
    "keep": true,
-   "major": "Other",
-   "answered": "yes",
+   "major": "Business & Management",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i090",
@@ -2951,14 +2976,15 @@
     "description": null
    },
    "keep": true,
-   "major": "Other",
-   "answered": "yes",
+   "major": "Business & Management",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i091",
@@ -2983,14 +3009,15 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "unsure",
+   "major": "Government, Law & Policy",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i092",
@@ -3015,14 +3042,15 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "unsure",
+   "major": "Data & Mathematics",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i093",
@@ -3047,14 +3075,15 @@
     "description": null
    },
    "keep": true,
-   "major": "Other",
-   "answered": "yes",
+   "major": null,
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i094",
@@ -3080,14 +3109,15 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "unsure",
+   "major": "Arts, Design & Media",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i095",
@@ -3112,14 +3142,15 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "unsure",
+   "major": "Engineering",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i096",
@@ -3143,15 +3174,16 @@
     "deadline": null,
     "description": null
    },
-   "keep": true,
-   "major": "Other",
-   "answered": "yes",
+   "keep": false,
+   "major": null,
+   "answered": "major page 2026-10-05 ; SkillBridge: military only, not a student role",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i097",
@@ -3176,14 +3208,15 @@
     "description": null
    },
    "keep": true,
-   "major": "Other",
-   "answered": "yes",
+   "major": "Government, Law & Policy",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i098",
@@ -3208,14 +3241,15 @@
     "description": null
    },
    "keep": true,
-   "major": "Other",
-   "answered": "yes",
+   "major": "Government, Law & Policy",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i099",
@@ -3240,14 +3274,15 @@
     "description": null
    },
    "keep": true,
-   "major": "Other",
-   "answered": "yes",
+   "major": "Computer Science & IT",
+   "answered": "major page 2026-10-05 (corrected with owner)",
    "ruleAtSampling": {
     "decision": "kept",
     "type": "internship",
     "major": "Other",
     "why": "no rule matched"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i100",
@@ -3355,11 +3390,12 @@
    },
    "keep": true,
    "major": null,
-   "answered": "yes",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "rejected",
     "reason": "no internship keyword in title"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i104",
@@ -3494,12 +3530,13 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "yes",
+   "major": "Engineering",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "rejected",
     "reason": "no internship keyword in title"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i109",
@@ -3746,12 +3783,13 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "yes",
+   "major": "Engineering",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "rejected",
     "reason": "no internship keyword in title"
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i118",
@@ -5230,12 +5268,13 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "yes",
+   "major": "Computer Science & IT",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "rejected",
     "reason": "not a student role: \"Early Career\""
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i171",
@@ -5455,11 +5494,12 @@
    },
    "keep": true,
    "major": null,
-   "answered": "yes",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "rejected",
     "reason": "not a student role: \"Early Career\""
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i179",
@@ -5595,11 +5635,12 @@
    },
    "keep": true,
    "major": null,
-   "answered": "yes",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "rejected",
     "reason": "not a student role: \"Early Career\""
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i184",
@@ -5650,12 +5691,13 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "yes",
+   "major": "Business & Management",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "rejected",
     "reason": "runs the programme: \"Manager - Intern\""
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i186",
@@ -5678,12 +5720,13 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "yes",
+   "major": "Business & Management",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "rejected",
     "reason": "runs the programme: \"Manager - Intern\""
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i187",
@@ -5706,12 +5749,13 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "yes",
+   "major": "Business & Management",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "rejected",
     "reason": "runs the programme: \"Manager - Intern\""
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i188",
@@ -5734,12 +5778,13 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "yes",
+   "major": "Business & Management",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "rejected",
     "reason": "runs the programme: \"Manager - Intern\""
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i189",
@@ -5762,12 +5807,13 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "yes",
+   "major": "Business & Management",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "rejected",
     "reason": "runs the programme: \"Manager - Intern\""
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i190",
@@ -5846,12 +5892,13 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "yes",
+   "major": "Business & Management",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "rejected",
     "reason": "runs the programme: \"Manager, Intern\""
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i193",
@@ -5874,12 +5921,13 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "yes",
+   "major": "Business & Management",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "rejected",
     "reason": "runs the programme: \"Manager, Intern\""
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i194",
@@ -5930,12 +5978,13 @@
     "description": null
    },
    "keep": true,
-   "major": null,
-   "answered": "yes",
+   "major": "Business & Management",
+   "answered": "major page 2026-10-05",
    "ruleAtSampling": {
     "decision": "rejected",
     "reason": "runs the programme: \"Manager - Intern\""
-   }
+   },
+   "majorFrom": "title"
   },
   {
    "row": "i196",
@@ -5963,6 +6012,3329 @@
    "ruleAtSampling": {
     "decision": "rejected",
     "reason": "not open to students (USAJOBS hiring paths: fed-internal-search)"
+   }
+  },
+  {
+   "row": "m000",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "clearwateranalytics.wd1.myworkdayjobs.com/clearwater_analytics_careers",
+    "id": "R12216",
+    "title": "S&M / Ops Support Intern",
+    "org": "Clearwater Analytics",
+    "url": "https://clearwateranalytics.wd1.myworkdayjobs.com/Clearwater_Analytics_Careers/job/Office---Boise/S-M---Ops-Support-Intern_R12216",
+    "locations": [
+     "Office - Boise"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-01",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Computer Science & IT",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m001",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "michelinhr.wd3.myworkdayjobs.com/michelin",
+    "id": "R-2026030998",
+    "title": "2027 Summer Intern",
+    "org": "Michelin",
+    "url": "https://michelinhr.wd3.myworkdayjobs.com/Michelin/job/Midland-City-AL/XMLNAME-2027-Summer-Intern_R-2026030998",
+    "locations": [
+     "Midland City, AL"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": null,
+    "eligibility": null,
+    "posted": "2026-08-13",
+    "deadline": "2027-05-27",
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m002",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "covestro.wd3.myworkdayjobs.com/cov_external",
+    "id": "JR-2026-01871",
+    "title": "HES Intern",
+    "org": "Covestro",
+    "url": "https://covestro.wd3.myworkdayjobs.com/cov_external/job/Pittsburgh-PA/HES-Intern_JR-2026-01871",
+    "locations": [
+     "Pittsburgh, PA"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-01",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Life Sciences & Health",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m003",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "fox.wd1.myworkdayjobs.com/domestic",
+    "id": "R50033932",
+    "title": "Spring 2027 FOX Technology Internship Program - New York, NY",
+    "org": "FOX",
+    "url": "https://fox.wd1.myworkdayjobs.com/Domestic/job/New-York-New-York-USA/Spring-2027-FOX-Technology-Internship-Program---New-York--NY_R50033932",
+    "locations": [
+     "New York, New York, USA"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-09-25",
+    "deadline": "2026-11-23",
+    "description": null
+   },
+   "keep": true,
+   "major": "Computer Science & IT",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m004",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "nsf",
+    "board": "nsf-reu",
+    "id": "2447704",
+    "title": "REU Accessible Information and Communication Technologies",
+    "org": "Gallaudet University",
+    "url": "https://www.nsf.gov/awardsearch/showAward?AWD_ID=2447704",
+    "locations": [
+     "WASHINGTON, DC"
+    ],
+    "country": "US",
+    "category": "CSE",
+    "workplace": null,
+    "employment": "Research programme",
+    "eligibility": null,
+    "posted": "2025-06-02",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Computer Science & IT",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "research programme",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m005",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "greenhouse",
+    "board": "robinhood",
+    "id": "8193710",
+    "title": "Crypto Partnership Intern (Summer 2027)",
+    "org": "Robinhood",
+    "url": "https://boards.greenhouse.io/robinhood/jobs/8193710?t=gh_src=&gh_jid=8193710",
+    "locations": [
+     "New York, NY"
+    ],
+    "country": null,
+    "category": "Crypto Division",
+    "workplace": null,
+    "employment": null,
+    "eligibility": null,
+    "posted": "2026-09-14",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Finance & Accounting",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m006",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "modernatx.wd1.myworkdayjobs.com/m_tx",
+    "id": "R19735",
+    "title": "Co-Op, Applied Technologies (Spring 2027)",
+    "org": "Moderna",
+    "url": "https://modernatx.wd1.myworkdayjobs.com/M_tx/job/Norwood-Massachusetts/Co-Op--Applied-Technologies--Spring-2027-_R19735",
+    "locations": [
+     "Norwood, Massachusetts",
+     "Technical Development"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-04",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "co-op",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m007",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "magna.wd3.myworkdayjobs.com/magna",
+    "id": "R00246431",
+    "title": "Intern - System Test",
+    "org": "Magna International",
+    "url": "https://wd3.myworkdaysite.com/recruiting/magna/Magna/job/Auburn-Hills-Michigan-US/Intern---System-Test_R00246431",
+    "locations": [
+     "Auburn Hills, Michigan, US"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-08-03",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m008",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "ashby",
+    "board": "withpace",
+    "id": "9acdae91-3834-4c08-8579-fd14ff40a76b",
+    "title": "Member of Technical Staff, Intern",
+    "org": "Pace",
+    "url": "https://jobs.ashbyhq.com/withpace/9acdae91-3834-4c08-8579-fd14ff40a76b",
+    "locations": [
+     "New York City"
+    ],
+    "country": null,
+    "category": "Internships",
+    "workplace": "OnSite",
+    "employment": "Intern",
+    "eligibility": null,
+    "posted": "2026-09-14",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m009",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "greenhouse",
+    "board": "point72",
+    "id": "8492784002",
+    "title": "Fundamental Research Fellow, Canvas",
+    "org": "Point72",
+    "url": "https://boards.greenhouse.io/point72/jobs/8492784002?gh_jid=8492784002",
+    "locations": [
+     "New York, NY"
+    ],
+    "country": null,
+    "category": "Market Intelligence",
+    "workplace": null,
+    "employment": null,
+    "eligibility": null,
+    "posted": "2026-04-15",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Finance & Accounting",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "fellowship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m010",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "greenhouse",
+    "board": "spacex",
+    "id": "8685947002",
+    "title": "Apprentice Fabrication Technician - 2nd Shift",
+    "org": "SpaceX",
+    "url": "https://boards.greenhouse.io/spacex/jobs/8685947002?gh_jid=8685947002",
+    "locations": [
+     "McGregor, TX"
+    ],
+    "country": null,
+    "category": "Texas - Fabrication",
+    "workplace": null,
+    "employment": null,
+    "eligibility": null,
+    "posted": "2026-08-05",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "apprenticeship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m011",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "theirc.wd1.myworkdayjobs.com/external_careers",
+    "id": "JR00003823",
+    "title": "Fall 2026 Casework Intern - UNPAID",
+    "org": "International Rescue Committee (IRC)",
+    "url": "https://theirc.wd1.myworkdayjobs.com/External_Careers/job/Atlanta-GA-USA/Fall-2026-Casework-Intern---UNPAID_JR00003823",
+    "locations": [
+     "Atlanta, GA USA"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-06-17",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Life Sciences & Health",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m012",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "conagrabrands.wd1.myworkdayjobs.com/careers_us",
+    "id": "Req-039360",
+    "title": "R&D Intern - Summer 2027",
+    "org": "Conagra Brands",
+    "url": "https://conagrabrands.wd1.myworkdayjobs.com/Careers_US/job/Omaha-Nebraska/R-D-Intern---Summer-2027_Req-039360",
+    "locations": [
+     "Omaha, Nebraska"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-08-12",
+    "deadline": "2026-10-09",
+    "description": null
+   },
+   "keep": true,
+   "major": "Life Sciences & Health",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m013",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "mfs.wd1.myworkdayjobs.com/mfs-careers",
+    "id": "MFS-231921",
+    "title": "Summer 2027 Service Center Intern (June - August)",
+    "org": "MFS",
+    "url": "https://mfs.wd1.myworkdayjobs.com/MFS-Careers/job/Boston/Summer-2027-Service-Center-Intern--June---August-_MFS-231921",
+    "locations": [
+     "Boston"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-10-01",
+    "deadline": "2026-10-15",
+    "description": null
+   },
+   "keep": true,
+   "major": "Marketing & Communications",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m014",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "commercebank.wd1.myworkdayjobs.com/commercejobs",
+    "id": "38384",
+    "title": "Intern - LJ Hart (Summer 2027)",
+    "org": "Commerce Bank",
+    "url": "https://commercebank.wd1.myworkdayjobs.com/CommerceJobs/job/MO---St-Louis-County-Central---St-Louis---Clayton-8000-Forsyth-63105/Intern---LJ-Hart--Summer-2027-_38384",
+    "locations": [
+     "MO - St. Louis County Central - St. Louis - Clayton (8000 Forsyth) (63105)"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-22",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Finance & Accounting",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m015",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "trumpf.wd3.myworkdayjobs.com/trumpf_students",
+    "id": "R00042751",
+    "title": "Machine Assembly Intern",
+    "org": "TRUMPF",
+    "url": "https://trumpf.wd3.myworkdayjobs.com/TRUMPF_Students/job/Farmington-CT/Assembly---Interns_R00042751",
+    "locations": [
+     "Farmington, CT"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-30",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m016",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "graco.wd501.myworkdayjobs.com/graco_careers",
+    "id": "R0023360",
+    "title": "Machinist intern",
+    "org": "Graco",
+    "url": "https://graco.wd501.myworkdayjobs.com/Graco_Careers/job/Anoka-Minnesota-USA/Machinist-intern_R0023360",
+    "locations": [
+     "Anoka, Minnesota, USA"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-15",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m017",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "regions.wd5.myworkdayjobs.com/regions_careers",
+    "id": "R106501",
+    "title": "2027 Clearsight Summer Analyst",
+    "org": "Regions Bank",
+    "url": "https://regions.wd5.myworkdayjobs.com/Regions_Careers/job/Clearsight-McLean/XMLNAME-2027-Clearsight-Summer-Analyst_R106501",
+    "locations": [
+     "Clearsight McLean"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-10-02",
+    "deadline": "2026-10-06",
+    "description": null
+   },
+   "keep": true,
+   "major": null,
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m018",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "freese.wd1.myworkdayjobs.com/freese_nichols_external",
+    "id": "JR103873",
+    "title": "Summer 2027 Internships - TX Water and Transportation",
+    "org": "Freese and Nichols",
+    "url": "https://freese.wd1.myworkdayjobs.com/Freese_Nichols_External/job/Fort-Worth-Texas/Summer-2027-Internships---TX-Water-and-Transportation_JR103873",
+    "locations": [
+     "Fort Worth, Texas",
+     "San Marcos, Texas",
+     "San Antonio, Texas",
+     "Pearland, Texas",
+     "Lubbock, Texas",
+     "Houston, Texas",
+     "Frisco, Texas",
+     "Harlingen, Texas",
+     "El Paso, Texas",
+     "Denton, Texas",
+     "Dallas, Texas",
+     "Corpus Christi, Texas",
+     "Austin, Texas"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-30",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m019",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "nexstar.wd5.myworkdayjobs.com/nexstar",
+    "id": "REQ-43032",
+    "title": "Broadcasting Internship (NYSBA)",
+    "org": "Nexstar",
+    "url": "https://nexstar.wd5.myworkdayjobs.com/nexstar/job/VT-Colchester/Broadcasting-Internship--NYSBA-_REQ-43032",
+    "locations": [
+     "VT, Colchester"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-09-21",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Marketing & Communications",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m020",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "tencent.wd1.myworkdayjobs.com/tencent_careers",
+    "id": "R107331",
+    "title": "Multimedia development intern",
+    "org": "Tencent",
+    "url": "https://tencent.wd1.myworkdayjobs.com/Tencent_Careers/job/US-California-Palo-Alto/Multimedia-development-intern_R107331",
+    "locations": [
+     "US-California-Palo Alto"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-07-02",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Marketing & Communications",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m021",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "flowserve.wd1.myworkdayjobs.com/applied",
+    "id": "R-21410",
+    "title": "MBA Future Leader Internship Program",
+    "org": "Flowserve",
+    "url": "https://flowserve.wd1.myworkdayjobs.com/applied/job/Irving-Texas-US/MBA-Future-Leader-Internship-Program_R-21410-1",
+    "locations": [
+     "Irving, Texas US"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-10-02",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Business & Management",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m022",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "baldwin.wd1.myworkdayjobs.com/msi",
+    "id": "JR110081",
+    "title": "Claims Intern, MSI",
+    "org": "MSI",
+    "url": "https://baldwin.wd1.myworkdayjobs.com/MSI/job/Tampa-Florida-US/Claims-Intern--MSI_JR110081",
+    "locations": [
+     "Tampa, Florida, US"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-10-01",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Finance & Accounting",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m023",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "ashby",
+    "board": "helion",
+    "id": "d2a1f8af-a310-44af-a5bc-c68816ebb7f6",
+    "title": "Computational Plasma Research Summer 2027 Intern",
+    "org": "Helion Energy",
+    "url": "https://jobs.ashbyhq.com/helion/d2a1f8af-a310-44af-a5bc-c68816ebb7f6",
+    "locations": [
+     "Everett, WA"
+    ],
+    "country": null,
+    "category": "Science",
+    "workplace": "OnSite",
+    "employment": "Intern",
+    "eligibility": null,
+    "posted": "2026-09-30",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Physical Sciences",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m024",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "nsf",
+    "board": "nsf-reu",
+    "id": "2349628",
+    "title": "Collaborative Research: REU Site: TRUST: Training Research for Undergraduate Students in Secure and Trusted Systems",
+    "org": "Wright State University",
+    "url": "https://www.nsf.gov/awardsearch/showAward?AWD_ID=2349628",
+    "locations": [
+     "DAYTON, OH"
+    ],
+    "country": "US",
+    "category": "CSE",
+    "workplace": null,
+    "employment": "Research programme",
+    "eligibility": null,
+    "posted": "2024-05-09",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Computer Science & IT",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "research programme",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m025",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "envista.wd1.myworkdayjobs.com/envistacareers",
+    "id": "R5027340",
+    "title": "Metrex Technical Research Intern",
+    "org": "Envista",
+    "url": "https://envista.wd1.myworkdayjobs.com/envistacareers/job/United-States-of-America--California--Brea/Metrex-Technical-Research-Intern_R5027340-1",
+    "locations": [
+     "United States of America,  California,  Brea",
+     "United States of America,  Michigan,  Romulus"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-09-28",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Data & Mathematics",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m026",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "fox.wd1.myworkdayjobs.com/domestic",
+    "id": "R50033964",
+    "title": "Summer 2027 FOX Sports Internship Program - Los Angeles",
+    "org": "FOX",
+    "url": "https://fox.wd1.myworkdayjobs.com/Domestic/job/Los-Angeles-California-USA/Summer-2027-FOX-Sports-Internship-Program---Los-Angeles_R50033964",
+    "locations": [
+     "Los Angeles, California, USA"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-09-28",
+    "deadline": "2027-01-11",
+    "description": null
+   },
+   "keep": true,
+   "major": "Marketing & Communications",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m027",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "envista.wd1.myworkdayjobs.com/envistacareers",
+    "id": "R5027451",
+    "title": "Research and Development Intern",
+    "org": "Envista",
+    "url": "https://envista.wd1.myworkdayjobs.com/envistacareers/job/United-States-of-America--Texas--Lubbock/Research-and-Development-Intern_R5027451",
+    "locations": [
+     "United States of America,  Texas,  Lubbock"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-09-30",
+    "deadline": "2026-12-31",
+    "description": null
+   },
+   "keep": true,
+   "major": "Life Sciences & Health",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m028",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "costar.wd1.myworkdayjobs.com/costar_campus",
+    "id": "R39945",
+    "title": "Summer 2027 Technology Intern - Sunnyvale, CA",
+    "org": "CoStar Group",
+    "url": "https://costar.wd1.myworkdayjobs.com/Costar_Campus/job/Sunnyvale-US/Summer-2027-Technology-Intern---Sunnyvale--CA_R39945",
+    "locations": [
+     "Sunnyvale (US)"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-10-01",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Business & Management",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m029",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "firstquality.wd5.myworkdayjobs.com/firstquality",
+    "id": "R11226",
+    "title": "Intern - Planning",
+    "org": "First Quality",
+    "url": "https://firstquality.wd5.myworkdayjobs.com/FIRSTQUALITY/job/US-SC-Anderson/Intern---Planning_R11226",
+    "locations": [
+     "US SC Anderson"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-06-19",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Life Sciences & Health",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m030",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "cir.wd108.myworkdayjobs.com/cir_external_career_site",
+    "id": "R-2025-240",
+    "title": "Advocacy & Supervision Intern",
+    "org": "Cambridge Investment Research",
+    "url": "https://cir.wd108.myworkdayjobs.com/CIR_External_Career_Site/job/Fairfield-IA/Advocacy---Supervision-Intern_R-2025-240",
+    "locations": [
+     "Fairfield, IA"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-21",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Finance & Accounting",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m031",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "nsf",
+    "board": "nsf-reu",
+    "id": "2349630",
+    "title": "Collaborative Research: REU Site: TRUST: Training Research for Undergraduate Students in Secure and Trusted Systems",
+    "org": "Air Force Institute of Tech",
+    "url": "https://www.nsf.gov/awardsearch/showAward?AWD_ID=2349630",
+    "locations": [
+     "WRIGHT PATTERSON AFB, OH"
+    ],
+    "country": "US",
+    "category": "CSE",
+    "workplace": null,
+    "employment": "Research programme",
+    "eligibility": null,
+    "posted": "2024-05-09",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Computer Science & IT",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "research programme",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m032",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "greenhouse",
+    "board": "bgeinccampus",
+    "id": "5415775008",
+    "title": "SAN ANTONIO - Transportation, Internship",
+    "org": "BGE",
+    "url": "https://job-boards.greenhouse.io/bgeinccampus/jobs/5415775008",
+    "locations": [
+     "7330 San Pedro Ave., Suite 301, San Antonio, Texas 78216"
+    ],
+    "country": null,
+    "category": "Transportation Systems",
+    "workplace": null,
+    "employment": null,
+    "eligibility": null,
+    "posted": "2026-09-03",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m033",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "walmart.wd504.myworkdayjobs.com/walmartexternal",
+    "id": "R-2630172",
+    "title": "Corporate Intern: 2027 Summer Intern: Walmart Merchandising - Fashion",
+    "org": "Walmart",
+    "url": "https://walmart.wd504.myworkdayjobs.com/WalmartExternal/job/USA-Hula-Building-Bentonville-AR-Home-Office/Corporate-Intern--2027-Summer-Intern--Walmart-Merchandising---Fashion_R-2630172-1",
+    "locations": [
+     "(USA) Hula Building Bentonville AR Home Office"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-16",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Marketing & Communications",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m034",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "austincc.wd1.myworkdayjobs.com/external",
+    "id": "R-9859",
+    "title": "Farm Assistant- Internship (Hourly)",
+    "org": "Austin Community College District",
+    "url": "https://austincc.wd1.myworkdayjobs.com/External/job/Elgin-Campus/Farm-Assistant--Internship--Hourly-_R-9859",
+    "locations": [
+     "Elgin Campus"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-09-30",
+    "deadline": "2026-10-14",
+    "description": null
+   },
+   "keep": true,
+   "major": "Other",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m035",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "valeo.wd3.myworkdayjobs.com/valeo_jobs",
+    "id": "REQ2025060211",
+    "title": "HSE Intern (Summer 2026)",
+    "org": "Valeo",
+    "url": "https://valeo.wd3.myworkdayjobs.com/valeo_jobs/job/Reno-NV/HSE-Intern--Summer-2026-_REQ2025060211",
+    "locations": [
+     "Reno, NV"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-05-13",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Life Sciences & Health",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m036",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "nsf",
+    "board": "nsf-reu",
+    "id": "2547922",
+    "title": "REU Site: Research Experience for Undergraduates Intersecting Computing and Evolution",
+    "org": "Grand Valley State University",
+    "url": "https://www.nsf.gov/awardsearch/showAward?AWD_ID=2547922",
+    "locations": [
+     "ALLENDALE, MI"
+    ],
+    "country": "US",
+    "category": "CSE",
+    "workplace": null,
+    "employment": "Research programme",
+    "eligibility": null,
+    "posted": "2026-04-21",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Data & Mathematics",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "research programme",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m037",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "centerstone.wd5.myworkdayjobs.com/centerstonecareers",
+    "id": "JR-033355",
+    "title": "Bachelor Level Intern Spring Semester",
+    "org": "Centerstone",
+    "url": "https://centerstone.wd5.myworkdayjobs.com/CenterstoneCareers/job/Bloomington-Indiana/Bachelor-Level-Intern-Spring-Semester_JR-033355",
+    "locations": [
+     "Bloomington, Indiana",
+     "Seymour, Indiana",
+     "Greenwood, Indiana",
+     "Jeffersonville, Indiana",
+     "Richmond, Indiana"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-10-01",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Life Sciences & Health",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m038",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "curtisswright.wd1.myworkdayjobs.com/cw_external_career_site",
+    "id": "JR4041",
+    "title": "Co-op (Summer Term)",
+    "org": "Curtiss-Wright Corporation",
+    "url": "https://curtisswright.wd1.myworkdayjobs.com/CW_External_Career_Site/job/US-PA-Cheswick-EMD/Co-op--Summer-Term-_JR4041",
+    "locations": [
+     "US-PA-Cheswick (EMD)"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2025-02-07",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "co-op",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m039",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "premierinc.wd1.myworkdayjobs.com/external_professional",
+    "id": "R0008468",
+    "title": "Advisory Services Intern",
+    "org": "Premier",
+    "url": "https://premierinc.wd1.myworkdayjobs.com/External_Professional/job/Remote/Advisory-Services-Intern_R0008468",
+    "locations": [
+     "Remote"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-28",
+    "deadline": "2026-10-26",
+    "description": null
+   },
+   "keep": true,
+   "major": "Data & Mathematics",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m040",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "theirc.wd1.myworkdayjobs.com/external_careers",
+    "id": "JR00002406",
+    "title": "Youth Intern (Fall 2026)",
+    "org": "International Rescue Committee (IRC)",
+    "url": "https://theirc.wd1.myworkdayjobs.com/External_Careers/job/Silver-Spring-MD-USA/Youth-Intern--Summer-2026-_JR00002406",
+    "locations": [
+     "Silver Spring, MD USA"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-06-25",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Marketing & Communications",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m041",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "walmart.wd504.myworkdayjobs.com/walmartexternal",
+    "id": "R-2630171",
+    "title": "2026 Corporate Intern Conversion: 2027 Return Intern Wamart Merchandising",
+    "org": "Walmart",
+    "url": "https://walmart.wd504.myworkdayjobs.com/WalmartExternal/job/USA-Hula-Building-Bentonville-AR-Home-Office/XMLNAME-2026-Corporate-Intern-Conversion--2027-Return-Intern-Wamart-Merchandising_R-2630171",
+    "locations": [
+     "(USA) Hula Building Bentonville AR Home Office"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-23",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Marketing & Communications",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m042",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "theirc.wd1.myworkdayjobs.com/external_careers",
+    "id": "JR00002358",
+    "title": "Walk-in Casework Intern (Summer 2026)",
+    "org": "International Rescue Committee (IRC)",
+    "url": "https://theirc.wd1.myworkdayjobs.com/External_Careers/job/Silver-Spring-MD-USA/Walk-in-Casework-Intern--Summer-2026-_JR00002358",
+    "locations": [
+     "Silver Spring, MD USA"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-03-11",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Life Sciences & Health",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m043",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "wattswater.wd5.myworkdayjobs.com/intern-external",
+    "id": "10017598",
+    "title": "Research and Technology Co-Op, Jan-Jun 2027",
+    "org": "Watts Water",
+    "url": "https://wattswater.wd5.myworkdayjobs.com/Intern-External/job/North-Andover-MA/Research-and-Technology-Co-Op_10017598",
+    "locations": [
+     "North Andover, MA"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-23",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Life Sciences & Health",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "co-op",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m044",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "integritymarketing.wd1.myworkdayjobs.com/integrity",
+    "id": "JR4450",
+    "title": "Intern",
+    "org": "Integrity",
+    "url": "https://integritymarketing.wd1.myworkdayjobs.com/Integrity/job/Decatur-IL/Intern_JR4450",
+    "locations": [
+     "Decatur, IL"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-08-17",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Computer Science & IT",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m045",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "bcbsla.wd1.myworkdayjobs.com/generation_blue",
+    "id": "R12139",
+    "title": "CW Technical Support Services Intern (Spring 2027)",
+    "org": "Louisiana Blue",
+    "url": "https://bcbsla.wd1.myworkdayjobs.com/Generation_Blue/job/Corporate---Baton-Rouge-LA/CW-IT-Service-Desk-Intern--Spring-2027-_R12139",
+    "locations": [
+     "Corporate - Baton Rouge, LA"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-09-16",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m046",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "ashby",
+    "board": "meshy",
+    "id": "0bb445e0-8359-4e94-b7cb-3df40a44d256",
+    "title": "GTM Intern",
+    "org": "Meshy",
+    "url": "https://jobs.ashbyhq.com/meshy/0bb445e0-8359-4e94-b7cb-3df40a44d256",
+    "locations": [
+     "Bay Area Office"
+    ],
+    "country": null,
+    "category": "Growth",
+    "workplace": "Hybrid",
+    "employment": "FullTime",
+    "eligibility": null,
+    "posted": "2026-09-25",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Computer Science & IT",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m047",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "utaustin.wd1.myworkdayjobs.com/utstudent",
+    "id": "R_00049032",
+    "title": "Sr. Student Associate - McDermott Archives Intern",
+    "org": "University of Texas at Austin",
+    "url": "https://utaustin.wd1.myworkdayjobs.com/UTstudent/job/UT-MAIN-CAMPUS/Sr-Student-Associate---McDermott-Archives-Intern_R_00049032",
+    "locations": [
+     "UT MAIN CAMPUS"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-09-24",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": null,
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m048",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "ttc.wd1.myworkdayjobs.com/toro_external_careers",
+    "id": "JR17203",
+    "title": "EHS Intern - BOSS Snowplow",
+    "org": "The Toro Company",
+    "url": "https://ttc.wd1.myworkdayjobs.com/Toro_External_Careers/job/Iron-Mountain-MI/EHS-Intern---BOSS-Snowplow_JR17203",
+    "locations": [
+     "Iron Mountain, MI"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-11",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Life Sciences & Health",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m049",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "acxiomllc.wd5.myworkdayjobs.com/acxiomusa",
+    "id": "JR014453",
+    "title": "Intern - Collections",
+    "org": "Acxiom",
+    "url": "https://acxiomllc.wd5.myworkdayjobs.com/AcxiomUSA/job/Conway/Intern---Collections_JR014453",
+    "locations": [
+     "Conway"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-09-15",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Marketing & Communications",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m050",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "lthc.wd1.myworkdayjobs.com/excellusbcbscareers",
+    "id": "JR104091",
+    "title": "College Intern I",
+    "org": "Excellus BCBS",
+    "url": "https://lthc.wd1.myworkdayjobs.com/ExcellusBCBSCareers/job/Rochester/College-Intern-I_JR104091-2",
+    "locations": [
+     "Rochester"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-09-28",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": null,
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m051",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "hntb.wd5.myworkdayjobs.com/hntb_careers",
+    "id": "R-31400",
+    "title": "Technology Intern - Summer 2027",
+    "org": "HNTB",
+    "url": "https://hntb.wd5.myworkdayjobs.com/HNTB_Careers/job/Chicago-IL/Technology-Intern---Summer-2027_R-31400-1",
+    "locations": [
+     "Chicago, IL"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-08-31",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Computer Science & IT",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m052",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "raymondjames.wd1.myworkdayjobs.com/raymondjamesearlycareers",
+    "id": "R-0012914",
+    "title": "2027 Summer Internship – Equity Research – Multiple Locations",
+    "org": "Raymond James Financial",
+    "url": "https://raymondjames.wd1.myworkdayjobs.com/RaymondJamesEarlyCareers/job/Saint-Petersburg-Florida---United-States/XMLNAME-2027-Summer-Internship---Equity-Research---Multiple-Locations_R-0012914",
+    "locations": [
+     "Saint Petersburg, Florida - United States"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-14",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Finance & Accounting",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m053",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "lever",
+    "board": "standtogether",
+    "id": "d42ab1de-8c17-4192-8a89-4acfe402aa55",
+    "title": "KIP Spring 2027 - Campus Freedom Intern - The American Council of Trustees and Alumni",
+    "org": "Stand Together",
+    "url": "https://jobs.lever.co/standtogether/d42ab1de-8c17-4192-8a89-4acfe402aa55",
+    "locations": [
+     "Washington, DC"
+    ],
+    "country": "US",
+    "category": "Koch Internship Program",
+    "workplace": "onsite",
+    "employment": "ST Fellowships - On-Site",
+    "eligibility": null,
+    "posted": "2026-09-25",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Education",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m054",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "gentex.wd5.myworkdayjobs.com/gentex",
+    "id": "REQ026640",
+    "title": "2027 Summer Intern",
+    "org": "Gentex Corporation",
+    "url": "https://gentex.wd5.myworkdayjobs.com/Gentex/job/Zeeland-MI/XMLNAME-2027-Summer-Intern_REQ026640",
+    "locations": [
+     "Zeeland, MI"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-15",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Computer Science & IT",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m055",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "xenergy.wd5.myworkdayjobs.com/x-energyus",
+    "id": "R101364",
+    "title": "Nuclear Criticality Safety Internship- Summer 2027",
+    "org": "X-energy",
+    "url": "https://xenergy.wd5.myworkdayjobs.com/X-energyUS/job/Oak-Ridge-TN/Nuclear-Criticality-Safety-Internship--Summer-2027_R101364-1",
+    "locations": [
+     "Oak Ridge, TN"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-09-28",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m056",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "mosscm.wd1.myworkdayjobs.com/moss_careers",
+    "id": "R-2719",
+    "title": "Energy Internship: Summer 2027",
+    "org": "Moss & Associates",
+    "url": "https://mosscm.wd1.myworkdayjobs.com/Moss_Careers/job/FLORIDA/Energy-Internship--Summer-2027_R-2719",
+    "locations": [
+     "FLORIDA"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-08",
+    "deadline": "2027-07-23",
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m057",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "disney.wd5.myworkdayjobs.com/disneycareer",
+    "id": "10158803",
+    "title": "WABC-TV (ABC7) Digital Intern, Spring 2027",
+    "org": "The Walt Disney Company",
+    "url": "https://disney.wd5.myworkdayjobs.com/disneycareer/job/New-York-NY-USA/WABC-TV--ABC7--Digital-Intern--Spring-2027_10158803",
+    "locations": [
+     "New York, NY, USA"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-09-29",
+    "deadline": "2026-10-07",
+    "description": null
+   },
+   "keep": true,
+   "major": "Arts, Design & Media",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m058",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "empower.wd12.myworkdayjobs.com/panagora",
+    "id": "R.0062297",
+    "title": "Summer 2027 Intern",
+    "org": "PanAgora",
+    "url": "https://empower.wd12.myworkdayjobs.com/PanAgora/job/MA-Boston---PanAgora/Summer-2027-Intern_R0062297",
+    "locations": [
+     "MA Boston - PanAgora"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-10",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Marketing & Communications",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m059",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "burlington.wd5.myworkdayjobs.com/burlingtoncareers",
+    "id": "R104357",
+    "title": "Buying Intern - Summer 2027",
+    "org": "Burlington Stores",
+    "url": "https://burlington.wd5.myworkdayjobs.com/BurlingtonCareers/job/99000---Kingsbury-Corporate-Office/Buying-Intern---Summer-2027_R104357-1",
+    "locations": [
+     "99000 - Kingsbury Corporate Office"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-04",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Finance & Accounting",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m060",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "centene.wd5.myworkdayjobs.com/centene_external",
+    "id": "1660521",
+    "title": "Corporate Functions Summer 2027 Intern (Undergraduate)",
+    "org": "Centene",
+    "url": "https://centene.wd5.myworkdayjobs.com/Centene_External/job/Remote-MO/Corporate-Functions-Summer-2027-Intern--Undergraduate-_1660521",
+    "locations": [
+     "Remote-MO"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-18",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Business & Management",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m061",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "greenhouse",
+    "board": "compeerfinancial",
+    "id": "5430754008",
+    "title": "Intern Loan Servicing & Risk Assets",
+    "org": "Compeer Financial",
+    "url": "https://job-boards.greenhouse.io/compeerfinancial/jobs/5430754008",
+    "locations": [
+     "WI-Sun Prairie; WI-Dodgeville; WI-Lancaster"
+    ],
+    "country": null,
+    "category": "Risk Asset Unit",
+    "workplace": null,
+    "employment": null,
+    "eligibility": null,
+    "posted": "2026-09-30",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Finance & Accounting",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m062",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "pimco.wd1.myworkdayjobs.com/pimco-careers",
+    "id": "R106747",
+    "title": "2027 Summer Intern – Private Strategies Analyst, US (Special Situations, NYC)",
+    "org": "PIMCO",
+    "url": "https://pimco.wd1.myworkdayjobs.com/pimco-careers/job/New-York-NY-USA/XMLNAME-2027-Summer-Intern---Private-Strategies-Analyst--US--Special-Situations--NYC-_R106747",
+    "locations": [
+     "New York, NY USA"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-08-18",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Business & Management",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m063",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "ashby",
+    "board": "vendelux",
+    "id": "ec44a794-9622-444e-a789-491fa12726dd",
+    "title": "Fall Data Intern",
+    "org": "Vendelux",
+    "url": "https://jobs.ashbyhq.com/vendelux/ec44a794-9622-444e-a789-491fa12726dd",
+    "locations": [
+     "New York, NY"
+    ],
+    "country": null,
+    "category": "Data",
+    "workplace": "Hybrid",
+    "employment": "FullTime",
+    "eligibility": null,
+    "posted": "2026-08-14",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Marketing & Communications",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m064",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "recar.wd108.myworkdayjobs.com/slatecareers",
+    "id": "JR101403",
+    "title": "Body Structures Intern",
+    "org": "Slate Auto",
+    "url": "https://recar.wd108.myworkdayjobs.com/SLATEcareers/job/Troy-Michigan/Body-Structures-Intern_JR101403",
+    "locations": [
+     "Troy, Michigan"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-25",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m065",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "greenhouse",
+    "board": "bgeinccampus",
+    "id": "5415760008",
+    "title": "SAN ANTONIO - Public Works, Internship",
+    "org": "BGE",
+    "url": "https://job-boards.greenhouse.io/bgeinccampus/jobs/5415760008",
+    "locations": [
+     "7330 San Pedro Ave., Suite 301, San Antonio, Texas 78216"
+    ],
+    "country": null,
+    "category": "Public Works",
+    "workplace": null,
+    "employment": null,
+    "eligibility": null,
+    "posted": "2026-09-03",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m066",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "gilead.wd1.myworkdayjobs.com/gileadcareers",
+    "id": "R0054621",
+    "title": "Intern - PDM - Analytical Development",
+    "org": "Gilead Sciences",
+    "url": "https://gilead.wd1.myworkdayjobs.com/gileadcareers/job/United-States---California---Foster-City/Intern---PDM---Analytical-Development_R0054621",
+    "locations": [
+     "United States - California - Foster City"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-16",
+    "deadline": "2026-10-16",
+    "description": null
+   },
+   "keep": true,
+   "major": "Data & Mathematics",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m067",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "greenhouse",
+    "board": "financialtechnologypartners",
+    "id": "8815197002",
+    "title": "2027 Equity Research Summer Analyst (US)",
+    "org": "Financial Technology Partners",
+    "url": "https://job-boards.greenhouse.io/financialtechnologypartners/jobs/8815197002",
+    "locations": [
+     "San Francisco, New York City"
+    ],
+    "country": null,
+    "category": "Early Careers",
+    "workplace": null,
+    "employment": null,
+    "eligibility": null,
+    "posted": "2026-09-16",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Finance & Accounting",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m068",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "greenhouse",
+    "board": "bgeinccampus",
+    "id": "5417903008",
+    "title": "ATLANTA - Land/Site Development, Internship",
+    "org": "BGE",
+    "url": "https://job-boards.greenhouse.io/bgeinccampus/jobs/5417903008",
+    "locations": [
+     "245 TownPark Drive, Suite 470, Kennesaw, Georgia 30144"
+    ],
+    "country": null,
+    "category": "Land/Site Development",
+    "workplace": null,
+    "employment": null,
+    "eligibility": null,
+    "posted": "2026-09-08",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Government, Law & Policy",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m069",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "gfs.wd5.myworkdayjobs.com/usjobs-gen-gfs",
+    "id": "R-57406",
+    "title": "Learning and Development Intern",
+    "org": "Gordon Food Service",
+    "url": "https://gfs.wd5.myworkdayjobs.com/usjobs-gen-gfs/job/Wyoming-Michigan/Learning-and-Development-Intern_R-57406",
+    "locations": [
+     "Wyoming, Michigan"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-21",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Education",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m070",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "greenhouse",
+    "board": "fspco-op012325",
+    "id": "8859973002",
+    "title": "Apriori Bio: Protein Science Co-Op",
+    "org": "Flagship Pioneering",
+    "url": "https://job-boards.greenhouse.io/fspco-op012325/jobs/8859973002",
+    "locations": [
+     "Cambridge, MA USA"
+    ],
+    "country": null,
+    "category": "Co-Ops & Internships",
+    "workplace": null,
+    "employment": null,
+    "eligibility": null,
+    "posted": "2026-10-01",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Life Sciences & Health",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "co-op",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m071",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "slihrms.wd3.myworkdayjobs.com/careers",
+    "id": "R-159666",
+    "title": "Archaeology Intern - Summer 2027",
+    "org": "AtkinsRéalis",
+    "url": "https://slihrms.wd3.myworkdayjobs.com/Careers/job/USGAAtlanta2018-Powers-Ferry-Rd/Archaeology-Intern---Summer-2027_R-159666-1",
+    "locations": [
+     "US.GA.Atlanta.2018 Powers Ferry Rd"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-09-08",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Social Sciences & Psychology",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m072",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "aero.wd5.myworkdayjobs.com/external",
+    "id": "R016763",
+    "title": "2027 Structural Mechanics Undergraduate Intern",
+    "org": "The Aerospace Corporation",
+    "url": "https://aero.wd5.myworkdayjobs.com/External/job/El-Segundo-CA/XMLNAME-2027-Structural-Mechanics-Undergraduate-Intern_R016763",
+    "locations": [
+     "El Segundo, CA"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-29",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m073",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "nexstar.wd5.myworkdayjobs.com/nexstar",
+    "id": "REQ-43078",
+    "title": "Unpaid Intern",
+    "org": "Nexstar",
+    "url": "https://nexstar.wd5.myworkdayjobs.com/nexstar/job/TX-Amarillo/Unpaid-Intern_REQ-43078",
+    "locations": [
+     "TX, Amarillo"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-21",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": null,
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m074",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "uva.wd1.myworkdayjobs.com/uvastudentjobs",
+    "id": "R0075407",
+    "title": "Graduate Admission Intern (Student Wage)",
+    "org": "University of Virginia",
+    "url": "https://uva.wd1.myworkdayjobs.com/UVAStudentJobs/job/Charlottesville-VA/Graduate-Admission-Intern--Student-Wage-_R0075407-1",
+    "locations": [
+     "Charlottesville, VA"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2025-09-12",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Business & Management",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m075",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "ingredion.wd1.myworkdayjobs.com/ingredioncareers",
+    "id": "Req-40341",
+    "title": "Food Quality Intern",
+    "org": "Ingredion",
+    "url": "https://ingredion.wd1.myworkdayjobs.com/IngredionCareers/job/South-Sioux-City-NE/Food-Quality-Intern_Req-40341-1",
+    "locations": [
+     "South Sioux City, NE"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-18",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Life Sciences & Health",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m076",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "vermeer.wd5.myworkdayjobs.com/externalcareersite",
+    "id": "REQ-22156",
+    "title": "Training and Development Specialist Intern - Summer 2027",
+    "org": "Vermeer",
+    "url": "https://vermeer.wd5.myworkdayjobs.com/externalcareersite/job/Pella-Iowa-USA---Corporate-Office/Training-and-Development-Specialist-Intern---Summer-2027_REQ-22156",
+    "locations": [
+     "Pella, Iowa, USA - Corporate Office"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-08-31",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Education",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m077",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "meijer.wd5.myworkdayjobs.com/meijer",
+    "id": "R000700731",
+    "title": "Community Partnerships Intern- Summer 2027",
+    "org": "Meijer",
+    "url": "https://meijer.wd5.myworkdayjobs.com/Meijer/job/Grand-Rapids-MI/Community-Partnerships-Intern--Summer-2027_R000700731",
+    "locations": [
+     "Grand Rapids, MI"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-11",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Marketing & Communications",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m078",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "greenhouse",
+    "board": "formic",
+    "id": "4655166006",
+    "title": "2026 Internship",
+    "org": "Formic",
+    "url": "https://job-boards.greenhouse.io/formic/jobs/4655166006",
+    "locations": [
+     "San Francisco || Oakland, CA"
+    ],
+    "country": null,
+    "category": "G&A",
+    "workplace": null,
+    "employment": null,
+    "eligibility": null,
+    "posted": "2026-02-17",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m079",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "aero.wd5.myworkdayjobs.com/external",
+    "id": "R016512",
+    "title": "2027 Guidance, Navigation, and Control (GNC) Graduate Intern",
+    "org": "The Aerospace Corporation",
+    "url": "https://aero.wd5.myworkdayjobs.com/External/job/El-Segundo-CA/XMLNAME-2027-Guidance--Navigation--and-Control--GNC--Graduate-Intern_R016512",
+    "locations": [
+     "El Segundo, CA"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-09",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m080",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "travelers.wd5.myworkdayjobs.com/external",
+    "id": "R-52460",
+    "title": "Claim Professional Development Program Intern",
+    "org": "Travelers",
+    "url": "https://travelers.wd5.myworkdayjobs.com/External/job/TX---Richardson/Claim-Professional-Development-Program-Intern_R-52460",
+    "locations": [
+     "TX - Richardson"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-04",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Finance & Accounting",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m081",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "ashby",
+    "board": "antares",
+    "id": "fbf5e422-fb4c-46fb-9ba0-9046df88f44f",
+    "title": "Thermofluids Analysis Intern - Summer 2027",
+    "org": "Antares Nuclear",
+    "url": "https://jobs.ashbyhq.com/Antares/fbf5e422-fb4c-46fb-9ba0-9046df88f44f",
+    "locations": [
+     "Los Angeles"
+    ],
+    "country": null,
+    "category": "Internships",
+    "workplace": "OnSite",
+    "employment": "Intern",
+    "eligibility": null,
+    "posted": "2026-09-14",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m082",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "yai.wd5.myworkdayjobs.com/careers",
+    "id": "R024284",
+    "title": "Resource - Respite Center Internship",
+    "org": "Yai",
+    "url": "https://yai.wd5.myworkdayjobs.com/Careers/job/Queens/Resource---Respite-Center-Internship_R024284",
+    "locations": [
+     "Queens"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-03-23",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Social Sciences & Psychology",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m083",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "mpc.wd1.myworkdayjobs.com/mpccareers",
+    "id": "00024456",
+    "title": "Operator Internship",
+    "org": "Marathon Petroleum",
+    "url": "https://mpc.wd1.myworkdayjobs.com/MPCCareers/job/Texas-City-Texas/Operator-Internship_00024456",
+    "locations": [
+     "Texas City, Texas"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-28",
+    "deadline": "2026-10-06",
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m084",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "cox.wd1.myworkdayjobs.com/cox_external_career_site_1",
+    "id": "R202682427",
+    "title": "Organizational Effectiveness Intern",
+    "org": "Cox",
+    "url": "https://cox.wd1.myworkdayjobs.com/Cox_External_Career_Site_1/job/Atlanta-GA/Organizational-Effectiveness-Intern_R202682427-1",
+    "locations": [
+     "Atlanta GA"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-21",
+    "deadline": "2026-10-09",
+    "description": null
+   },
+   "keep": true,
+   "major": "Business & Management",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m085",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "diamondbackenergy.wd12.myworkdayjobs.com/dbe",
+    "id": "R100808",
+    "title": "Summer 2027 Landman Intern",
+    "org": "Diamondback Energy",
+    "url": "https://diamondbackenergy.wd12.myworkdayjobs.com/DBE/job/Midland-TX/Summer-2027-Landman-Intern_R100808",
+    "locations": [
+     "Midland, TX"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-08-21",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Business & Management",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m086",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "nationwide.wd1.myworkdayjobs.com/nationwide_career",
+    "id": "099980",
+    "title": "Summer 2027 Controllership Internship",
+    "org": "Nationwide",
+    "url": "https://nationwide.wd1.myworkdayjobs.com/Nationwide_Career/job/Ohio---Columbus-Metro/Summer-2027-Controllership-Internship_099980",
+    "locations": [
+     "Ohio - Columbus Metro"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-08-24",
+    "deadline": "2026-12-04",
+    "description": null
+   },
+   "keep": true,
+   "major": "Finance & Accounting",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m087",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "curtisswright.wd1.myworkdayjobs.com/cw_external_career_site",
+    "id": "JR1907",
+    "title": "Co-op (Spring Term)",
+    "org": "Curtiss-Wright Corporation",
+    "url": "https://curtisswright.wd1.myworkdayjobs.com/CW_External_Career_Site/job/US-PA-Cheswick-EMD/Co-op_JR1907",
+    "locations": [
+     "US-PA-Cheswick (EMD)"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2025-02-07",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "co-op",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m088",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "chrobinson.wd5.myworkdayjobs.com/chrobinson",
+    "id": "R49466",
+    "title": "Intern - Associate Portfolio Executive",
+    "org": "C.H. Robinson",
+    "url": "https://chrobinson.wd5.myworkdayjobs.com/CHRobinson/job/Grandview-Heights-OH-United-States-of-America/Intern---Associate-Portfolio-Executive_R49466-1",
+    "locations": [
+     "Grandview Heights, OH United States of America"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-08",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Business & Management",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m089",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "ttc.wd1.myworkdayjobs.com/toro_external_careers",
+    "id": "JR17332",
+    "title": "Indirect Sourcing Intern - The Toro Company",
+    "org": "The Toro Company",
+    "url": "https://ttc.wd1.myworkdayjobs.com/Toro_External_Careers/job/Bloomington-MN/Indirect-Sourcing-Intern---The-Toro-Company_JR17332",
+    "locations": [
+     "Bloomington, MN"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-29",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Business & Management",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m090",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "covestro.wd3.myworkdayjobs.com/cov_external",
+    "id": "JR-2026-01981",
+    "title": "PSRA Intern",
+    "org": "Covestro",
+    "url": "https://covestro.wd3.myworkdayjobs.com/cov_external/job/Pittsburgh-PA/PSRA-Intern_JR-2026-01981",
+    "locations": [
+     "Pittsburgh, PA"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-08",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Life Sciences & Health",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m091",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "abb.wd3.myworkdayjobs.com/external_career_page",
+    "id": "JR00046563",
+    "title": "Quotations Support Intern - Summer 2027",
+    "org": "ABB",
+    "url": "https://abb.wd3.myworkdayjobs.com/External_Career_Page/job/Houston-Texas-United-States-of-America/Quotations-Support-Intern---Summer-2027_JR00046563",
+    "locations": [
+     "Houston, Texas, United States of America",
+     "Remote, Georgia, United States of America",
+     "Remote, Texas, United States of America",
+     "Remote, Florida, United States of America"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-29",
+    "deadline": "2026-10-26",
+    "description": null
+   },
+   "keep": true,
+   "major": "Business & Management",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m092",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "ashby",
+    "board": "rilla",
+    "id": "450c6d61-15d8-40b8-8f72-bfbe49935831",
+    "title": "Generalist Intern, 2027",
+    "org": "Rilla",
+    "url": "https://jobs.ashbyhq.com/rilla/450c6d61-15d8-40b8-8f72-bfbe49935831",
+    "locations": [
+     "New York City"
+    ],
+    "country": null,
+    "category": "Ops",
+    "workplace": "OnSite",
+    "employment": "FullTime",
+    "eligibility": null,
+    "posted": "2026-03-19",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Finance & Accounting",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m093",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "greenhouse",
+    "board": "astranis",
+    "id": "4625923006",
+    "title": "Power Electronics Intern (Fall 2026)",
+    "org": "Astranis",
+    "url": "https://job-boards.greenhouse.io/astranis/jobs/4625923006",
+    "locations": [
+     "San Francisco"
+    ],
+    "country": null,
+    "category": "Power Electronics Internships",
+    "workplace": null,
+    "employment": null,
+    "eligibility": null,
+    "posted": "2026-04-29",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m094",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "mfs.wd1.myworkdayjobs.com/mfs-careers",
+    "id": "MFS-231956",
+    "title": "Summer 2027 Payroll Intern (June-August)",
+    "org": "MFS",
+    "url": "https://mfs.wd1.myworkdayjobs.com/MFS-Careers/job/Boston/Summer-2027-Payroll-Intern--June-August-_MFS-231956",
+    "locations": [
+     "Boston"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-10-01",
+    "deadline": "2026-10-15",
+    "description": null
+   },
+   "keep": true,
+   "major": "Business & Management",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m095",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "emcins.wd5.myworkdayjobs.com/emc_internships",
+    "id": "R6553",
+    "title": "Intern- Claims (Property)",
+    "org": "EMC Insurance",
+    "url": "https://emcins.wd5.myworkdayjobs.com/EMC_Internships/job/Iowa/Intern--Claims--Property-_R6553",
+    "locations": [
+     "Iowa"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-09-22",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Finance & Accounting",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m096",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "citjpl.wd5.myworkdayjobs.com/jobs",
+    "id": "R6094",
+    "title": "COOP - EPPA III",
+    "org": "NASA Jet Propulsion Laboratory",
+    "url": "https://citjpl.wd5.myworkdayjobs.com/Jobs/job/JPL-Campus/COOP---EPPA-III_R6094",
+    "locations": [
+     "JPL Campus"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-10-01",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Social Sciences & Psychology",
+   "majorFrom": "description",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "co-op",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m097",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "aero.wd5.myworkdayjobs.com/external",
+    "id": "R016462",
+    "title": "2027 Systems of Systems/Portfolio Analysis Undergraduate Intern",
+    "org": "The Aerospace Corporation",
+    "url": "https://aero.wd5.myworkdayjobs.com/External/job/Colorado-Springs-CO/XMLNAME-2027-Systems-of-Systems-Portfolio-Analysis-Undergraduate-Intern_R016462",
+    "locations": [
+     "Colorado Springs, CO",
+     "El Segundo, CA",
+     "Chantilly, VA"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Full time",
+    "eligibility": null,
+    "posted": "2026-09-07",
+    "deadline": "2026-10-30",
+    "description": null
+   },
+   "keep": true,
+   "major": "Engineering",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m098",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "workday",
+    "board": "emcins.wd5.myworkdayjobs.com/emc_careers",
+    "id": "R6553",
+    "title": "Intern- Claims (Property)",
+    "org": "EMC Insurance",
+    "url": "https://emcins.wd5.myworkdayjobs.com/EMC_Careers/job/Iowa/Intern--Claims--Property-_R6553-1",
+    "locations": [
+     "Iowa"
+    ],
+    "country": "United States of America",
+    "category": null,
+    "workplace": null,
+    "employment": "Part time",
+    "eligibility": null,
+    "posted": "2026-09-22",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Finance & Accounting",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05 (corrected with owner)",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
+   }
+  },
+  {
+   "row": "m099",
+   "stratum": "kept: major Other, second sample",
+   "posting": {
+    "source": "greenhouse",
+    "board": "bgeinc",
+    "id": "5415804008",
+    "title": "HOUSTON - Planning & Landscape Architecture, Internship",
+    "org": "BGE",
+    "url": "https://job-boards.greenhouse.io/bgeinc/jobs/5415804008",
+    "locations": [
+     "10777 Westheimer Road, Suite 400, Houston, Texas 77042"
+    ],
+    "country": null,
+    "category": "Planning + Landscape Architecture",
+    "workplace": null,
+    "employment": null,
+    "eligibility": null,
+    "posted": "2026-09-03",
+    "deadline": null,
+    "description": null
+   },
+   "keep": true,
+   "major": "Government, Law & Policy",
+   "majorFrom": "title",
+   "answered": "major page 2026-10-05",
+   "ruleAtSampling": {
+    "decision": "kept",
+    "type": "internship",
+    "major": "Other",
+    "why": "no rule matched"
    }
   }
  ]

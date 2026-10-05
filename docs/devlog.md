@@ -189,3 +189,93 @@ rejections to postings by id finds nothing for Workday. Matched by board and
 title: 44 of the 90 were rule flips, 46 new; with the 25 Greenhouse/Ashby
 flips, 69 of the 77, plus 6 now rejected as outside US. The shorter run is
 the detail cache: known postings skip the detail call.
+
+## 2026-10-05 — the page-1 major labels were the pre-fill
+
+**What broke:** 16 of the 30 sampled "Other" postings had been labelled
+"Other" on the first labelling page, which pre-filled the rule's answer.
+
+**First diagnosis:** that the owner judged them Other.
+
+**What settled it:** asking again blind (second page: one question, nothing
+pre-filled, rule's answer hidden): 0 of the 16 stayed Other. An unchanged
+pre-fill and an agreement look identical in the saved answer. Three more
+pre-filled labels in "kept: random" (i001 EHS, i016 FP&A, i020, i050
+"Biofilms" -> Arts from the film-in-Biofilms match) were replaced when the new
+rules disagreed with them. Other pre-filled labels that happen to agree with
+the rules are still in the sample, unverified.
+
+## 2026-10-05 — NSF computing awards never mapped to a major
+
+**What broke:** 42 open NSF REU awards were "Other".
+
+**First diagnosis:** titles too vague for the keyword rules.
+
+**What settled it:** counting NSF categories in postings.json. The API's
+`dirAbbr` for the computing directorate is `CSE`; the map had `CISE`, which
+never occurs. Present since the first run.
+
+## 2026-10-05 — a comment silently dropped three NSF directorates
+
+**What broke:** replaying the new major rules moved 51 Engineering and 51
+Physical Sciences postings to Other.
+
+**First diagnosis:** adding keywords cannot remove a major, so the replay
+looked wrong.
+
+**What settled it:** the 102 were all NSF awards with "no rule matched". The
+`CSE` fix put a `//` comment mid-line inside `Map.of(...)`, commenting out
+the ENG, TIP and MPS entries; it compiled. `RulesTest` already covered ENG
+and would have failed, but only `LabelledSampleTest` had been run. Now
+`RulesTest` checks every directorate seen in the data.
+
+## 2026-10-05 — generic words as ordinary rules took real subjects
+
+**What broke:** replay over all 8,995 open postings, read move by move:
+"Air Quality" and "Water quality" REUs -> Engineering ("quality"),
+"Structural ... Biology" -> Engineering, an astrophysics REU at the American
+Museum of Natural History -> Arts ("museum"), the CURATE addiction programme
+-> Arts ("curat"), "Sports Medicine" -> Marketing, "Abbott Nutrition
+Consumer Sales" -> Life Sciences.
+
+**First diagnosis:** rule order; move the words later in the list.
+
+**What settled it:** later in the list still beats the NSF directorate and
+the board's department, which are better evidence than a generic word. These
+words (quality, structural, construction, analytical, quantitative, sports,
+curat, museum, technology) are now `WEAK_RULES`, tried only after the title's
+subject words and the category. Same pass: Finance's `\bquant` matched
+"Quantum" (9 quantum-computing postings were Finance); now `\bquants?\b`,
+with "quantitative" weak and "quantum" Physical Sciences.
+
+## 2026-10-05 — employer-name fallback: 22 decisions that were 171
+
+**What broke:** the owner chose title-then-employer. I measured the employer
+fallback at 22 decisions, about half wrong, and on that the owner dropped it.
+
+**First diagnosis:** none at the time; 22 was taken as the count.
+
+**What settled it:** the final Other count came out 162 higher than predicted.
+The 22 came from grepping the replay's printed examples, capped at 6 per
+group, not from every posting. Measured properly (fallback re-added
+temporarily, every decision printed): 171 postings, about 75 right (The
+Aerospace Corporation, Vertex, Regeneron, Starr Insurance), about 80 wrong
+(Fidelity "Investor Center" x29 -> Finance where the owner labelled one
+Business, Clearwater Analytics client service -> Data, St. Luke's University
+Health Network radiology -> CS via "Network"), the rest arguable. Still
+dropped; owner told the real count.
+
+## 2026-10-05 — deliberate breaks that did not break
+
+**What broke:** after the rule changes, two of three deliberate breaks left
+every test green.
+
+**First diagnosis:** the tests could not fail.
+
+**What settled it:** the breaks never applied. The shell collapses `\\` to
+`\` before a command runs, so `\\b` typed into sed or an inline Python string
+became a backspace character in the Java source: a pattern that compiles and
+never matches. The same slip had already broken three anchors in Rules.java
+(caught by the "Thermofluids" row). A Python runner then called `./mvnw`
+through cmd.exe, which ran nothing and reported 0 failures. Applied from a
+script file and run through bash, all three breaks go red in two tests each.

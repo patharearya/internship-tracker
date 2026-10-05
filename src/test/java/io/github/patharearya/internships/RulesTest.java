@@ -3,6 +3,7 @@ package io.github.patharearya.internships;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -105,6 +106,22 @@ class RulesTest {
         assertEquals("Life Sciences & Health", Rules.major(p("nih", "Summer Undergraduate Research Experience (SURE)", List.of(), "NIH", null, null)).value());
         assertEquals("Data & Mathematics", Rules.major(p("nsf", "REU Site: Applied and Computational Mathematics", List.of(), "MPS", null, null)).value(),
                 "title beats directorate");
+        // every directorate the API returned on 2026-10-05; a misplaced comment once dropped ENG and MPS silently (devlog)
+        Map<String, String> dirs = Map.of("CSE", "Computer Science & IT", "ENG", "Engineering", "MPS", "Physical Sciences",
+                "BIO", "Life Sciences & Health", "GEO", "Physical Sciences", "SBE", "Social Sciences & Psychology", "EDU", "Education");
+        dirs.forEach((d, major) -> assertEquals(major, Rules.major(p("nsf", "REU Site: Scaffolds Across Length Scales", List.of(), d, null, null)).value(), d));
+    }
+
+    @Test
+    void genericWordsOnlyWhenNothingElseNamesAField() {
+        assertEquals("Engineering", Rules.major(job("Quality Intern")).value());
+        assertEquals("Physical Sciences", Rules.major(job("Air Quality Intern")).value());
+        assertEquals("Life Sciences & Health", Rules.major(job("Structural Biology Research Intern")).value());
+        assertEquals("Life Sciences & Health", Rules.major(p("nsf", "REU Site: Quality of Life", List.of(), "BIO", null, null)).value(),
+                "directorate beats a generic word");
+        assertEquals("Physical Sciences", Rules.major(job("Quantum Research Intern")).value(), "not Finance's \"quant\"");
+        assertEquals("Finance & Accounting", Rules.major(job("Quantitative Intern")).value());
+        assertNotNull(Rules.reject(job("Avionics Internship - SkillBridge")), "SkillBridge is for service members only");
     }
 
     @Test

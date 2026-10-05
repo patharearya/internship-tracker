@@ -1,7 +1,7 @@
 # Task list
 
-Last session: 2026-10-04 (second session that day). Plan and decisions:
-[brief.md](brief.md). Defects and how they were settled: [devlog.md](devlog.md).
+Last session: 2026-10-05. Plan and decisions: [brief.md](brief.md). Defects
+and how they were settled: [devlog.md](devlog.md).
 
 ## Where we left off
 
@@ -12,40 +12,34 @@ Last session: 2026-10-04 (second session that day). Plan and decisions:
   fetching with politeness rules, internship filter, major / level /
   arrangement / state rules, open-closed comparison, hourly GitHub Actions
   workflow.
-- **Hourly workflow live** (secrets set 2026-10-04). First complete run
-  (manual, 16:33Z): 8,882 open postings, 81 min, nearly all of it Workday.
-- **This session:**
-  - Descriptions split into `data/descriptions/{0..63}.json`: one file was
-    43 MB and heading for GitHub's 100 MB limit.
-  - Workflow checks out `main`, not the triggering commit: a run queued
-    behind the 81-min Workday run had computed on stale data and failed on
-    push.
-  - Filter checked against 197 hand-labelled postings (labelling page:
-    https://claude.ai/artifact/YGvMeM3xcQs3T8aZ4JqQLL). Four rules fixed
-    (underscore in titles, "Manager, Intern", "Early Career Intern", "Summer
-    2027" titles); 14 wrong -> 0 on the sample; across the whole run 77
-    rejected -> kept, 0 kept -> rejected. `LabelledSampleTest` replays the
-    sample on every test run. 28 tests.
+- **Hourly workflow live.** GitHub fires only some scheduled runs (5 of ~13
+  on 2026-10-04), so Workday now runs when its last run started 3 h ago
+  (`workdayStarted` in `state.json`), not on clock hours. Last Workday run
+  (manual, 2026-10-04 23:38Z) took 34 min; 8,995 open postings.
+- **This session (2026-10-05):**
+  - Workday scheduling fix above; the filter fixes of 2026-10-04 confirmed on
+    a real run: 69 of the 77 rule flips kept, 6 more now rejected as outside
+    US.
+  - Majors relabelled on a second page with nothing pre-filled
+    (https://claude.ai/artifact/XSKuirRcRQiYWwkwLHmMSB, 148 rows, answers in
+    its `majors` collection). `labelled-sample.json` now 297 rows;
+    `majorFrom: description` rows are printed, not scored.
+  - Major rules: keywords from the labels, NSF `CSE` directorate (42 awards
+    were Other), weak generic words, `\bquant` no longer matches "Quantum",
+    SkillBridge rejected. Replay over the 23:38Z run: Other 1,648 -> 1,183
+    (18% -> 13%), 466 out of Other, 120 moved between majors (read through),
+    28 SkillBridge postings now rejected. The next run applies it.
+  - 30 tests. Every new rule was broken on purpose and goes red.
 
 ## Next session, in order
 
-1. **Done (2026-10-05):** the first Workday run on the new code
-   (37244506396, 34 min) ran Workday, wrote `workdayStarted`, and kept 69 of
-   the 77 rule flips (6 more now rejected as outside US). See devlog.
-2. **Majors.** Labelling page published 2026-10-05:
-   https://claude.ai/artifact/XSKuirRcRQiYWwkwLHmMSB (148 rows: 48 re-asked
-   because the old page pre-filled the major, 100 new Other postings; answers
-   in its `majors` collection; note "desc" = decided from the description,
-   which title rules cannot match). "Other" is 1,659 of 8,882 (19%). The owner was unsure of the
-   major on 18 sampled rows (14 in Other). Sample Other titles, label the
-   major only, add missing major rules, extend `labelled-sample.json` and
-   re-run `LabelledSampleTest`. Labelling page lesson: one unmistakable
-   question per row (devlog 2026-10-04: "Yes" was read as "the rule was
-   right").
-3. **Log location and eligibility in `rejections.tsv`.** Without them,
-   "outside US" and USAJOBS-eligibility rejections cannot be sampled or
-   replayed (sample row i196 is unreplayable for this reason).
-4. **Day 3: the page** (GitHub Pages). Postings grouped by major, filters
+1. **Check the first run on the new major rules:** Other near 1,183 and no
+   NSF award in Other unless its directorate is O/D.
+2. **Log location and eligibility in `rejections.tsv`**, and the same id for
+   rejected and kept Workday rows (list path vs requisition id today, devlog
+   2026-10-05). Without them "outside US" and USAJOBS-eligibility rejections
+   cannot be sampled or replayed (i196 is unreplayable).
+3. **Day 3: the page** (GitHub Pages). Postings grouped by major, filters
    (state / remote, arrangement, level), posting detail, saved list
    (browser storage), coverage sentence. Decide first:
    - Pages source: repo root or `/docs`.
@@ -53,10 +47,10 @@ Last session: 2026-10-04 (second session that day). Plan and decisions:
      `data/descriptions/{n}.json`, 64 files; load one when a posting is
      opened, `n` = Java `String.hashCode` of the key, non-negative mod 64
      (formula in `Main.shard`, pinned by `ShardTest`).
-5. **Thin majors:** Education (36) and Social Sciences (36). Revisit after
-   the major rules (item 2); if still thin, hand-add employers (Q21).
+4. **Thin majors:** Education (41) and Social Sciences (36) after the new
+   rules. Hand-add employers (Q21) if still thin after a day of runs.
 
-## Settled this session
+## Settled
 
 - "Summer 2027 ..." titles are kept (a dated term); "starting summer 2027"
   is a full-time start date and is not.
@@ -64,14 +58,21 @@ Last session: 2026-10-04 (second session that day). Plan and decisions:
   Assistant", "Working Student") are out: open only to that university's
   students (owner default, 2026-10-04).
 - "Research Analyst (Economics) - July 2027" stays rejected: a full-time job.
+- Majors follow the work, not the employer (Q23). SkillBridge is rejected.
 - Still open: "AI Residency".
 
 ## Small items
 
-- Workday rows in `rejections.tsv` carry the list path as id, kept Workday
-  postings the requisition id, so the two cannot be joined by id (devlog
-  2026-10-05). Fix alongside item 3: log the same id for both.
-
+- The remaining ~1,180 Other are mostly titles that name no field ("2027
+  Summer Intern", "Starr Summer Intern"). 31 sampled rows were settled only
+  by the description; a description-based rule is the next lever if Other
+  must shrink further.
+- A hand-built employer -> field list would fix some of them without the
+  employer-name guessing (Aerospace Corp, Vertex, Regeneron, Starr were the
+  employers the dropped fallback got right). Only if Other is a problem on
+  the page.
+- Page-1 labels in "kept: random" that agree with the rules may still be
+  unverified pre-fills (devlog 2026-10-05).
 - 37 Workday boards answer HTTP 422 (Activision, Netflix, Comcast, Lilly,
   Takeda...), likely one shared cause. 49 Greenhouse/Lever/Ashby boards 404
   (moved systems?).
@@ -84,3 +85,5 @@ Last session: 2026-10-04 (second session that day). Plan and decisions:
   US place name found that would exercise it).
 - `ubuntu-latest` moves to Ubuntu 26 from 2026-10-19 (Actions annotation);
   watch the first run after that.
+- Working on this repo from this machine's shell: `\\` in a command reaches
+  the program as `\`. Write anything with regex backslashes through a file.

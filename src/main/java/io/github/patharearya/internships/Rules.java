@@ -28,7 +28,9 @@ public final class Rules {
     /** "Early Career Intern" is an internship; "early career" alone is a new-grad job. */
     private static final Pattern NOT_STUDENT = Pattern.compile(
             "\\b(new grad(uate)?s?|university grad(uate)?s?|recent grad(uate)?s?|entry[- ]level|early career(?! intern)"
-                    + "|post-?doc(toral)?|distinguished fellow|senior fellow|clinical fellow|medical fellow)\\b", Pattern.CASE_INSENSITIVE);
+                    + "|post-?doc(toral)?|distinguished fellow|senior fellow|clinical fellow|medical fellow"
+                    // DoD SkillBridge internships are for transitioning service members only (labelled sample, 2026-10-05)
+                    + "|skill ?bridge)\\b", Pattern.CASE_INSENSITIVE);
     /**
      * Jobs running an internship programme, e.g. "Internship Program Manager", "Recruiter, Early Talent & Interns".
      * "Product Manager, Intern" is an intern: after the role, a bare "intern" names the job's level, not its subject.
@@ -80,20 +82,47 @@ public final class Rules {
             "Marketing & Communications", "Life Sciences & Health", "Physical Sciences", "Social Sciences & Psychology",
             "Government, Law & Policy", "Education", "Arts, Design & Media", "Other");
 
-    /** Checked in this order; first match wins. Specific before general (e.g. "software engineer" is CS, not Engineering). */
+    /**
+     * Checked in this order; first match wins. Specific before general (e.g. "software engineer" is CS, not Engineering).
+     * The first rule holds phrases Data's "ai"/"machine learning" would otherwise take ("AI Engineer" is CS, owner's
+     * label). Keywords added 2026-10-05 come from the owner's major labels.
+     */
     private static final List<Map.Entry<String, Pattern>> MAJOR_RULES = List.of(
+            rule("Computer Science & IT", "\\b(ai|ml|machine learning) engineer|deep learning|reinforcement learning|\\bllms?\\b|application development"),
             rule("Data & Mathematics", "data scien|data analy|data engineer|machine learning|\\bml\\b|\\bai\\b|artificial intelligence|statistic|mathemat|\\bmath\\b|analytics|quantitative research|actuar"),
             rule("Computer Science & IT", "software|developer|programmer|computer|\\bit\\b|information technology|information systems|cyber|security engineer|devops|\\bcloud|network|\\bweb\\b|front-?end|back-?end|full[- ]stack|\\bsre\\b|database"),
-            rule("Engineering", "engineer|mechanical|electrical|civil|hardware|manufactur|aerospace|industrial|robotic|embedded|semiconductor|\\brf\\b|process tech"),
-            rule("Finance & Accounting", "accounting|accountant|\\baudit|\\btax|financ|investment|banking|treasury|wealth|credit|trading|trader|\\bquant|asset management|private equity|capital markets|underwrit|insurance"),
-            rule("Marketing & Communications", "marketing|\\bbrand|communications|public relations|\\bpr\\b|social media|content|journalis|advertis|copywrit|editorial|\\bwriter|public affairs"),
-            rule("Arts, Design & Media", "design|graphic|\\bux\\b|\\bui\\b|\\bart\\b|\\barts\\b|video|film|photograph|music|creative|animat|illustrat|media production"),
-            rule("Life Sciences & Health", "biolog|biotech|bioinformatic|clinical|health|medical|medicine|nurs|pharma|patient|life science|neuro|genetic|genomic|dental|therap|veterinar|microbio|immunolog|cancer|physician|biomedical"),
-            rule("Physical Sciences", "chemist|chemical|physic|environment|geolog|geoscien|\\bearth|climate|meteorolog|forecast|materials scien|astronom|ocean|atmospher|energy science"),
-            rule("Social Sciences & Psychology", "psycholog|sociolog|economic|economist|anthropolog|social work|social science|behavioral|human services|criminolog"),
-            rule("Government, Law & Policy", "legal|\\blaw\\b|paralegal|policy|government|legislat|political|regulatory|compliance|intelligence analyst|public service|diplomat"),
-            rule("Education", "teach|education|tutor|curriculum|instruction|\\bschool|academic|admissions"),
-            rule("Business & Management", "business|operations|strategy|consult|management|manager|product|project|supply chain|logistic|procurement|purchasing|human resources|\\bhr\\b|people|talent|recruit|sales|customer|account executive|real estate|administrat|entrepreneur"));
+            rule("Engineering", "engineer|mechanical|electrical|civil|hardware|manufactur|aerospace|industrial|robotic|embedded|semiconductor|\\brf\\b|process tech"
+                    + "|concrete|installation|public works|machinist|machining|machine assembly|fabricat|\\bsystems? test|technical staff|\\bthermo|thermal"
+                    + "|power electronics|avionics|propulsion|\\bfpga\\b|\\basic\\b|systems of systems|maintenance|land survey|surveying"),
+            // "\\bquant" also matched "Quantum" (devlog 2026-10-05)
+            rule("Finance & Accounting", "accounting|accountant|\\baudit|\\btax|financ|investment|banking|treasury|wealth|credit|trading|trader|\\bquants?\\b|asset management|private equity|capital markets|underwrit|insurance"
+                    + "|\\bclaims?\\b|crypto|equity research|\\bloans?\\b|lending|controller|market risk|risk asset|risk management|reconcil|fp&a"),
+            rule("Marketing & Communications", "marketing|\\bbrand|communications|public relations|\\bpr\\b|social media|content|journalis|advertis|copywrit|editorial|\\bwriter|public affairs"
+                    + "|merchandis|broadcast|multimedia|consumer insights|market research|community (partnerships?|relations|engagement)"),
+            rule("Arts, Design & Media", "design|graphic|\\bux\\b|\\bui\\b|\\bart\\b|\\barts\\b|video|\\bfilm|photograph|music|creative|animat|illustrat|media production|\\baudio\\b|podcast|sculpt|ceramic"),
+            rule("Life Sciences & Health", "biolog|biotech|bioinformatic|clinical|health|medical|medicine|nurs|pharma|patient|life science|neuro|genetic|genomic|\\bdental|therap|veterinar|microbio|immunolog|cancer|physician|biomedical"
+                    + "|protein|casework|\\b(ehs|hse|hes)\\b|\\bfood (safety|quality|science)|dietitian|dietetic"),
+            rule("Physical Sciences", "chemist|chemical|physic|environment|geolog|geoscien|\\bearth|climate|meteorolog|forecast|materials scien|astronom|ocean|atmospher|energy science"
+                    + "|polymer|plasma (physics|research|science)|quantum|air quality|water quality"),
+            rule("Social Sciences & Psychology", "psycholog|sociolog|economic|economist|anthropolog|archaeolog|social work|social science|behavioral|human services|criminolog"),
+            rule("Government, Law & Policy", "legal|\\blaw\\b|paralegal|policy|government|legislat|political|regulatory|compliance|intelligence analyst|public service|diplomat"
+                    + "|clearance|forensic|urban planning|city planning|land use|landscape architecture|site development"),
+            rule("Education", "teach|education|tutor|curriculum|instruction|\\bschool|academic|admissions|learning (and|&) development|training (and|&) development"),
+            rule("Business & Management", "business|operations|strategy|consult|management|manager|product|project|supply chain|logistic|procurement|purchasing|human resources|\\bhr\\b|people|talent|recruit|sales|customer|account executive|real estate|administrat|entrepreneur"
+                    + "|sourcing|labor relations|employee relations|organizational|landman|portfolio executive|corporate functions"));
+
+    /**
+     * Generic words that name a field only when nothing else does: tried after the title's subject words and the
+     * source's category. As ordinary rules they took "Air Quality", "Structural Biology",
+     * "Sports Medicine", an astrophysics REU at a museum and the CURATE addiction programme (replay, 2026-10-05).
+     */
+    private static final List<Map.Entry<String, Pattern>> WEAK_RULES = List.of(
+            rule("Engineering", "\\bquality\\b|structural|construction"),
+            rule("Data & Mathematics", "\\banalytical\\b"),
+            rule("Finance & Accounting", "\\bquantitative\\b"),   // "Quantitative Intern" at a bank; "Quantitative Biology" is Life Sciences
+            rule("Marketing & Communications", "\\bsports\\b"),
+            rule("Arts, Design & Media", "\\bcurat|museum"),
+            rule("Computer Science & IT", "\\btechnology\\b"));
 
     /** USAJOBS occupational series by group (first two digits), from OPM's handbook of occupational groups. */
     private static final Map<String, String> SERIES = Map.ofEntries(
@@ -108,13 +137,14 @@ public final class Rules {
             Map.entry("20", "Business & Management"), Map.entry("21", "Business & Management"),
             Map.entry("22", "Computer Science & IT"));
     private static final Map<String, String> NSF_DIRECTORATE = Map.of(
-            "CISE", "Computer Science & IT", "ENG", "Engineering", "TIP", "Engineering", "MPS", "Physical Sciences",
+            // "CSE" is the API's dirAbbr for CISE; "CISE" never occurs (42 awards were Other, devlog 2026-10-05)
+            "CSE", "Computer Science & IT", "ENG", "Engineering", "TIP", "Engineering", "MPS", "Physical Sciences",
             "BIO", "Life Sciences & Health", "GEO", "Physical Sciences", "SBE", "Social Sciences & Psychology",
             "EDU", "Education", "EHR", "Education");
 
-    /** Title first, then the source's own category (department, series code, directorate), then Other. */
+    /** Title first, then the source's own category (department, series code, directorate), then the title's generic words, then Other. */
     static Label major(Posting p) {
-        Label byTitle = matchMajor(words(p.title()), "title");
+        Label byTitle = matchMajor(MAJOR_RULES, words(p.title()), "title");
         if (byTitle != null) return byTitle;
         String c = p.category();
         if (c != null) {
@@ -125,14 +155,17 @@ public final class Rules {
                 default -> null;
             };
             if (mapped != null) return new Label(mapped, p.source() + " category " + c);
-            Label byCategory = matchMajor(c, "category");
+            Label byCategory = matchMajor(MAJOR_RULES, c, "category");
             if (byCategory != null) return byCategory;
         }
-        return new Label("Other", "no rule matched");
+        // no employer-name fallback: tried 2026-10-05, it decided 22 postings and about half wrongly
+        // ("Conagra Brands" -> Marketing, "Cadence Design" -> Arts); employer names are brands, not fields (devlog)
+        Label weak = matchMajor(WEAK_RULES, words(p.title()), "title");
+        return weak != null ? weak : new Label("Other", "no rule matched");
     }
 
-    private static Label matchMajor(String text, String field) {
-        for (var r : MAJOR_RULES) {
+    private static Label matchMajor(List<Map.Entry<String, Pattern>> rules, String text, String field) {
+        for (var r : rules) {
             Matcher m = r.getValue().matcher(text);
             if (m.find()) return new Label(r.getKey(), field + " \"" + m.group() + "\"");
         }
