@@ -78,7 +78,7 @@ flowchart LR
   C -. every rejection, with its reason .-> R[rejections.tsv]
 ```
 
-- **Schedule.** Runs hourly; GitHub fires only some hourly slots, which still gives several updates a day. Workday boards (about 1,170) run when three hours have passed since their last run. Each successful run commits the data and redeploys the site.
+- **Schedule.** Automatic, several times a day; see [How often the data updates](#how-often-the-data-updates).
 - **Filter.** A title must name the role: intern, internship, co-op, apprenticeship, fellowship, student trainee, "summer analyst" or a dated term like "Summer 2027". Research awards skip this step.
   - It then rejects new-grad, entry-level and early-career jobs, postdocs and senior or clinical fellowships, and people who run internship programmes ("Internship Program Manager").
   - It also rejects DoD SkillBridge roles (for service members only), USAJOBS postings closed to students, and roles outside the US.
@@ -92,6 +92,31 @@ flowchart LR
   - A board failing for 7 days has its postings closed.
 - **Politeness.** Every request identifies the project and a contact address. Each source gets one request at a time. Failing boards back off exponentially, a 403 or 429 pauses that server, and robots.txt is respected.
 - **Large data.** `postings.json` is about 14 MB (0.8 MB compressed). Full descriptions are split into 64 files by a hash of the posting key, which the page computes the same way, so one is fetched only when a posting is opened.
+
+## How often the data updates
+
+**Automatically, about 4–5 times a day.** Nobody has to run anything.
+
+- **The schedule.** The `update` workflow asks GitHub to run it every hour, but GitHub only fires some scheduled slots when its servers are busy. In practice there are 2 to 7 hours between runs.
+- **After each run,** it commits the new data to `data/` and the site redeploys itself. A newly posted internship usually appears within a few hours, and almost always the same day.
+- **The date of the data** the site is showing is in its footer ("Posting data from the update started …").
+
+| Day (UTC) | Scheduled runs |
+|---|---|
+| October 5, 2026 | 01:59, 09:02, 14:17, 18:26 |
+| October 6, 2026 | 00:48, 07:33, 13:10, 15:10, … |
+
+**What each run covers:**
+
+| Part | How often | Time it takes |
+|---|---|---|
+| Greenhouse, Lever, Ashby, USAJOBS, NSF, NIH | Every run | About 5 minutes |
+| Workday (about 1,170 employers, about 70% of postings) | When 3 hours have passed since its last Workday run, so about every other run | About 1 hour |
+| The list of employer boards, rebuilt from the Simplify list | Once a day (06:05 UTC) | A few minutes |
+
+**To update right now:** open the repository's **Actions** tab, choose **update**, then **Run workflow**. This is optional; the schedule keeps going without it.
+
+**If updates stop:** GitHub disables scheduled workflows in a public repository after 60 days without activity. The data commits each run makes should count as activity. If the date in the site's footer stops moving, open the **Actions** tab, and if the `update` workflow shows as disabled, click **Enable workflow**.
 
 ## Repository layout
 
