@@ -31,7 +31,7 @@ const read = (k, fallback) => { try { return JSON.parse(localStorage.getItem(k))
 const write = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
 const plan = read("irf-planner", {});
 plan.rows ??= {};
-const save = () => write("irf-planner", plan);
+const save = () => { write("irf-planner", plan); queuePush(); };
 
 // ---------- columns: Posting is always shown; the rest are the student's choice ----------
 const COLUMNS = [
@@ -56,8 +56,9 @@ let shown = new Set(Array.isArray(plan.cols) ? plan.cols : COLUMNS.filter(c => c
 let sortBy = null, sortDir = 1, view = "table";
 
 // ---------- rows: one per employer + title, like the browse list; tracking kept under the row's first key ----------
-let rows = [];
-function build(entries) {
+let rows = [], entries = [];
+function build(list) {
+  entries = list;
   const byKey = new Map(entries.map(e => [e.key, e]));
   const groups = new Map();
   for (const key of read("irf-saved", [])) {
@@ -108,7 +109,7 @@ const urgent = (d, days = 7) => d && daysBetween(today, d) <= days;
 
 // ---------- load ----------
 fetch("data/postings.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-  .then(entries => { build(entries); render(); })
+  .then(list => { build(list); render(); })
   .catch(() => { build([]); render(); $("[data-sum]").textContent += " The latest posting data could not be loaded, so closed postings may not be marked."; });
 fetch("data/report.json").then(r => r.ok ? r.json() : null).then(r => {
   if (r?.started) $("[data-updated]").textContent = `Posting data from the update started ${short(iso(r.started))}, ${r.started.slice(11, 16)} UTC.`;
@@ -222,6 +223,7 @@ const sheetEl = $("[data-sheet]");
 sheetEl.addEventListener("change", ev => {
   const el = ev.target.closest("[data-ed]"), r = el && rowOf(el); if (!r) return;
   const f = el.dataset.ed, t = r.t;
+  t.updated = Date.now();
   if (f === "applied") {
     // ticking Applied stamps today and moves the status on, in one motion; unticking undoes only what it did
     t.applied = el.checked;
@@ -241,14 +243,14 @@ sheetEl.addEventListener("change", ev => {
 });
 sheetEl.addEventListener("input", ev => {   // notes and contacts save as they are typed
   const el = ev.target.closest("textarea[data-ed]"), r = el && rowOf(el); if (!r) return;
-  r.t[el.dataset.ed] = el.value; save();
+  r.t[el.dataset.ed] = el.value; r.t.updated = Date.now(); save();
 });
 sheetEl.addEventListener("click", ev => {
   if (ev.target.matches(".datecell input")) { try { ev.target.showPicker(); } catch {} return; }
   const s = ev.target.closest("[data-sort]");
   if (s) { const id = s.dataset.sort; sortDir = sortBy === id ? -sortDir : 1; sortBy = id; sheet(); $(`[data-sort="${id}"]`)?.focus(); return; }
   const m = ev.target.closest("[data-mat]"), r = (m || ev.target).closest("[data-row]") && rowOf(ev.target);
-  if (m && r) { r.t.materials[m.dataset.mat] = !r.t.materials[m.dataset.mat]; m.setAttribute("aria-pressed", String(r.t.materials[m.dataset.mat])); save(); return; }
+  if (m && r) { r.t.updated = Date.now(); r.t.materials[m.dataset.mat] = !r.t.materials[m.dataset.mat]; m.setAttribute("aria-pressed", String(r.t.materials[m.dataset.mat])); save(); return; }
   if (ev.target.closest("[data-remove]") && r) remove(r);
 });
 function refreshRow(r) {   // redraw one row's cells in place, so focus and scroll stay where the student is
@@ -264,7 +266,8 @@ function refreshRow(r) {   // redraw one row's cells in place, so focus and scro
 function remove(r) {
   if (!confirm(`Remove "${r.s.title}" from your planner? Your notes for it are deleted too.`)) return;
   write("irf-saved", read("irf-saved", []).filter(k => !r.keys.includes(k)));
-  r.keys.forEach(k => delete plan.rows[k]); save();
+  plan.deleted ??= {};
+  r.keys.forEach(k => { delete plan.rows[k]; plan.deleted[k] = Date.now(); }); save();   // the time keeps it deleted on other devices
   rows = rows.filter(x => x !== r); render();
 }
 
@@ -328,6 +331,81 @@ $("[data-csv]").addEventListener("click", () => {
   const a = Object.assign(document.createElement("a"), { href: url, download: `internship-planner-${today}.csv` });
   document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
 });
+
+// ---------- Google Drive sync (sync.js): optional, the planner works the same without it ----------
+const CLIENT_ID = "814004045316-2gq2c5bhfj38mq8qrln0jdrve9jbr436.apps.googleusercontent.com";
+const SCOPE = "https://www.googleapis.com/auth/drive.appdata";   // this site's own hidden folder in the student's Drive, nothing else
+const sync = read("irf-sync", {});   // { on, at }: whether this browser syncs, and when it last did
+let token = null, fileId = null, pushTimer = null;
+const clock = t => new Date(t).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+const day = t => new Date(t).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+
+function syncLine(state, msg = "") {
+  const el = $("[data-sync]");
+  const go = label => `<button type="button" class="btn ghost" data-sync-go>${label}</button>`;
+  el.innerHTML = {
+    off: `${go("Sync with Google Drive")}<p>Keep this planner on every device you use. It is saved to a hidden file in your own Google Drive that only this site can open.</p>`,
+    paused: `${go("Resume Drive sync")}<p>Changes are saved in this browser${sync.at ? `; last synced with Drive ${day(sync.at)} at ${clock(sync.at)}` : ""}. Google asks you to confirm each visit.</p>`,
+    busy: `<p class="on">Syncing with Google Drive…</p>`,
+    ok: `<p class="on">Synced with Google Drive at ${clock(sync.at)}.</p><button type="button" class="linkish" data-sync-stop>Stop syncing</button>`,
+    error: `${go("Try again")}<p>${esc(msg)}</p>`
+  }[state];
+}
+const doc = () => ({ v: 1, saved: read("irf-saved", []), rows: plan.rows, unstarred: plan.unstarred || {}, deleted: plan.deleted || {}, cols: plan.cols });
+
+function connect() {
+  const g = window.google?.accounts?.oauth2;
+  if (!g) { syncLine("error", "Google's sign-in did not load. If a blocker stops accounts.google.com, allow it for this site and try again."); return; }
+  g.initTokenClient({
+    client_id: CLIENT_ID, scope: SCOPE,
+    callback: async resp => {
+      if (resp.error || !g.hasGrantedAllScopes(resp, SCOPE)) { syncLine("error", "Drive access was not allowed, so nothing was synced. Your planner is still saved in this browser."); return; }
+      token = resp.access_token;
+      setTimeout(() => { token = null; if (sync.on) syncLine("paused"); }, Math.max(60, (resp.expires_in || 3600) - 60) * 1000);
+      await pull();
+    },
+    error_callback: e => syncLine("error", e?.type === "popup_closed" ? "The Google window closed before you signed in. Nothing was synced."
+      : "The Google window could not open. Allow pop-ups for this site and try again.")
+  }).requestAccessToken({ prompt: sync.on ? "" : "consent" });
+}
+
+// first the Drive copy is read and merged with this browser's, then the merged planner is written back to both
+async function pull() {
+  syncLine("busy");
+  try {
+    fileId = await drive.find(token);
+    const merged = mergePlans(doc(), fileId ? await drive.read(token, fileId) : null);
+    write("irf-saved", merged.saved);
+    Object.assign(plan, { rows: merged.rows, unstarred: merged.unstarred, deleted: merged.deleted });
+    if (merged.cols) { plan.cols = merged.cols; shown = new Set(merged.cols); }
+    write("irf-planner", plan);
+    fileId = await drive.write(token, fileId, doc());
+    Object.assign(sync, { on: true, at: Date.now() }); write("irf-sync", sync);
+    build(entries); render(); syncLine("ok");
+  } catch (e) { failed(e); }
+}
+function queuePush() {
+  if (!sync.on) return;
+  if (!token) { syncLine("paused"); return; }
+  clearTimeout(pushTimer);
+  pushTimer = setTimeout(async () => {
+    try { fileId = await drive.write(token, fileId, doc()); sync.at = Date.now(); write("irf-sync", sync); syncLine("ok"); }
+    catch (e) { failed(e); }
+  }, 1200);
+}
+function failed(e) {
+  if (e.expired) { token = null; syncLine("paused"); return; }
+  syncLine("error", `Could not reach Google Drive (${e.message}). Your planner is still saved in this browser.`);
+}
+$("[data-sync]").addEventListener("click", ev => {
+  if (ev.target.closest("[data-sync-go]")) connect();
+  if (ev.target.closest("[data-sync-stop]")) {
+    if (token) window.google?.accounts?.oauth2?.revoke(token, () => {});
+    token = null; for (const k in sync) delete sync[k]; write("irf-sync", {});
+    syncLine("off");
+  }
+});
+syncLine(sync.on ? "paused" : "off");
 
 // stars changed on the browse page in another tab arrive here too
 addEventListener("storage", e => { if (e.key === "irf-saved") location.reload(); });

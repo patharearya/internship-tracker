@@ -35,7 +35,7 @@ jobs:
       - name: Assemble the site
         run: |
           mkdir -p _site/data
-          cp site/index.html site/planner.html site/privacy.html site/style.css site/app.js site/planner.js _site/
+          cp site/index.html site/planner.html site/privacy.html site/style.css site/app.js site/planner.js site/sync.js _site/
           cp -r data/postings.json data/report.json data/descriptions _site/data/
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5

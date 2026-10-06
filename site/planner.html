@@ -32,6 +32,7 @@
 <main class="plan">
   <h1>Your planner.</h1>
   <p class="plan-sum" data-sum aria-live="polite">Loading your postings…</p>
+  <div class="sync" data-sync aria-live="polite"></div>
 
   <div class="plan-tools" data-tools hidden>
     <div class="seg" role="group" aria-label="View" data-view>
@@ -57,6 +58,8 @@
   <span>Data is public and read directly from each source. <a href="https://github.com/patharearya/internship-tracker">Source on GitHub</a> · <a href="privacy.html">Privacy</a></span>
 </footer>
 
+<script src="https://accounts.google.com/gsi/client" async></script>
+<script src="sync.js"></script>
 <script src="planner.js"></script>
 </body>
 </html>

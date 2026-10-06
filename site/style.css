@@ -382,3 +382,12 @@ select.ed option { background: var(--ground-2); color: var(--ink); }
 .prose .lede-line { font-size: clamp(16px, 1.4vw, 19px); color: var(--ink); }
 .prose a { text-underline-offset: 0.22em; }
 .prose a:hover { color: var(--ink); }
+
+/* ---------- planner: Google Drive sync line ---------- */
+.sync { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin: -8px 0 26px; }
+.sync .btn { height: 40px; font-size: 14px; padding: 0 16px; }
+.sync p { margin: 0; max-width: 62ch; color: var(--ink-3); font-size: 14px; }
+.sync p.on { color: var(--ink-2); }
+.linkish { all: unset; cursor: pointer; color: var(--ink-3); font-size: 14px; text-decoration: underline; text-underline-offset: 0.22em; }
+.linkish:hover { color: var(--ink); }
+.linkish:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }

@@ -134,17 +134,26 @@ and how they were settled: [devlog.md](devlog.md).
   fixes; DESIGN.md updated by the documenter. Checked in headless Chrome: 16
   flow checks and 8 fix checks, each written to fail on the old code, phone
   width 390. `pages.yml` now publishes planner.html and planner.js.
+- **Google Drive sync** (`site/sync.js`; Q26): "Sync with Google Drive" on
+  the planner keeps it in one hidden file in the student's own Drive
+  (`drive.appdata`, the only scope; Google lists it as non-sensitive, so no
+  app review). Google Cloud project "Internship Finder", consent screen
+  External and In production, client ID in planner.js (public by design),
+  origins patharearya.github.io and localhost:8765. Merge: a row takes the
+  copy edited last; an unstar keeps the notes, a planner delete removes them,
+  each remembered with its time so the other copy cannot bring it back
+  (`node site/sync.test.mjs`, red under three deliberate breaks). Browsers
+  block Google's window without a click, so a later visit shows "Resume
+  Drive sync"; edits in between stay in the browser. 11 checks against fake
+  Google and Drive in headless Chrome. Privacy page (`site/privacy.html`)
+  added for Google's consent screen.
 
 ## Next session, in order
 
-1. **Google sign-in, data in the user's own Google Drive (B; the planner is done).**
-   Sign in with Google; the planner is kept in the hidden app-data folder of
-   the user's Drive, so there is still no server and no student data held by
-   us. Needs: a Google Cloud project and OAuth client (owner's Google
-   account), merging what is in the browser with what is in Drive on first
-   sign-in, sign-out. Check first whether the `drive.appdata` scope needs
-   Google's app verification (unverified apps can be capped at 100 users).
-   Firebase (C) rejected: we would hold student data.
+1. **Check Drive sync with a real Google account** (owner): on the live
+   planner, star two postings, press "Sync with Google Drive", sign in, edit
+   a note; open the planner in another browser or on a phone, sync, and check
+   the note arrives. Only a real sign-in can test Google's side.
 
 ## After a few days of runs
 

@@ -38,13 +38,17 @@ const saved = (() => {
   let keys = new Set();
   try { keys = new Set(JSON.parse(localStorage.getItem("irf-saved") || "[]")); } catch {}
   const write = () => { try { localStorage.setItem("irf-saved", JSON.stringify([...keys])); } catch {} };
-  const keep = e => { try {
-    const plan = JSON.parse(localStorage.getItem("irf-planner") || "{}"); plan.rows ??= {};
-    (plan.rows[e.key] ??= {}).snap = { title: e.title, org: e.org, url: e.url, deadline: iso(e.deadline), first: iso(e.first), posted: iso(e.posted),
-      major: e.major, locs: e.locs, states: e.states, remote: !!e.remote, arr: e.arr, level: e.level };
+  // the times let Drive sync (sync.js mergePlans) tell a new star from an old one, and an unstar from both
+  const keep = (e, on) => { try {
+    const plan = JSON.parse(localStorage.getItem("irf-planner") || "{}"); plan.rows ??= {}; plan.unstarred ??= {};
+    if (on) {
+      Object.assign(plan.rows[e.key] ??= {}, { starred: Date.now(), snap: { title: e.title, org: e.org, url: e.url, deadline: iso(e.deadline),
+        first: iso(e.first), posted: iso(e.posted), major: e.major, locs: e.locs, states: e.states, remote: !!e.remote, arr: e.arr, level: e.level } });
+      delete plan.unstarred[e.key];
+    } else plan.unstarred[e.key] = Date.now();
     localStorage.setItem("irf-planner", JSON.stringify(plan));
   } catch {} };
-  return { has: k => keys.has(k), get keys() { return keys; }, toggle(e) { const on = !keys.has(e.key); on ? keys.add(e.key) : keys.delete(e.key); write(); if (on) keep(e); },
+  return { has: k => keys.has(k), get keys() { return keys; }, toggle(e) { const on = !keys.has(e.key); on ? keys.add(e.key) : keys.delete(e.key); write(); keep(e, on); },
     get size() { return keys.size; } };
 })();
 const iso = d => d ? d.toISOString().slice(0, 10) : "";
