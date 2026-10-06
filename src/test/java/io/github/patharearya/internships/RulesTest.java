@@ -58,6 +58,7 @@ class RulesTest {
         assertEquals("outside US", Rules.reject(p("ashby", "Software Intern", List.of("Remote - Canada"), null, null, null)));
         assertNull(Rules.reject(p("lever", "Software Intern", List.of("Indianapolis"), null, null, null)), "india inside Indianapolis");
         assertNull(Rules.reject(p("lever", "Software Intern", List.of("Oberlin"), null, null, null)), "berlin inside Oberlin");
+        assertEquals("outside US", Rules.reject(p("ashby", "Intern, HR Operations (Bangladesh)", List.of("Dhaka, Bangladesh"), null, null, null)));
         assertNull(Rules.reject(p("lever", "Software Intern", List.of("Remote (United States | Canada)"), null, null, null)));
         assertNull(Rules.reject(p("lever", "Software Intern", List.of("Toronto, ON", "Austin, TX"), null, null, null)), "one US location is enough");
         Posting gb = new Posting("lever", "b", "1", "Software Intern", "Org", "https://x", List.of("London"), "GB", null, null, null, null, null, null, null);

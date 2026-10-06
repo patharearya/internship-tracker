@@ -275,7 +275,8 @@ public final class Rules {
                     // seen as state-less "US" locations on 2026-10-05
                     + "|auckland|wellington|\\bnz\\b|stockholm|cape town|sofia|belgrade|serbia|bulgaria|cologne|köln|dusseldorf|düsseldorf"
                     + "|münchen|stuttgart|frankfurt|hamburg|courbevoie|wroclaw|wrocław|krakow|kraków|dubai|abu dhabi|calgary|ottawa"
-                    + "|edmonton|ontario|surrey|kuala lumpur|\\bmys\\b|latin america|santiago)\\b",
+                    + "|edmonton|ontario|surrey|kuala lumpur|\\bmys\\b|latin america|santiago"
+                    + "|bangladesh|dhaka)\\b",   // 2026-10-06: an open "Intern, HR Operations (Bangladesh)"
             Pattern.CASE_INSENSITIVE);
     private static final Pattern COUNTRY_US = Pattern.compile("us|usa|united states.*", Pattern.CASE_INSENSITIVE);
 
