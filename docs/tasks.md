@@ -103,23 +103,23 @@ and how they were settled: [devlog.md](devlog.md).
   "GitHub Actions", switched on 2026-10-06). First deploy 37474089311: page,
   `report.json`, `postings.json` (14 MB, 0.8 MB gzipped) and description
   shards all answer 200. Each successful `update` run redeploys.
+- Open postings a new rule rejects now leave on the next run, logged as
+  "still open, now rejected" (they used to count as misses and close as if
+  the employer had closed them; devlog). Walmart "(USA) TX ..." locations
+  read: no state 408 -> 332. Riverside Natural Foods (Toronto) rejected by
+  board. Replay: Dhaka and Riverside leave on the next run. 37 tests.
 
 ## Next session, in order
 
-1. **Outside-US postings that stay open:** a Dhaka, Bangladesh internship
-   ("Intern, HR Operations (Bangladesh)") is listed live although Bangladesh
-   is rejected since 1934d96. Likely `Main.relabel` relabels open postings
-   but never re-applies rejections. Check, and look for the same shape in
-   the other rejection rules.
-2. **Favicon** is still stroked in Engineering's #f4a259 (`site/index.html`
+1. **Favicon** is still stroked in Engineering's #f4a259 (`site/index.html`
    line 9); the wordmark moved to ink in finish round 1.
-3. **Workday boards at the 10-page cap** (12: CVS Health 4,543 "intern" hits,
+2. **Workday boards at the 10-page cap** (12: CVS Health 4,543 "intern" hits,
    Walmart and Hitachi 2,000, Stryker, Oshkosh, P&G, two Disney sites, ASML,
    HNTB, Clarios, Marvell): internships past page 10 can be missed. Use the
    `jobFamilyGroup` / time-type facets on those tenants rather than more pages.
-4. **Two sudden-drop anomalies** on 2026-10-06 03:50Z: `ashby:nory-co` 24 -> 0
+3. **Two sudden-drop anomalies** on 2026-10-06 03:50Z: `ashby:nory-co` 24 -> 0
    and `raymondjames.../raymondjamesearlycareers` 17 -> 2. Check whether real.
-5. **Planner and tracker page, browser only (owner, 2026-10-06; Q26).** A
+4. **Planner and tracker page, browser only (owner, 2026-10-06; Q26).** A
    spreadsheet-like page built from the saved (starred) postings, to plan
    and track applying. No login yet: kept in browser storage like the stars.
    - Every column is optional: the user ticks which ones appear on their
@@ -139,7 +139,7 @@ and how they were settled: [devlog.md](devlog.md).
    - No reminders for now (owner).
    - Built with Impeccable inside the existing world (DESIGN.md): new surface
      brief, finish review, documenter.
-6. **Google sign-in, data in the user's own Google Drive (B, after 5).**
+5. **Google sign-in, data in the user's own Google Drive (B, after 4).**
    Sign in with Google; the planner is kept in the hidden app-data folder of
    the user's Drive, so there is still no server and no student data held by
    us. Needs: a Google Cloud project and OAuth client (owner's Google

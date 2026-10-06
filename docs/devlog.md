@@ -413,3 +413,35 @@ returned exactly 40 rows in the 00:48Z run. Tenants that repeat the real total
 on later pages were unaffected (ASML read all 10 pages, count 355). Total is
 now read from the first page only; `WorkdayPagingTest` serves those answers
 and failed before the fix (2 requests, count 0).
+
+## 2026-10-06 — a posting a new rule rejects stays listed three more runs
+
+**What broke:** "Intern, HR Operations (Bangladesh)" in Dhaka was on the live
+page hours after Bangladesh was added to the outside-US rule (1934d96).
+
+**First diagnosis:** `Main.relabel` relabels every open posting but never
+re-applies the rejection rules, so a posting kept under the old rules stays
+open for good.
+
+**What settled it:** the posting's entry: `misses` 2, `firstMiss` 07:33Z. The
+rule did run, on each fetch; a rejected posting is simply absent from what the
+run keeps, so merge counted it as missing from the board. It would have closed
+on the third miss (24 for NSF, about 9 hours for a Workday board), and then
+read as "closed by the employer", which it never was. Fix: relabel drops an
+open posting the current rules reject and logs it in rejections.tsv as "still
+open, now rejected: ..." (`rejectedWhileOpen` in the report);
+`MergeTest.openPostingsANewRuleRejectsLeaveAtOnceAndAreLogged` went red with
+the check removed. Replay over the 14:02Z postings: 1 of 11,100 open postings
+affected, the Dhaka one.
+
+Same pass, checking the 408 open postings with no state for anything foreign:
+76 were Walmart stores written "(USA) TX BROWNWOOD 00813 WM SUPERCENTER". The
+code after "(USA)" now decides alone, which also corrected three that had a
+wrong state from the city name (Redmond OR read as WA, New Boston TX as MA,
+"DC WASHINGTON" as WA). Replay: no state 408 -> 332, 80 postings changed, no
+state lost. Riverside Natural Foods "2233 Sheppard Ave W" is Toronto (its
+description); no location rule can read a street address, so its board is in
+`Rules.BOARDS_ABROAD` (owner). Left open on purpose: three with no country
+anywhere (Hiverge "Cambridge", Colonist "Any Location", Octopus "Worldwide"),
+already hidden by any state filter. Replay of the rejections: 2 open postings
+leave on the next run, Dhaka and Riverside.

@@ -164,7 +164,9 @@ class RulesTest {
         String[][] more = {{"TX-Dallas", "TX"}, {"TX - Dallas", "TX"}, {"VA, Portsmouth", "VA"}, {"FL", "FL"}, {"WI Madison", "WI"},
                 {"US.CO.Denver", "CO"}, {"USA_NC_Holly Springs_161 Tradition Trail", "NC"}, {"Atlanta GA", "GA"},
                 {"Indianapolis IN USA", "IN"}, {"Omaha NE-6750", "NE"}, {"San Francisco", "CA"}, {"Chicago - 125 S Franklin", "IL"},
-                {"St. Louis", "MO"}, {"MO - Kansas City Downtown", "MO"}};
+                {"St. Louis", "MO"}, {"MO - Kansas City Downtown", "MO"}, {"(USA) TX BROWNWOOD 00813 WM SUPERCENTER", "TX"},
+                {"(USA) LA KENNER 08261 SAM'S CLUB", "LA"}, {"(USA) DC WASHINGTON 03035 WM SUPERCENTER", "DC"},
+                {"(USA) TX NEW BOSTON 00181 WM SUPERCENTER", "TX"}, {"(USA) OR REDMOND 02243 WM SUPERCENTER", "OR"}};
         for (String[] c : more) assertEquals(List.of(c[1]), List.copyOf(Rules.statesIn(c[0])), c[0]);
         assertEquals(List.of("WI", "MN"), List.copyOf(Rules.statesIn("MN-Mankato; WI-Baldwin")).reversed());
         assertEquals(List.of("TX"), List.copyOf(Rules.statesIn("UT MAIN CAMPUS")), "UT Austin, not Utah");
@@ -182,6 +184,9 @@ class RulesTest {
         assertEquals(List.of(), List.copyOf(Rules.statesIn("Mobile Unit")), "a word inside a segment is not a place");
         assertEquals(List.of(), List.copyOf(Rules.statesIn("Columbus")), "left out on purpose: Ohio or Georgia");
         assertEquals("outside US", Rules.reject(p("lever", "Software Intern", List.of("Auckland, NZ"), null, null, null)));
+        Posting toronto = new Posting("greenhouse", "riversidenaturalfoodsltd", "1", "R&D Co-Op (Jan- August Term)", "Riverside", "https://x",
+                List.of("2233 Sheppard Ave W"), null, null, null, null, null, null, null, null);
+        assertEquals("outside US: Riverside Natural Foods, Toronto", Rules.reject(toronto), "a street address no rule can read");
         var w = Rules.where(p("lever", "Intern", List.of("Remote (United States | Canada)", "Raleigh, NC"), null, null, null));
         assertEquals(List.of("NC"), w.states());
         assertTrue(w.remoteUs());

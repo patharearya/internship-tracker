@@ -117,11 +117,18 @@ public final class Main {
      * Labels every open posting with the current rules, not only those fetched this run: Workday is fetched every
      * third hour and a failing board not at all, so a rule change otherwise reached 5,934 Workday postings hours
      * late (devlog 2026-10-05). Closed postings keep the labels they closed with.
+     * An open posting the current rules reject leaves now, logged in {@code rejections}; otherwise it counted as
+     * missing and stayed listed for three more runs (24 for NSF), then read as closed by the employer (devlog 2026-10-06).
      */
-    static List<Entry> relabel(List<Entry> entries, Map<String, String> descriptions) {
+    static List<Entry> relabel(List<Entry> entries, Map<String, String> descriptions, List<String> rejections) {
         List<Entry> out = new ArrayList<>(entries.size());
         for (Entry e : entries) {
             if (e.closed() != null) { out.add(e); continue; }
+            String reason = Rules.reject(e.posting());
+            if (reason != null) {
+                rejections.add(rejectionRow(e.posting().source() + ":" + e.posting().board(), e.posting(), "still open, now rejected: " + reason));
+                continue;
+            }
             String d = e.posting().description() != null ? e.posting().description() : descriptions.get(e.key());
             out.add(new Entry(e.key(), e.posting(), Rules.label(withDescription(e.posting(), d)), e.firstSeen(), e.lastSeen(),
                     e.misses(), e.firstMiss(), e.closed(), e.reopened()));
@@ -206,7 +213,9 @@ public final class Main {
         }
 
         Map<String, Object> retired = new TreeMap<>();
-        List<Entry> merged = retire(relabel(merge(previous, kept, now), descriptions), state.failures(), now, retired);
+        int rejectedBefore = rejections.size();
+        List<Entry> merged = retire(relabel(merge(previous, kept, now), descriptions, rejections), state.failures(), now, retired);
+        retired.put("rejectedWhileOpen", rejections.size() - rejectedBefore);
         Map<String, String> newDescriptions = new TreeMap<>();
         List<Entry> published = new ArrayList<>();
         for (Entry e : merged) {

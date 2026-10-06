@@ -56,8 +56,18 @@ public final class Rules {
         if (p.eligibility() != null && !p.eligibility().matches(".*\\b(public|student|graduates)\\b.*"))
             return "not open to students (USAJOBS hiring paths: " + p.eligibility() + ")";
         if (outsideUs(p)) return "outside US";
+        String abroad = BOARDS_ABROAD.get(p.source() + ":" + p.board());
+        if (abroad != null) return "outside US: " + abroad;
         return null;
     }
+
+    /**
+     * Boards whose postings are abroad although no location says so. A rule here and not a board dropped from
+     * discovery: discovery keeps a dropped board while it has open postings, and a rule logs what it removes.
+     */
+    private static final Map<String, String> BOARDS_ABROAD = Map.of(
+            // "2233 Sheppard Ave W": Toronto in the description (owner, 2026-10-06)
+            "greenhouse:riversidenaturalfoodsltd", "Riverside Natural Foods, Toronto");
 
     static boolean isResearch(Posting p) { return Parse.RESEARCH.equals(p.employment()); }
 
@@ -303,6 +313,9 @@ public final class Rules {
 
     static Set<String> statesIn(String loc) {
         Set<String> out = new TreeSet<>();
+        // the code after "(USA)" is the whole answer: the city after it would read "DC WASHINGTON" as WA, "TX NEW BOSTON" as MA
+        Matcher usa = CODE_AFTER_USA.matcher(loc);
+        if (usa.find() && STATES.containsValue(usa.group(1))) { out.add(usa.group(1)); return out; }
         String rest = loc;
         if (rest.matches("(?i).*\\b(washington,?\\s*(d\\.?c\\.?|district of columbia))\\b.*")) {
             out.add("DC");
@@ -345,6 +358,8 @@ public final class Rules {
     private static final Pattern CODE_LEADING = Pattern.compile("^([A-Z]{2})\\s+(?=[A-Z][a-z])");
     /** "Atlanta GA", "Indianapolis IN USA", "Omaha NE-6750": after a lower-case word, at the end or before USA or a number. */
     private static final Pattern CODE_TRAILING = Pattern.compile("(?<=[a-z.]\\s)([A-Z]{2})(?=\\s*$|\\s+USA?\\b|-\\d)");
+    /** Walmart's "(USA) TX BROWNWOOD 00813 WM SUPERCENTER": 85 open postings with no state on 2026-10-06. */
+    private static final Pattern CODE_AFTER_USA = Pattern.compile("^\\(USA\\)\\s+([A-Z]{2})\\s");
 
     /**
      * US cities that name one state, tried only when no state name or code was found. Names shared with another state

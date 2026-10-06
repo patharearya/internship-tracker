@@ -30,11 +30,29 @@ class MergeTest {
                 new Rules.Label("not stated", "old"), List.of(), false);
         Entry open = new Entry("workday:b:1", p, stale, "T0", "T0", 0, null, null, false);
         Entry closed = new Entry("workday:b:2", p, stale, "T0", "T0", 3, "T1", "T1", false);
-        List<Entry> out = Main.relabel(List.of(open, closed), Map.of("workday:b:1", "Open to undergraduate students."));
+        List<Entry> out = Main.relabel(List.of(open, closed), Map.of("workday:b:1", "Open to undergraduate students."), new java.util.ArrayList<>());
         assertEquals("Computer Science & IT", out.get(0).labels().major().value());
         assertEquals(List.of("CA"), out.get(0).labels().states());
         assertEquals("undergrad", out.get(0).labels().level().value(), "description from the shard files is used");
         assertSame(stale, out.get(1).labels(), "closed postings keep the labels they closed with");
+    }
+
+    @Test
+    void openPostingsANewRuleRejectsLeaveAtOnceAndAreLogged() {
+        // the Dhaka posting of 2026-10-06: kept before Bangladesh was rejected, then shown for three more runs
+        Posting dhaka = new Posting("ashby", "commure", "9", "Intern, HR Operations (Bangladesh)", "Commure", "https://x",
+                List.of("Dhaka, Bangladesh"), null, null, null, null, null, null, null, null);
+        Posting ok = new Posting("ashby", "commure", "8", "Software Engineer Intern", "Commure", "https://y",
+                List.of("San Francisco, CA"), null, null, null, null, null, null, null, null);
+        Rules.Labels l = Rules.label(ok);
+        Entry closedAbroad = new Entry("ashby:commure:7", dhaka, l, "T0", "T0", 3, "T1", "T1", false);
+        List<String> log = new java.util.ArrayList<>();
+        List<Entry> out = Main.relabel(List.of(new Entry("ashby:commure:9", dhaka, l, "T0", "T0", 0, null, null, false),
+                new Entry("ashby:commure:8", ok, l, "T0", "T0", 0, null, null, false), closedAbroad), Map.of(), log);
+        assertEquals(List.of("ashby:commure:8", "ashby:commure:7"), out.stream().map(Entry::key).toList(),
+                "the open Dhaka posting is gone; closed postings are left as they closed");
+        assertEquals(1, log.size());
+        assertTrue(log.get(0).startsWith("ashby:commure\t9\tIntern, HR Operations (Bangladesh)\tstill open, now rejected: outside US"), log.get(0));
     }
 
     @Test
