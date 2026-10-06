@@ -55,12 +55,19 @@ and how they were settled: [devlog.md](devlog.md).
   "total":0 (devlog 2026-10-06). 485 boards had `lastCount` 0, 390 stopped at
   exactly 40 rows. Fixed, `WorkdayPagingTest`.
 - A paused host now records when the 403 came. "Oberlin" pins the leading
-  word boundary on foreign names. 35 tests.
+  word boundary on foreign names. 36 tests.
 - 18 employer site names in the city table ("Carmel Headquarters", "UT MAIN
   CAMPUS", "Stamford Hub"...; one employer each, 3+ open postings): replay
   over the 01:27Z postings, no state 430 -> 297, no other posting changed.
   Left out on purpose: Batavia, Conway, Bethlehem (other states share them),
   "US Headquarters", "Airport Headquarters", "Any SpaceX Site".
+
+- Closed postings leave `postings.json` 14 days after closing; a board
+  failing 7 days has its open postings closed (`Main.retire`, counts in
+  `report.json` under `retired`). Replay over the saved data: nothing changes
+  today, the 13 postings closed on 10-04 go on 10-18. The 78 failures from
+  before this have no start date, so their 7 days count from their next
+  failure.
 
 ## Next session, in order
 
@@ -86,11 +93,6 @@ and how they were settled: [devlog.md](devlog.md).
 
 - Tune the "sudden drop" constants (`DROP_CHECK_MIN`, `DROP_RATIO`) and check
   that 3 misses fits real churn.
-- Retention rule for closed postings: `postings.json` only grows, ~80k
-  entries before GitHub's 100 MB limit.
-- A board that fails for good keeps its open postings open (failed fetches
-  count no misses). 0 such postings today; decide a rule (e.g. close after N
-  days of 404) before it happens.
 - `ubuntu-latest` moves to Ubuntu 26 from 2026-10-19; watch the first run.
 
 ## Settled
@@ -105,6 +107,9 @@ and how they were settled: [devlog.md](devlog.md).
   tried and dropped. SkillBridge is rejected.
 - Updates at least daily are enough (Q24).
 - "AI Residency" stays rejected: a research job (Q25).
+- Closed postings are dropped and failing boards' postings closed (owner,
+  2026-10-06). 14 and 7 days are defaults: 27 postings reopened in the first
+  two days, and dropping at once would show each as new.
 
 ## Small items
 

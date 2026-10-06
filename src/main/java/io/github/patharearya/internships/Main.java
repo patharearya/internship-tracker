@@ -32,6 +32,13 @@ public final class Main {
     static final int DROP_CHECK_MIN = 5;
     static final double DROP_RATIO = 0.2;
     static final int MAX_BACKOFF_HOURS = 24;
+    /**
+     * Closed postings leave postings.json (and their descriptions) this long after closing (owner, 2026-10-06). Not at
+     * once: one that comes back within it is marked reopened with its first-seen date kept (27 in the first two days).
+     */
+    static final int KEEP_CLOSED_DAYS = 14;
+    /** A board failing this long has its open postings closed, dated from the first failure (owner, 2026-10-06). */
+    static final int DEAD_BOARD_DAYS = 7;
     static final int WORKDAY_EVERY_HOURS = 3;
     /**
      * Descriptions are ~5 KB each and never removed, so one file passes GitHub's 100 MB limit within a season
@@ -43,7 +50,8 @@ public final class Main {
     public record Entry(String key, Posting posting, Rules.Labels labels, String firstSeen, String lastSeen,
                         int misses, String firstMiss, String closed, boolean reopened) {}
 
-    public record Failure(int count, String nextTry, String lastError) {}
+    /** {@code since}: the first failure in this streak; null in state written before 2026-10-06. */
+    public record Failure(int count, String nextTry, String lastError, String since) {}
 
     /** {@code workdayStarted}: start of the last run that fetched Workday; null before the first. */
     public record State(Map<String, Integer> lastCount, Map<String, Failure> failures, Map<String, String> paused,
@@ -167,9 +175,11 @@ public final class Main {
             switch (u.status()) {
                 case "ok" -> { state.lastCount().put(u.id(), u.rawCount()); state.failures().remove(u.id()); }
                 case "failed" -> {
-                    int n = state.failures().containsKey(u.id()) ? state.failures().get(u.id()).count() + 1 : 1;
+                    Failure prev = state.failures().get(u.id());
+                    int n = prev != null ? prev.count() + 1 : 1;
                     long hours = Math.min(1L << Math.min(n - 1, 5), MAX_BACKOFF_HOURS);   // 1h, 2h, 4h ... capped at 24h
-                    state.failures().put(u.id(), new Failure(n, started.plus(Duration.ofHours(hours)).truncatedTo(ChronoUnit.SECONDS).toString(), u.detail()));
+                    String since = prev != null && prev.since() != null ? prev.since() : now;   // older streaks start counting now
+                    state.failures().put(u.id(), new Failure(n, started.plus(Duration.ofHours(hours)).truncatedTo(ChronoUnit.SECONDS).toString(), u.detail(), since));
                 }
                 case "refused" -> state.paused().put(u.host(), u.detail());
                 default -> {}
@@ -195,7 +205,8 @@ public final class Main {
             kept.put(u.id(), k);
         }
 
-        List<Entry> merged = relabel(merge(previous, kept, now), descriptions);
+        Map<String, Object> retired = new TreeMap<>();
+        List<Entry> merged = retire(relabel(merge(previous, kept, now), descriptions), state.failures(), now, retired);
         Map<String, String> newDescriptions = new TreeMap<>();
         List<Entry> published = new ArrayList<>();
         for (Entry e : merged) {
@@ -210,6 +221,7 @@ public final class Main {
         write("state.json", state);
         Files.writeString(DATA.resolve("rejections.tsv"), REJECTION_HEADER + "\n" + String.join("\n", rejections) + "\n");
         Map<String, Object> report = report(units, merged, rejectedBy, seconds, started, state);
+        report.put("retired", retired);
         write("report.json", report);
         System.out.println(JSON.writeValueAsString(report.get("systems")));
     }
@@ -286,6 +298,32 @@ public final class Main {
                     misses >= MISSES_TO_CLOSE_BY_SOURCE.getOrDefault(e.posting().source(), MISSES_TO_CLOSE) ? firstMiss : null, e.reopened()));
         }
         return new ArrayList<>(out.values());
+    }
+
+    /**
+     * Closes open postings on boards failing DEAD_BOARD_DAYS (failed fetches count no misses, so they would stay open
+     * forever) and drops postings closed more than KEEP_CLOSED_DAYS ago. What it did goes into {@code log} for the report.
+     */
+    static List<Entry> retire(List<Entry> entries, Map<String, Failure> failures, String now, Map<String, Object> log) {
+        Instant t = Instant.parse(now);
+        String deadBefore = t.minus(Duration.ofDays(DEAD_BOARD_DAYS)).toString();
+        String keepAfter = t.minus(Duration.ofDays(KEEP_CLOSED_DAYS)).toString();
+        Map<String, Integer> deadBoards = new TreeMap<>();
+        int dropped = 0;
+        List<Entry> out = new ArrayList<>(entries.size());
+        for (Entry e : entries) {
+            String unit = e.posting().source() + ":" + e.posting().board();
+            Failure f = failures.get(unit);
+            if (e.closed() == null && f != null && f.since() != null && f.since().compareTo(deadBefore) < 0) {
+                e = new Entry(e.key(), e.posting(), e.labels(), e.firstSeen(), e.lastSeen(), e.misses(), e.firstMiss(), f.since(), e.reopened());
+                deadBoards.merge(unit + " (" + f.lastError() + ")", 1, Integer::sum);
+            }
+            if (e.closed() != null && e.closed().compareTo(keepAfter) < 0) dropped++;
+            else out.add(e);
+        }
+        log.put("closedOnDeadBoards", deadBoards);
+        log.put("droppedClosed", dropped);
+        return out;
     }
 
     static String key(Posting p) { return p.source() + ":" + p.board() + ":" + p.id(); }

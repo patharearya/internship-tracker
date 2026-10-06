@@ -98,4 +98,26 @@ class MergeTest {
         assertEquals(find(r1, "1"), find(r2, "1"));
         assertEquals(0, find(r2, "1").misses());
     }
+
+    @Test
+    void deadBoardsCloseAndOldClosedPostingsLeave() {
+        Kept k = kept("b", "1");
+        Entry open = new Entry("lever:b:1", k.posting(), k.labels(), "2026-09-01T00:00:00Z", "2026-09-20T00:00:00Z", 0, null, null, false);
+        Entry closedRecently = new Entry("lever:c:2", kept("c", "2").posting(), k.labels(), "T0", "T0", 3, "2026-09-30T00:00:00Z", "2026-09-30T00:00:00Z", false);
+        Entry closedLongAgo = new Entry("lever:c:3", kept("c", "3").posting(), k.labels(), "T0", "T0", 3, "2026-09-20T00:00:00Z", "2026-09-20T00:00:00Z", false);
+        Entry onYoungFailure = new Entry("lever:d:4", kept("d", "4").posting(), k.labels(), "T0", "T0", 0, null, null, false);
+        Map<String, Main.Failure> failures = Map.of(
+                "lever:b", new Main.Failure(9, "x", "IOException: HTTP 404", "2026-09-28T00:00:00Z"),   // 8 days
+                "lever:d", new Main.Failure(5, "x", "IOException: HTTP 404", "2026-10-01T00:00:00Z"),   // 5 days
+                "lever:c", new Main.Failure(5, "x", "IOException: HTTP 404", null));                    // state from before since existed
+        Map<String, Object> log = new java.util.TreeMap<>();
+        List<Entry> out = Main.retire(List.of(open, closedRecently, closedLongAgo, onYoungFailure), failures, "2026-10-06T00:00:00Z", log);
+
+        assertEquals("2026-09-28T00:00:00Z", find(out, "1").closed(), "closed from the first failure, 7+ days ago");
+        assertNull(find(out, "4").closed(), "failing 5 days: still open");
+        assertEquals("2026-09-30T00:00:00Z", find(out, "2").closed(), "closed 6 days ago: kept, so a return shows as reopened");
+        assertTrue(out.stream().noneMatch(e -> e.posting().id().equals("3")), "closed 16 days ago: dropped");
+        assertEquals(1, log.get("droppedClosed"));
+        assertEquals(Map.of("lever:b (IOException: HTTP 404)", 1), log.get("closedOnDeadBoards"));
+    }
 }
