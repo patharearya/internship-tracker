@@ -87,22 +87,32 @@ and how they were settled: [devlog.md](devlog.md).
   browser; "How it works" with real counts. Built with the Impeccable design
   plugin: product record `PRODUCT.md`, direction in
   `.impeccable/surfaces/site-index-html.md`. Finish review round 1: 8 fixes,
-  6 resolved, 1 partial, 2 regressions; round 2 fixes applied (fresh = today
-  only, rows visible by default, thin note above the listings line), not yet
-  scored. `.github/workflows/pages.yml` publishes `site/` + `data/` only.
+  6 resolved, 1 partial, 2 regressions. Round 2 (fresh = today only, rows
+  visible by default, thin note first): all resolved, river click and lit
+  stream verified on captures; it found rows blinking (visible, then blank,
+  then fading in). Round 3 fixed that (rows on screen arrive at render,
+  observer starts 15% below the screen; DOM test 1/6 -> 0/0 rows seen before
+  arriving) and the wave order it broke (test: delays 6..11,0..4 -> 0..10).
+  "See what's new" removed by the owner (did the same as "Choose your
+  major"). Verdict: ship, for the scored fixes. Captures were taken with
+  headless Chrome over the DevTools protocol from Node (no install).
+  `.github/workflows/pages.yml` publishes `site/` + `data/` only.
   Locally: `site/data` is a junction to `data/` (gitignored); serve `site/`
   with `python -m http.server`.
+- **Live** at https://patharearya.github.io/internship-tracker/ (Pages source
+  "GitHub Actions", switched on 2026-10-06). First deploy 37474089311: page,
+  `report.json`, `postings.json` (14 MB, 0.8 MB gzipped) and description
+  shards all answer 200. Each successful `update` run redeploys.
 
 ## Next session, in order
 
-1. **Go live:** switch GitHub Pages on with source "GitHub Actions"
-   (Settings > Pages, or `gh api -X POST repos/patharearya/internship-tracker/pages
-   -f build_type=workflow`), then run the `pages` workflow. Until then every
-   `pages` run fails at deploy. Site: https://patharearya.github.io/internship-tracker/
-2. **Finish the page:** send the round-2 fixes to the finish reviewer for the
-   verdict; then the Impeccable documenter writes `DESIGN.md` (the run is not
-   finished without it). Unverified so far: clicking a stream selects its
-   field, the picked field staying lit in the river.
+1. **Outside-US postings that stay open:** a Dhaka, Bangladesh internship
+   ("Intern, HR Operations (Bangladesh)") is listed live although Bangladesh
+   is rejected since 1934d96. Likely `Main.relabel` relabels open postings
+   but never re-applies rejections. Check, and look for the same shape in
+   the other rejection rules.
+2. **Favicon** is still stroked in Engineering's #f4a259 (`site/index.html`
+   line 9); the wordmark moved to ink in finish round 1.
 3. **Workday boards at the 10-page cap** (12: CVS Health 4,543 "intern" hits,
    Walmart and Hitachi 2,000, Stryker, Oshkosh, P&G, two Disney sites, ASML,
    HNTB, Clarios, Marvell): internships past page 10 can be missed. Use the

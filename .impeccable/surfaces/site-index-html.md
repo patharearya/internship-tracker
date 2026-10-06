@@ -23,7 +23,7 @@ OWN-WORLD: Night ground #0a0f15, warm off-white ink #eef1ec, cool grey secondari
 
 STORY: The visitor sees the field of real postings, learns what it is in one sentence with real counts, picks a major from the river or the strip, narrows with filters that apply instantly, opens a posting to read its description, stars it, and leaves through the employer's own link.
 
-FIRST VIEWPORT: Full-height canvas river across the upper half (original demo: separate coloured streams, short trails, 1.3px points, hover names a stream and its count, click selects that major). Bottom-left: headline "Internships in your field, straight from the source." at up to 96px, one line of real counts, primary pill "Choose your major", secondary "See what's new". Top bar: wordmark left, Browse / How it works / Saved right. Mono hint bottom-right.
+FIRST VIEWPORT: Full-height canvas river across the upper half (original demo: separate coloured streams, short trails, 1.3px points, hover names a stream and its count, click selects that major). Bottom-left: headline "Internships in your field, straight from the source." at up to 96px, one line of real counts, one pill "Choose your major" (a secondary "See what's new" was removed by the owner, 2026-10-06: the list is always newest first, so it did the same as the primary). Top bar: wordmark left, Browse / How it works / Saved right. Mono hint bottom-right.
 
 FORM: Owner-pinned direction from references, built code-first; candidate 1 of the owner's two demos; seed key 0bede2ee (roll set aside by the owner's references).
 

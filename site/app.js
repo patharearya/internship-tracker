@@ -124,7 +124,6 @@ document.querySelectorAll("[data-seg]").forEach(seg => seg.addEventListener("cli
 }));
 $("[data-more]").addEventListener("click", () => { state.shown += PAGE; render(false, true); });
 document.querySelector("[data-saved-link]").addEventListener("click", () => { state.saved = true; state.shown = PAGE; render(true); });
-document.querySelector("[data-newest]").addEventListener("click", () => pick(""));
 
 // "not stated" is shown under every arrangement and level, since the posting may well fit
 function match(e) {
@@ -153,7 +152,14 @@ function render(changed, appending) {
   const start = appending ? ul.children.length : 0;
   const html = shown.slice(start).map((g, i) => row(g, i)).join("");
   if (appending) ul.insertAdjacentHTML("beforeend", html); else ul.innerHTML = html;
-  if (!reduce) [...ul.children].slice(start).forEach(li => { if (li.classList.contains("row")) rowsIn.observe(li); });
+  // rows already on screen arrive now; waiting for the observer would show them for a frame, then blank them
+  // the wave counts only rows on screen, so it always runs top to bottom; rows above the screen arrive with no delay
+  let wave = 0;
+  if (!reduce) [...ul.children].slice(start).filter(li => li.classList.contains("row")).forEach(li => {
+    const top = li.getBoundingClientRect().top;
+    if (top < innerHeight) { li.style.setProperty("--i", top < 0 ? 0 : wave++ % 12); li.classList.add("arrive"); }
+    else rowsIn.observe(li);
+  });
   const more = $("[data-more]");
   more.hidden = view.length <= state.shown;
   more.textContent = `Show ${fmt(Math.min(PAGE, view.length - state.shown))} more of ${fmt(view.length - state.shown)} listings`;
@@ -171,7 +177,7 @@ const rowsIn = new IntersectionObserver(es => {
     e.target.style.setProperty("--i", batch++ % 12);
     e.target.classList.add("arrive"); rowsIn.unobserve(e.target);
   });
-}, { rootMargin: "0px 0px -6% 0px" });
+}, { rootMargin: "0px 0px 15% 0px" });   // starts just below the screen, so a row is never seen before it fades in
 
 function summary(n) {
   const h = $("[data-summary]"), note = $("[data-note]");
