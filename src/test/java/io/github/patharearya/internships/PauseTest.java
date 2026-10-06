@@ -32,6 +32,7 @@ class PauseTest {
 
         assertEquals(List.of("refused", "skipped", "ok"), units.stream().map(Main.Unit::status).toList());
         assertEquals("amplify.wd1.myworkdayjobs.com", units.get(0).host());
+        assertTrue(units.get(0).detail().matches("\\d{4}-\\d\\d-\\d\\dT\\S+Z HTTP 403 .*"), "pause stamped when the 403 came, not with the run start T1");
 
         // a pause saved from an earlier run is also per server
         Main.State saved = new Main.State(new TreeMap<>(), new TreeMap<>(), new TreeMap<>(Map.of("amplify.wd1.myworkdayjobs.com", "T0 HTTP 403")), null);

@@ -171,7 +171,7 @@ public final class Main {
                     long hours = Math.min(1L << Math.min(n - 1, 5), MAX_BACKOFF_HOURS);   // 1h, 2h, 4h ... capped at 24h
                     state.failures().put(u.id(), new Failure(n, started.plus(Duration.ofHours(hours)).truncatedTo(ChronoUnit.SECONDS).toString(), u.detail()));
                 }
-                case "refused" -> state.paused().put(u.host(), now + " " + u.detail());
+                case "refused" -> state.paused().put(u.host(), u.detail());
                 default -> {}
             }
         }
@@ -248,8 +248,9 @@ public final class Main {
                     out.add(new Unit(id, system, host, "ok", null, r.rawCount(), r.postings()));
                 }
             } catch (Fetch.Refused e) {
-                out.add(new Unit(id, system, e.host, "refused", e.getMessage(), 0, List.of()));
-                refusedNow.put(e.host, now + " " + e.getMessage());   // later boards on the same server are skipped this run
+                String at = Instant.now().truncatedTo(ChronoUnit.SECONDS) + " " + e.getMessage();   // when the refusal came, not the run start
+                out.add(new Unit(id, system, e.host, "refused", at, 0, List.of()));
+                refusedNow.put(e.host, at);   // later boards on the same server are skipped this run
             } catch (Exception e) {
                 out.add(new Unit(id, system, host, "failed", e.getClass().getSimpleName() + ": " + e.getMessage(), 0, List.of()));
             }
