@@ -489,3 +489,28 @@ count, so the same count on the next run is believed and the postings start
 counting misses (one glitch costs nothing; the next normal reading is not a
 drop). `PauseTest.aDropThatHoldsIsBelievedOnTheNextRun` went red without the
 line. nory-co had no kept postings, so nothing on the page changes for it.
+
+
+## 2026-10-06 — the planner widened every phone page to 866px
+
+**What broke:** at 390px the planner laid out 866px wide, so a phone would
+zoom the whole page out. The full-page phone capture came back 1,752 wide.
+
+**First diagnosis:** the sheet escaping its sideways-scrolling container: the
+row arrival animation, or the pinned (sticky) Posting column.
+
+**What settled it:** removing suspects one at a time in headless Chrome and
+re-reading `innerWidth`: the animation and the sticky column changed nothing;
+hiding the sheet fixed it. The culprit was the screen-reader label in the
+"Remove" header cell: `.sr` is `position: absolute`, and with no positioned
+ancestor inside the scroller its containing block was the page, so it sat at
+x 870 outside the clip. `.sheet-scroll` is now `position: relative`. A second
+cause came in with a later fix: the counts line's parts were made nowrap with
+no space between them, so it could not wrap (477px); the finish reviewer
+caught it from the capture's width. Both checked by measuring scrollWidth at
+390, not by looking.
+
+**Slip on the way:** a shell heredoc turned `"\u0000"` into a real NUL
+byte in site/app.js (the backslash collapse in the notes); the JS still ran,
+which is why nothing failed. Git and grep then treated the file as binary.
+Edits with backslashes go through a file, every time.

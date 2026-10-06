@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-06T14:18:30.009Z",
+  "generatedAt": "2026-10-06T16:03:59.000Z",
   "title": "Design System: Internship & Research Finder",
   "extensions": {
     "colorMeta": {
@@ -341,7 +341,7 @@
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Section titles."
+        "purpose": "Section titles and the planner's page title."
       },
       "title": {
         "displayName": "Title",
@@ -357,15 +357,15 @@
       },
       "body-small": {
         "displayName": "Body small",
-        "purpose": "Nav, search, select, organisation and location in rows."
+        "purpose": "Nav, search, select, organisation and location in rows, planner cells and inline fields."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Chips, segments, river hover label."
+        "purpose": "Chips, segments, river hover label, the planner's tick pills and sort headers."
       },
       "data": {
         "displayName": "Data (mono)",
-        "purpose": "Dates, deadlines, counts, codes and the river hint only. Never field names, labels or prose."
+        "purpose": "Dates, deadlines, counts, codes and the river hint only; in the planner, date cells, the counts line, the Closed pill and timeline month ticks. Never field names, labels or prose."
       }
     },
     "shadows": [
@@ -388,6 +388,16 @@
         "name": "hero-gradient",
         "value": "linear-gradient(180deg, rgba(10,15,21,.5) 0%, rgba(10,15,21,0) 20%, rgba(10,15,21,0) 52%, rgba(10,15,21,.88) 100%)",
         "purpose": "Over the river so the bar and lede stay legible."
+      },
+      {
+        "name": "pinned-column-rule",
+        "value": "box-shadow: 1px 0 0 rgba(238, 241, 236, 0.11)",
+        "purpose": "The planner's pinned Posting column edge: a hairline rule drawn as a shadow, not a lift."
+      },
+      {
+        "name": "sheet-edge-fade",
+        "value": "48px linear-gradient to night on the right; from the pinned column's edge at 90% night on the left",
+        "purpose": "Shown only on the side of the planner sheet with more columns to scroll to."
       }
     ],
     "motion": [
@@ -432,9 +442,34 @@
         "purpose": "Continuous drift; paused while off screen."
       },
       {
+        "name": "view-fade",
+        "value": "opacity 0 -> 1 over .45s on the ease",
+        "purpose": "Planner Table / Timeline switch, and a column added from the columns panel."
+      },
+      {
+        "name": "timeline-draw",
+        "value": "scaleX(0) -> 1 from the left over .9s, delay --i * 50ms, --i = row % 12",
+        "purpose": "Planner timeline lines."
+      },
+      {
+        "name": "applied-stamp",
+        "value": "keyframes from blur(4px), opacity .3; .6s",
+        "purpose": "Status, date applied and apply-by cells settle once after Applied is ticked or the row is refreshed while applied."
+      },
+      {
+        "name": "check-grow",
+        "value": "tick pill check: width 0 -> 14px, scale .6 -> 1 over .3s; Applied tick check: scale .4 -> 1 over .35s",
+        "purpose": "The check growing in when a tick pill or the Applied circle is pressed."
+      },
+      {
+        "name": "panel-drop",
+        "value": "translateY(-6px), opacity 0 -> in over .35s",
+        "purpose": "The planner's columns panel opening."
+      },
+      {
         "name": "reduced-motion",
         "value": "prefers-reduced-motion: reduce",
-        "purpose": "No reveals, no row or drawer animation, no canvas fade, smooth scroll off; the river is drawn without drift and redrawn only on hover and resize."
+        "purpose": "No reveals, no row or drawer animation, no canvas fade, smooth scroll off; the river is drawn without drift and redrawn only on hover and resize. In the planner: no row wave, view fade, timeline draw, stamp, column fade or panel drop."
       }
     ],
     "breakpoints": [
@@ -446,7 +481,12 @@
       {
         "name": "mobile",
         "value": "760px",
-        "purpose": "Nav keeps only Saved, hint hides, strip 92px without labels, chips scroll in one line, select full width, river band 10% / 22%."
+        "purpose": "Nav keeps only Planner, hint hides, strip 92px without labels, chips scroll in one line, select full width, river band 10% / 22%; planner: columns panel full width from the tool row, narrower pinned column, page scroll with the sheet sideways only, 132px timeline names."
+      },
+      {
+        "name": "sheet-own-scroll",
+        "value": "761px",
+        "purpose": "From here up the planner sheet scrolls in its own area (max-height 100svh - 96px) under a sticky header; below it the page scrolls."
       }
     ]
   },
@@ -463,7 +503,7 @@
       "name": "Ghost Button",
       "kind": "button",
       "refersTo": "button-ghost",
-      "description": "Secondary pill over any ground: Show more, Clear filters, Save.",
+      "description": "Secondary pill over any ground: Show more, Clear filters, Add to planner, the planner's Columns and Export CSV.",
       "html": "<button class=\"ds-btn ds-btn-ghost\" type=\"button\">Show more</button>",
       "css": ":host{--ground:#0a0f15;--ground-2:#10161e;--ground-3:#161e28;--ink:#eef1ec;--ink-2:#aab5c0;--ink-3:#7f8b97;--line:rgba(238,241,236,.11);--line-2:rgba(238,241,236,.2);--accent:#eef1ec;--ease:cubic-bezier(.16,1,.3,1);--ui:'Schibsted Grotesk',system-ui,sans-serif;--mono:'Fragment Mono',ui-monospace,monospace;--display:'Bricolage Grotesque',system-ui,sans-serif} .ds-btn{display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 22px;border-radius:999px;font:500 16px/1 var(--ui);color:var(--ink);text-decoration:none;cursor:pointer;border:1px solid var(--line-2);background:none;transition:transform .25s var(--ease),background .25s,border-color .25s,color .25s}.ds-btn svg{width:18px;height:18px}.ds-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}.ds-btn-ghost{background:rgba(10,15,21,.35)}.ds-btn-ghost:hover{border-color:rgba(238,241,236,.45)}"
     },
@@ -495,16 +535,16 @@
       "name": "Navigation Bar",
       "kind": "nav",
       "refersTo": null,
-      "description": "Wordmark left in the display face; grey links right; Saved carries an ink count badge.",
-      "html": "<div class=\"ds-bar\"><a class=\"ds-mark\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M3 8c3-2 6 2 9 0s6-2 9 0M3 12c3-2 6 2 9 0s6-2 9 0M3 16c3-2 6 2 9 0s6-2 9 0\"/></svg>Internship &amp; Research Finder</a><nav class=\"ds-nav\"><a href=\"#\">Browse</a><a href=\"#\">How it works</a><a href=\"#\">Saved <span class=\"ds-count\">3</span></a></nav></div>",
-      "css": ":host{--ground:#0a0f15;--ground-2:#10161e;--ground-3:#161e28;--ink:#eef1ec;--ink-2:#aab5c0;--ink-3:#7f8b97;--line:rgba(238,241,236,.11);--line-2:rgba(238,241,236,.2);--accent:#eef1ec;--ease:cubic-bezier(.16,1,.3,1);--ui:'Schibsted Grotesk',system-ui,sans-serif;--mono:'Fragment Mono',ui-monospace,monospace;--display:'Bricolage Grotesque',system-ui,sans-serif} .ds-bar{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 24px;background:var(--ground);color:var(--ink)}.ds-mark{font:600 17px/1 var(--display);letter-spacing:-.01em;text-decoration:none;color:inherit;display:flex;align-items:center;gap:10px}.ds-nav{display:flex;gap:28px;font:400 15px/1 var(--ui);color:var(--ink-2)}.ds-nav a{color:inherit;text-decoration:none;transition:color .2s;display:inline-flex;align-items:center;gap:6px}.ds-nav a:hover{color:var(--ink)}.ds-nav a:focus-visible,.ds-mark:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}.ds-count{font:400 12px/1 var(--mono);background:var(--ink);color:var(--ground);border-radius:999px;padding:3px 7px}"
+      "description": "Wordmark left in the display face; grey links right; Planner carries an ink count badge and is ink on the planner page.",
+      "html": "<div class=\"ds-bar\"><a class=\"ds-mark\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M3 8c3-2 6 2 9 0s6-2 9 0M3 12c3-2 6 2 9 0s6-2 9 0M3 16c3-2 6 2 9 0s6-2 9 0\"/></svg>Internship &amp; Research Finder</a><nav class=\"ds-nav\"><a href=\"#\">Browse</a><a href=\"#\">How it works</a><a href=\"#\" aria-current=\"page\">Planner <span class=\"ds-count\">3</span></a></nav></div>",
+      "css": ":host{--ground:#0a0f15;--ground-2:#10161e;--ground-3:#161e28;--ink:#eef1ec;--ink-2:#aab5c0;--ink-3:#7f8b97;--line:rgba(238,241,236,.11);--line-2:rgba(238,241,236,.2);--accent:#eef1ec;--ease:cubic-bezier(.16,1,.3,1);--ui:'Schibsted Grotesk',system-ui,sans-serif;--mono:'Fragment Mono',ui-monospace,monospace;--display:'Bricolage Grotesque',system-ui,sans-serif} .ds-bar{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 24px;background:var(--ground);color:var(--ink)}.ds-mark{font:600 17px/1 var(--display);letter-spacing:-.01em;text-decoration:none;color:inherit;display:flex;align-items:center;gap:10px}.ds-nav{display:flex;gap:28px;font:400 15px/1 var(--ui);color:var(--ink-2)}.ds-nav a{color:inherit;text-decoration:none;transition:color .2s;display:inline-flex;align-items:center;gap:6px}.ds-nav a:hover{color:var(--ink)}.ds-nav a:focus-visible,.ds-mark:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}.ds-count{font:400 12px/1 var(--mono);background:var(--ink);color:var(--ground);border-radius:999px;padding:3px 7px}.ds-nav a[aria-current=page]{color:var(--ink)}"
     },
     {
       "name": "Posting Row",
       "kind": "custom",
       "refersTo": "posting-row",
       "description": "Ruled list row, not a card: mono date, title over organisation and major dot, location, mono deadline, round star. Ink marks today and near deadlines only.",
-      "html": "<ul class=\"ds-rows\"><li class=\"ds-row\" style=\"--c:#f4a259\"><span class=\"ds-when ds-on\">Posted today</span><span><button type=\"button\" class=\"ds-title\">Mechanical Engineer Internship, Robotics Hardware</button><span class=\"ds-org\">Field AI</span><span class=\"ds-kind\"><i></i>Engineering</span></span><span class=\"ds-where\">MA</span><span class=\"ds-when ds-on\">Apply by Oct 14</span><button type=\"button\" class=\"ds-star\" aria-pressed=\"false\" aria-label=\"Save\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" aria-hidden=\"true\"><path d=\"M12 3.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linejoin=\"round\"/></svg></button></li><li class=\"ds-row\" style=\"--c:#6aa9ff\"><span class=\"ds-when\">Posted yesterday</span><span><button type=\"button\" class=\"ds-title\">Software Engineering Intern</button><span class=\"ds-org\">Bedrock Robotics</span><span class=\"ds-kind\"><i></i>Computer Science &amp; IT</span></span><span class=\"ds-where\">TX</span><span class=\"ds-when\">No deadline published</span><button type=\"button\" class=\"ds-star\" aria-pressed=\"true\" aria-label=\"Remove from saved\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" aria-hidden=\"true\"><path d=\"M12 3.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linejoin=\"round\"/></svg></button></li></ul>",
+      "html": "<ul class=\"ds-rows\"><li class=\"ds-row\" style=\"--c:#f4a259\"><span class=\"ds-when ds-on\">Posted today</span><span><button type=\"button\" class=\"ds-title\">Mechanical Engineer Internship, Robotics Hardware</button><span class=\"ds-org\">Field AI</span><span class=\"ds-kind\"><i></i>Engineering</span></span><span class=\"ds-where\">MA</span><span class=\"ds-when ds-on\">Apply by Oct 14</span><button type=\"button\" class=\"ds-star\" aria-pressed=\"false\" aria-label=\"Add to your planner\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" aria-hidden=\"true\"><path d=\"M12 3.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linejoin=\"round\"/></svg></button></li><li class=\"ds-row\" style=\"--c:#6aa9ff\"><span class=\"ds-when\">Posted yesterday</span><span><button type=\"button\" class=\"ds-title\">Software Engineering Intern</button><span class=\"ds-org\">Bedrock Robotics</span><span class=\"ds-kind\"><i></i>Computer Science &amp; IT</span></span><span class=\"ds-where\">TX</span><span class=\"ds-when\">No deadline published</span><button type=\"button\" class=\"ds-star\" aria-pressed=\"true\" aria-label=\"Remove from your planner\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" aria-hidden=\"true\"><path d=\"M12 3.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linejoin=\"round\"/></svg></button></li></ul>",
       "css": ":host{--ground:#0a0f15;--ground-2:#10161e;--ground-3:#161e28;--ink:#eef1ec;--ink-2:#aab5c0;--ink-3:#7f8b97;--line:rgba(238,241,236,.11);--line-2:rgba(238,241,236,.2);--accent:#eef1ec;--ease:cubic-bezier(.16,1,.3,1);--ui:'Schibsted Grotesk',system-ui,sans-serif;--mono:'Fragment Mono',ui-monospace,monospace;--display:'Bricolage Grotesque',system-ui,sans-serif} .ds-rows{list-style:none;margin:0;padding:0 16px;border-top:1px solid var(--line);background:var(--ground);color:var(--ink);font:400 17px/1.55 var(--ui)}.ds-row{display:grid;grid-template-columns:130px minmax(0,1.5fr) minmax(0,.7fr) 170px 44px;gap:20px;align-items:center;padding:16px 4px;border-bottom:1px solid var(--line);border-radius:4px;cursor:pointer;transition:background .2s}.ds-row:hover{background:var(--ground-2)}.ds-when{font:400 13px/1.3 var(--mono);color:var(--ink-3)}.ds-on{color:var(--ink)}.ds-title{all:unset;display:block;cursor:pointer;font-weight:500}.ds-title:hover{text-decoration:underline}.ds-title:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}.ds-org,.ds-where{display:block;color:var(--ink-2);font-size:15px}.ds-kind{display:inline-flex;align-items:center;gap:7px;font:400 13px/1 var(--ui);color:var(--ink-3);margin-top:6px}.ds-kind i{width:7px;height:7px;border-radius:50%;background:var(--c)}.ds-star{width:40px;height:40px;display:grid;place-items:center;border-radius:50%;border:0;background:none;cursor:pointer;color:var(--ink-3);transition:color .2s,background .2s}.ds-star svg{fill:none}.ds-star:hover{color:var(--ink);background:var(--ground-3)}.ds-star:focus-visible{outline:2px solid var(--accent);outline-offset:3px}.ds-star[aria-pressed=true]{color:var(--ink)}.ds-star[aria-pressed=true] svg{fill:currentColor}"
     },
     {
@@ -514,16 +554,41 @@
       "description": "Bars as wide as each major's share, in the major's hue; selecting one dims the rest to 28% and grows it 1.6x.",
       "html": "<div class=\"ds-strip ds-pick\"><button type=\"button\" style=\"--n:1900;--c:#f4a259\"><span><b>1,900</b>Engineering</span></button><button type=\"button\" aria-pressed=\"true\" style=\"--n:1812;--c:#6aa9ff\"><span><b>1,812</b>Computer Science &amp; IT</span></button><button type=\"button\" style=\"--n:1300;--c:#e6d27e\"><span><b>1,300</b>Business</span></button><button type=\"button\" style=\"--n:900;--c:#9bdc6b\"></button><button type=\"button\" style=\"--n:400;--c:#b892ff\"></button><button type=\"button\" style=\"--n:44;--c:#ffd34e\"></button></div>",
       "css": ":host{--ground:#0a0f15;--ground-2:#10161e;--ground-3:#161e28;--ink:#eef1ec;--ink-2:#aab5c0;--ink-3:#7f8b97;--line:rgba(238,241,236,.11);--line-2:rgba(238,241,236,.2);--accent:#eef1ec;--ease:cubic-bezier(.16,1,.3,1);--ui:'Schibsted Grotesk',system-ui,sans-serif;--mono:'Fragment Mono',ui-monospace,monospace;--display:'Bricolage Grotesque',system-ui,sans-serif} .ds-strip{display:flex;gap:4px;height:150px;background:var(--ground);padding:16px}.ds-strip button{all:unset;position:relative;flex:var(--n) 1 0;min-width:8px;border-radius:10px;background:var(--c);cursor:pointer;overflow:hidden;transition:flex-grow .6s var(--ease),opacity .35s}.ds-strip button span{position:absolute;left:12px;right:8px;bottom:10px;color:#0a0f15;font:500 13px/1.2 var(--ui);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ds-strip button span b{display:block;font:400 12px/1 var(--mono);opacity:.72;margin-bottom:4px}.ds-strip button:hover{filter:brightness(1.1)}.ds-strip button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}.ds-pick button{opacity:.28}.ds-pick button[aria-pressed=true]{opacity:1;flex-grow:calc(var(--n) * 1.6)}"
+    },
+    {
+      "name": "Planner Sheet",
+      "kind": "custom",
+      "refersTo": "sheet-cell",
+      "description": "Hairline-ruled table, Posting column pinned with a 1px rule; quiet inline fields, mono date cells with the picker laid over, the Applied circle, the Closed pill.",
+      "html": "<table class=\"ds-sheet\"><thead><tr><th class=\"ds-pin\">Posting</th><th>Status</th><th>Applied</th><th>Apply by</th><th>Deadline</th><th>Notes</th></tr></thead><tbody><tr><th class=\"ds-pin\"><a class=\"ds-t\" href=\"#\">Associate Product Manager, Intern</a><span class=\"ds-org\">Duolingo <span class=\"ds-maj\"><i style=\"--c:#e6d27e\"></i>Business &amp; Management</span></span></th><td><select class=\"ds-ed\"><option>Saved</option><option>Preparing</option><option selected>Applied</option></select></td><td><label class=\"ds-tick\"><input type=\"checkbox\" checked aria-label=\"Applied\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12.5l4.5 4.5L19 7.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></label></td><td><label class=\"ds-date ds-hot\"><span>Oct 8</span><small>suggested</small><input type=\"date\" value=\"2026-10-08\" aria-label=\"Apply by\"></label></td><td><span class=\"ds-mono ds-hot\">Oct 8</span></td><td><textarea class=\"ds-ed\" rows=\"1\" placeholder=\"Add a note\" aria-label=\"Notes\"></textarea></td></tr><tr class=\"ds-closed\"><th class=\"ds-pin\"><a class=\"ds-t\" href=\"#\">Software Engineering Intern</a><span class=\"ds-org\">Astera <span class=\"ds-maj\"><i style=\"--c:#6aa9ff\"></i>Computer Science &amp; IT</span></span><span class=\"ds-gone\">Closed Oct 5</span></th><td><select class=\"ds-ed\"><option selected>Saved</option></select></td><td><label class=\"ds-tick\"><input type=\"checkbox\" aria-label=\"Applied\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12.5l4.5 4.5L19 7.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></label></td><td><label class=\"ds-date ds-sug\"><span>Oct 18</span><small>suggested</small><input type=\"date\" value=\"2026-10-18\" aria-label=\"Apply by\"></label></td><td><span class=\"ds-dim\">None published</span></td><td><textarea class=\"ds-ed\" rows=\"1\" placeholder=\"Add a note\" aria-label=\"Notes\"></textarea></td></tr></tbody></table>",
+      "css": ":host{--ground:#0a0f15;--ground-2:#10161e;--ground-3:#161e28;--ink:#eef1ec;--ink-2:#aab5c0;--ink-3:#7f8b97;--line:rgba(238,241,236,.11);--line-2:rgba(238,241,236,.2);--accent:#eef1ec;--ease:cubic-bezier(.16,1,.3,1);--ui:'Schibsted Grotesk',system-ui,sans-serif;--mono:'Fragment Mono',ui-monospace,monospace;--display:'Bricolage Grotesque',system-ui,sans-serif} .ds-sheet{border-collapse:separate;border-spacing:0;background:var(--ground);color:var(--ink);font:400 15px/1.55 var(--ui)}.ds-sheet th,.ds-sheet td{text-align:left;vertical-align:top;padding:14px;border-bottom:1px solid var(--line)}.ds-sheet thead th{font:500 13px/1 var(--ui);color:var(--ink-3);white-space:nowrap}.ds-pin{position:sticky;left:0;background:var(--ground);min-width:260px;font-weight:400;box-shadow:1px 0 0 var(--line)}.ds-sheet tbody tr{transition:background .2s}.ds-sheet tbody tr:hover,.ds-sheet tbody tr:hover .ds-pin{background:var(--ground-2)}.ds-t{display:block;font-weight:500;color:inherit;text-decoration:none;line-height:1.35}.ds-t:hover{text-decoration:underline}.ds-org{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;margin-top:4px;color:var(--ink-2);font-size:14px}.ds-maj{display:inline-flex;align-items:center;gap:7px;color:var(--ink-3);font-size:13px}.ds-maj i{width:7px;height:7px;border-radius:50%;background:var(--c)}.ds-gone{display:inline-block;margin-top:8px;font:400 12px/1 var(--mono);color:var(--ink);border:1px solid var(--line-2);border-radius:999px;padding:5px 9px}.ds-closed .ds-t,.ds-closed .ds-org{color:var(--ink-3)}.ds-ed{all:unset;box-sizing:border-box;display:block;width:100%;min-height:34px;padding:6px 10px;margin:-6px -10px;border-radius:8px;border:1px solid transparent;color:var(--ink);font:400 15px/1.4 var(--ui);transition:border-color .2s,background .2s}.ds-ed:hover{border-color:var(--line)}.ds-ed:focus{border-color:var(--ink-2);background:var(--ground-3)}.ds-ed::placeholder{color:var(--ink-3)}textarea.ds-ed{min-width:200px;resize:none}select.ds-ed{cursor:pointer;padding-right:28px;min-width:128px;background:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237f8b97' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M7 10l5 5 5-5'/%3E%3C/svg%3E\") no-repeat right 6px center / 14px}select.ds-ed option{background:var(--ground-2)}.ds-date{position:relative;display:inline-flex;flex-wrap:wrap;column-gap:8px;align-items:center;min-height:34px;padding:6px 10px;margin:-6px -10px;border-radius:8px;border:1px solid transparent;font:400 13px/1.3 var(--mono);color:var(--ink-2);white-space:nowrap;cursor:pointer;transition:border-color .2s,background .2s}.ds-date:hover{border-color:var(--line)}.ds-date:focus-within{border-color:var(--ink-2);background:var(--ground-3);color:var(--ink)}.ds-sug{color:var(--ink-3)}.ds-hot{color:var(--ink)}.ds-date small{font:400 12px/1.3 var(--ui);color:var(--ink-3)}.ds-date input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;color-scheme:dark;border:0;padding:0}.ds-mono{font:400 13px/1.3 var(--mono);color:var(--ink-2)}.ds-mono.ds-hot{color:var(--ink)}.ds-dim{color:var(--ink-3);font-size:14px;white-space:nowrap}.ds-tick{position:relative;display:inline-grid;place-items:center;width:26px;height:26px;margin-top:3px;border-radius:50%;border:1px solid var(--line-2);cursor:pointer;transition:background .25s var(--ease),border-color .25s}.ds-tick input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}.ds-tick svg{width:16px;height:16px;color:var(--ground);opacity:0;transform:scale(.4);transition:opacity .2s,transform .35s var(--ease)}.ds-tick:has(input:checked){background:var(--ink);border-color:var(--ink)}.ds-tick:has(input:checked) svg{opacity:1;transform:none}.ds-tick:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:3px}"
+    },
+    {
+      "name": "Tick Pills",
+      "kind": "chip",
+      "refersTo": "tick-pill",
+      "description": "Column picker in a flat panel (no shadow); pressed fills with ink and the check grows in.",
+      "html": "<div class=\"ds-panel\" role=\"group\" aria-label=\"Columns to show\"><button type=\"button\" aria-pressed=\"true\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12.5l4.5 4.5L19 7.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>Status</button><button type=\"button\" aria-pressed=\"true\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12.5l4.5 4.5L19 7.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>Applied</button><button type=\"button\" aria-pressed=\"true\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12.5l4.5 4.5L19 7.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>Apply by</button><button type=\"button\" aria-pressed=\"true\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12.5l4.5 4.5L19 7.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>Deadline</button><button type=\"button\" aria-pressed=\"true\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12.5l4.5 4.5L19 7.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>Notes</button><button type=\"button\" aria-pressed=\"false\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12.5l4.5 4.5L19 7.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>Date applied</button><button type=\"button\" aria-pressed=\"false\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12.5l4.5 4.5L19 7.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>Follow up</button><button type=\"button\" aria-pressed=\"false\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12.5l4.5 4.5L19 7.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>Materials</button><button type=\"button\" aria-pressed=\"false\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12.5l4.5 4.5L19 7.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>Days open</button><button type=\"button\" aria-pressed=\"false\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12.5l4.5 4.5L19 7.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>First seen</button></div>",
+      "css": ":host{--ground:#0a0f15;--ground-2:#10161e;--ground-3:#161e28;--ink:#eef1ec;--ink-2:#aab5c0;--ink-3:#7f8b97;--line:rgba(238,241,236,.11);--line-2:rgba(238,241,236,.2);--accent:#eef1ec;--ease:cubic-bezier(.16,1,.3,1);--ui:'Schibsted Grotesk',system-ui,sans-serif;--mono:'Fragment Mono',ui-monospace,monospace;--display:'Bricolage Grotesque',system-ui,sans-serif} .ds-panel{display:flex;flex-wrap:wrap;gap:8px;max-width:560px;padding:16px;background:var(--ground-2);border:1px solid var(--line-2);border-radius:8px;font-family:var(--ui)}.ds-panel button{display:inline-flex;align-items:center;height:34px;padding:0 13px;border-radius:999px;border:1px solid var(--line);background:none;color:var(--ink-2);font:400 14px/1 var(--ui);cursor:pointer;white-space:nowrap;transition:background .2s,color .2s,border-color .2s}.ds-panel button svg{width:0;height:14px;opacity:0;transform:scale(.6);transition:width .3s var(--ease),margin .3s var(--ease),opacity .2s,transform .3s var(--ease)}.ds-panel button:hover{color:var(--ink);border-color:var(--line-2)}.ds-panel button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}.ds-panel button[aria-pressed=true]{padding-left:10px;background:var(--ink);color:var(--ground);border-color:var(--ink)}.ds-panel button[aria-pressed=true] svg{width:14px;margin-right:7px;opacity:1;transform:none}"
+    },
+    {
+      "name": "Planner Timeline",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "One row per posting: major-hue start dot, line to the deadline (fading when none, dashed when closed), apply-by ring, applied dot, deadline tick, merged ring-with-tick, slash cut, one today rule, mono month ticks, a key.",
+      "html": "<div class=\"ds-tl\"><div class=\"ds-axis\"><span style=\"left:0%\">Sep</span><span style=\"left:40%\">Oct</span><span style=\"left:80%\">Nov</span><b style=\"left:46%\">Today</b></div><ol><li class=\"ds-today\" style=\"--p:.46\"></li><li><div class=\"ds-nm\"><a href=\"#\">Summer Analyst Program 2027</a><span>Example Capital</span></div><div class=\"ds-tr\"><span class=\"ds-ln ds-dash\" style=\"left:2%;width:24%\"></span><span class=\"ds-st\" style=\"left:2%;--c:#4fd1a1\"></span><span class=\"ds-cut\" style=\"left:26%\"></span></div></li><li><div class=\"ds-nm\"><a href=\"#\">Associate Product Manager, Intern</a><span>Duolingo</span></div><div class=\"ds-tr\"><span class=\"ds-ln\" style=\"left:43%;width:6%\"></span><span class=\"ds-st\" style=\"left:43%;--c:#e6d27e\"></span><span class=\"ds-ap\" style=\"left:46%\"></span><span class=\"ds-both\" style=\"left:49%\"></span></div></li><li><div class=\"ds-nm\"><a href=\"#\">Business Development Intern</a><span>Guidepoint</span></div><div class=\"ds-tr\"><span class=\"ds-ln\" style=\"left:43%;width:37%\"></span><span class=\"ds-st\" style=\"left:43%;--c:#e6d27e\"></span><span class=\"ds-by\" style=\"left:62%\"></span><span class=\"ds-end\" style=\"left:80%\"></span></div></li><li><div class=\"ds-nm\"><a href=\"#\">Internship - CNC Machine Park</a><span>1X</span></div><div class=\"ds-tr\"><span class=\"ds-ln ds-open\" style=\"left:43%;width:57%\"></span><span class=\"ds-st\" style=\"left:43%;--c:#f4a259\"></span><span class=\"ds-by\" style=\"left:60%\"></span></div></li></ol></div>",
+      "css": ":host{--ground:#0a0f15;--ground-2:#10161e;--ground-3:#161e28;--ink:#eef1ec;--ink-2:#aab5c0;--ink-3:#7f8b97;--line:rgba(238,241,236,.11);--line-2:rgba(238,241,236,.2);--accent:#eef1ec;--ease:cubic-bezier(.16,1,.3,1);--ui:'Schibsted Grotesk',system-ui,sans-serif;--mono:'Fragment Mono',ui-monospace,monospace;--display:'Bricolage Grotesque',system-ui,sans-serif} .ds-tl{--name:200px;position:relative;padding:32px 0 8px;background:var(--ground);color:var(--ink);font:400 15px/1.4 var(--ui)}.ds-axis{position:relative;height:18px;margin-left:var(--name);font:400 12px/1 var(--mono);color:var(--ink-3)}.ds-axis span{position:absolute;top:0;height:18px;padding-left:6px;border-left:1px solid var(--line)}.ds-axis b{position:absolute;top:-20px;transform:translateX(-50%);font-weight:400;color:var(--ink)}.ds-tl ol{position:relative;list-style:none;margin:12px 0 0;padding:0}.ds-tl li:not(.ds-today){display:grid;grid-template-columns:var(--name) 1fr;align-items:center;min-height:58px;border-bottom:1px solid var(--line)}.ds-today{position:absolute;top:0;bottom:0;width:1px;left:calc(var(--name) + (100% - var(--name)) * var(--p));background:var(--ink);opacity:.5}.ds-nm{min-width:0;padding:10px 18px 10px 0}.ds-nm a{display:block;font-weight:500;color:inherit;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ds-nm a:hover{text-decoration:underline}.ds-nm span{display:block;color:var(--ink-2);font-size:13px}.ds-tr{position:relative;height:58px}.ds-tr>span{position:absolute;top:50%}.ds-ln{height:2px;margin-top:-1px;background:var(--ink-3);transform-origin:left;animation:ds-draw .9s var(--ease) both}.ds-open{background:linear-gradient(90deg,var(--ink-3) 60%,transparent)}.ds-dash{height:0;background:none;border-top:2px dashed var(--ink-3)}.ds-st{width:9px;height:9px;margin:-4.5px 0 0 -4.5px;border-radius:50%;background:var(--c)}.ds-by{width:13px;height:13px;margin:-6.5px 0 0 -6.5px;border-radius:50%;border:2px solid var(--ink-2);background:var(--ground)}.ds-ap{width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;background:var(--ink)}.ds-end{width:2px;height:18px;margin:-9px 0 0 -1px;background:var(--ink)}.ds-both{width:13px;height:13px;margin:-6.5px 0 0 -6.5px;border-radius:50%;border:2px solid var(--ink);background:linear-gradient(var(--ink),var(--ink)) center/2px 100% no-repeat}.ds-cut{width:2px;height:18px;margin:-9px 0 0 -1px;background:var(--ink-3);transform:rotate(28deg)}@keyframes ds-draw{from{transform:scaleX(0)}}@media (prefers-reduced-motion:reduce){.ds-ln{animation:none}}"
     }
   ],
   "narrative": {
     "northStar": "The Night River",
-    "overview": "The postings themselves are the art. Every open posting is one point of light on a night ground, flowing with the rest of its major in one of thirteen streams; below the river the same data turns into a working browser. The world is dark, quiet and typographic: one warm off-white ink on a blue-black ground, cool greys for everything secondary, and colour only where it means a field of study.\n\nDensity is calm at the top and working-dense below. The first screen is a full-height canvas with a large headline anchored bottom-left; after it, the page is hairline rules, pill controls and a long list of rows with no cards. Motion is slow and exponential: sections sharpen out of a blur once as they arrive, list rows arrive in a short wave, and the river drifts continuously unless the visitor asks for reduced motion.\n\nThis system was recorded from the shipped build (site/index.html, site/style.css, site/app.js) on 2026-10-06. The North Star name is the documenter's, taken from the direction contract's thesis; the owner has not been asked to confirm it.",
+    "overview": "The postings themselves are the art. Every open posting is one point of light on a night ground, flowing with the rest of its major in one of thirteen streams; below the river the same data turns into a working browser. The world is dark, quiet and typographic: one warm off-white ink on a blue-black ground, cool greys for everything secondary, and colour only where it means a field of study.\n\nDensity is calm at the top and working-dense below. The first screen is a full-height canvas with a large headline anchored bottom-left; after it, the page is hairline rules, pill controls and a long list of rows with no cards. The planner page keeps the same world and turns those rows into a sheet the student edits: a hairline-ruled table of quiet inline fields, and a timeline that draws each posting as a line against one today rule. Motion is slow and exponential: sections sharpen out of a blur once as they arrive, list rows arrive in a short wave, and the river drifts continuously unless the visitor asks for reduced motion.\n\nThis system was recorded from the shipped build (site/index.html, site/style.css, site/app.js) on 2026-10-06. The North Star name is the documenter's, taken from the direction contract's thesis; the owner has not been asked to confirm it. The planner (site/planner.html, site/planner.js and the planner section of site/style.css) was recorded from its shipped build on the same day, after its finish review.",
     "keyCharacteristics": [
       "Blue-black night ground (three steps) with a single warm off-white ink; the accent is the ink, not a hue.",
       "Thirteen fixed major hues, used only as data: river stream, strip bar, row dot, chip dot.",
       "Bricolage Grotesque for display, Schibsted Grotesk for UI, Fragment Mono only for dates, deadlines, counts, codes and the river hint.",
       "Pill controls, hairline rules, no cards, no decorative imagery; the river is the only picture.",
+      "In the planner, native controls dressed as quiet inline fields that show a border only on hover and focus.",
       "One exponential ease-out curve for everything; blur-to-sharp reveals, once."
     ],
     "rules": [
@@ -539,17 +604,17 @@
       },
       {
         "name": "The Rare Mark Rule",
-        "body": "Within a row, ink replaces grey only for \"Posted today\" and for \"Apply by\" dates within 14 days. Yesterday and older stay Slate Tertiary, so the mark stays rare enough to scan for.",
+        "body": "Within a row, ink replaces grey only for \"Posted today\" and for \"Apply by\" dates within 14 days. Yesterday and older stay Slate Tertiary, so the mark stays rare enough to scan for. In the planner, a deadline takes ink within 14 days (as on the browse page, and not once it has passed), and an apply-by date within 7 days or overdue, because a suggested apply-by sits at most 14 days after first seen and a 14-day window would mark nearly every one. Neither marks a closed posting or one no longer listed, and an apply-by date stops marking once the student has applied.",
         "section": "colors"
       },
       {
         "name": "The Mono Is For Facts Rule",
-        "body": "Fragment Mono only sets dates, deadlines, counts, codes and the river hint. Field names, drawer labels and prose are never mono (mono was taken off field names and drawer labels in finish review round 1). \"Funded programme\" in the date column switches back to the UI face because it is not a date.",
+        "body": "Fragment Mono only sets dates, deadlines, counts, codes and the river hint. Field names, drawer labels and prose are never mono (mono was taken off field names and drawer labels in finish review round 1). \"Funded programme\" in the date column switches back to the UI face because it is not a date. In the planner a date reads \"Oct 18\" in mono; \"suggested\" after a suggested apply-by date, \"Add date\", \"None published\", \"Open\" and \"No longer listed\" are set in the UI face because they are not dates.",
         "section": "typography"
       },
       {
         "name": "The Counted Numbers Rule",
-        "body": "Every number that a visitor compares (lede counts, summary, chip and strip counts, source facts) is set with tabular numerals.",
+        "body": "Every number that a visitor compares (lede counts, summary, chip and strip counts, source facts, the planner counts line) is set with tabular numerals.",
         "section": "typography"
       },
       {
@@ -565,14 +630,15 @@
       "Do use the one ease, cubic-bezier(.16, 1, .3, 1), for every transition and arrival.",
       "Do reveal a section once, rising 26px from an 8px blur over 0.9s; list rows rise 14px from a 6px blur over 0.7s in a 40ms wave counted from the first row on screen.",
       "Do keep everything visible without script and show everything at once, with the river frozen, under prefers-reduced-motion.",
-      "Do separate content with hairline rules and space, and make every control a pill or a circle."
+      "Do separate content with hairline rules and space, and make every control a pill or a circle; the planner's inline cell editors are the one exception, quiet 8px fields that show a border only on hover and focus.",
+      "Do show a planner date in mono as \"Oct 18\" with the native picker laid over it, and say \"suggested\" in the UI face when the date is ours rather than the student's."
     ],
     "donts": [
       "Don't colour a button, link, heading, border or mark with a major hue.",
       "Don't put content in cards or bordered boxes; rows are ruled list items.",
       "Don't set field names, labels or prose in mono.",
       "Don't add shadows to rows, chips or controls; the drawer is the only lifted surface.",
-      "Don't mark more than today's postings and deadlines within 14 days in ink; a mark on everything marks nothing."
+      "Don't mark more than today's postings, deadlines within 14 days and planner apply-by dates within 7 days in ink; a mark on everything marks nothing."
     ]
   }
 }

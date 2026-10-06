@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Planner · Internship &amp; Research Finder</title>
+<meta name="description" content="Plan and track the internships you starred: status, apply-by dates, deadlines, materials and notes, kept in this browser.">
+<meta name="theme-color" content="#0a0f15">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230a0f15'/%3E%3Cpath d='M5 9c2.3-1.5 4.7 1.5 7 0s4.7-1.5 7 0M5 12.5c2.3-1.5 4.7 1.5 7 0s4.7-1.5 7 0M5 16c2.3-1.5 4.7 1.5 7 0s4.7-1.5 7 0' fill='none' stroke='%23eef1ec' stroke-width='1.9' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Schibsted+Grotesk:wght@400;500;600&family=Fragment+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="planner-page">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v12M6 11l6 6 6-6M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-cols" viewBox="0 0 24 24"><path d="M4 5h16v14H4zM9.5 5v14M15 5v14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-sort" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<a class="skip" href="#sheet">Skip to your planner</a>
+
+<header class="bar">
+  <a class="mark" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8c3-2 6 2 9 0s6-2 9 0M3 12c3-2 6 2 9 0s6-2 9 0M3 16c3-2 6 2 9 0s6-2 9 0"/></svg>Internship &amp; Research Finder</a>
+  <nav class="nav" aria-label="Sections"><a href="index.html#browse">Browse</a><a href="index.html#how">How it works</a><a href="planner.html" aria-current="page" data-saved-link>Planner <span class="count" data-saved-count hidden></span></a></nav>
+</header>
+
+<main class="plan">
+  <h1>Your planner.</h1>
+  <p class="plan-sum" data-sum aria-live="polite">Loading your postings…</p>
+
+  <div class="plan-tools" data-tools hidden>
+    <div class="seg" role="group" aria-label="View" data-view>
+      <button type="button" data-v="table" aria-pressed="true">Table</button><button type="button" data-v="timeline" aria-pressed="false">Timeline</button>
+    </div>
+    <details class="cols" data-cols>
+      <summary class="btn ghost"><svg aria-hidden="true"><use href="#i-cols"/></svg>Columns</summary>
+      <div class="cols-panel" role="group" aria-label="Columns to show" data-col-picks></div>
+    </details>
+    <button type="button" class="btn ghost" data-csv><svg aria-hidden="true"><use href="#i-down"/></svg>Export CSV</button>
+  </div>
+
+  <section id="sheet" class="sheet-wrap" data-sheet-wrap aria-label="Planner table" tabindex="-1">
+    <div class="sheet-scroll" data-scroll><table class="sheet" data-sheet></table></div>
+  </section>
+  <section class="timeline" data-timeline aria-label="Planner timeline" hidden></section>
+  <div class="plan-empty" data-empty hidden></div>
+  <p class="plan-note">Your planner is kept in this browser only. Clearing this site's data removes it.</p>
+</main>
+
+<footer class="foot">
+  <span data-updated></span>
+  <span>Data is public and read directly from each source. <a href="https://github.com/patharearya/internship-tracker">Source on GitHub</a></span>
+</footer>
+
+<script src="planner.js"></script>
+</body>
+</html>

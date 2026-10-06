@@ -28,16 +28,26 @@ const daysAgo = d => Math.floor(Date.now() / DAY) - Math.floor(d.getTime() / DAY
 const short = d => d.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const state = { major: "", q: "", where: "", arr: "", level: "", saved: false, shown: PAGE };
+const state = { major: "", q: "", where: "", arr: "", level: "", shown: PAGE };
 let all = [], majors = [], view = [];
 
-// ---------- saved list: this browser only ----------
+// ---------- stars: this browser only; the planner page reads them ----------
+// A star also keeps a copy of the posting (planner.js snapshot()), so the planner still shows it after the
+// posting leaves postings.json, 14 days after it closes. Unstarring here keeps the student's notes; only the planner deletes.
 const saved = (() => {
   let keys = new Set();
   try { keys = new Set(JSON.parse(localStorage.getItem("irf-saved") || "[]")); } catch {}
   const write = () => { try { localStorage.setItem("irf-saved", JSON.stringify([...keys])); } catch {} };
-  return { has: k => keys.has(k), toggle(k) { keys.has(k) ? keys.delete(k) : keys.add(k); write(); }, get size() { return keys.size; }, get keys() { return keys; } };
+  const keep = e => { try {
+    const plan = JSON.parse(localStorage.getItem("irf-planner") || "{}"); plan.rows ??= {};
+    (plan.rows[e.key] ??= {}).snap = { title: e.title, org: e.org, url: e.url, deadline: iso(e.deadline), first: iso(e.first), posted: iso(e.posted),
+      major: e.major, locs: e.locs, states: e.states, remote: !!e.remote, arr: e.arr, level: e.level };
+    localStorage.setItem("irf-planner", JSON.stringify(plan));
+  } catch {} };
+  return { has: k => keys.has(k), get keys() { return keys; }, toggle(e) { const on = !keys.has(e.key); on ? keys.add(e.key) : keys.delete(e.key); write(); if (on) keep(e); },
+    get size() { return keys.size; } };
 })();
+const iso = d => d ? d.toISOString().slice(0, 10) : "";
 
 // ---------- load ----------
 fetch("data/postings.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(entries => {
@@ -100,7 +110,7 @@ function fields() {
   }));
 }
 function pick(major, scroll) {
-  state.major = major; state.saved = false; state.shown = PAGE;
+  state.major = major; state.shown = PAGE;
   document.querySelectorAll("[data-major]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.major === major)));
   $("[data-strip]").classList.toggle("has-pick", !!major);
   render(true);
@@ -123,12 +133,10 @@ document.querySelectorAll("[data-seg]").forEach(seg => seg.addEventListener("cli
   state[seg.dataset.seg] = b.dataset.v; state.shown = PAGE; render(true);
 }));
 $("[data-more]").addEventListener("click", () => { state.shown += PAGE; render(false, true); });
-document.querySelector("[data-saved-link]").addEventListener("click", () => { state.saved = true; state.shown = PAGE; render(true); });
 
 // "not stated" is shown under every arrangement and level, since the posting may well fit
 function match(e) {
-  if (state.saved && !saved.has(e.key)) return false;
-  if (state.major && !state.saved && e.major !== state.major) return false;
+  if (state.major && e.major !== state.major) return false;
   if (state.where === "remote" ? !(e.remote || e.arr === "remote") : state.where && !e.states.includes(state.where)) return false;
   if (state.arr && e.arr !== state.arr && e.arr !== "not stated" && !(state.arr === "remote" && e.remote)) return false;
   if (state.level && e.level !== state.level && e.level !== "both" && e.level !== "unknown") return false;
@@ -183,27 +191,16 @@ function summary(n) {
   const h = $("[data-summary]"), note = $("[data-note]");
   const filtered = state.q || state.where || state.arr || state.level;
   note.hidden = true;
-  if (state.saved) {
-    h.textContent = n ? `${fmt(n)} saved posting${n === 1 ? "" : "s"}` : "Nothing saved yet";
-    const gone = [...saved.keys].filter(k => !all.some(e => e.key === k)).length;
-    note.innerHTML = (n ? "" : "Press the star on any posting to keep it here. Stars are kept in this browser only. ") +
-      (gone ? `${fmt(gone)} saved posting${gone === 1 ? " is" : "s are"} no longer listed, so the employer has closed ${gone === 1 ? "it" : "them"}. ` : "") +
-      `<a href="#browse" data-all>Back to all postings</a>`;
+  h.textContent = `${fmt(n)} open ${state.major ? "in " + state.major : "across every field"}${filtered ? " matching your filters" : ""}`;
+  const m = majors.find(x => x.name === state.major);
+  if (state.major === "Other") {
+    note.textContent = "These titles name no field we can sort by, like \"2027 Summer Intern\". Open one to see what the work involves.";
     note.hidden = false;
-    note.querySelector("[data-all]").addEventListener("click", e => { e.preventDefault(); pick(state.major); });
-  } else {
-    h.textContent = `${fmt(n)} open ${state.major ? "in " + state.major : "across every field"}${filtered ? " matching your filters" : ""}`;
-    const m = majors.find(x => x.name === state.major);
-    if (state.major === "Other") {
-      note.textContent = "These titles name no field we can sort by, like \"2027 Summer Intern\". Open one to see what the work involves.";
-      note.hidden = false;
-    } else if (m && m.n < THIN) {
-      note.textContent = `Only ${fmt(m.n)} open right now. This field is thin in what we can read: employers' own boards lean toward engineering and business.`;
-      note.hidden = false;
-    }
+  } else if (m && m.n < THIN) {
+    note.textContent = `Only ${fmt(m.n)} open right now. This field is thin in what we can read: employers' own boards lean toward engineering and business.`;
+    note.hidden = false;
   }
   if (!n) {
-    if (state.saved) { $("[data-rows]").innerHTML = ""; return; }
     const q = $("[data-q]").value.trim();
     $("[data-rows]").innerHTML = `<li class="empty"><b>${q ? `Nothing matches "${esc(q)}"` : "Nothing matches all of these filters"}${state.major ? " in " + esc(state.major) : ""}.</b> ${q ? "Check the spelling or try a shorter word" : "Try another state, or set arrangement or level back to Any"}.<br><button type="button" class="btn ghost" data-clear>Clear filters</button></li>`;
     $("[data-clear]").addEventListener("click", clearFilters);
@@ -242,7 +239,7 @@ function row(g, i) {
       <span class="kind"><i></i>${esc(e.major)}${e.type !== "internship" ? " · " + esc(TYPE[e.type] || e.type) : ""}</span></span>
     <span class="where">${esc(where(g))}${g.length > 1 ? ` <span class="due">(${g.length} openings)</span>` : ""}</span>
     <span class="due${soon ? " soon" : ""}">${esc(d)}</span>
-    <button type="button" class="star" data-star aria-pressed="${on}" aria-label="${on ? "Remove from saved" : "Save"}: ${esc(e.title)}"><svg aria-hidden="true"><use href="#i-star"/></svg></button>
+    <button type="button" class="star" data-star aria-pressed="${on}" aria-label="${on ? "Remove from your planner" : "Add to your planner"}: ${esc(e.title)}"><svg aria-hidden="true"><use href="#i-star"/></svg></button>
   </li>`;
 }
 
@@ -255,17 +252,20 @@ $("[data-rows]").addEventListener("click", ev => {
 });
 function star(g) {
   const on = g.some(x => saved.has(x.key));
-  g.forEach(x => { if (saved.has(x.key) === on) saved.toggle(x.key); });
+  g.forEach(x => { if (saved.has(x.key) === on) saved.toggle(x); });
   savedCount();
   document.querySelectorAll(`.row[data-key="${CSS.escape(g[0].key)}"] [data-star]`).forEach(b => {
-    b.setAttribute("aria-pressed", String(!on)); b.setAttribute("aria-label", `${!on ? "Remove from saved" : "Save"}: ${g[0].title}`);
+    b.setAttribute("aria-pressed", String(!on)); b.setAttribute("aria-label", `${!on ? "Remove from your planner" : "Add to your planner"}: ${g[0].title}`);
   });
   const ds = $("[data-d-star]");
-  if (current === g) { ds.setAttribute("aria-pressed", String(!on)); ds.querySelector("span").textContent = !on ? "Saved" : "Save"; }
-  if (state.saved) render();
+  if (current === g) { ds.setAttribute("aria-pressed", String(!on)); ds.querySelector("span").textContent = !on ? "In your planner" : "Add to planner"; }
 }
+// counted as the planner counts its rows: one per employer + title, however many places it is listed in
 function savedCount() {
-  const c = $("[data-saved-count]"); c.hidden = !saved.size; c.textContent = saved.size;
+  const byKey = new Map(all.map(e => [e.key, e]));
+  let kept = {}; try { kept = JSON.parse(localStorage.getItem("irf-planner") || "{}").rows || {}; } catch {}
+  const n = new Set([...saved.keys].map(k => { const e = byKey.get(k) || kept[k]?.snap; return e ? e.org + "\u0000" + e.title : k; })).size;
+  const c = $("[data-saved-count]"); c.hidden = !n; c.textContent = n;
 }
 
 // ---------- posting detail ----------
@@ -296,7 +296,7 @@ function open(g) {
   const apply = $("[data-d-apply]"); apply.href = e.url;
   apply.childNodes[0].textContent = e.research ? "Open the programme's page " : "Apply on the employer's site ";
   const on = g.some(x => saved.has(x.key)), ds = $("[data-d-star]");
-  ds.setAttribute("aria-pressed", String(on)); ds.querySelector("span").textContent = on ? "Saved" : "Save";
+  ds.setAttribute("aria-pressed", String(on)); ds.querySelector("span").textContent = on ? "In your planner" : "Add to planner";
   const desc = $("[data-d-desc]");
   desc.innerHTML = `<p class="muted">Loading the description…</p>`;
   description(e.key).then(t => {

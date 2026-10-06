@@ -121,30 +121,23 @@ and how they were settled: [devlog.md](devlog.md).
   James 2). An anomaly now records its count, so a drop that holds is
   believed on the next run; Raymond James's 14 gone postings close 3 runs
   later. 39 tests.
+- **Planner** (`site/planner.html`, `planner.js`; Q26): the starred postings
+  as a sheet, one row per employer + title. Columns chosen by tick pills and
+  remembered (default: Posting, Status, Applied, Apply by, Deadline, Notes);
+  suggested apply-by (a week before the deadline, else two weeks after first
+  seen, marked "suggested"); ticking Applied stamps the date and moves Status,
+  unticking restores both; closed / no longer listed from our own data; sort,
+  CSV, Timeline view against today. Data in `localStorage` ("irf-saved",
+  "irf-planner"); a star keeps a copy of the posting so it survives leaving
+  postings.json; unstarring on the browse page keeps the notes. Top bar
+  "Saved" became "Planner". Finish review: fix, fix, then ship for the scored
+  fixes; DESIGN.md updated by the documenter. Checked in headless Chrome: 16
+  flow checks and 8 fix checks, each written to fail on the old code, phone
+  width 390. `pages.yml` now publishes planner.html and planner.js.
 
 ## Next session, in order
 
-1. **Planner and tracker page, browser only (owner, 2026-10-06; Q26).** A
-   spreadsheet-like page built from the saved (starred) postings, to plan
-   and track applying. No login yet: kept in browser storage like the stars.
-   - Every column is optional: the user ticks which ones appear on their
-     planner (checkboxes), and the choice is remembered.
-   - Columns to offer: status (saved / preparing / applied / interviewing /
-     offer / rejected), applied checkmark, date applied, apply-by date
-     (before the published deadline; with none, within N days of first
-     seen), deadline, days open, first seen, closed warning ("closed Oct 4",
-     from our own records), materials checklist (resume, cover letter,
-     transcript, references, portfolio), follow-up date, notes, contacts,
-     field, location, arrangement, level.
-   - Timeline view: each planned posting from first seen to apply-by to
-     deadline.
-   - Sortable columns, cells edited in place, CSV export.
-   - A saved posting keeps a copy of its title, employer, link and deadline,
-     because closed postings leave `postings.json` after 14 days.
-   - No reminders for now (owner).
-   - Built with Impeccable inside the existing world (DESIGN.md): new surface
-     brief, finish review, documenter.
-2. **Google sign-in, data in the user's own Google Drive (B, after 1).**
+1. **Google sign-in, data in the user's own Google Drive (B; the planner is done).**
    Sign in with Google; the planner is kept in the hidden app-data folder of
    the user's Drive, so there is still no server and no student data held by
    us. Needs: a Google Cloud project and OAuth client (owner's Google
