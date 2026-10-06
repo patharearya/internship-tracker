@@ -234,6 +234,12 @@
   "from" : "simplify"
 }, {
   "system" : "ashby",
+  "key" : "bobyard",
+  "company" : "Bobyard",
+  "api" : "https://api.ashbyhq.com/posting-api/job-board/bobyard",
+  "from" : "simplify"
+}, {
+  "system" : "ashby",
   "key" : "bracket-bot",
   "company" : "Bracket Bot",
   "api" : "https://api.ashbyhq.com/posting-api/job-board/bracket-bot",
@@ -2412,6 +2418,12 @@
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
+  "key" : "asteraearlycareer2027",
+  "company" : "Astera Labs",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/asteraearlycareer2027/jobs?content=true",
+  "from" : "simplify"
+}, {
+  "system" : "greenhouse",
   "key" : "asteralabs",
   "company" : "Astera Labs",
   "api" : "https://boards-api.greenhouse.io/v1/boards/asteralabs/jobs?content=true",
@@ -2433,6 +2445,12 @@
   "key" : "atlassand",
   "company" : "Atlas Energy Solutions",
   "api" : "https://boards-api.greenhouse.io/v1/boards/atlassand/jobs?content=true",
+  "from" : "simplify"
+}, {
+  "system" : "greenhouse",
+  "key" : "atoms",
+  "company" : "Atoms",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/atoms/jobs?content=true",
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
@@ -3210,6 +3228,12 @@
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
+  "key" : "foundenergy",
+  "company" : "Found Energy",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/foundenergy/jobs?content=true",
+  "from" : "simplify"
+}, {
+  "system" : "greenhouse",
   "key" : "fourhands",
   "company" : "Four Hands",
   "api" : "https://boards-api.greenhouse.io/v1/boards/fourhands/jobs?content=true",
@@ -3522,6 +3546,12 @@
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
+  "key" : "iex-interns",
+  "company" : "IEX",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/iex-interns/jobs?content=true",
+  "from" : "simplify"
+}, {
+  "system" : "greenhouse",
   "key" : "iherb",
   "company" : "iHerb",
   "api" : "https://boards-api.greenhouse.io/v1/boards/iherb/jobs?content=true",
@@ -3672,6 +3702,12 @@
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
+  "key" : "judihealth",
+  "company" : "Judi Health",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/judihealth/jobs?content=true",
+  "from" : "simplify"
+}, {
+  "system" : "greenhouse",
   "key" : "jumio",
   "company" : "Jumio",
   "api" : "https://boards-api.greenhouse.io/v1/boards/jumio/jobs?content=true",
@@ -3699,7 +3735,7 @@
   "key" : "khanacademy",
   "company" : "Khan Academy",
   "api" : "https://boards-api.greenhouse.io/v1/boards/khanacademy/jobs?content=true",
-  "from" : "hand"
+  "from" : "simplify"
 }, {
   "system" : "greenhouse",
   "key" : "kikoff",
@@ -4602,6 +4638,12 @@
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
+  "key" : "solutions",
+  "company" : "Cadence Solutions",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/solutions/jobs?content=true",
+  "from" : "simplify"
+}, {
+  "system" : "greenhouse",
   "key" : "sonatus",
   "company" : "Sonatus",
   "api" : "https://boards-api.greenhouse.io/v1/boards/sonatus/jobs?content=true",
@@ -4659,6 +4701,12 @@
   "key" : "spycloud",
   "company" : "SpyCloud",
   "api" : "https://boards-api.greenhouse.io/v1/boards/spycloud/jobs?content=true",
+  "from" : "simplify"
+}, {
+  "system" : "greenhouse",
+  "key" : "stackadapt-confidential",
+  "company" : "StackAdapt",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/stackadapt-confidential/jobs?content=true",
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
@@ -6732,6 +6780,12 @@
   "from" : "simplify"
 }, {
   "system" : "workday",
+  "key" : "associatedbank.wd1.myworkdayjobs.com/external_careers",
+  "company" : "Associated Bank",
+  "api" : "https://associatedbank.wd1.myworkdayjobs.com/wday/cxs/associatedbank/external_careers",
+  "from" : "simplify"
+}, {
+  "system" : "workday",
   "key" : "assurant.wd1.myworkdayjobs.com/assurant_careers",
   "company" : "Assurant",
   "api" : "https://assurant.wd1.myworkdayjobs.com/wday/cxs/assurant/Assurant_Careers",
@@ -7071,12 +7125,6 @@
   "key" : "bcbsla.wd1.myworkdayjobs.com/generation_blue",
   "company" : "Louisiana Blue",
   "api" : "https://bcbsla.wd1.myworkdayjobs.com/wday/cxs/bcbsla/Generation_Blue",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
-  "key" : "bcbsnc.wd5.myworkdayjobs.com/bcbsnc",
-  "company" : "Blue Cross and Blue Shield of North Carolina",
-  "api" : "https://bcbsnc.wd5.myworkdayjobs.com/wday/cxs/bcbsnc/bcbsnc",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -9390,6 +9438,12 @@
   "from" : "simplify"
 }, {
   "system" : "workday",
+  "key" : "hpe.wd5.myworkdayjobs.com/jobsathpe",
+  "company" : "Hewlett Packard Enterprise",
+  "api" : "https://hpe.wd5.myworkdayjobs.com/wday/cxs/hpe/jobsathpe",
+  "from" : "simplify"
+}, {
+  "system" : "workday",
   "key" : "hq.wd12.myworkdayjobs.com/securian_external",
   "company" : "Securian Financial Group",
   "api" : "https://hq.wd12.myworkdayjobs.com/wday/cxs/hq/Securian_External",
@@ -10254,6 +10308,12 @@
   "from" : "simplify"
 }, {
   "system" : "workday",
+  "key" : "medtronic.wd1.myworkdayjobs.com/medtroniccareers",
+  "company" : "Medtronic",
+  "api" : "https://medtronic.wd1.myworkdayjobs.com/wday/cxs/medtronic/MedtronicCareers",
+  "from" : "simplify"
+}, {
+  "system" : "workday",
   "key" : "medtronic.wd1.myworkdayjobs.com/redeploymentmedtroniccareers",
   "company" : "Medtronic",
   "api" : "https://medtronic.wd1.myworkdayjobs.com/wday/cxs/medtronic/redeploymentmedtroniccareers",
@@ -10317,6 +10377,12 @@
   "key" : "micron.wd1.myworkdayjobs.com/external",
   "company" : "Micron Technology",
   "api" : "https://micron.wd1.myworkdayjobs.com/wday/cxs/micron/External",
+  "from" : "simplify"
+}, {
+  "system" : "workday",
+  "key" : "midlandsb.wd1.myworkdayjobs.com/msbcareers",
+  "company" : "Midland States Bank",
+  "api" : "https://midlandsb.wd1.myworkdayjobs.com/wday/cxs/midlandsb/msbcareers",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -12873,6 +12939,12 @@
   "key" : "visa.wd5.myworkdayjobs.com/visa",
   "company" : "Visa",
   "api" : "https://visa.wd5.myworkdayjobs.com/wday/cxs/visa/Visa",
+  "from" : "simplify"
+}, {
+  "system" : "workday",
+  "key" : "visa.wd5.myworkdayjobs.com/visa_early_careers",
+  "company" : "Visa",
+  "api" : "https://visa.wd5.myworkdayjobs.com/wday/cxs/visa/Visa_Early_Careers",
   "from" : "simplify"
 }, {
   "system" : "workday",
