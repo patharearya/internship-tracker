@@ -2,3 +2,7 @@ target/
 .env
 *.db
 data/rejections.tsv
+site/data
+.impeccable/review/
+.impeccable/questions/
+.impeccable/hook.cache.json

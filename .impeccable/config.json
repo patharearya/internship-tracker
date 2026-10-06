@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "site/index.html"
+        ],
+        "createdAt": "2026-10-06T04:42:55.106Z",
+        "reason": "Claude, verified against desktop.png: the detector reads static HTML and cannot resolve clamp(); h1 renders at 96px and h2 at 56px over 17px body"
+      }
+    ]
+  }
+}

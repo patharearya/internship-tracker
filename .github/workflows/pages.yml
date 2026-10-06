@@ -1,0 +1,45 @@
+name: pages
+
+# Publishes only the page (site/) and the data it reads; docs/ and the rest of the repo stay out of the site.
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", ".github/workflows/pages.yml"]
+  # data commits are pushed by the update workflow's token, which never triggers a push workflow,
+  # so a finished update run triggers the deploy instead
+  workflow_run:
+    workflows: [update]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+      - name: Assemble the site
+        run: |
+          mkdir -p _site/data
+          cp site/index.html site/style.css site/app.js _site/
+          cp -r data/postings.json data/report.json data/descriptions _site/data/
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v5

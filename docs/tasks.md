@@ -13,12 +13,13 @@ and how they were settled: [devlog.md](devlog.md).
   GitHub Actions workflow.
 - **Live:** hourly schedule, of which GitHub fires only some; updates at least
   daily are enough (Q24). Workday runs when its last run started 3 h ago
-  (`workdayStarted` in `state.json`), about 37 min. Every run relabels every
-  open posting with the current rules.
-- **State after the 2026-10-05 02:47Z run (Workday) and 02:51Z run
-  (discovery):** 9,056 open postings; 2,193 boards (15 hand-added); Other
-  1,197 (13%); 411 without a state; level both 2,538 / undergrad 3,760 /
-  grad 587 / unknown 2,171; Education 42, Social Sciences 39. 34 tests.
+  (`workdayStarted` in `state.json`), about 62 min since the paging fix. Every
+  run relabels every open posting with the current rules.
+- **Day 3, the page:** built in `site/` (not yet live, see next session).
+- **State after the 2026-10-06 03:50Z run (Workday, first with the paging
+  fix):** 10,963 open postings (Workday 6,337 -> 7,894); Other 1,451 (13%);
+  404 without a state; Education 50, Social Sciences 46; Workday `lastCount`
+  0 on 19 boards (was 485). 36 tests.
 
 ## Done on 2026-10-05 (all checked on real runs)
 
@@ -72,24 +73,43 @@ and how they were settled: [devlog.md](devlog.md).
   a whole location segment, the first in each part. Replay: no state
   297 -> 266; every change checked by hand ("Fort Collins - Lincoln Campus"
   is CO only).
+- Bangladesh / Dhaka rejected as outside the US (one open posting).
+- Other is not sorted by a model reading descriptions (owner: finish fast).
+- First Workday run with the paging fix (03:50Z): 62 min of 120, +1,541 open,
+  `lastCount` 0 on 19 boards, 2 sudden-drop anomalies (see below), 12 boards
+  at the 10-page cap (see below).
+- **The page** (`site/index.html`, `style.css`, `app.js`; plain HTML/CSS/JS):
+  first screen is a river of one point per open posting in 13 streams by
+  field (owner chose it over a glow and a starlight version); field strip and
+  chips; filters (search, state or remote, arrangement, level) applied live;
+  list grouped by employer + title, 50 at a time, rows arrive on scroll;
+  detail drawer with the description from its shard; saved list in the
+  browser; "How it works" with real counts. Built with the Impeccable design
+  plugin: product record `PRODUCT.md`, direction in
+  `.impeccable/surfaces/site-index-html.md`. Finish review round 1: 8 fixes,
+  6 resolved, 1 partial, 2 regressions; round 2 fixes applied (fresh = today
+  only, rows visible by default, thin note above the listings line), not yet
+  scored. `.github/workflows/pages.yml` publishes `site/` + `data/` only.
+  Locally: `site/data` is a junction to `data/` (gitignored); serve `site/`
+  with `python -m http.server`.
 
 ## Next session, in order
 
-1. **Check the first Workday run with the paging fix:** run time (was ~37
-   min, timeout 120), open postings gained, any board newly at
-   `MAX_WORKDAY_PAGES`, no sudden-drop anomalies, `lastCount` 0 count.
-2. **Day 3: the page** (owner: next, finish fast; hosting and size as
-   recommended below). Postings grouped by major,
-   filters (state / remote, arrangement, level), posting detail, saved list
-   (browser storage), coverage sentence. Must not promise "hourly" (Q24).
-   Decide first:
-   - Pages source: recommended, deploy only the page and data through
-     Actions, so `/docs` stays private.
-   - Size: `postings.json` is 11 MB (0.5 MB gzipped). Descriptions are in
-     `data/descriptions/{n}.json`, 64 files; load one when a posting is
-     opened, `n` = Java `String.hashCode` of the key, non-negative mod 64
-     (formula in `Main.shard`, pinned by `ShardTest`).
-3. **Thin majors, January:** recheck Education and Social Sciences when
+1. **Go live:** switch GitHub Pages on with source "GitHub Actions"
+   (Settings > Pages, or `gh api -X POST repos/patharearya/internship-tracker/pages
+   -f build_type=workflow`), then run the `pages` workflow. Until then every
+   `pages` run fails at deploy. Site: https://patharearya.github.io/internship-tracker/
+2. **Finish the page:** send the round-2 fixes to the finish reviewer for the
+   verdict; then the Impeccable documenter writes `DESIGN.md` (the run is not
+   finished without it). Unverified so far: clicking a stream selects its
+   field, the picked field staying lit in the river.
+3. **Workday boards at the 10-page cap** (12: CVS Health 4,543 "intern" hits,
+   Walmart and Hitachi 2,000, Stryker, Oshkosh, P&G, two Disney sites, ASML,
+   HNTB, Clarios, Marvell): internships past page 10 can be missed. Use the
+   `jobFamilyGroup` / time-type facets on those tenants rather than more pages.
+4. **Two sudden-drop anomalies** on 2026-10-06 03:50Z: `ashby:nory-co` 24 -> 0
+   and `raymondjames.../raymondjamesearlycareers` 17 -> 2. Check whether real.
+5. **Thin majors, January:** recheck Education and Social Sciences when
    summer internships in those fields are posted (Pew CenterInternships is
    the seasonal one). More Workday tenants can be found by probing hosts for
    "not found: Job_Posting_Site_ID" (devlog).

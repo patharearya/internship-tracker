@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Internship &amp; Research Finder</title>
+<meta name="description" content="Internships and funded research programmes for US college students, read straight from employers' own job boards, USAJOBS, NSF and NIH, grouped by major.">
+<meta name="theme-color" content="#0a0f15">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f4a259' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M3 8c3-2 6 2 9 0s6-2 9 0M3 12c3-2 6 2 9 0s6-2 9 0M3 16c3-2 6 2 9 0s6-2 9 0'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Schibsted+Grotesk:wght@400;500;600&family=Fragment+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+</svg>
+
+<a class="skip" href="#browse">Skip to the internships</a>
+
+<header class="hero">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="label" id="label" aria-hidden="true"></div>
+  <div class="bar">
+    <a class="mark" href="#top" id="top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8c3-2 6 2 9 0s6-2 9 0M3 12c3-2 6 2 9 0s6-2 9 0M3 16c3-2 6 2 9 0s6-2 9 0"/></svg>Internship &amp; Research Finder</a>
+    <nav class="nav" aria-label="Sections"><a href="#browse">Browse</a><a href="#how">How it works</a><a href="#browse" data-saved-link>Saved <span class="count" data-saved-count hidden></span></a></nav>
+  </div>
+  <div class="lede">
+    <h1>Internships in your field, straight from the source.</h1>
+    <p data-lede>Internships and research programmes from employers' own job boards, USAJOBS, NSF and NIH, checked several times a day.</p>
+    <div class="actions">
+      <a class="btn primary" href="#browse">Choose your major <svg aria-hidden="true"><use href="#i-arrow-down"/></svg></a>
+      <a class="btn ghost" href="#browse" data-newest>See what's new</a>
+    </div>
+  </div>
+  <p class="hint">Every point is one open posting, flowing with the rest of its field. Hover a stream to see which; click it to browse.</p>
+</header>
+
+<main id="browse">
+  <section class="fields" aria-labelledby="fields-h">
+    <h2 id="fields-h" class="reveal">Pick a field.</h2>
+    <p class="reveal sub">Each bar is as wide as what's open in it right now.</p>
+    <div class="strip reveal" data-strip role="group" aria-label="Fields by number of open postings"></div>
+    <div class="chips" data-chips role="group" aria-label="Fields"></div>
+  </section>
+
+  <section class="list" aria-labelledby="list-h">
+    <div class="controls" data-controls>
+      <label class="search"><svg aria-hidden="true"><use href="#i-search"/></svg><span class="sr">Search titles and employers</span><input type="search" placeholder="Search titles and employers" data-q autocomplete="off"></label>
+      <label class="select"><span class="sr">Where</span>
+        <select data-where><option value="">Anywhere in the US</option><option value="remote">Remote</option></select>
+      </label>
+      <div class="seg" role="group" aria-label="Arrangement" data-seg="arr">
+        <button type="button" data-v="" aria-pressed="true">Any</button><button type="button" data-v="in-person" aria-pressed="false">In person</button><button type="button" data-v="hybrid" aria-pressed="false">Hybrid</button><button type="button" data-v="remote" aria-pressed="false">Remote</button>
+      </div>
+      <div class="seg" role="group" aria-label="Level" data-seg="level">
+        <button type="button" data-v="" aria-pressed="true">Any level</button><button type="button" data-v="undergrad" aria-pressed="false">Undergrad</button><button type="button" data-v="grad" aria-pressed="false">Grad</button>
+      </div>
+    </div>
+    <div class="summary">
+      <h2 id="list-h" data-summary aria-live="polite">Loading postings…</h2>
+      <p class="note" data-note hidden></p>
+      <p class="grouped" data-grouped hidden></p>
+    </div>
+    <ul class="rows" data-rows></ul>
+    <div class="more"><button type="button" class="btn ghost" data-more hidden>Show more</button></div>
+  </section>
+
+  <section class="how" id="how" aria-labelledby="how-h">
+    <h2 id="how-h" class="reveal">How it works</h2>
+    <div class="how-grid">
+      <p class="big reveal" data-coverage>Postings come from employers' public job boards, federal jobs and funded research programmes. It is not every internship.</p>
+      <dl class="facts reveal" data-sources></dl>
+    </div>
+    <div class="how-notes">
+      <p class="reveal">Every posting links to the employer's own page, and you apply there. Nothing on this site asks you to sign up or enter anything; stars are kept in this browser only.</p>
+      <p class="reveal">A posting counts as closed once it has been missing from three checks in a row. Fields are sorted from each title by keyword, so a few land under Other when the title names no field.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span data-updated></span>
+  <span>Data is public and read directly from each source. <a href="https://github.com/patharearya/internship-tracker">Source on GitHub</a></span>
+</footer>
+
+<aside class="drawer" data-drawer aria-labelledby="d-title" hidden>
+  <div class="drawer-in" tabindex="-1" data-drawer-in>
+    <div class="d-top">
+      <button type="button" class="icon" data-close aria-label="Close"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
+    </div>
+    <p class="d-org" data-d-org></p>
+    <h2 id="d-title" data-d-title></h2>
+    <dl class="d-facts" data-d-facts></dl>
+    <div class="d-actions">
+      <a class="btn primary" data-d-apply target="_blank" rel="noopener">Apply on the employer's site <svg aria-hidden="true"><use href="#i-out"/></svg></a>
+      <button type="button" class="btn ghost star-btn" data-d-star aria-pressed="false"><svg aria-hidden="true"><use href="#i-star"/></svg><span>Save</span></button>
+    </div>
+    <div class="d-desc" data-d-desc></div>
+  </div>
+</aside>
+<div class="scrim" data-scrim hidden></div>
+
+<script src="app.js"></script>
+</body>
+</html>
