@@ -395,3 +395,21 @@ employers on 13 hosts gave 13 tenants; site names came from their public
 career links. 12 added by hand (RAND, Pew Research internships, Teach For
 America, City Year, Success Academy, College Board, Scholastic...). Few have
 internships posted in October; they are watched for the season.
+
+## 2026-10-06 — Workday paging stopped at page 2 on 390 boards
+
+**What broke:** Wiley's board answered 64 jobs live but `state.json` had
+`lastCount` 0; 485 of 1,146 Workday boards had 0.
+
+**First diagnosis:** a wrong site id, as for Pew CenterInternships, Success
+Academy and Uncommon Schools (those three answer 0 even with no search text:
+real sites with nothing posted).
+
+**What settled it:** asking Wiley for offsets 0, 20 and 40: `total` is 64 on
+the first page and 0, not absent, on the others. `asInt(total)` only falls
+back when the field is missing, so page 2 set total to 0 and the "last page"
+check stopped there, whatever `MAX_WORKDAY_PAGES` said. 390 of the 485 had
+returned exactly 40 rows in the 00:48Z run. Tenants that repeat the real total
+on later pages were unaffected (ASML read all 10 pages, count 355). Total is
+now read from the first page only; `WorkdayPagingTest` serves those answers
+and failed before the fix (2 requests, count 0).

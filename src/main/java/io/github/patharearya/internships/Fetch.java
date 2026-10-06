@@ -86,7 +86,7 @@ public class Fetch {
         for (int page = 0; page < MAX_WORKDAY_PAGES; page++) {
             String body = "{\"appliedFacets\":{},\"limit\":20,\"offset\":" + page * 20 + ",\"searchText\":\"intern\"}";
             JsonNode list = JSON.readTree(post(b.api() + "/jobs", body));
-            total = list.path("total").asInt(total);   // Workday reports total only on the first page
+            if (page == 0) total = list.path("total").asInt(0);   // later pages say "total":0 on many tenants (devlog 2026-10-06)
             boolean anyInternTitle = false;
             for (JsonNode p : list.path("jobPostings")) {
                 String path = p.path("externalPath").asText();
@@ -179,7 +179,7 @@ public class Fetch {
         return send(HttpRequest.newBuilder(URI.create(url)).GET());
     }
 
-    private String post(String url, String json) throws IOException, InterruptedException {
+    String post(String url, String json) throws IOException, InterruptedException {
         return send(HttpRequest.newBuilder(URI.create(url)).header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(json)));
     }
