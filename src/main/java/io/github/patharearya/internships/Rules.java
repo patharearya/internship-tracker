@@ -325,6 +325,14 @@ public final class Rules {
         if (out.isEmpty() && !FOREIGN.matcher(rest).find()) {   // "San José, Costa Rica" is not San Jose, CA
             Matcher m = CITY.matcher(rest);
             while (m.find()) out.add(CITIES.get(m.group(1).toLowerCase(Locale.ROOT)));
+            // then a whole segment that is a US place naming one state ("Durham", "El Paso - Corporate Office"); in each
+            // comma-separated part only the first, so a site name after the city ("Fort Collins - Lincoln Campus") is not read
+            if (out.isEmpty()) for (String part : rest.split("[,;/|]+")) {
+                for (String seg : part.split("[>:()\\-]+")) {
+                    String st = PLACES.get(GENERIC.matcher(seg).replaceAll("").strip().toLowerCase(Locale.ROOT));
+                    if (st != null) { out.add(st); break; }
+                }
+            }
         }
         return out;
     }
@@ -375,6 +383,24 @@ public final class Rules {
                 {"KS", "topeka"}, {"ID", "boise"}, {"VT", "essex junction"}, {"CT", "hartford", "stamford"}, {"KY", "louisville"},
                 {"OK", "oklahoma city", "tulsa"}};
         for (String[] s : byState) for (int i = 1; i < s.length; i++) CITIES.put(s[i], s[0]);
+    }
+    /**
+     * src/main/resources/us-places.tsv: Census places whose largest namesake has 20,000+ people and 5x the next state's
+     * (1,654 names, 2026-10-06). Only a whole location segment matches, never a word inside one ("Mobile Unit" is not
+     * Mobile, AL). Names CITIES leaves out on purpose stay out.
+     */
+    private static final Map<String, String> PLACES = new HashMap<>();
+    private static final Set<String> NOT_PLACES = Set.of("portland", "columbus", "rochester", "cambridge", "birmingham", "kingston", "manhattan");
+    private static final Pattern GENERIC = Pattern.compile("(?i)\\b(US|USA|United States( of America)?|Remote|Hybrid|Office|Corporate|Headquarters|Campus|HQ)\\b");
+    static {
+        try (var in = Rules.class.getResourceAsStream("/us-places.tsv")) {
+            for (String line : new String(in.readAllBytes(), java.nio.charset.StandardCharsets.UTF_8).split("\n")) {
+                String[] f = line.split("\t");
+                if (!line.startsWith("#") && f.length > 1 && !NOT_PLACES.contains(f[0])) PLACES.put(f[0], f[1]);
+            }
+        } catch (java.io.IOException e) {
+            throw new java.io.UncheckedIOException(e);
+        }
     }
     private static final Pattern CITY = Pattern.compile("(?<![\\w.])(" + CITIES.keySet().stream()
             .sorted(Comparator.comparingInt(String::length).reversed()).map(Pattern::quote).collect(java.util.stream.Collectors.joining("|"))

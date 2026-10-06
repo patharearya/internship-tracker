@@ -175,6 +175,11 @@ class RulesTest {
         assertEquals(List.of("IN"), List.copyOf(Rules.statesIn("Carmel Headquarters")));
         assertEquals(List.of("MN"), List.copyOf(Rules.statesIn("Mpls-Investments Office")), "not stopped by the hyphen guard");
         assertEquals(List.of("OH"), List.copyOf(Rules.statesIn("West Chester Regional Office")));
+        // Census places table: a whole segment only, the first in each part
+        assertEquals(List.of("NC"), List.copyOf(Rules.statesIn("Durham")));
+        assertEquals(List.of("CO"), List.copyOf(Rules.statesIn("Fort Collins - Lincoln Campus")), "Lincoln is the site, not Nebraska");
+        assertEquals(List.of(), List.copyOf(Rules.statesIn("Mobile Unit")), "a word inside a segment is not a place");
+        assertEquals(List.of(), List.copyOf(Rules.statesIn("Columbus")), "left out on purpose: Ohio or Georgia");
         assertEquals("outside US", Rules.reject(p("lever", "Software Intern", List.of("Auckland, NZ"), null, null, null)));
         var w = Rules.where(p("lever", "Intern", List.of("Remote (United States | Canada)", "Raleigh, NC"), null, null, null));
         assertEquals(List.of("NC"), w.states());

@@ -68,13 +68,18 @@ and how they were settled: [devlog.md](devlog.md).
   today, the 13 postings closed on 10-04 go on 10-18. The 78 failures from
   before this have no start date, so their 7 days count from their next
   failure.
+- Census places table (`us-places.tsv`, 1,654 names naming one state):
+  a whole location segment, the first in each part. Replay: no state
+  297 -> 266; every change checked by hand ("Fort Collins - Lincoln Campus"
+  is CO only).
 
 ## Next session, in order
 
 1. **Check the first Workday run with the paging fix:** run time (was ~37
    min, timeout 120), open postings gained, any board newly at
    `MAX_WORKDAY_PAGES`, no sudden-drop anomalies, `lastCount` 0 count.
-2. **Day 3: the page** (on hold by the owner). Postings grouped by major,
+2. **Day 3: the page** (owner: next, finish fast; hosting and size as
+   recommended below). Postings grouped by major,
    filters (state / remote, arrangement, level), posting detail, saved list
    (browser storage), coverage sentence. Must not promise "hourly" (Q24).
    Decide first:
@@ -107,19 +112,17 @@ and how they were settled: [devlog.md](devlog.md).
   tried and dropped. SkillBridge is rejected.
 - Updates at least daily are enough (Q24).
 - "AI Residency" stays rejected: a research job (Q25).
+- Other stays a group on the page; no model reads descriptions to sort it
+  (owner, 2026-10-06: finish fast).
 - Closed postings are dropped and failing boards' postings closed (owner,
   2026-10-06). 14 and 7 days are defaults: 27 postings reopened in the first
   two days, and dropping at once would show each as new.
 
 ## Small items
 
-- The ~1,200 Other are mostly titles that name no field ("2027 Summer
-  Intern"). 31 sampled rows were settled only by the description; a
-  description-based rule or a hand-built employer -> field list are the next
-  levers, only if Other is a problem on the page.
-- 297 without a state (replay, 2026-10-06): 39 with no location, 19 "United
-  States", SpaceX "any site", and short tails of ambiguous cities. Add to the
-  city table only with a count behind it.
+- 266 without a state (replay, 2026-10-06): 39 with no location, 19 "United
+  States", SpaceX "any site", cities several states share (Columbus,
+  Charleston, Rochester, Madison) and site names. Left as they are.
 - Page-1 labels in "kept: random" that agree with the rules may still be
   unverified pre-fills (devlog 2026-10-05).
 - 16 Workday tenants answer on no host (Activision, Comcast, Lilly, IDEXX...)
