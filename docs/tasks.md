@@ -111,16 +111,18 @@ and how they were settled: [devlog.md](devlog.md).
 - Favicon: a night-ground tile with ink waves (was Engineering's orange;
   plain ink would vanish on a light tab strip). Checked rendered at 16 and
   32 px on light and dark.
+- Workday boards with more than 200 "intern" results (249) also read their
+  student category in full (facet values up to 500 jobs, one facet). Adds
+  roughly 15-20 min to a Workday run (52 min before; limit 120); check the
+  first Workday run after this. CVS store pharmacy internships (3,279) stay
+  a sample: the intern search stops early on CVS, so fewer of them will be
+  open (devlog).
 
 ## Next session, in order
 
-1. **Workday boards at the 10-page cap** (12: CVS Health 4,543 "intern" hits,
-   Walmart and Hitachi 2,000, Stryker, Oshkosh, P&G, two Disney sites, ASML,
-   HNTB, Clarios, Marvell): internships past page 10 can be missed. Use the
-   `jobFamilyGroup` / time-type facets on those tenants rather than more pages.
-2. **Two sudden-drop anomalies** on 2026-10-06 03:50Z: `ashby:nory-co` 24 -> 0
+1. **Two sudden-drop anomalies** on 2026-10-06 03:50Z: `ashby:nory-co` 24 -> 0
    and `raymondjames.../raymondjamesearlycareers` 17 -> 2. Check whether real.
-3. **Planner and tracker page, browser only (owner, 2026-10-06; Q26).** A
+2. **Planner and tracker page, browser only (owner, 2026-10-06; Q26).** A
    spreadsheet-like page built from the saved (starred) postings, to plan
    and track applying. No login yet: kept in browser storage like the stars.
    - Every column is optional: the user ticks which ones appear on their
@@ -140,7 +142,7 @@ and how they were settled: [devlog.md](devlog.md).
    - No reminders for now (owner).
    - Built with Impeccable inside the existing world (DESIGN.md): new surface
      brief, finish review, documenter.
-4. **Google sign-in, data in the user's own Google Drive (B, after 3).**
+3. **Google sign-in, data in the user's own Google Drive (B, after 2).**
    Sign in with Google; the planner is kept in the hidden app-data folder of
    the user's Drive, so there is still no server and no student data held by
    us. Needs: a Google Cloud project and OAuth client (owner's Google

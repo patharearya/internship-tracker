@@ -15,9 +15,11 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /** Live HTTP. Everything here is thin: parsing lives in Parse, so tests replay saved responses instead. */
 public class Fetch {
@@ -76,40 +78,104 @@ public class Fetch {
     }
 
     // ponytail: Workday search is relevance-ordered and "intern" also matches internal/international; stop at the
-    // first page with no internship title, capped at MAX_WORKDAY_PAGES. Use facets if real internships get cut off.
+    // first page with no internship title, capped at MAX_WORKDAY_PAGES; past the cap, student categories (below).
     static final int MAX_WORKDAY_PAGES = 10;
+    /**
+     * When the "intern" search has more results than MAX_WORKDAY_PAGES can read, the board's own student categories are
+     * read in full as well: CVS's 47 corporate internships ranked below 3,285 store pharmacy internships, so 1 was seen,
+     * and a page with no internship title can end the search early (2026-10-06). Not "Internal Audit" or "IT, Telecom &
+     * Internet". 249 of 1,151 boards had more than 200 results that day.
+     */
+    static final java.util.regex.Pattern STUDENT_CATEGORY =
+            java.util.regex.Pattern.compile("(?i)\\bintern(?!al|et|ation)|co-?op|student|trainee|apprentic|early careers?");
+    /** A category larger than this is a flood (CVS store pharmacy internships), not a category to read in full. */
+    static final int MAX_CATEGORY_PAGES = 25;
 
     private Result workday(Board b, Map<String, Posting> known) throws IOException, InterruptedException {
-        String site = "https://" + b.key();   // key is host/site; public posting URL is host/site + path
         List<Posting> out = new ArrayList<>();
+        Set<String> seen = new HashSet<>();
+        JsonNode first = null;
         int total = 0;
         for (int page = 0; page < MAX_WORKDAY_PAGES; page++) {
-            String body = "{\"appliedFacets\":{},\"limit\":20,\"offset\":" + page * 20 + ",\"searchText\":\"intern\"}";
-            JsonNode list = JSON.readTree(post(b.api() + "/jobs", body));
-            if (page == 0) total = list.path("total").asInt(0);   // later pages say "total":0 on many tenants (devlog 2026-10-06)
-            boolean anyInternTitle = false;
-            for (JsonNode p : list.path("jobPostings")) {
-                String path = p.path("externalPath").asText();
-                String title = p.path("title").asText();
-                Posting stub = new Posting("workday", b.key(), listId(p.path("bulletFields").path(0).asText(""), path), title, b.company(), site + path,
-                        List.of(p.path("locationsText").asText("")), null, null, null, null, null, null, null, null);
-                if (Rules.reject(withLocations(stub, List.of())) == null) anyInternTitle = true;
-                if (Rules.reject(stub) != null) {   // rejected on title or location: keep the stub so the rejection is logged
-                    out.add(stub);
-                    continue;
-                }
-                Posting prev = known.get(b.key() + path);
-                if (prev != null) {
-                    out.add(prev);
-                } else {
-                    pause(200);
-                    out.add(Parse.workday(b.company(), b.key(), get(b.api() + path)));
-                }
-            }
-            if (!anyInternTitle || (page + 1) * 20 >= total) break;
+            JsonNode list = workdayPage(b, "{}", "intern", page);
+            if (page == 0) { first = list; total = list.path("total").asInt(0); }   // later pages say "total":0 on many tenants (devlog 2026-10-06)
+            if (!workdayRead(b, list, known, out, seen) || (page + 1) * 20 >= total) break;
             pause(200);
         }
+        if (total > MAX_WORKDAY_PAGES * 20) for (JsonNode[] c : studentCategories(first.path("facets"))) {
+            String param = c[0].asText(), id = c[1].path("id").asText(), name = c[1].path("descriptor").asText();
+            int n = c[1].path("count").asInt(0);
+            if (n > MAX_CATEGORY_PAGES * 20) {
+                System.out.println("workday " + b.key() + ": category \"" + name + "\" (" + n + ") too large to read in full; sampled by the intern search");
+                continue;
+            }
+            for (int page = 0; page * 20 < n; page++) {
+                pause(200);
+                workdayRead(b, workdayPage(b, "{\"" + param + "\":[\"" + id + "\"]}", "", page), known, out, seen);
+            }
+        }
         return new Result(out, total);
+    }
+
+    private JsonNode workdayPage(Board b, String facets, String text, int page) throws IOException, InterruptedException {
+        return JSON.readTree(post(b.api() + "/jobs",
+                "{\"appliedFacets\":" + facets + ",\"limit\":20,\"offset\":" + page * 20 + ",\"searchText\":\"" + text + "\"}"));
+    }
+
+    /** Adds one page of a Workday list to {@code out}, skipping paths already read; true when any title is an internship. */
+    private boolean workdayRead(Board b, JsonNode list, Map<String, Posting> known, List<Posting> out, Set<String> seen)
+            throws IOException, InterruptedException {
+        String site = "https://" + b.key();   // key is host/site; public posting URL is host/site + path
+        boolean anyInternTitle = false;
+        for (JsonNode p : list.path("jobPostings")) {
+            String path = p.path("externalPath").asText();
+            String title = p.path("title").asText();
+            Posting stub = new Posting("workday", b.key(), listId(p.path("bulletFields").path(0).asText(""), path), title, b.company(), site + path,
+                    List.of(p.path("locationsText").asText("")), null, null, null, null, null, null, null, null);
+            if (Rules.reject(withLocations(stub, List.of())) == null) anyInternTitle = true;
+            if (!seen.add(path)) continue;
+            if (Rules.reject(stub) != null) {   // rejected on title or location: keep the stub so the rejection is logged
+                out.add(stub);
+                continue;
+            }
+            Posting prev = known.get(b.key() + path);
+            if (prev != null) {
+                out.add(prev);
+            } else {
+                pause(200);
+                out.add(Parse.workday(b.company(), b.key(), get(b.api() + path)));
+            }
+        }
+        return anyInternTitle;
+    }
+
+    /**
+     * Facet values naming student roles, as {parameter, value}, from one facet only: boards file the same jobs under
+     * two facets (P&G's job type and job profile), and reading both read P&G's 260 internships twice. The facet whose
+     * readable student values hold the most jobs wins. Location facets are skipped.
+     */
+    static List<JsonNode[]> studentCategories(JsonNode facets) {
+        Map<String, List<JsonNode[]>> byFacet = new LinkedHashMap<>();
+        collect(facets, byFacet);
+        List<JsonNode[]> best = List.of();
+        int bestJobs = -1;
+        for (List<JsonNode[]> values : byFacet.values()) {
+            int jobs = values.stream().mapToInt(v -> v[1].path("count").asInt(0)).filter(n -> n <= MAX_CATEGORY_PAGES * 20).sum();
+            if (jobs > bestJobs) { best = values; bestJobs = jobs; }
+        }
+        return best;
+    }
+
+    private static void collect(JsonNode facets, Map<String, List<JsonNode[]>> byFacet) {
+        for (JsonNode f : facets) {
+            JsonNode values = f.path("values");
+            if (values.path(0).has("facetParameter")) { collect(values, byFacet); continue; }   // a group of facets
+            String param = f.path("facetParameter").asText();
+            if (param.toLowerCase(java.util.Locale.ROOT).contains("location")) continue;
+            for (JsonNode v : values)
+                if (STUDENT_CATEGORY.matcher(v.path("descriptor").asText()).find())
+                    byFacet.computeIfAbsent(param, k -> new ArrayList<>()).add(new JsonNode[]{f.path("facetParameter"), v});
+        }
     }
 
     private static Posting withLocations(Posting p, List<String> locations) {

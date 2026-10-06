@@ -445,3 +445,29 @@ description); no location rule can read a street address, so its board is in
 anywhere (Hiverge "Cambridge", Colonist "Any Location", Octopus "Worldwide"),
 already hidden by any state filter. Replay of the rejections: 2 open postings
 leave on the next run, Dhaka and Riverside.
+
+## 2026-10-06 — Workday boards whose internships rank below a flood
+
+**What broke:** 12 Workday boards reached `MAX_WORKDAY_PAGES` (10 pages, 200
+results) with internship titles still on the last page, so later internships
+could be missed. Of 137 open CVS postings, 136 were store pharmacy internships.
+
+**First diagnosis:** the page cap. Read the board's student category (a
+Workday facet) when the cap is reached.
+
+**What settled it:** a live fetch of CVS with that change read only 60 results:
+the "intern" search stopped at page 3 on a page with no internship title, so
+the cap was never reached and the category pass never ran. Workday's ordering
+for CVS differs between requests (earlier runs read all 10 pages). The real
+condition is that the search has more results than 10 pages can read: 249 of
+1,151 boards had over 200 that day. Facets on every capped board name student
+roles ("Intern (Fixed Term)", "Student (Fixed Term)", "Intern/Co-Op"), so one
+rule needs no per-employer table: past 200 results, read the board's student
+category values of up to 500 jobs in full, from one facet only (P&G files the
+same jobs under two facets; both would read them twice). Probe of the 249
+boards: 190 have such a category; CVS's two pharmacy categories (3,279 and
+3,328) are the only ones too large, and stay sampled by the intern search.
+Live after the fix: CVS kept 55 (its corporate summer internships, 1 before),
+P&G 41 (36 before), Stryker 119 (119). `WorkdayPagingTest` went red with the
+category pass off, with a path read twice, with the size limit off, with both
+facets read, and with the trigger loosened.
