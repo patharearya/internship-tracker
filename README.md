@@ -169,4 +169,8 @@ Built between October 2 and October 6, 2026.
 
 The code was written with Claude Code as a pair programmer, and the code commits carry its co-author line. Decisions, labels and acceptance were the owner's.
 
-Postings belong to the employers and agencies that publish them; every one links to its original page, where students apply.
+## License
+
+The code is released under the [MIT License](LICENSE).
+
+The postings in `data/` are not covered by it. They belong to the employers and agencies that publish them, and every one links to its original page, where students apply.
