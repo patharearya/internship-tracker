@@ -166,11 +166,15 @@ class RulesTest {
                 {"St. Louis", "MO"}, {"MO - Kansas City Downtown", "MO"}};
         for (String[] c : more) assertEquals(List.of(c[1]), List.copyOf(Rules.statesIn(c[0])), c[0]);
         assertEquals(List.of("WI", "MN"), List.copyOf(Rules.statesIn("MN-Mankato; WI-Baldwin")).reversed());
-        assertEquals(List.of(), List.copyOf(Rules.statesIn("UT MAIN CAMPUS")), "UT Austin, not Utah");
+        assertEquals(List.of("TX"), List.copyOf(Rules.statesIn("UT MAIN CAMPUS")), "UT Austin, not Utah");
         assertEquals(List.of(), List.copyOf(Rules.statesIn("LA Office")), "Los Angeles as often as Louisiana");
         assertEquals(List.of(), List.copyOf(Rules.statesIn("Portland")), "Oregon or Maine");
         assertEquals(List.of(), List.copyOf(Rules.statesIn("SF-57th & I-229")), "Sioux Falls");
         assertEquals(List.of(), List.copyOf(Rules.statesIn("San Jose, Costa Rica")), "feeds often drop the accent");
+        // employer site names, one employer each (Republic Airways, Thrivent, Cleveland-Cliffs)
+        assertEquals(List.of("IN"), List.copyOf(Rules.statesIn("Carmel Headquarters")));
+        assertEquals(List.of("MN"), List.copyOf(Rules.statesIn("Mpls-Investments Office")), "not stopped by the hyphen guard");
+        assertEquals(List.of("OH"), List.copyOf(Rules.statesIn("West Chester Regional Office")));
         assertEquals("outside US", Rules.reject(p("lever", "Software Intern", List.of("Auckland, NZ"), null, null, null)));
         var w = Rules.where(p("lever", "Intern", List.of("Remote (United States | Canada)", "Raleigh, NC"), null, null, null));
         assertEquals(List.of("NC"), w.states());

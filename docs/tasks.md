@@ -1,6 +1,6 @@
 # Task list
 
-Last session: 2026-10-05. Plan and decisions: [brief.md](brief.md). Defects
+Last session: 2026-10-06. Plan and decisions: [brief.md](brief.md). Defects
 and how they were settled: [devlog.md](devlog.md).
 
 ## Where we left off
@@ -42,14 +42,32 @@ and how they were settled: [devlog.md](devlog.md).
 - Thin majors: USAJOBS student hiring path (40 -> 55 open); 15 hand-added
   education / social-science boards (`Discover.HAND`).
 
+## Done on 2026-10-06
+
+- The 06:05Z discovery ran at 14:17Z (GitHub delays the daily cron by hours)
+  and kept all 15 hand-added boards (2,193 boards).
+- The 12 hand-added Workday boards all answer; none failed. They have no open
+  postings: every row is a correct title rejection (their "intern" search
+  returns everything), and Wiley's one intern is in Germany. Pew
+  CenterInternships, Success Academy and Uncommon Schools list nothing at all,
+  even with no search text; no other site name answers on those tenants.
+- Workday paging stopped at page 2 on many tenants: later pages answer
+  "total":0 (devlog 2026-10-06). 485 boards had `lastCount` 0, 390 stopped at
+  exactly 40 rows. Fixed, `WorkdayPagingTest`.
+- A paused host now records when the 403 came. "Oberlin" pins the leading
+  word boundary on foreign names. 35 tests.
+- 18 employer site names in the city table ("Carmel Headquarters", "UT MAIN
+  CAMPUS", "Stamford Hub"...; one employer each, 3+ open postings): replay
+  over the 01:27Z postings, no state 430 -> 297, no other posting changed.
+  Left out on purpose: Batavia, Conway, Bethlehem (other states share them),
+  "US Headquarters", "Airport Headquarters", "Any SpaceX Site".
+
 ## Next session, in order
 
-1. **Check the 06:05Z scheduled discovery** ran on its own and kept the 15
-   hand-added boards.
-2. **First Workday run after 02:11Z + 3 h:** the 12 hand-added Workday boards
-   (RAND, Pew, Teach For America, City Year...) are fetched for the first
-   time; check none fails.
-3. **Day 3: the page** (on hold by the owner). Postings grouped by major,
+1. **Check the first Workday run with the paging fix:** run time (was ~37
+   min, timeout 120), open postings gained, any board newly at
+   `MAX_WORKDAY_PAGES`, no sudden-drop anomalies, `lastCount` 0 count.
+2. **Day 3: the page** (on hold by the owner). Postings grouped by major,
    filters (state / remote, arrangement, level), posting detail, saved list
    (browser storage), coverage sentence. Must not promise "hourly" (Q24).
    Decide first:
@@ -59,9 +77,10 @@ and how they were settled: [devlog.md](devlog.md).
      `data/descriptions/{n}.json`, 64 files; load one when a posting is
      opened, `n` = Java `String.hashCode` of the key, non-negative mod 64
      (formula in `Main.shard`, pinned by `ShardTest`).
-4. **Thin majors, January:** recheck Education and Social Sciences when
-   summer internships in those fields are posted. More Workday tenants can be
-   found by probing hosts for "not found: Job_Posting_Site_ID" (devlog).
+3. **Thin majors, January:** recheck Education and Social Sciences when
+   summer internships in those fields are posted (Pew CenterInternships is
+   the seasonal one). More Workday tenants can be found by probing hosts for
+   "not found: Job_Posting_Site_ID" (devlog).
 
 ## After a few days of runs
 
@@ -93,16 +112,14 @@ and how they were settled: [devlog.md](devlog.md).
   Intern"). 31 sampled rows were settled only by the description; a
   description-based rule or a hand-built employer -> field list are the next
   levers, only if Other is a problem on the page.
-- 411 without a state: mostly employer site names ("Carmel Headquarters",
-  "UT MAIN CAMPUS") and ambiguous cities. Add to the city table only with a
-  count behind it.
+- 297 without a state (replay, 2026-10-06): 39 with no location, 19 "United
+  States", SpaceX "any site", and short tails of ambiguous cities. Add to the
+  city table only with a count behind it.
 - Page-1 labels in "kept: random" that agree with the rules may still be
   unverified pre-fills (devlog 2026-10-05).
 - 16 Workday tenants answer on no host (Activision, Comcast, Lilly, IDEXX...)
   and 47 Greenhouse/Lever/Ashby boards are gone; stale entries such as
   `intel.../en-us` stay in `state.json` failures. One request a day each;
   prune if the list gets in the way.
-- Pause times in `state.json` record the run start, not when the 403 came.
-- No test covers the leading word boundary on foreign country names.
 - Working on this repo from this machine's shell: `\\` in a command reaches
   the program as `\`. Write anything with regex backslashes through a file.

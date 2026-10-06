@@ -341,38 +341,38 @@ public final class Rules {
      * US cities that name one state, tried only when no state name or code was found. Names shared with another state
      * or country are left out on purpose (Portland, Columbus, Rochester, Cambridge, Birmingham, Kingston, Manhattan).
      */
-    // ponytail: hand list from the 2026-10-05 state-less locations; add names when "unknown" counts show them
+    // ponytail: hand list from the 2026-10-05 state-less locations, employer site names from 2026-10-06 (one employer each); add names when "unknown" counts show them
     private static final Map<String, String> CITIES = new HashMap<>();
     static {
         String[][] byState = {
                 {"CA", "san francisco", "south san francisco", "sf", "bay area", "silicon valley", "palo alto", "mountain view",
                         "sunnyvale", "san jose", "santa clara", "redwood city", "los altos", "berkeley", "oakland", "emeryville",
                         "fremont", "menlo park", "irvine", "long beach", "los angeles", "el segundo", "santa monica", "culver city",
-                        "torrance", "san diego", "la jolla", "oxnard", "newport beach", "scotts valley", "sacramento"},
+                        "torrance", "san diego", "la jolla", "oxnard", "newport beach", "scotts valley", "sacramento", "jpl"},
                 {"IL", "chicago", "naperville", "downers grove", "rosemont", "northbrook", "schaumburg", "westmont"},
                 {"MA", "boston", "braintree", "waltham", "woburn"},
-                {"TX", "austin", "dallas", "houston", "plano", "san antonio", "richardson", "mckinney", "fort worth", "irving", "dfw"},
+                {"TX", "austin", "ut main campus", "dallas", "houston", "plano", "san antonio", "richardson", "mckinney", "fort worth", "irving", "dfw"},
                 {"WA", "seattle", "bothell", "redmond"},
                 {"NY", "new york city", "nyc", "brooklyn", "queens", "bronx", "tarrytown", "sleepy hollow", "buffalo", "utica",
-                        "binghamton", "poughkeepsie", "fishkill", "long island", "syracuse", "albany"},
-                {"GA", "atlanta", "alpharetta", "macon"},
-                {"CO", "denver", "boulder"},
+                        "binghamton", "poughkeepsie", "fishkill", "long island", "syracuse", "albany", "weill cornell", "rensselaer"},
+                {"GA", "gacor", "atlanta", "alpharetta", "macon"},
+                {"CO", "denver", "boulder", "jmtc"},
                 {"AZ", "phoenix", "scottsdale", "chandler", "tempe", "tucson"},
                 {"PA", "philadelphia", "pittsburgh", "king of prussia", "canonsburg"},
-                {"MN", "minneapolis", "mpls", "st. paul", "saint paul", "chaska", "mankato", "lakeville", "edina", "minnetonka"},
-                {"IN", "indianapolis", "fort wayne", "evansville"},
-                {"WI", "milwaukee", "sun prairie", "fond du lac"},
+                {"MN", "minneapolis", "mpls", "st. paul", "saint paul", "chaska", "mankato", "lakeville", "edina", "minnetonka", "mpls-investments office", "golden valley"},
+                {"IN", "indianapolis", "fort wayne", "evansville", "carmel headquarters", "burns harbor"},
+                {"WI", "milwaukee", "sun prairie", "fond du lac", "exact lane"},
                 {"MI", "detroit", "dearborn", "ann arbor", "grand rapids"},
-                {"FL", "miami", "orlando", "tampa", "jacksonville", "fort lauderdale", "sarasota"},
+                {"FL", "miami", "orlando", "tampa", "jacksonville", "fort lauderdale", "sarasota", "mvw headquarters"},
                 {"TN", "nashville", "memphis", "knoxville"},
-                {"NC", "charlotte", "raleigh", "chapel hill"},
+                {"NC", "charlotte", "raleigh", "chapel hill", "hendrick motorsports", "hendrick technical solutions"},
                 {"MD", "baltimore", "bethesda", "hunt valley"},
-                {"OH", "cincinnati", "cleveland", "akron", "dayton"},
+                {"OH", "cincinnati", "cleveland", "akron", "dayton", "toledo", "west chester regional office"},
                 {"LA", "new orleans", "baton rouge", "lake charles", "shreveport"},
                 {"NE", "omaha"}, {"IA", "des moines", "cedar rapids"}, {"UT", "salt lake city", "lehi"},
                 {"NV", "las vegas"}, {"MO", "st. louis", "st louis", "saint louis"}, {"AR", "bentonville", "little rock"},
-                {"VA", "ashburn", "reston", "mclean"}, {"NJ", "iselin", "parsippany", "trenton", "jersey city", "princeton"},
-                {"KS", "topeka"}, {"ID", "boise"}, {"VT", "essex junction"}, {"CT", "hartford"}, {"KY", "louisville"},
+                {"VA", "ashburn", "reston", "mclean"}, {"NJ", "iselin", "parsippany", "trenton", "jersey city", "princeton", "burlington corporate office"},
+                {"KS", "topeka"}, {"ID", "boise"}, {"VT", "essex junction"}, {"CT", "hartford", "stamford"}, {"KY", "louisville"},
                 {"OK", "oklahoma city", "tulsa"}};
         for (String[] s : byState) for (int i = 1; i < s.length; i++) CITIES.put(s[i], s[0]);
     }
