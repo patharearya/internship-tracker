@@ -39,4 +39,20 @@ class PauseTest {
         units = Main.system(fake, "workday", boards, Map.of(), saved, "T1");
         assertEquals(List.of("skipped", "skipped", "ok"), units.stream().map(Main.Unit::status).toList());
     }
+
+    @Test
+    void aDropThatHoldsIsBelievedOnTheNextRun() throws Exception {
+        // Raymond James early careers, 2026-10-05: 17 -> 2 for real; flagged on every run after, so 16 postings never closed
+        Fetch two = new Fetch("test@example.com", "") {
+            @Override
+            public Result board(Board b, Map<String, Posting> known) { return new Result(List.of(), 2); }
+        };
+        List<Board> boards = List.of(wd("raymondjames", "raymondjamesearlycareers"));
+        String id = "workday:" + boards.get(0).key();
+        Main.State state = new Main.State(new TreeMap<>(Map.of(id, 17)), new TreeMap<>(), new TreeMap<>(), null);
+        List<Main.Unit> run1 = Main.system(two, "workday", boards, Map.of(), state, "T1");
+        assertEquals("anomaly", run1.get(0).status(), "one low reading may be a glitch");
+        Main.record(state, run1, java.time.Instant.parse("2026-10-05T00:00:00Z"), "T1");
+        assertEquals("ok", Main.system(two, "workday", boards, Map.of(), state, "T2").get(0).status(), "the same count again is real");
+    }
 }

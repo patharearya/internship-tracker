@@ -177,21 +177,7 @@ public final class Main {
         List<Unit> units = new ArrayList<>();
         for (var f : futures.values()) units.addAll(f.get());
 
-        // state: counts for the drop check, back-off for failures, pause on refusal
-        for (Unit u : units) {
-            switch (u.status()) {
-                case "ok" -> { state.lastCount().put(u.id(), u.rawCount()); state.failures().remove(u.id()); }
-                case "failed" -> {
-                    Failure prev = state.failures().get(u.id());
-                    int n = prev != null ? prev.count() + 1 : 1;
-                    long hours = Math.min(1L << Math.min(n - 1, 5), MAX_BACKOFF_HOURS);   // 1h, 2h, 4h ... capped at 24h
-                    String since = prev != null && prev.since() != null ? prev.since() : now;   // older streaks start counting now
-                    state.failures().put(u.id(), new Failure(n, started.plus(Duration.ofHours(hours)).truncatedTo(ChronoUnit.SECONDS).toString(), u.detail(), since));
-                }
-                case "refused" -> state.paused().put(u.host(), u.detail());
-                default -> {}
-            }
-        }
+        record(state, units, started, now);
 
         // filter and label; every rejection is kept with its reason
         Map<String, List<Kept>> kept = new HashMap<>();
@@ -233,6 +219,29 @@ public final class Main {
         report.put("retired", retired);
         write("report.json", report);
         System.out.println(JSON.writeValueAsString(report.get("systems")));
+    }
+
+    /**
+     * State after a run: counts for the drop check, back-off for failures, pause on refusal. A sudden drop records its
+     * count too, so the same count next run is not a drop and the board's postings start counting misses: Raymond
+     * James's early-careers board fell 17 -> 2 for real and its 16 postings stayed open (devlog 2026-10-06).
+     */
+    static void record(State state, List<Unit> units, Instant started, String now) {
+        for (Unit u : units) {
+            switch (u.status()) {
+                case "ok" -> { state.lastCount().put(u.id(), u.rawCount()); state.failures().remove(u.id()); }
+                case "anomaly" -> state.lastCount().put(u.id(), u.rawCount());
+                case "failed" -> {
+                    Failure prev = state.failures().get(u.id());
+                    int n = prev != null ? prev.count() + 1 : 1;
+                    long hours = Math.min(1L << Math.min(n - 1, 5), MAX_BACKOFF_HOURS);   // 1h, 2h, 4h ... capped at 24h
+                    String since = prev != null && prev.since() != null ? prev.since() : now;   // older streaks start counting now
+                    state.failures().put(u.id(), new Failure(n, started.plus(Duration.ofHours(hours)).truncatedTo(ChronoUnit.SECONDS).toString(), u.detail(), since));
+                }
+                case "refused" -> state.paused().put(u.host(), u.detail());
+                default -> {}
+            }
+        }
     }
 
     record Kept(Posting posting, Rules.Labels labels) {}

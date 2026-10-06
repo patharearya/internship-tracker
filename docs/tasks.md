@@ -117,12 +117,14 @@ and how they were settled: [devlog.md](devlog.md).
   first Workday run after this. CVS store pharmacy internships (3,279) stay
   a sample: the intern search stops early on CVS, so fewer of them will be
   open (devlog).
+- Sudden drops: both 2026-10-06 anomalies were real (nory-co 0 jobs, Raymond
+  James 2). An anomaly now records its count, so a drop that holds is
+  believed on the next run; Raymond James's 14 gone postings close 3 runs
+  later. 39 tests.
 
 ## Next session, in order
 
-1. **Two sudden-drop anomalies** on 2026-10-06 03:50Z: `ashby:nory-co` 24 -> 0
-   and `raymondjames.../raymondjamesearlycareers` 17 -> 2. Check whether real.
-2. **Planner and tracker page, browser only (owner, 2026-10-06; Q26).** A
+1. **Planner and tracker page, browser only (owner, 2026-10-06; Q26).** A
    spreadsheet-like page built from the saved (starred) postings, to plan
    and track applying. No login yet: kept in browser storage like the stars.
    - Every column is optional: the user ticks which ones appear on their
@@ -142,7 +144,7 @@ and how they were settled: [devlog.md](devlog.md).
    - No reminders for now (owner).
    - Built with Impeccable inside the existing world (DESIGN.md): new surface
      brief, finish review, documenter.
-3. **Google sign-in, data in the user's own Google Drive (B, after 2).**
+2. **Google sign-in, data in the user's own Google Drive (B, after 1).**
    Sign in with Google; the planner is kept in the hidden app-data folder of
    the user's Drive, so there is still no server and no student data held by
    us. Needs: a Google Cloud project and OAuth client (owner's Google

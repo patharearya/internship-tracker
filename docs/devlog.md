@@ -471,3 +471,21 @@ Live after the fix: CVS kept 55 (its corporate summer internships, 1 before),
 P&G 41 (36 before), Stryker 119 (119). `WorkdayPagingTest` went red with the
 category pass off, with a path read twice, with the size limit off, with both
 facets read, and with the trigger loosened.
+
+## 2026-10-06 — a real drop was flagged as an anomaly forever
+
+**What broke:** two "sudden drop" anomalies repeated on every run since
+2026-10-05/06: `ashby:nory-co` 24 -> 0 and Raymond James early careers 17 -> 2.
+The 16 Raymond James postings stayed open, last seen 2026-10-05 14:17Z.
+
+**First diagnosis:** fetch glitches, to be checked by hand.
+
+**What settled it:** asking both boards directly: nory-co lists 0 jobs and
+Raymond James 2. Both drops were real (an early-careers season closing). The
+anomaly path never updated `lastCount`, so every later run compared against
+the old count, flagged it again, and left the postings open for good: the
+guard against a glitch could never be satisfied. Fix: an anomaly records its
+count, so the same count on the next run is believed and the postings start
+counting misses (one glitch costs nothing; the next normal reading is not a
+drop). `PauseTest.aDropThatHoldsIsBelievedOnTheNextRun` went red without the
+line. nory-co had no kept postings, so nothing on the page changes for it.
