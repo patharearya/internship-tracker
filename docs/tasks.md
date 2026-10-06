@@ -153,9 +153,8 @@ and how they were settled: [devlog.md](devlog.md).
 
 ## Next session, in order
 
-1. **Check Drive sync with a real Google account** (owner): first test done
-   2026-10-06 (two devices synced; the sign-out defect it found is fixed).
-   Recheck sign-out: sign out, star and remove signed out, sign in again.
+Nothing left: every item is done (owner, 2026-10-06). Drive sync checked by
+the owner with a real Google account on two devices, sign-out included.
 
 ## After a few days of runs
 
