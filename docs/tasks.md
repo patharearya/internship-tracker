@@ -119,10 +119,34 @@ and how they were settled: [devlog.md](devlog.md).
    `jobFamilyGroup` / time-type facets on those tenants rather than more pages.
 4. **Two sudden-drop anomalies** on 2026-10-06 03:50Z: `ashby:nory-co` 24 -> 0
    and `raymondjames.../raymondjamesearlycareers` 17 -> 2. Check whether real.
-5. **Thin majors, January:** recheck Education and Social Sciences when
-   summer internships in those fields are posted (Pew CenterInternships is
-   the seasonal one). More Workday tenants can be found by probing hosts for
-   "not found: Job_Posting_Site_ID" (devlog).
+5. **Planner and tracker page, browser only (owner, 2026-10-06; Q26).** A
+   spreadsheet-like page built from the saved (starred) postings, to plan
+   and track applying. No login yet: kept in browser storage like the stars.
+   - Every column is optional: the user ticks which ones appear on their
+     planner (checkboxes), and the choice is remembered.
+   - Columns to offer: status (saved / preparing / applied / interviewing /
+     offer / rejected), applied checkmark, date applied, apply-by date
+     (before the published deadline; with none, within N days of first
+     seen), deadline, days open, first seen, closed warning ("closed Oct 4",
+     from our own records), materials checklist (resume, cover letter,
+     transcript, references, portfolio), follow-up date, notes, contacts,
+     field, location, arrangement, level.
+   - Timeline view: each planned posting from first seen to apply-by to
+     deadline.
+   - Sortable columns, cells edited in place, CSV export.
+   - A saved posting keeps a copy of its title, employer, link and deadline,
+     because closed postings leave `postings.json` after 14 days.
+   - No reminders for now (owner).
+   - Built with Impeccable inside the existing world (DESIGN.md): new surface
+     brief, finish review, documenter.
+6. **Google sign-in, data in the user's own Google Drive (B, after 5).**
+   Sign in with Google; the planner is kept in the hidden app-data folder of
+   the user's Drive, so there is still no server and no student data held by
+   us. Needs: a Google Cloud project and OAuth client (owner's Google
+   account), merging what is in the browser with what is in Drive on first
+   sign-in, sign-out. Check first whether the `drive.appdata` scope needs
+   Google's app verification (unverified apps can be capped at 100 users).
+   Firebase (C) rejected: we would hold student data.
 
 ## After a few days of runs
 
@@ -147,6 +171,8 @@ and how they were settled: [devlog.md](devlog.md).
 - Closed postings are dropped and failing boards' postings closed (owner,
   2026-10-06). 14 and 7 days are defaults: 27 postings reopened in the first
   two days, and dropping at once would show each as new.
+- No January recheck of thin majors: the owner does not plan to come back to
+  the project once the task list is done (2026-10-06).
 
 ## Small items
 

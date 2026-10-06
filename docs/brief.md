@@ -237,3 +237,9 @@ Grill held 2026-10-03. Superseded entries are kept, marked, for the record.
   updates a day. The page must not promise "hourly".
 - Q25 (2026-10-05) "AI Residency" is a research job, not an internship or a
   funded student programme: stays rejected.
+- Q26 (2026-10-06) the app becomes a planner and tracker as well
+  (supersedes Q15's "browser-only saved list" in part). First a planner page
+  in browser storage, every column optional by checkbox, no reminders; then
+  Google sign-in with the data in the user's own Google Drive app-data
+  folder, so there is still no server and no personal data held by us.
+  Firebase rejected for holding student data.
