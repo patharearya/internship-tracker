@@ -347,7 +347,8 @@ function syncLine(state, msg = "") {
     off: `${go("Sync with Google Drive")}<p>Keep this planner on every device you use. It is saved to a hidden file in your own Google Drive that only this site can open.</p>`,
     paused: `${go("Resume Drive sync")}<p>Changes are saved in this browser${sync.at ? `; last synced with Drive ${day(sync.at)} at ${clock(sync.at)}` : ""}. Google asks you to confirm each visit.</p>`,
     busy: `<p class="on">Syncing with Google Drive…</p>`,
-    ok: `<p class="on">Synced with Google Drive at ${clock(sync.at)}.</p><button type="button" class="linkish" data-sync-stop>Stop syncing</button>`,
+    ok: `<p class="on">Synced with Google Drive at ${clock(sync.at)}.</p><button type="button" class="linkish" data-sync-stop>Sign out</button>`,
+    out: `${go("Sync with Google Drive")}<p>Signed out. Your planner is safe in your Google Drive; sync again to bring it back. Anything you star until then is added to it when you do.</p>`,
     error: `${go("Try again")}<p>${esc(msg)}</p>`
   }[state];
 }
@@ -369,12 +370,15 @@ function connect() {
   }).requestAccessToken({ prompt: sync.on ? "" : "consent" });
 }
 
-// first the Drive copy is read and merged with this browser's, then the merged planner is written back to both
+// first the Drive copy is read and merged with this browser's, then the merged planner is written back to both.
+// Resuming (still signed in, the session ran out) merges everything, removals included: they were made on the account.
+// Signing in from signed out adds this browser's planner to the account; its removals never reach it.
 async function pull() {
   syncLine("busy");
   try {
     fileId = await drive.find(token);
-    const merged = mergePlans(doc(), fileId ? await drive.read(token, fileId) : null);
+    const remote = fileId ? await drive.read(token, fileId) : null;
+    const merged = sync.on ? mergePlans(doc(), remote) : mergePlans(remote, signedOutCopy(doc()));
     write("irf-saved", merged.saved);
     Object.assign(plan, { rows: merged.rows, unstarred: merged.unstarred, deleted: merged.deleted });
     if (merged.cols) { plan.cols = merged.cols; shown = new Set(merged.cols); }
@@ -399,12 +403,19 @@ function failed(e) {
 }
 $("[data-sync]").addEventListener("click", ev => {
   if (ev.target.closest("[data-sync-go]")) connect();
-  if (ev.target.closest("[data-sync-stop]")) {
-    if (token) window.google?.accounts?.oauth2?.revoke(token, () => {});
-    token = null; for (const k in sync) delete sync[k]; write("irf-sync", {});
-    syncLine("off");
-  }
+  if (ev.target.closest("[data-sync-stop]")) signOut();
 });
+// signing out takes the account's planner off this browser, as signing out of any site does; it stays in Drive
+function signOut() {
+  clearTimeout(pushTimer);
+  if (token) window.google?.accounts?.oauth2?.revoke(token, () => {});
+  token = null; fileId = null;
+  for (const k in sync) delete sync[k];
+  for (const k in plan) delete plan[k];
+  plan.rows = {}; shown = new Set(COLUMNS.filter(c => c.on).map(c => c.id));
+  ["irf-sync", "irf-saved", "irf-planner"].forEach(k => { try { localStorage.removeItem(k); } catch {} });
+  build(entries); render(); syncLine("out");
+}
 syncLine(sync.on ? "paused" : "off");
 
 // stars changed on the browse page in another tab arrive here too

@@ -144,16 +144,18 @@ and how they were settled: [devlog.md](devlog.md).
   each remembered with its time so the other copy cannot bring it back
   (`node site/sync.test.mjs`, red under three deliberate breaks). Browsers
   block Google's window without a click, so a later visit shows "Resume
-  Drive sync"; edits in between stay in the browser. 11 checks against fake
-  Google and Drive in headless Chrome. Privacy page (`site/privacy.html`)
+  Drive sync"; edits in between stay in the browser. "Sign out" takes the
+  account's planner off the browser; signed out, the browser has its own
+  planner, and signing in adds its stars and notes to the account but never
+  its removals (owner, 2026-10-06, after finding a signed-out removal reach
+  Drive). 17 checks against fake Google and Drive in headless Chrome. Privacy page (`site/privacy.html`)
   added for Google's consent screen.
 
 ## Next session, in order
 
-1. **Check Drive sync with a real Google account** (owner): on the live
-   planner, star two postings, press "Sync with Google Drive", sign in, edit
-   a note; open the planner in another browser or on a phone, sync, and check
-   the note arrives. Only a real sign-in can test Google's side.
+1. **Check Drive sync with a real Google account** (owner): first test done
+   2026-10-06 (two devices synced; the sign-out defect it found is fixed).
+   Recheck sign-out: sign out, star and remove signed out, sign in again.
 
 ## After a few days of runs
 

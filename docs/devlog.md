@@ -514,3 +514,27 @@ caught it from the capture's width. Both checked by measuring scrollWidth at
 byte in site/app.js (the backslash collapse in the notes); the JS still ran,
 which is why nothing failed. Git and grep then treated the file as binary.
 Edits with backslashes go through a file, every time.
+
+## 2026-10-06 — a removal made after signing out reached Drive
+
+**What broke (found by the owner):** synced in an incognito window, pressed
+"Stop syncing", removed one of the two postings, synced again: the removal
+had reached the Drive copy, and the two postings had stayed on screen after
+stopping.
+
+**First diagnosis:** none needed; it was the design. "Stop syncing" only
+paused uploads and kept the planner, and the next sync merged everything,
+removals included, which is right for a session that ran out and wrong for a
+student who signed out on purpose (a shared or incognito browser).
+
+**What settled it:** the owner's rule (2026-10-06): signing out takes the
+account's planner off the browser; signed out, the browser keeps its own
+planner; signing in adds its stars and notes to the account, never its
+removals. `signedOutCopy` drops the removal times from the signed-out copy
+before the merge; `sync.test.mjs` shows the same merge without it deletes the
+posting from the account, and went red with it removed. The browser check
+replays the owner's steps against fake Google and Drive; three of its first
+failures were the test's own (rows counted in a hidden table, a key an
+earlier step had deleted, a fake Drive that reset on reload), each checked
+before being fixed.
+

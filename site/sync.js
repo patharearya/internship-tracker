@@ -33,6 +33,15 @@ function mergePlans(a, b) {
   return out;
 }
 
+/**
+ * What a browser did while signed out, as it joins the account on sign-in (owner, 2026-10-06): its stars, notes and
+ * edits are added; its removals are dropped, because they were made on that browser's own planner, never on the
+ * account's. Merge it second, so the account's column choice wins.
+ */
+function signedOutCopy(copy) {
+  return { ...copy, unstarred: {}, deleted: {} };
+}
+
 const drive = {
   async call(token, url, init = {}) {
     const r = await fetch(url, { ...init, headers: { Authorization: `Bearer ${token}`, ...(init.headers || {}) } });

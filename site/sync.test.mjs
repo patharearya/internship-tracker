@@ -4,7 +4,7 @@ import vm from "node:vm";
 import assert from "node:assert/strict";
 
 const ctx = {};
-vm.runInNewContext(readFileSync(new URL("./sync.js", import.meta.url), "utf8") + "\nthis.mergePlans = mergePlans;", ctx);
+vm.runInNewContext(readFileSync(new URL("./sync.js", import.meta.url), "utf8") + "\nthis.mergePlans = mergePlans; this.signedOutCopy = signedOutCopy;", ctx);
 const merge = (a, b) => JSON.parse(JSON.stringify(ctx.mergePlans(a, b)));
 const sorted = xs => [...xs].sort();
 
@@ -46,4 +46,15 @@ assert.deepEqual(m.saved, ["old"]);
 
 // which postings live does not depend on which copy comes first
 assert.deepEqual(sorted(merge(phone, laptop).saved), sorted(merge(laptop, phone).saved));
+// signing in after working signed out (owner, 2026-10-06): the browser's stars and notes join the account, its
+// removals do not touch it; the account's column choice stays
+const account = { saved: ["a", "b"], rows: { a: { status: "applied", updated: 10 }, b: { notes: "keep me", updated: 10 } }, cols: ["status", "notes"] };
+const signedOut = { saved: ["a", "g"], rows: { a: { notes: "signed-out note", updated: 50 }, g: { starred: 60 } }, deleted: { b: 70 }, unstarred: { a: 70 }, cols: ["deadline"] };
+m = merge(account, ctx.signedOutCopy(signedOut));
+assert.deepEqual(sorted(m.saved), ["a", "b", "g"], "b deleted and a unstarred while signed out: both stay in the account; g joins it");
+assert.equal(m.rows.b.notes, "keep me");
+assert.equal(m.rows.a.notes, "signed-out note", "a newer edit made signed out is still an edit");
+assert.deepEqual(m.cols, ["status", "notes"]);
+// without signedOutCopy the same merge would delete b from the account: the bug the owner found
+assert.ok(!merge(account, signedOut).saved.includes("b"));
 console.log("sync merge: all checks pass");
