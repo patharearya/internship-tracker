@@ -1,20 +1,20 @@
 {
-  "started" : "2026-10-09T16:11:32Z",
-  "seconds" : 4106,
-  "open" : 13346,
+  "started" : "2026-10-09T20:53:44Z",
+  "seconds" : 3998,
+  "open" : 13465,
   "byMajor" : {
-    "Arts, Design & Media" : 208,
-    "Business & Management" : 1910,
-    "Computer Science & IT" : 1289,
-    "Data & Mathematics" : 843,
+    "Arts, Design & Media" : 207,
+    "Business & Management" : 1913,
+    "Computer Science & IT" : 1295,
+    "Data & Mathematics" : 849,
     "Education" : 51,
-    "Engineering" : 3358,
-    "Finance & Accounting" : 1511,
-    "Government, Law & Policy" : 272,
-    "Life Sciences & Health" : 1187,
-    "Marketing & Communications" : 472,
-    "Other" : 1838,
-    "Physical Sciences" : 355,
+    "Engineering" : 3374,
+    "Finance & Accounting" : 1529,
+    "Government, Law & Policy" : 276,
+    "Life Sciences & Health" : 1209,
+    "Marketing & Communications" : 482,
+    "Other" : 1872,
+    "Physical Sciences" : 356,
     "Social Sciences & Psychology" : 52
   },
   "systems" : {
@@ -23,39 +23,39 @@
         "ok" : 344,
         "skipped" : 14
       },
-      "open" : 505,
+      "open" : 507,
       "rejected" : {
-        "no internship keyword in title" : 12034,
+        "no internship keyword in title" : 12015,
         "not a student role" : 2,
-        "outside US" : 86
+        "outside US" : 84
       },
-      "seconds" : 93
+      "seconds" : 78
     },
     "greenhouse" : {
       "units" : {
         "ok" : 487,
         "skipped" : 20
       },
-      "open" : 1426,
+      "open" : 1433,
       "rejected" : {
-        "no internship keyword in title" : 30933,
+        "no internship keyword in title" : 30975,
         "not a student role" : 33,
         "outside US" : 307
       },
-      "seconds" : 160
+      "seconds" : 172
     },
     "lever" : {
       "units" : {
         "ok" : 156,
         "skipped" : 15
       },
-      "open" : 256,
+      "open" : 255,
       "rejected" : {
-        "no internship keyword in title" : 7510,
+        "no internship keyword in title" : 7541,
         "not a student role" : 4,
-        "outside US" : 116
+        "outside US" : 117
       },
-      "seconds" : 282
+      "seconds" : 212
     },
     "nih" : {
       "units" : {
@@ -63,7 +63,7 @@
       },
       "open" : 221,
       "rejected" : { },
-      "seconds" : 5
+      "seconds" : 0
     },
     "nsf" : {
       "units" : {
@@ -73,7 +73,7 @@
       "rejected" : {
         "outside US" : 1
       },
-      "seconds" : 19
+      "seconds" : 18
     },
     "usajobs" : {
       "units" : {
@@ -81,7 +81,7 @@
       },
       "open" : 62,
       "rejected" : {
-        "no internship keyword in title" : 688,
+        "no internship keyword in title" : 691,
         "runs the programme" : 1
       },
       "seconds" : 3
@@ -91,14 +91,14 @@
         "ok" : 1149,
         "skipped" : 22
       },
-      "open" : 10154,
+      "open" : 10265,
       "rejected" : {
-        "no internship keyword in title" : 32533,
-        "not a student role" : 118,
-        "outside US" : 4647,
+        "no internship keyword in title" : 32842,
+        "not a student role" : 117,
+        "outside US" : 4663,
         "runs the programme" : 1
       },
-      "seconds" : 4081
+      "seconds" : 3961
     }
   },
   "paused" : {
