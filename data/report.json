@@ -1,61 +1,61 @@
 {
-  "started" : "2026-10-10T12:17:30Z",
-  "seconds" : 3585,
-  "open" : 13364,
+  "started" : "2026-10-10T13:40:19Z",
+  "seconds" : 263,
+  "open" : 13354,
   "byMajor" : {
     "Arts, Design & Media" : 204,
-    "Business & Management" : 1906,
-    "Computer Science & IT" : 1293,
+    "Business & Management" : 1905,
+    "Computer Science & IT" : 1291,
     "Data & Mathematics" : 842,
     "Education" : 50,
-    "Engineering" : 3357,
+    "Engineering" : 3355,
     "Finance & Accounting" : 1504,
-    "Government, Law & Policy" : 270,
+    "Government, Law & Policy" : 269,
     "Life Sciences & Health" : 1195,
-    "Marketing & Communications" : 482,
-    "Other" : 1853,
+    "Marketing & Communications" : 481,
+    "Other" : 1851,
     "Physical Sciences" : 356,
-    "Social Sciences & Psychology" : 52
+    "Social Sciences & Psychology" : 51
   },
   "systems" : {
     "ashby" : {
       "units" : {
-        "failed" : 13,
-        "ok" : 344
+        "ok" : 344,
+        "skipped" : 13
       },
-      "open" : 508,
+      "open" : 504,
       "rejected" : {
         "no internship keyword in title" : 12114,
         "not a student role" : 2,
         "outside US" : 85
       },
-      "seconds" : 92
+      "seconds" : 88
     },
     "greenhouse" : {
       "units" : {
-        "failed" : 21,
-        "ok" : 481
+        "ok" : 481,
+        "skipped" : 21
       },
       "open" : 1426,
       "rejected" : {
-        "no internship keyword in title" : 30852,
+        "no internship keyword in title" : 30851,
         "not a student role" : 33,
         "outside US" : 306
       },
-      "seconds" : 203
+      "seconds" : 176
     },
     "lever" : {
       "units" : {
-        "failed" : 15,
-        "ok" : 156
+        "ok" : 156,
+        "skipped" : 15
       },
       "open" : 253,
       "rejected" : {
-        "no internship keyword in title" : 7563,
+        "no internship keyword in title" : 7562,
         "not a student role" : 4,
         "outside US" : 118
       },
-      "seconds" : 253
+      "seconds" : 234
     },
     "nih" : {
       "units" : {
@@ -73,32 +73,18 @@
       "rejected" : {
         "outside US" : 1
       },
-      "seconds" : 27
+      "seconds" : 19
     },
     "usajobs" : {
       "units" : {
         "ok" : 1
       },
-      "open" : 62,
+      "open" : 56,
       "rejected" : {
         "no internship keyword in title" : 640,
         "runs the programme" : 1
       },
       "seconds" : 3
-    },
-    "workday" : {
-      "units" : {
-        "ok" : 1148,
-        "skipped" : 22
-      },
-      "open" : 10172,
-      "rejected" : {
-        "no internship keyword in title" : 32604,
-        "not a student role" : 116,
-        "outside US" : 4664,
-        "runs the programme" : 1
-      },
-      "seconds" : 3548
     }
   },
   "paused" : {
@@ -107,7 +93,7 @@
     "liveramp.wd5.myworkdayjobs.com" : "2026-10-04T15:12:06Z HTTP 403 from liveramp.wd5.myworkdayjobs.com",
     "ngc.wd1.myworkdayjobs.com" : "2026-10-04T15:12:06Z HTTP 403 from ngc.wd1.myworkdayjobs.com"
   },
-  "problems" : [ "failed ashby:atomicsemi: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/atomicsemi", "failed ashby:conductorone: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/conductorone", "failed ashby:genesis-therapeutics: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/genesis-therapeutics", "failed ashby:inspiration-commerce-group: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/inspiration-commerce-group", "failed ashby:latitude: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/latitude", "failed ashby:lindy: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/lindy", "failed ashby:mach: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/mach", "failed ashby:mentis: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/mentis", "failed ashby:mtesting.ai: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/mtesting.ai", "failed ashby:odin-dynamics: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/odin-dynamics", "failed ashby:tuesday-lab: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/tuesday-lab", "failed ashby:veeda-labs: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/veeda-labs", "failed ashby:whatnot: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/whatnot", "failed greenhouse:appliedintuition: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/appliedintuition/jobs?content=true", "failed greenhouse:arcellx: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/arcellx/jobs?content=true", "failed greenhouse:arine: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/arine/jobs?content=true", "failed greenhouse:campusopportunities: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/campusopportunities/jobs?content=true", "failed greenhouse:capitalrx: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/capitalrx/jobs?content=true", "failed greenhouse:designmehair: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/designmehair/jobs?content=true", "failed greenhouse:dustyrobotics: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/dustyrobotics/jobs?content=true", "failed greenhouse:fireworksai: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/fireworksai/jobs?content=true", "failed greenhouse:forerunner: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/forerunner/jobs?content=true", "failed greenhouse:glossgenius: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/glossgenius/jobs?content=true", "failed greenhouse:ibkr: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/ibkr/jobs?content=true", "failed greenhouse:iherb: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/iherb/jobs?content=true", "failed greenhouse:maintainx: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/maintainx/jobs?content=true", "failed greenhouse:memphismeats: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/memphismeats/jobs?content=true", "failed greenhouse:mqreferrals: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/mqreferrals/jobs?content=true", "failed greenhouse:optirtc: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/optirtc/jobs?content=true", "failed greenhouse:postman: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/postman/jobs?content=true", "failed greenhouse:rdccareers: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/rdccareers/jobs?content=true", "failed greenhouse:seamlessai: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/seamlessai/jobs?content=true", "failed greenhouse:superbet: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/superbet/jobs?content=true", "failed greenhouse:transcarent: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/transcarent/jobs?content=true", "failed lever:aifund: IOException: HTTP 404 for https://api.lever.co/v0/postings/aifund?mode=json", "failed lever:aprio: IOException: HTTP 404 for https://api.lever.co/v0/postings/aprio?mode=json", "failed lever:bestegg: IOException: HTTP 404 for https://api.lever.co/v0/postings/bestegg?mode=json", "failed lever:calstart: IOException: HTTP 404 for https://api.lever.co/v0/postings/calstart?mode=json", "failed lever:cesiumastro: IOException: HTTP 404 for https://api.lever.co/v0/postings/cesiumastro?mode=json", "failed lever:energyvault: IOException: HTTP 404 for https://api.lever.co/v0/postings/energyvault?mode=json", "failed lever:grid: IOException: HTTP 404 for https://api.lever.co/v0/postings/grid?mode=json", "failed lever:machinalabs: IOException: HTTP 404 for https://api.lever.co/v0/postings/machinalabs?mode=json", "failed lever:mbrdna: IOException: HTTP 404 for https://api.lever.co/v0/postings/mbrdna?mode=json", "failed lever:njstateofficeofinnovation: IOException: HTTP 404 for https://api.lever.co/v0/postings/njstateofficeofinnovation?mode=json", "failed lever:nomagic: IOException: HTTP 404 for https://api.lever.co/v0/postings/nomagic?mode=json", "failed lever:quantumworkplace: IOException: HTTP 404 for https://api.lever.co/v0/postings/quantumworkplace?mode=json", "failed lever:sanctuary: IOException: HTTP 404 for https://api.lever.co/v0/postings/sanctuary?mode=json", "failed lever:saronic: IOException: HTTP 404 for https://api.lever.co/v0/postings/saronic?mode=json", "failed lever:xpansiv: IOException: HTTP 404 for https://api.lever.co/v0/postings/xpansiv?mode=json", "skipped workday:activision.wd1.myworkdayjobs.com/external: backing off until 2026-10-11T00:49:46Z after: IOException: HTTP 422 for https://activision.wd1.myworkdayjobs.com/wday/cxs/activision/External/jobs", "skipped workday:activision.wd1.myworkdayjobs.com/king_external_careers: backing off until 2026-10-11T00:49:46Z after: IOException: HTTP 422 for https://activision.wd1.myworkdayjobs.com/wday/cxs/activision/King_External_Careers/jobs", "skipped workday:amplify.wd1.myworkdayjobs.com/amplify_careers: server paused: 2026-10-04T15:12:06Z HTTP 403 from amplify.wd1.myworkdayjobs.com", "skipped workday:cliftonlarsonallen.wd1.myworkdayjobs.com/cla: backing off until 2026-10-11T00:49:46Z after: IOException: HTTP 422 for https://cliftonlarsonallen.wd1.myworkdayjobs.com/wday/cxs/cliftonlarsonallen/CLA/jobs", "skipped workday:cmu.wd5.myworkdayjobs.com/cmu: backing off until 2026-10-11T00:49:46Z after: IOException: HTTP 422 for https://cmu.wd5.myworkdayjobs.com/wday/cxs/cmu/cmu/jobs", "skipped workday:comcast.wd5.myworkdayjobs.com/comcast_careers: backing off until 2026-10-11T00:49:46Z after: IOException: HTTP 422 for https://comcast.wd5.myworkdayjobs.com/wday/cxs/comcast/Comcast_Careers/jobs", "skipped workday:donaldson.wd5.myworkdayjobs.com/donaldsoncareers: backing off until 2026-10-11T00:49:46Z after: IOException: HTTP 422 for https://donaldson.wd5.myworkdayjobs.com/wday/cxs/donaldson/donaldsoncareers/jobs", "skipped workday:evrazna.wd5.myworkdayjobs.com/evraz: backing off until 2026-10-11T00:49:46Z after: IOException: HTTP 422 for https://evrazna.wd5.myworkdayjobs.com/wday/cxs/evrazna/EVRAZ/jobs", "skipped workday:gtsgbu.wd3.myworkdayjobs.com/careers: server paused: 2026-10-04T15:12:06Z HTTP 403 from gtsgbu.wd3.myworkdayjobs.com", "skipped workday:idexx.wd1.myworkdayjobs.com/idexx: backing off until 2026-10-11T00:49:46Z after: IOException: HTTP 422 for https://idexx.wd1.myworkdayjobs.com/wday/cxs/idexx/IDEXX/jobs", "skipped workday:justfab.wd1.myworkdayjobs.com/fabletics: backing off until 2026-10-11T00:49:46Z after: IOException: HTTP 422 for https://justfab.wd1.myworkdayjobs.com/wday/cxs/justfab/fabletics/jobs", "skipped workday:justfab.wd1.myworkdayjobs.com/savagex: backing off until 2026-10-11T00:49:46Z after: IOException: HTTP 422 for https://justfab.wd1.myworkdayjobs.com/wday/cxs/justfab/savagex/jobs", "skipped workday:lilly.wd5.myworkdayjobs.com/cmp: backing off until 2026-10-11T00:49:46Z after: IOException: HTTP 422 for https://lilly.wd5.myworkdayjobs.com/wday/cxs/lilly/CMP/jobs", "skipped workday:liveramp.wd5.myworkdayjobs.com/liverampcareers: server paused: 2026-10-04T15:12:06Z HTTP 403 from liveramp.wd5.myworkdayjobs.com", "skipped workday:milestone.wd1.myworkdayjobs.com/milestone_external: backing off until 2026-10-11T00:49:46Z after: IOException: HTTP 422 for https://milestone.wd1.myworkdayjobs.com/wday/cxs/milestone/Milestone_External/jobs", "skipped workday:ngc.wd1.myworkdayjobs.com/northrop_grumman_external_site: server paused: 2026-10-04T15:12:06Z HTTP 403 from ngc.wd1.myworkdayjobs.com", "skipped workday:ngc.wd1.myworkdayjobs.com/northrop_grumman_restricted_site: server paused: 2026-10-04T15:12:06Z HTTP 403 from ngc.wd1.myworkdayjobs.com", "skipped workday:nio.wd3.myworkdayjobs.com/nio_careers: backing off until 2026-10-11T00:49:46Z after: IOException: HTTP 422 for https://nio.wd3.myworkdayjobs.com/wday/cxs/nio/NIO_Careers/jobs", "skipped workday:nrel.wd5.myworkdayjobs.com/nrel: backing off until 2026-10-11T00:49:46Z after: IOException: HTTP 404 for https://nrel.wd5.myworkdayjobs.com/wday/cxs/nrel/nrel/jobs", "skipped workday:procasemanagement.wd1.myworkdayjobs.com/pcm: backing off until 2026-10-11T00:49:46Z after: IOException: HTTP 422 for https://procasemanagement.wd1.myworkdayjobs.com/wday/cxs/procasemanagement/PCM/jobs", "skipped workday:redbulltechnology.wd3.myworkdayjobs.com/rb_racing: backing off until 2026-10-11T00:49:46Z after: IOException: HTTP 422 for https://redbulltechnology.wd3.myworkdayjobs.com/wday/cxs/redbulltechnology/RB_Racing/jobs", "skipped workday:vhr-pbs.wd5.myworkdayjobs.com/pbscareers: backing off until 2026-10-11T00:49:46Z after: IOException: HTTP 422 for https://vhr-pbs.wd5.myworkdayjobs.com/wday/cxs/vhr_pbs/PBSCareers/jobs" ],
+  "problems" : [ "skipped ashby:atomicsemi: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/atomicsemi", "skipped ashby:conductorone: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/conductorone", "skipped ashby:genesis-therapeutics: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/genesis-therapeutics", "skipped ashby:inspiration-commerce-group: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/inspiration-commerce-group", "skipped ashby:latitude: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/latitude", "skipped ashby:lindy: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/lindy", "skipped ashby:mach: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/mach", "skipped ashby:mentis: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/mentis", "skipped ashby:mtesting.ai: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/mtesting.ai", "skipped ashby:odin-dynamics: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/odin-dynamics", "skipped ashby:tuesday-lab: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/tuesday-lab", "skipped ashby:veeda-labs: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/veeda-labs", "skipped ashby:whatnot: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/whatnot", "skipped greenhouse:appliedintuition: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/appliedintuition/jobs?content=true", "skipped greenhouse:arcellx: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/arcellx/jobs?content=true", "skipped greenhouse:arine: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/arine/jobs?content=true", "skipped greenhouse:campusopportunities: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/campusopportunities/jobs?content=true", "skipped greenhouse:capitalrx: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/capitalrx/jobs?content=true", "skipped greenhouse:designmehair: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/designmehair/jobs?content=true", "skipped greenhouse:dustyrobotics: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/dustyrobotics/jobs?content=true", "skipped greenhouse:fireworksai: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/fireworksai/jobs?content=true", "skipped greenhouse:forerunner: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/forerunner/jobs?content=true", "skipped greenhouse:glossgenius: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/glossgenius/jobs?content=true", "skipped greenhouse:ibkr: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/ibkr/jobs?content=true", "skipped greenhouse:iherb: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/iherb/jobs?content=true", "skipped greenhouse:maintainx: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/maintainx/jobs?content=true", "skipped greenhouse:memphismeats: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/memphismeats/jobs?content=true", "skipped greenhouse:mqreferrals: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/mqreferrals/jobs?content=true", "skipped greenhouse:optirtc: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/optirtc/jobs?content=true", "skipped greenhouse:postman: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/postman/jobs?content=true", "skipped greenhouse:rdccareers: backing off until 2026-10-10T14:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/rdccareers/jobs?content=true", "skipped greenhouse:seamlessai: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/seamlessai/jobs?content=true", "skipped greenhouse:superbet: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/superbet/jobs?content=true", "skipped greenhouse:transcarent: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/transcarent/jobs?content=true", "skipped lever:aifund: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.lever.co/v0/postings/aifund?mode=json", "skipped lever:aprio: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.lever.co/v0/postings/aprio?mode=json", "skipped lever:bestegg: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.lever.co/v0/postings/bestegg?mode=json", "skipped lever:calstart: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.lever.co/v0/postings/calstart?mode=json", "skipped lever:cesiumastro: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.lever.co/v0/postings/cesiumastro?mode=json", "skipped lever:energyvault: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.lever.co/v0/postings/energyvault?mode=json", "skipped lever:grid: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.lever.co/v0/postings/grid?mode=json", "skipped lever:machinalabs: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.lever.co/v0/postings/machinalabs?mode=json", "skipped lever:mbrdna: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.lever.co/v0/postings/mbrdna?mode=json", "skipped lever:njstateofficeofinnovation: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.lever.co/v0/postings/njstateofficeofinnovation?mode=json", "skipped lever:nomagic: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.lever.co/v0/postings/nomagic?mode=json", "skipped lever:quantumworkplace: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.lever.co/v0/postings/quantumworkplace?mode=json", "skipped lever:sanctuary: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.lever.co/v0/postings/sanctuary?mode=json", "skipped lever:saronic: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.lever.co/v0/postings/saronic?mode=json", "skipped lever:xpansiv: backing off until 2026-10-11T12:17:30Z after: IOException: HTTP 404 for https://api.lever.co/v0/postings/xpansiv?mode=json" ],
   "retired" : {
     "closedOnDeadBoards" : { },
     "droppedClosed" : 0,
