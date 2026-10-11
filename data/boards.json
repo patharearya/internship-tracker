@@ -1122,12 +1122,6 @@
   "from" : "simplify"
 }, {
   "system" : "ashby",
-  "key" : "medraai",
-  "company" : "Medra",
-  "api" : "https://api.ashbyhq.com/posting-api/job-board/medraai",
-  "from" : "simplify"
-}, {
-  "system" : "ashby",
   "key" : "megazone",
   "company" : "MegazoneCloud",
   "api" : "https://api.ashbyhq.com/posting-api/job-board/megazone",
@@ -2089,7 +2083,7 @@
 }, {
   "system" : "ashby",
   "key" : "whatnot",
-  "company" : "WhatNot",
+  "company" : "Whatnot",
   "api" : "https://api.ashbyhq.com/posting-api/job-board/whatnot",
   "from" : "simplify"
 }, {
@@ -4203,12 +4197,6 @@
   "key" : "phoenixcontact",
   "company" : "Phoenix Contact",
   "api" : "https://boards-api.greenhouse.io/v1/boards/phoenixcontact/jobs?content=true",
-  "from" : "simplify"
-}, {
-  "system" : "greenhouse",
-  "key" : "physicsx",
-  "company" : "PhysicsX",
-  "api" : "https://boards-api.greenhouse.io/v1/boards/physicsx/jobs?content=true",
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
@@ -7560,12 +7548,6 @@
   "from" : "simplify"
 }, {
   "system" : "workday",
-  "key" : "carters.wd1.myworkdayjobs.com/carterscareers",
-  "company" : "Carter's",
-  "api" : "https://carters.wd1.myworkdayjobs.com/wday/cxs/carters/CartersCareers",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
   "key" : "cat.wd5.myworkdayjobs.com/caterpillarcareers",
   "company" : "Caterpillar Inc.",
   "api" : "https://cat.wd5.myworkdayjobs.com/wday/cxs/cat/CaterpillarCareers",
@@ -9186,12 +9168,6 @@
   "from" : "simplify"
 }, {
   "system" : "workday",
-  "key" : "guggenheiminvestment.wd5.myworkdayjobs.com/external",
-  "company" : "Guggenheim",
-  "api" : "https://guggenheiminvestment.wd5.myworkdayjobs.com/wday/cxs/guggenheiminvestment/External",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
   "key" : "guidehouse.wd1.myworkdayjobs.com/external",
   "company" : "Guidehouse",
   "api" : "https://guidehouse.wd1.myworkdayjobs.com/wday/cxs/guidehouse/external",
@@ -9639,12 +9615,6 @@
   "key" : "investpsp.wd3.myworkdayjobs.com/psp_careers",
   "company" : "PSP Investments",
   "api" : "https://investpsp.wd3.myworkdayjobs.com/wday/cxs/investpsp/psp_careers",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
-  "key" : "iqvia.wd1.myworkdayjobs.com/iqvia",
-  "company" : "IQVIA",
-  "api" : "https://iqvia.wd1.myworkdayjobs.com/wday/cxs/iqvia/IQVIA",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -10740,12 +10710,6 @@
   "from" : "simplify"
 }, {
   "system" : "workday",
-  "key" : "novartis.wd3.myworkdayjobs.com/novartis_careers",
-  "company" : "Novartis",
-  "api" : "https://novartis.wd3.myworkdayjobs.com/wday/cxs/novartis/Novartis_Careers",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
   "key" : "novoco.wd108.myworkdayjobs.com/novogradac",
   "company" : "Novogradac",
   "api" : "https://novoco.wd108.myworkdayjobs.com/wday/cxs/novoco/Novogradac",
@@ -10773,12 +10737,6 @@
   "key" : "nshe.wd1.myworkdayjobs.com/unr-external",
   "company" : "University of Nevada, Reno",
   "api" : "https://nshe.wd1.myworkdayjobs.com/wday/cxs/nshe/UNR-external",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
-  "key" : "nshs.wd1.myworkdayjobs.com/ns-eeh",
-  "company" : "Endeavor Health",
-  "api" : "https://nshs.wd1.myworkdayjobs.com/wday/cxs/nshs/ns-eeh",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -11018,7 +10976,7 @@
   "system" : "workday",
   "key" : "pattersoncompanies.wd501.myworkdayjobs.com/pdco",
   "company" : "Patterson Companies",
-  "api" : "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/cxs/pattersoncompanies/PDCO",
+  "api" : "https://pattersoncompanies.wd501.myworkdayjobs.com/wday/cxs/pattersoncompanies/pdco",
   "from" : "simplify"
 }, {
   "system" : "workday",
