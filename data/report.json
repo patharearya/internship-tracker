@@ -1,14 +1,14 @@
 {
-  "started" : "2026-10-11T15:39:45Z",
-  "seconds" : 3539,
-  "open" : 13176,
+  "started" : "2026-10-11T20:15:48Z",
+  "seconds" : 3473,
+  "open" : 13178,
   "byMajor" : {
     "Arts, Design & Media" : 199,
     "Business & Management" : 1877,
     "Computer Science & IT" : 1274,
-    "Data & Mathematics" : 832,
+    "Data & Mathematics" : 833,
     "Education" : 50,
-    "Engineering" : 3321,
+    "Engineering" : 3322,
     "Finance & Accounting" : 1469,
     "Government, Law & Policy" : 268,
     "Life Sciences & Health" : 1194,
@@ -39,11 +39,11 @@
       },
       "open" : 1424,
       "rejected" : {
-        "no internship keyword in title" : 30795,
+        "no internship keyword in title" : 30798,
         "not a student role" : 33,
-        "outside US" : 306
+        "outside US" : 305
       },
-      "seconds" : 151
+      "seconds" : 148
     },
     "lever" : {
       "units" : {
@@ -56,7 +56,7 @@
         "not a student role" : 4,
         "outside US" : 118
       },
-      "seconds" : 237
+      "seconds" : 239
     },
     "nih" : {
       "units" : {
@@ -92,14 +92,14 @@
         "ok" : 1143,
         "skipped" : 22
       },
-      "open" : 9996,
+      "open" : 9998,
       "rejected" : {
-        "no internship keyword in title" : 32353,
+        "no internship keyword in title" : 32219,
         "not a student role" : 114,
-        "outside US" : 4614,
+        "outside US" : 4613,
         "runs the programme" : 1
       },
-      "seconds" : 3501
+      "seconds" : 3428
     }
   },
   "paused" : {
