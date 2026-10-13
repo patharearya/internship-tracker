@@ -738,6 +738,12 @@
   "from" : "simplify"
 }, {
   "system" : "ashby",
+  "key" : "goodlord",
+  "company" : "Goodlord",
+  "api" : "https://api.ashbyhq.com/posting-api/job-board/goodlord",
+  "from" : "simplify"
+}, {
+  "system" : "ashby",
   "key" : "gorgias",
   "company" : "Gorgias",
   "api" : "https://api.ashbyhq.com/posting-api/job-board/gorgias",
@@ -3882,6 +3888,12 @@
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
+  "key" : "memx",
+  "company" : "MEMX",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/memx/jobs?content=true",
+  "from" : "simplify"
+}, {
+  "system" : "greenhouse",
   "key" : "mercury",
   "company" : "Mercury",
   "api" : "https://boards-api.greenhouse.io/v1/boards/mercury/jobs?content=true",
@@ -5247,6 +5259,12 @@
   "key" : "artera",
   "company" : "ArteraAI",
   "api" : "https://api.lever.co/v0/postings/artera?mode=json",
+  "from" : "simplify"
+}, {
+  "system" : "lever",
+  "key" : "azul",
+  "company" : "Azul Systems",
+  "api" : "https://api.lever.co/v0/postings/azul?mode=json",
   "from" : "simplify"
 }, {
   "system" : "lever",
@@ -8562,6 +8580,12 @@
   "from" : "simplify"
 }, {
   "system" : "workday",
+  "key" : "expedia.wd108.myworkdayjobs.com/search",
+  "company" : "Expedia Group",
+  "api" : "https://expedia.wd108.myworkdayjobs.com/wday/cxs/expedia/search",
+  "from" : "simplify"
+}, {
+  "system" : "workday",
   "key" : "fairstone.wd3.myworkdayjobs.com/fairstonecareers",
   "company" : "Fairstone Financial",
   "api" : "https://fairstone.wd3.myworkdayjobs.com/wday/cxs/fairstone/FairstoneCareers",
@@ -9978,6 +10002,12 @@
   "from" : "simplify"
 }, {
   "system" : "workday",
+  "key" : "lmcu.wd5.myworkdayjobs.com/lmcucareersite",
+  "company" : "Lake Michigan Credit Union",
+  "api" : "https://lmcu.wd5.myworkdayjobs.com/wday/cxs/lmcu/lmcucareersite",
+  "from" : "simplify"
+}, {
+  "system" : "workday",
   "key" : "lnw.wd5.myworkdayjobs.com/lightwonderexternalcareers",
   "company" : "Light & Wonder",
   "api" : "https://lnw.wd5.myworkdayjobs.com/wday/cxs/lnw/lightwonderexternalcareers",
@@ -11121,6 +11151,12 @@
   "key" : "progyny.wd5.myworkdayjobs.com/progyny",
   "company" : "Progyny",
   "api" : "https://progyny.wd5.myworkdayjobs.com/wday/cxs/progyny/progyny",
+  "from" : "simplify"
+}, {
+  "system" : "workday",
+  "key" : "prologis.wd5.myworkdayjobs.com/prologis_external_careers",
+  "company" : "Prologis",
+  "api" : "https://prologis.wd5.myworkdayjobs.com/wday/cxs/prologis/Prologis_External_Careers",
   "from" : "simplify"
 }, {
   "system" : "workday",
