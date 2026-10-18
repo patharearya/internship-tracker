@@ -1,10 +1,10 @@
 {
-  "started" : "2026-10-18T14:00:51Z",
-  "seconds" : 3648,
-  "open" : 13083,
+  "started" : "2026-10-18T17:22:27Z",
+  "seconds" : 3598,
+  "open" : 13078,
   "byMajor" : {
     "Arts, Design & Media" : 198,
-    "Business & Management" : 1823,
+    "Business & Management" : 1821,
     "Computer Science & IT" : 1259,
     "Data & Mathematics" : 815,
     "Education" : 60,
@@ -13,7 +13,7 @@
     "Government, Law & Policy" : 253,
     "Life Sciences & Health" : 1264,
     "Marketing & Communications" : 473,
-    "Other" : 1810,
+    "Other" : 1807,
     "Physical Sciences" : 345,
     "Social Sciences & Psychology" : 46
   },
@@ -26,11 +26,11 @@
       },
       "open" : 498,
       "rejected" : {
-        "no internship keyword in title" : 12263,
+        "no internship keyword in title" : 12257,
         "not a student role" : 2,
-        "outside US" : 91
+        "outside US" : 92
       },
-      "seconds" : 80
+      "seconds" : 84
     },
     "greenhouse" : {
       "units" : {
@@ -43,7 +43,7 @@
         "not a student role" : 33,
         "outside US" : 283
       },
-      "seconds" : 141
+      "seconds" : 154
     },
     "lever" : {
       "units" : {
@@ -56,7 +56,7 @@
         "not a student role" : 5,
         "outside US" : 116
       },
-      "seconds" : 328
+      "seconds" : 260
     },
     "nih" : {
       "units" : {
@@ -74,7 +74,7 @@
       "rejected" : {
         "outside US" : 1
       },
-      "seconds" : 32
+      "seconds" : 18
     },
     "usajobs" : {
       "units" : {
@@ -92,14 +92,14 @@
         "ok" : 1151,
         "skipped" : 22
       },
-      "open" : 9888,
+      "open" : 9883,
       "rejected" : {
-        "no internship keyword in title" : 32877,
+        "no internship keyword in title" : 32823,
         "not a student role" : 126,
-        "outside US" : 4658,
+        "outside US" : 4656,
         "runs the programme" : 2
       },
-      "seconds" : 3623
+      "seconds" : 3558
     }
   },
   "paused" : {
