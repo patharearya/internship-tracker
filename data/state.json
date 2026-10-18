@@ -640,7 +640,7 @@
     "greenhouse:locusrobotics" : 4,
     "greenhouse:logicgate" : 14,
     "greenhouse:lucidbots" : 2,
-    "greenhouse:lucidmotors" : 454,
+    "greenhouse:lucidmotors" : 458,
     "greenhouse:lumosfiber" : 24,
     "greenhouse:lunarenergy" : 24,
     "greenhouse:madisonenergyinfrastructure" : 11,
@@ -670,7 +670,7 @@
     "greenhouse:newsbreak" : 66,
     "greenhouse:newsela" : 13,
     "greenhouse:newtonresearch" : 13,
-    "greenhouse:nice" : 179,
+    "greenhouse:nice" : 181,
     "greenhouse:nimblegravity" : 12,
     "greenhouse:nisc" : 33,
     "greenhouse:nooks" : 10,
@@ -2211,6 +2211,12 @@
       "nextTry" : "2026-10-18T21:27:43Z",
       "lastError" : "IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/atomicsemi",
       "since" : "2026-10-06T03:50:01Z"
+    },
+    "ashby:chainlink-labs" : {
+      "count" : 1,
+      "nextTry" : "2026-10-18T11:48:24Z",
+      "lastError" : "IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/chainlink-labs",
+      "since" : "2026-10-18T10:48:24Z"
     },
     "ashby:conductorone" : {
       "count" : 15,
