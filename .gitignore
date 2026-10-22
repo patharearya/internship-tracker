@@ -6,3 +6,13 @@ site/data
 .impeccable/review/
 .impeccable/questions/
 .impeccable/hook.cache.json
+
+# brag video build: installed tools and intermediate frames
+brag-output/work/node_modules/
+brag-output/work/venv/
+brag-output/work/frames/
+brag-output/work/stills/
+brag-output/work/sheet*.png
+brag-output/work/ffpath.txt
+brag-output/work/audio.wav
+brag-output/work/*.mp4

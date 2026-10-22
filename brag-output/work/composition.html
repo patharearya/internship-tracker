@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Brag composition</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Schibsted+Grotesk:wght@400;500;600&family=Fragment+Mono&display=block" rel="stylesheet">
+<style>
+:root {
+  --ground: #0a0f15; --ground-2: #10161e; --ink: #eef1ec; --ink-2: #aab5c0; --ink-3: #7f8b97;
+  --line: rgba(238, 241, 236, 0.11); --line-2: rgba(238, 241, 236, 0.2);
+  --display: "Bricolage Grotesque", system-ui, sans-serif; --ui: "Schibsted Grotesk", system-ui, sans-serif; --mono: "Fragment Mono", ui-monospace, monospace;
+  --pad: 76px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: var(--ground); color: var(--ink); font: 400 23px/1.55 var(--ui); -webkit-font-smoothing: antialiased; }
+svg { flex: none; }
+#field { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+.scene { position: absolute; inset: 0; opacity: 0; }
+
+/* 1 hook */
+#hook { display: grid; place-content: center; text-align: center; padding-bottom: 260px; }
+#hook .num { font: 600 260px/0.9 var(--display); letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+#hook .cap { font: 500 52px/1.1 var(--display); letter-spacing: -0.015em; color: var(--ink-2); margin-top: 26px; }
+
+/* 2 hero, as on the site */
+.bar { position: absolute; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 30px var(--pad); }
+.mark { display: inline-flex; align-items: center; gap: 14px; font: 600 26px/1 var(--display); letter-spacing: -0.01em; }
+.mark svg { width: 30px; height: 30px; }
+.nav { display: flex; gap: 46px; color: var(--ink-2); font-size: 21px; }
+.lede { position: absolute; left: var(--pad); bottom: 110px; max-width: 1400px; }
+.lede h1 { margin: 0 0 28px; font: 600 128px/0.98 var(--display); letter-spacing: -0.022em; }
+.lede h1 span { display: block; }
+.lede p { margin: 0; color: var(--ink-2); font-size: 27px; max-width: 60ch; }
+.lede p b { color: var(--ink); font-weight: 500; font-family: var(--mono); }
+
+/* 3 fields + rows */
+#browse { padding: 96px var(--pad) 0; }
+#browse h2, #sources h2 { margin: 0; font: 600 84px/1.02 var(--display); letter-spacing: -0.025em; }
+.sub { margin: 14px 0 0; color: var(--ink-2); font-size: 26px; }
+.strip { display: flex; gap: 5px; height: 190px; margin-top: 40px; }
+.strip div { position: relative; flex: var(--g) 1 0; min-width: 10px; border-radius: 13px; background: var(--c); overflow: hidden; transform-origin: bottom; }
+.strip span { position: absolute; left: 15px; right: 10px; bottom: 13px; color: #0a0f15; font: 500 17px/1.2 var(--ui); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.strip span b { display: block; font: 400 16px/1 var(--mono); opacity: .72; margin-bottom: 5px; }
+.rows { list-style: none; margin: 34px 0 0; padding: 0; border-top: 1px solid var(--line); }
+.row { display: grid; grid-template-columns: 170px minmax(0, 1.5fr) minmax(0, .7fr) 220px 40px; gap: 26px; align-items: center; padding: 17px 5px; border-bottom: 1px solid var(--line); }
+.row .when { font: 400 17px/1.3 var(--mono); color: var(--ink); }
+.row .title { font-weight: 500; font-size: 23px; line-height: 1.3; }
+.row .org { color: var(--ink-2); font-size: 20px; }
+.row .kind { display: inline-flex; align-items: center; gap: 9px; font: 400 17px/1 var(--ui); color: var(--ink-3); margin-left: 12px; }
+.row .kind i { width: 9px; height: 9px; border-radius: 50%; background: #6aa9ff; }
+.row .where { color: var(--ink-2); font-size: 20px; }
+.row .due { font: 400 17px/1.3 var(--mono); color: var(--ink-3); white-space: nowrap; }
+.row .due.soon { color: var(--ink); }
+.row svg { width: 26px; height: 26px; color: var(--ink-3); }
+
+/* 4 planner */
+#planner .shot { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; transform-origin: 0 0; }
+#planner .shot img { position: absolute; inset: 0; width: 1440px; height: 900px; }
+.patch { position: absolute; left: 512px; top: 438px; width: 100px; height: 36px; background: var(--ground); font: 500 16px/36px var(--ui); padding-left: 8px; }
+.tick { position: absolute; left: 658px; top: 445px; width: 27px; height: 27px; border-radius: 50%; background: var(--ink); display: grid; place-items: center; }
+.tick svg { width: 15px; height: 15px; }
+.cap-chip { position: absolute; left: var(--pad); bottom: 70px; padding: 22px 34px; border-radius: 999px; background: rgba(16, 22, 30, .92); border: 1px solid var(--line-2); font: 500 34px/1.1 var(--display); letter-spacing: -0.012em; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+.fade-b { position: absolute; left: 0; right: 0; bottom: 0; height: 320px; background: linear-gradient(transparent, var(--ground)); }
+.cursor { position: absolute; left: 0; top: 0; width: 34px; height: 34px; filter: drop-shadow(0 3px 6px rgba(0,0,0,.6)); }
+.ring { position: absolute; width: 60px; height: 60px; margin: -30px 0 0 -30px; border-radius: 50%; border: 2px solid var(--ink); opacity: 0; }
+
+/* 5 sources */
+#sources { padding: 120px var(--pad) 0; }
+.src { margin-top: 50px; border-top: 1px solid var(--line); }
+.src div { display: grid; grid-template-columns: 380px 1fr 150px; gap: 30px; align-items: center; height: 70px; border-bottom: 1px solid var(--line); }
+.src .n { font: 500 28px/1 var(--ui); }
+.src .b { height: 14px; border-radius: 7px; background: var(--ink); transform-origin: left; }
+.src .c { font: 400 24px/1 var(--mono); text-align: right; color: var(--ink-2); }
+.src .kind { color: var(--ink-3); font-size: 19px; font-weight: 400; margin-left: 10px; }
+.tag { margin-top: 44px; font: 500 46px/1.1 var(--display); letter-spacing: -0.015em; color: var(--ink-2); }
+.tag b { color: var(--ink); font-weight: 500; }
+
+/* 6 outro */
+#outro .lede h1 { font-size: 112px; }
+#outro .mark-big { display: flex; align-items: center; gap: 26px; margin-bottom: 26px; }
+#outro .mark-big svg { width: 84px; height: 84px; padding: 16px; border-radius: 22px; background: var(--ground-2); border: 1px solid var(--line-2); }
+#outro .url { font: 400 34px/1.3 var(--mono); color: var(--ink); }
+#outro .free { margin-top: 14px; color: var(--ink-2); font-size: 28px; }
+</style>
+</head>
+<body>
+<canvas id="field" width="1920" height="1080"></canvas>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-mark" viewBox="0 0 24 24"><path d="M3 8c3-2 6 2 9 0s6-2 9 0M3 12c3-2 6 2 9 0s6-2 9 0M3 16c3-2 6 2 9 0s6-2 9 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-cursor" viewBox="0 0 24 24"><path d="M5 3l14 8-6.2 1.6L10 19z" fill="#eef1ec" stroke="#0a0f15" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+</svg>
+
+<section class="scene" id="hook"><div class="num" id="num">0</div><div class="cap">internships open right now.</div></section>
+
+<section class="scene" id="hero">
+  <div class="bar"><span class="mark"><svg><use href="#i-mark"/></svg>Internship &amp; Research Finder</span><nav class="nav"><span>Browse</span><span>How it works</span><span>Planner</span></nav></div>
+  <div class="lede"><h1><span>Internships in your field,</span><span>straight from the source.</span></h1>
+    <p><b>13,362</b> open internships and research programmes from employers' own job boards, USAJOBS, NSF and NIH.</p></div>
+</section>
+
+<section class="scene" id="browse">
+  <h2>Pick a field.</h2>
+  <p class="sub">Each bar is as wide as what's open in it right now.</p>
+  <div class="strip" id="strip"></div>
+  <ul class="rows" id="rows"></ul>
+  <svg class="cursor" id="cur3"><use href="#i-cursor"/></svg><div class="ring" id="ring3"></div>
+</section>
+
+<section class="scene" id="planner">
+  <div class="shot" id="shot"><img src="../../docs/images/planner.png" alt="">
+    <div class="patch" id="patch">Applied</div>
+    <div class="tick" id="tick"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#0a0f15" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <svg class="cursor" id="cur4" style="width:26px;height:26px"><use href="#i-cursor"/></svg><div class="ring" id="ring4" style="width:44px;height:44px;margin:-22px 0 0 -22px"></div>
+  </div>
+  <div class="fade-b"></div>
+  <div class="cap-chip" id="chip">Star a posting. The planner suggests when to apply.</div>
+</section>
+
+<section class="scene" id="sources">
+  <h2>Read from employers' own job boards.</h2>
+  <div class="src" id="src"></div>
+  <p class="tag" id="tag"><b>No aggregators.</b> Checked several times a day.</p>
+</section>
+
+<section class="scene" id="outro">
+  <div class="lede">
+    <div class="mark-big"><svg><use href="#i-mark"/></svg></div>
+    <h1>Internship &amp; Research Finder</h1>
+    <div class="url">patharearya.github.io/internship-tracker</div>
+    <div class="free">Free. No sign-up. Apply on the employer's own page.</div>
+  </div>
+</section>
+
+<script>
+// Every frame is a pure function of t (seconds): render(t) sets the whole page.
+// Counts from data/report.json, run started 2026-10-22 18:32 UTC.
+const TOTAL = 13362;
+const MAJORS = [
+  ["Engineering", 3372, "#f4a259"], ["Business & Management", 1878, "#e6d27e"], ["Finance & Accounting", 1353, "#4fd1a1"],
+  ["Life Sciences & Health", 1324, "#9bdc6b"], ["Computer Science & IT", 1268, "#6aa9ff"], ["Data & Mathematics", 843, "#b892ff"],
+  ["Marketing & Communications", 497, "#ff8fa3"], ["Physical Sciences", 345, "#5fd0e8"], ["Government, Law & Policy", 268, "#d3b58d"],
+  ["Arts, Design & Media", 229, "#ff7a5c"], ["Education", 58, "#ffd34e"], ["Social Sciences & Psychology", 49, "#f0a6e8"], ["Other", 1878, "#8d98a4"]];
+const CS = 4;
+// real postings first seen 2026-10-21/22 under Computer Science & IT (data/postings.json)
+const ROWS = [
+  ["Today", "Software Engineering Intern, Summer 2027", "Crusoe", "San Francisco, CA", "None published", false],
+  ["Today", "Camera Software Intern", "Metalenz", "Boston, MA", "None published", false],
+  ["Today", "Developer Intern, Front-End Platform", "1Password", "Remote (US)", "None published", false],
+  ["Today", "Co-Op, IT Systems Spring & Summer 2027", "Saab", "East Syracuse, NY", "Due Jan 4", false],
+  ["Yesterday", "Cloud Solutions Engineer / Site Reliability Undergrad Intern", "The Aerospace Corporation", "El Segundo, CA", "Due Oct 28 · 6 days", true]];
+const SOURCES = [["Workday", "career sites", 10033], ["Greenhouse", "job boards", 1495], ["NSF", "REU awards", 722], ["Ashby", "job boards", 518],
+  ["Lever", "job boards", 289], ["NIH", "R25 programmes", 221], ["USAJOBS", "federal", 84]];
+
+const $ = s => document.querySelector(s);
+const fmt = n => n.toLocaleString("en-US");
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const p = (t, a, b) => clamp((t - a) / (b - a));
+const out = x => 1 - Math.pow(1 - x, 4);            // close to the site's cubic-bezier(.16,1,.3,1)
+const inout = x => x < .5 ? 8 * x ** 4 : 1 - Math.pow(-2 * x + 2, 4) / 2;
+const mix = (a, b, k) => a + (b - a) * k;
+// a scene's visibility: in over [a, a+fi], out over [b-fo, b]
+const vis = (t, a, b, fi = .4, fo = .3) => out(p(t, a, a + fi)) * (1 - p(t, b - fo, b));
+
+// ---------- build static DOM ----------
+$("#strip").innerHTML = MAJORS.map(([n, c, col], i) => `<div style="--c:${col};--g:${c}" data-i="${i}"><span><b>${fmt(c)}</b>${n}</span></div>`).join("");
+$("#rows").innerHTML = ROWS.map(r => `<li class="row"><span class="when">${r[0]}</span><span><span class="title">${r[1]}</span><br><span class="org">${r[2]}</span><span class="kind"><i></i>Computer Science &amp; IT</span></span><span class="where">${r[3]}</span><span class="due${r[5] ? " soon" : ""}">${r[4]}</span><svg><use href="#i-star"/></svg></li>`).join("");
+$("#src").innerHTML = SOURCES.map(([n, k, c]) => `<div><span class="n">${n}<span class="kind">${k}</span></span><span class="b" style="width:${Math.max(1, c / 10033 * 100)}%"></span><span class="c">${fmt(c)}</span></div>`).join("");
+
+// ---------- the river: the site's own algorithm, one point per open posting, made a pure function of time ----------
+const cv = $("#field"), ctx = cv.getContext("2d"), W = 1920, H = 1080;
+let seed = 7; const rnd = () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let x = Math.imul(seed ^ seed >>> 15, 1 | seed); x = x + Math.imul(x ^ x >>> 7, 61 | x) ^ x; return ((x ^ x >>> 14) >>> 0) / 4294967296; };
+const PTS = new Float32Array(TOTAL * 6), START = [];   // x0, offset in band, speed, scatter x, scatter y, delay
+{ let i = 0; MAJORS.forEach(([, n], bi) => { START[bi] = i; for (let j = 0; j < n; j++, i++) {
+  PTS[i*6] = rnd(); PTS[i*6+1] = (rnd() + rnd() + rnd()) / 3; PTS[i*6+2] = .6 + rnd() * .8; PTS[i*6+3] = rnd(); PTS[i*6+4] = rnd(); PTS[i*6+5] = rnd(); } }); }
+function bands(span) {
+  let y = 0; const b = MAJORS.map(([, n]) => { const h = Math.max(6, span * n / TOTAL), r = { y0: y, h }; y += h; return r; });
+  const k = span / y; b.forEach(r => { r.y0 *= k; r.h *= k; }); return b;
+}
+const bend = (x, T) => Math.sin(x * 3.4 + T * 0.00012 + 0.6) * 0.075 + Math.sin(x * 6.1 - T * 0.00008) * 0.018 + (x - 0.5) * 0.06;
+// river layout per moment: top, span, alpha, convergence (0 scattered .. 1 in streams)
+function riverState(t) {
+  const hook = { top: .63, span: .26, a: .42 }, hero = { top: .12, span: .27, a: .58 }, outro = { top: .14, span: .30, a: .58 };
+  let s = { ...hero };
+  if (t < 3.0) s = { ...hook };
+  else if (t < 4.0) { const k = inout(p(t, 3.0, 4.0)); s = { top: mix(hook.top, hero.top, k), span: mix(hook.span, hero.span, k), a: mix(hook.a, hero.a, k) }; }
+  if (t >= 6.7) s.a = mix(hero.a, .07, inout(p(t, 6.7, 7.2)));
+  if (t >= 11.0) s.a = mix(.07, 0, p(t, 11.0, 11.5));
+  if (t >= 15.2) s.a = mix(0, .07, p(t, 15.2, 15.7));
+  if (t >= 18.3) { const k = inout(p(t, 18.3, 19.3)); s = { top: outro.top, span: outro.span, a: mix(.07, outro.a, k) }; }
+  return s;
+}
+function drawRiver(t) {
+  ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1; ctx.fillStyle = "#0a0f15"; ctx.fillRect(0, 0, W, H);
+  const s = riverState(t); if (s.a <= 0.002) return;
+  const top = H * s.top, B = bands(H * s.span), T = t * 3200;
+  ctx.globalCompositeOperation = "lighter";
+  for (let bi = 0; bi < B.length; bi++) {
+    const b = B[bi]; ctx.fillStyle = MAJORS[bi][2];
+    for (let i = START[bi], end = START[bi] + MAJORS[bi][1]; i < end; i++) {
+      let fx = (PTS[i*6] + 0.011 * PTS[i*6+2] * t) % 1.04 - 0.02;
+      const x = fx * W, y = top + b.y0 + PTS[i*6+1] * b.h + bend(fx, T) * H + Math.sin(fx * 9 + bi + T * 0.0004) * 2.8;
+      const c = out(p(t, PTS[i*6+5] * .9, PTS[i*6+5] * .9 + 1.7));    // converge from scatter during the hook
+      const X = mix(PTS[i*6+3] * W, x, c), Y = mix(PTS[i*6+4] * H, y, c);
+      ctx.globalAlpha = s.a * (0.35 + 0.65 * out(p(t, 0, .5))); ctx.fillRect(X, Y, 1.9, 1.9);
+      ctx.globalAlpha *= .35; ctx.fillRect(X - 4, Y, 4, 1.9);          // the site's short trail
+    }
+  }
+  ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
+}
+
+// ---------- helpers for scene motion ----------
+function show(el, o, dy = 0, sc = 1) { el.style.opacity = o; el.style.transform = `translateY(${dy}px) scale(${sc})`; el.style.visibility = o <= 0.001 ? "hidden" : "visible"; }
+function rise(el, t, a, d = .7, dist = 28) { const k = out(p(t, a, a + d)); el.style.opacity = k; el.style.transform = `translateY(${(1 - k) * dist}px)`; }
+function cursorPath(el, ring, t, from, to, a, b, click, scale = 1) {
+  const k = inout(p(t, a, b)), x = mix(from[0], to[0], k), y = mix(from[1], to[1], k);
+  const press = 1 - .18 * Math.sin(Math.PI * p(t, click, click + .18));
+  el.style.transform = `translate(${x}px, ${y}px) scale(${press})`;
+  const r = p(t, click, click + .5); ring.style.left = to[0] + 4 * scale + "px"; ring.style.top = to[1] + 4 * scale + "px";
+  ring.style.opacity = r > 0 && r < 1 ? (1 - r) * .8 : 0; ring.style.transform = `scale(${.4 + r})`;
+}
+
+window.render = function (t) {
+  drawRiver(t);
+
+  // 1 hook
+  const hook = $("#hook"); show(hook, vis(t, 0, 3.3, .35, .35), -12 * p(t, 3.0, 3.3));
+  $("#num").textContent = fmt(Math.round(TOTAL * out(p(t, .1, 1.5))));
+  rise($("#hook .cap"), t, .7, .6, 20);
+
+  // 2 hero
+  const hero = $("#hero"); show(hero, vis(t, 3.2, 7.0, .3, .3));
+  rise($("#hero .bar"), t, 3.3, .8, -16);
+  const spans = hero.querySelectorAll("h1 span"); rise(spans[0], t, 3.45, .8, 40); rise(spans[1], t, 3.6, .8, 40);
+  rise($("#hero .lede p"), t, 3.95, .7, 24);
+
+  // 3 browse
+  const br = $("#browse"); show(br, vis(t, 7.0, 11.4, .3, .35));
+  rise($("#browse h2"), t, 7.05, .7, 30); rise($("#browse .sub"), t, 7.2, .7, 20);
+  const pick = out(p(t, 8.75, 9.35));
+  $("#strip").querySelectorAll("div").forEach((d, i) => {
+    const g = MAJORS[i][1] * (i === CS ? 1 + .9 * pick : 1);
+    d.style.setProperty("--g", g);
+    d.style.transform = `scaleY(${.04 + .96 * out(p(t, 7.3 + i * .045, 8.4 + i * .045))})`;
+    d.style.opacity = i === CS ? 1 : 1 - .72 * pick;
+  });
+  const bar = $("#strip").children[CS].getBoundingClientRect();
+  cursorPath($("#cur3"), $("#ring3"), t, [1500, 900], [bar.left + bar.width * .5, bar.top + bar.height * .55], 7.9, 8.65, 8.65);
+  $("#cur3").style.opacity = p(t, 7.8, 8.0) * (1 - p(t, 9.4, 9.7));
+  $("#rows").querySelectorAll("li").forEach((li, i) => rise(li, t, 9.1 + i * .08, .7, 22));
+
+  // 4 planner: real screen, scaled 1.2, slow push in
+  const pl = $("#planner"); show(pl, vis(t, 11.3, 15.4, .5, .35));
+  const z = mix(1.2, 1.27, p(t, 11.3, 15.4)), slide = (1 - out(p(t, 11.3, 12.1))) * 70;
+  $("#shot").style.transform = `translate(${960 - 720 * z}px, ${slide - 60 * (z - 1.2) / .07}px) scale(${z})`;
+  const clicked = t >= 13.25;
+  $("#tick").style.opacity = clicked ? 1 : 0; $("#tick").style.transform = `scale(${clicked ? .7 + .3 * out(p(t, 13.25, 13.55)) : .7})`;
+  $("#patch").style.opacity = clicked ? 1 : 0;
+  cursorPath($("#cur4"), $("#ring4"), t, [900, 720], [668, 455], 12.3, 13.15, 13.2, .75);
+  $("#cur4").style.opacity = p(t, 12.2, 12.4) * (1 - p(t, 14.4, 14.7));
+  rise($("#chip"), t, 12.0, .7, 26);
+
+  // 5 sources
+  const so = $("#sources"); show(so, vis(t, 15.4, 18.6, .3, .3));
+  rise($("#sources h2"), t, 15.45, .7, 30);
+  $("#src").querySelectorAll(":scope > div").forEach((d, i) => {
+    rise(d, t, 15.75 + i * .08, .6, 16);
+    d.querySelector(".b").style.transform = `scaleX(${out(p(t, 15.85 + i * .08, 16.75 + i * .08))})`;
+  });
+  rise($("#tag"), t, 16.35, .7, 20);
+
+  // 6 outro
+  const ou = $("#outro"); show(ou, vis(t, 18.7, 99, .3));
+  rise($("#outro .mark-big"), t, 18.8, .7, 24); rise($("#outro h1"), t, 18.95, .8, 36);
+  rise($("#outro .url"), t, 19.2, .7, 20); rise($("#outro .free"), t, 19.35, .7, 20);
+};
+
+window.ready = Promise.all([document.fonts.load("600 80px 'Bricolage Grotesque'"), document.fonts.load("500 80px 'Bricolage Grotesque'"),
+  document.fonts.load("400 20px 'Schibsted Grotesk'"), document.fonts.load("500 20px 'Schibsted Grotesk'"), document.fonts.load("400 20px 'Fragment Mono'"),
+  new Promise(r => { const i = $("#shot img"); i.complete ? r() : i.onload = r; })]).then(() => document.fonts.ready);
+render(+(new URLSearchParams(location.search).get("t") || 6.5));
+</script>
+</body>
+</html>
