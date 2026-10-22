@@ -1,3 +1,7 @@
+[![Launch video: 13,362 internships open right now, one dot each. Click to watch.](brag-output/brag.jpg)](https://github.com/patharearya/internship-tracker/blob/main/brag-output/brag.mp4)
+
+*Click the poster to watch the 21-second launch video.*
+
 # Internship & Research Finder
 
 Live internships and funded research programmes for US college students, read straight from employers' own job boards and federal sources, grouped by major, with a planner to track applying.
