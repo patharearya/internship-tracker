@@ -11,6 +11,24 @@
         ],
         "createdAt": "2026-10-06T04:42:55.106Z",
         "reason": "Claude, verified against desktop.png: the detector reads static HTML and cannot resolve clamp(); h1 renders at 96px and h2 at 56px over 17px body"
+      },
+      {
+        "rule": "tight-leading",
+        "value": "*",
+        "files": [
+          "brag-output/work/composition.html"
+        ],
+        "createdAt": "2026-10-22T23:24:34.190Z",
+        "reason": "Claude: video composition frames; display line heights 0.98/1.02 copy DESIGN.md display/headline tokens, no body text is set tight"
+      },
+      {
+        "rule": "oversized-h1",
+        "value": "*",
+        "files": [
+          "brag-output/work/composition.html"
+        ],
+        "createdAt": "2026-10-22T23:24:34.406Z",
+        "reason": "Claude: video frame, not a page; h1 is the site's own 96px hero headline scaled to 1920 wide for the hero beat"
       }
     ]
   }
