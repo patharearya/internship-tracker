@@ -2245,8 +2245,8 @@
   },
   "failures" : {
     "ashby:atomicsemi" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/atomicsemi",
       "since" : "2026-10-06T03:50:01Z"
     },
@@ -2263,14 +2263,14 @@
       "since" : "2026-10-06T03:50:01Z"
     },
     "ashby:egra" : {
-      "count" : 13,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 14,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/egra",
       "since" : "2026-10-11T08:48:53Z"
     },
     "ashby:genesis-therapeutics" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/genesis-therapeutics",
       "since" : "2026-10-06T03:50:01Z"
     },
@@ -2281,26 +2281,26 @@
       "since" : "2026-10-06T03:50:01Z"
     },
     "ashby:inspiration-commerce-group" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/inspiration-commerce-group",
       "since" : "2026-10-06T03:50:01Z"
     },
     "ashby:latitude" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/latitude",
       "since" : "2026-10-06T03:50:01Z"
     },
     "ashby:lindy" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/lindy",
       "since" : "2026-10-06T03:50:01Z"
     },
     "ashby:mach" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/mach",
       "since" : "2026-10-06T03:50:01Z"
     },
@@ -2311,20 +2311,20 @@
       "since" : "2026-10-16T19:57:25Z"
     },
     "ashby:mentis" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/mentis",
       "since" : "2026-10-06T03:50:01Z"
     },
     "ashby:mtesting.ai" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/mtesting.ai",
       "since" : "2026-10-06T03:50:01Z"
     },
     "ashby:odin-dynamics" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/odin-dynamics",
       "since" : "2026-10-06T03:50:01Z"
     },
@@ -2335,26 +2335,26 @@
       "since" : "2026-10-06T03:50:01Z"
     },
     "ashby:tuesday-lab" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/tuesday-lab",
       "since" : "2026-10-06T03:50:01Z"
     },
     "ashby:veeda-labs" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/veeda-labs",
       "since" : "2026-10-06T03:50:01Z"
     },
     "ashby:whatnot" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.ashbyhq.com/posting-api/job-board/whatnot",
       "since" : "2026-10-06T03:50:01Z"
     },
     "greenhouse:appliedintuition" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/appliedintuition/jobs?content=true",
       "since" : "2026-10-06T03:50:01Z"
     },
@@ -2365,122 +2365,122 @@
       "since" : "2026-10-06T03:50:01Z"
     },
     "greenhouse:arine" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/arine/jobs?content=true",
       "since" : "2026-10-06T03:50:01Z"
     },
     "greenhouse:breezeairways" : {
-      "count" : 12,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 13,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/breezeairways/jobs?content=true",
       "since" : "2026-10-12T15:05:55Z"
     },
     "greenhouse:campusopportunities" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/campusopportunities/jobs?content=true",
       "since" : "2026-10-06T03:50:01Z"
     },
     "greenhouse:capitalrx" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/capitalrx/jobs?content=true",
       "since" : "2026-10-06T03:50:01Z"
     },
     "greenhouse:designmehair" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/designmehair/jobs?content=true",
       "since" : "2026-10-06T03:50:01Z"
     },
     "greenhouse:dustyrobotics" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/dustyrobotics/jobs?content=true",
       "since" : "2026-10-06T03:50:01Z"
     },
     "greenhouse:fireworksai" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/fireworksai/jobs?content=true",
       "since" : "2026-10-06T03:50:01Z"
     },
     "greenhouse:forerunner" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/forerunner/jobs?content=true",
       "since" : "2026-10-06T03:50:01Z"
     },
     "greenhouse:glossgenius" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/glossgenius/jobs?content=true",
       "since" : "2026-10-06T03:50:01Z"
     },
     "greenhouse:ibkr" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/ibkr/jobs?content=true",
       "since" : "2026-10-06T03:50:01Z"
     },
     "greenhouse:iherb" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/iherb/jobs?content=true",
       "since" : "2026-10-06T03:50:01Z"
     },
     "greenhouse:maintainx" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/maintainx/jobs?content=true",
       "since" : "2026-10-06T03:50:01Z"
     },
     "greenhouse:memphismeats" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/memphismeats/jobs?content=true",
       "since" : "2026-10-06T03:50:01Z"
     },
     "greenhouse:mqreferrals" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/mqreferrals/jobs?content=true",
       "since" : "2026-10-06T03:50:01Z"
     },
     "greenhouse:optirtc" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/optirtc/jobs?content=true",
       "since" : "2026-10-06T03:50:01Z"
     },
     "greenhouse:postman" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/postman/jobs?content=true",
       "since" : "2026-10-06T03:50:01Z"
     },
     "greenhouse:rdccareers" : {
-      "count" : 14,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 15,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/rdccareers/jobs?content=true",
       "since" : "2026-10-10T07:05:43Z"
     },
     "greenhouse:seamlessai" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/seamlessai/jobs?content=true",
       "since" : "2026-10-06T03:50:01Z"
     },
     "greenhouse:superbet" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/superbet/jobs?content=true",
       "since" : "2026-10-06T03:50:01Z"
     },
     "greenhouse:transcarent" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://boards-api.greenhouse.io/v1/boards/transcarent/jobs?content=true",
       "since" : "2026-10-06T03:50:01Z"
     },
@@ -2491,74 +2491,74 @@
       "since" : "2026-10-16T19:57:25Z"
     },
     "lever:aifund" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.lever.co/v0/postings/aifund?mode=json",
       "since" : "2026-10-06T03:50:01Z"
     },
     "lever:aprio" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.lever.co/v0/postings/aprio?mode=json",
       "since" : "2026-10-06T03:50:01Z"
     },
     "lever:bestegg" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.lever.co/v0/postings/bestegg?mode=json",
       "since" : "2026-10-06T03:50:01Z"
     },
     "lever:calstart" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.lever.co/v0/postings/calstart?mode=json",
       "since" : "2026-10-06T03:50:01Z"
     },
     "lever:cesiumastro" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.lever.co/v0/postings/cesiumastro?mode=json",
       "since" : "2026-10-06T03:50:01Z"
     },
     "lever:energyvault" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.lever.co/v0/postings/energyvault?mode=json",
       "since" : "2026-10-06T03:50:01Z"
     },
     "lever:grid" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.lever.co/v0/postings/grid?mode=json",
       "since" : "2026-10-06T03:50:01Z"
     },
     "lever:machinalabs" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.lever.co/v0/postings/machinalabs?mode=json",
       "since" : "2026-10-06T03:50:01Z"
     },
     "lever:mbrdna" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.lever.co/v0/postings/mbrdna?mode=json",
       "since" : "2026-10-06T03:50:01Z"
     },
     "lever:njstateofficeofinnovation" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.lever.co/v0/postings/njstateofficeofinnovation?mode=json",
       "since" : "2026-10-06T03:50:01Z"
     },
     "lever:nomagic" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.lever.co/v0/postings/nomagic?mode=json",
       "since" : "2026-10-06T03:50:01Z"
     },
     "lever:quantumworkplace" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.lever.co/v0/postings/quantumworkplace?mode=json",
       "since" : "2026-10-06T03:50:01Z"
     },
@@ -2569,8 +2569,8 @@
       "since" : "2026-10-06T03:50:01Z"
     },
     "lever:saronic" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.lever.co/v0/postings/saronic?mode=json",
       "since" : "2026-10-06T03:50:01Z"
     },
@@ -2581,8 +2581,8 @@
       "since" : "2026-10-24T10:43:04Z"
     },
     "lever:xpansiv" : {
-      "count" : 20,
-      "nextTry" : "2026-10-24T11:23:49Z",
+      "count" : 21,
+      "nextTry" : "2026-10-25T11:38:20Z",
       "lastError" : "IOException: HTTP 404 for https://api.lever.co/v0/postings/xpansiv?mode=json",
       "since" : "2026-10-06T03:50:01Z"
     },
