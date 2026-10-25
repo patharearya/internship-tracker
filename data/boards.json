@@ -2694,12 +2694,6 @@
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
-  "key" : "calyxo",
-  "company" : "Calyxo",
-  "api" : "https://boards-api.greenhouse.io/v1/boards/calyxo/jobs?content=true",
-  "from" : "simplify"
-}, {
-  "system" : "greenhouse",
   "key" : "campusopportunities",
   "company" : "Withum",
   "api" : "https://boards-api.greenhouse.io/v1/boards/campusopportunities/jobs?content=true",
@@ -8304,12 +8298,6 @@
   "from" : "simplify"
 }, {
   "system" : "workday",
-  "key" : "donaldson.wd5.myworkdayjobs.com/donaldsoncareers",
-  "company" : "Donaldson Company",
-  "api" : "https://donaldson.wd5.myworkdayjobs.com/wday/cxs/donaldson/donaldsoncareers",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
   "key" : "doterra.wd1.myworkdayjobs.com/doterracareers",
   "company" : "doTERRA",
   "api" : "https://doterra.wd1.myworkdayjobs.com/wday/cxs/doterra/doTERRACareers",
@@ -9860,7 +9848,7 @@
   "system" : "workday",
   "key" : "kla.wd1.myworkdayjobs.com/search",
   "company" : "KLA",
-  "api" : "https://kla.wd1.myworkdayjobs.com/wday/cxs/kla/search",
+  "api" : "https://kla.wd1.myworkdayjobs.com/wday/cxs/kla/Search",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -10887,12 +10875,6 @@
   "key" : "oregon.wd5.myworkdayjobs.com/sor_external_career_site",
   "company" : "Oregon State Government",
   "api" : "https://oregon.wd5.myworkdayjobs.com/wday/cxs/oregon/sor_external_career_site",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
-  "key" : "orthoclinical.wd1.myworkdayjobs.com/search",
-  "company" : "QuidelOrtho",
-  "api" : "https://orthoclinical.wd1.myworkdayjobs.com/wday/cxs/orthoclinical/Search",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -12739,7 +12721,7 @@
 }, {
   "system" : "workday",
   "key" : "utaustin.wd1.myworkdayjobs.com/utstaff",
-  "company" : "University of Texas - Austin",
+  "company" : "University of Texas at Austin",
   "api" : "https://utaustin.wd1.myworkdayjobs.com/wday/cxs/utaustin/UTstaff",
   "from" : "simplify"
 }, {
@@ -13209,11 +13191,5 @@
   "key" : "zoll.wd5.myworkdayjobs.com/zollmedicalcorp",
   "company" : "ZOLL Medical Corporation",
   "api" : "https://zoll.wd5.myworkdayjobs.com/wday/cxs/zoll/ZOLLMedicalCorp",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
-  "key" : "zoom.wd5.myworkdayjobs.com/zoom",
-  "company" : "Zoom",
-  "api" : "https://zoom.wd5.myworkdayjobs.com/wday/cxs/zoom/zoom",
   "from" : "simplify"
 } ]
