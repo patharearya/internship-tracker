@@ -4104,12 +4104,6 @@
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
-  "key" : "optirtc",
-  "company" : "OptiRTC",
-  "api" : "https://boards-api.greenhouse.io/v1/boards/optirtc/jobs?content=true",
-  "from" : "simplify"
-}, {
-  "system" : "greenhouse",
   "key" : "optiverprivate",
   "company" : "Optiver",
   "api" : "https://boards-api.greenhouse.io/v1/boards/optiverprivate/jobs?content=true",
@@ -8880,12 +8874,6 @@
   "from" : "simplify"
 }, {
   "system" : "workday",
-  "key" : "gcu.wd1.myworkdayjobs.com/gcu",
-  "company" : "Grand Canyon University",
-  "api" : "https://gcu.wd1.myworkdayjobs.com/wday/cxs/gcu/GCU",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
   "key" : "gdit.wd5.myworkdayjobs.com/external_career_site",
   "company" : "General Dynamics Information Technology",
   "api" : "https://gdit.wd5.myworkdayjobs.com/wday/cxs/gdit/external_career_site",
@@ -9024,12 +9012,6 @@
   "from" : "simplify"
 }, {
   "system" : "workday",
-  "key" : "glencorecorp.wd3.myworkdayjobs.com/external",
-  "company" : "Glencore",
-  "api" : "https://glencorecorp.wd3.myworkdayjobs.com/wday/cxs/glencorecorp/External",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
   "key" : "global.wd1.myworkdayjobs.com/globalpartnerscareers",
   "company" : "Global Partners",
   "api" : "https://global.wd1.myworkdayjobs.com/wday/cxs/global/globalpartnerscareers",
@@ -9111,12 +9093,6 @@
   "key" : "granite.wd1.myworkdayjobs.com/careers",
   "company" : "Granite Construction",
   "api" : "https://granite.wd1.myworkdayjobs.com/wday/cxs/granite/careers",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
-  "key" : "graybar.wd1.myworkdayjobs.com/careers",
-  "company" : "Graybar",
-  "api" : "https://graybar.wd1.myworkdayjobs.com/wday/cxs/graybar/Careers",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -13023,12 +12999,6 @@
   "key" : "wexinc.wd5.myworkdayjobs.com/wexinc",
   "company" : "Wex",
   "api" : "https://wexinc.wd5.myworkdayjobs.com/wday/cxs/wexinc/WEXInc",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
-  "key" : "wfscorp.wd5.myworkdayjobs.com/wfscareers",
-  "company" : "World Kinect",
-  "api" : "https://wfscorp.wd5.myworkdayjobs.com/wday/cxs/wfscorp/wfscareers",
   "from" : "simplify"
 }, {
   "system" : "workday",
