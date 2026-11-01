@@ -534,12 +534,6 @@
   "from" : "simplify"
 }, {
   "system" : "ashby",
-  "key" : "deliveroo",
-  "company" : "Deliveroo",
-  "api" : "https://api.ashbyhq.com/posting-api/job-board/deliveroo",
-  "from" : "simplify"
-}, {
-  "system" : "ashby",
   "key" : "designrulesco",
   "company" : "The Design Rules Company",
   "api" : "https://api.ashbyhq.com/posting-api/job-board/designrulesco",
@@ -837,12 +831,6 @@
   "key" : "georgian",
   "company" : "Georgian Partners Growth",
   "api" : "https://api.ashbyhq.com/posting-api/job-board/georgian",
-  "from" : "simplify"
-}, {
-  "system" : "ashby",
-  "key" : "glimp-se",
-  "company" : "Glimpse Engineering",
-  "api" : "https://api.ashbyhq.com/posting-api/job-board/glimp-se",
   "from" : "simplify"
 }, {
   "system" : "ashby",
@@ -2025,12 +2013,6 @@
   "key" : "spaitial",
   "company" : "SpAItial",
   "api" : "https://api.ashbyhq.com/posting-api/job-board/spaitial",
-  "from" : "simplify"
-}, {
-  "system" : "ashby",
-  "key" : "span",
-  "company" : "Span",
-  "api" : "https://api.ashbyhq.com/posting-api/job-board/span",
   "from" : "simplify"
 }, {
   "system" : "ashby",
@@ -5154,12 +5136,6 @@
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
-  "key" : "tatari",
-  "company" : "Tatari",
-  "api" : "https://boards-api.greenhouse.io/v1/boards/tatari/jobs?content=true",
-  "from" : "simplify"
-}, {
-  "system" : "greenhouse",
   "key" : "technergetics",
   "company" : "Technergetics",
   "api" : "https://boards-api.greenhouse.io/v1/boards/technergetics/jobs?content=true",
@@ -6528,21 +6504,9 @@
   "from" : "simplify"
 }, {
   "system" : "lever",
-  "key" : "telligen",
-  "company" : "Telligen",
-  "api" : "https://api.lever.co/v0/postings/telligen?mode=json",
-  "from" : "simplify"
-}, {
-  "system" : "lever",
   "key" : "thea.energy",
   "company" : "Thea Energy",
   "api" : "https://api.lever.co/v0/postings/thea.energy?mode=json",
-  "from" : "simplify"
-}, {
-  "system" : "lever",
-  "key" : "theinformationlab",
-  "company" : "The Information Lab",
-  "api" : "https://api.lever.co/v0/postings/theinformationlab?mode=json",
   "from" : "simplify"
 }, {
   "system" : "lever",
@@ -7932,12 +7896,6 @@
   "from" : "simplify"
 }, {
   "system" : "workday",
-  "key" : "calibercollision.wd1.myworkdayjobs.com/caliber",
-  "company" : "Caliber",
-  "api" : "https://calibercollision.wd1.myworkdayjobs.com/wday/cxs/calibercollision/caliber",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
   "key" : "calibercollision.wd1.myworkdayjobs.com/protech",
   "company" : "Protech Automotive Solutions",
   "api" : "https://calibercollision.wd1.myworkdayjobs.com/wday/cxs/calibercollision/protech",
@@ -8493,12 +8451,6 @@
   "key" : "cox.wd1.myworkdayjobs.com/cox_external_career_site_1",
   "company" : "Cox",
   "api" : "https://cox.wd1.myworkdayjobs.com/wday/cxs/cox/Cox_External_Career_Site_1",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
-  "key" : "coxhealth.wd5.myworkdayjobs.com/coxhealth_external",
-  "company" : "CoxHealth",
-  "api" : "https://coxhealth.wd5.myworkdayjobs.com/wday/cxs/coxhealth/CoxHealth_External",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -10076,7 +10028,7 @@
   "system" : "workday",
   "key" : "jabil.wd5.myworkdayjobs.com/jabil_careers",
   "company" : "Jabil",
-  "api" : "https://jabil.wd5.myworkdayjobs.com/wday/cxs/jabil/Jabil_Careers",
+  "api" : "https://jabil.wd5.myworkdayjobs.com/wday/cxs/jabil/jabil_careers",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -10244,7 +10196,7 @@
   "system" : "workday",
   "key" : "kla.wd1.myworkdayjobs.com/search",
   "company" : "KLA",
-  "api" : "https://kla.wd1.myworkdayjobs.com/wday/cxs/kla/search",
+  "api" : "https://kla.wd1.myworkdayjobs.com/wday/cxs/kla/Search",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -10305,12 +10257,6 @@
   "key" : "largo.wd1.myworkdayjobs.com/external",
   "company" : "City of Largo",
   "api" : "https://largo.wd1.myworkdayjobs.com/wday/cxs/largo/external",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
-  "key" : "lbg.wd3.myworkdayjobs.com/lbg_careers",
-  "company" : "Lloyds Bank",
-  "api" : "https://lbg.wd3.myworkdayjobs.com/wday/cxs/lbg/LBG_Careers",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -11631,12 +11577,6 @@
   "key" : "rakuten.wd1.myworkdayjobs.com/rakutenamericas",
   "company" : "Rakuten International",
   "api" : "https://rakuten.wd1.myworkdayjobs.com/wday/cxs/rakuten/RakutenAmericas",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
-  "key" : "rakuten.wd1.myworkdayjobs.com/rakutenrewards",
-  "company" : "Rakuten",
-  "api" : "https://rakuten.wd1.myworkdayjobs.com/wday/cxs/rakuten/RakutenRewards",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -13239,12 +13179,6 @@
   "key" : "vhr-otsuka.wd1.myworkdayjobs.com/recorexternal",
   "company" : "ReCor Medical",
   "api" : "https://vhr-otsuka.wd1.myworkdayjobs.com/wday/cxs/vhr_otsuka/RecorExternal",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
-  "key" : "vhr-pbs.wd5.myworkdayjobs.com/pbscareers",
-  "company" : "PBS",
-  "api" : "https://vhr-pbs.wd5.myworkdayjobs.com/wday/cxs/vhr_pbs/PBSCareers",
   "from" : "simplify"
 }, {
   "system" : "workday",
