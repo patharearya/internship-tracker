@@ -630,6 +630,12 @@
   "from" : "simplify"
 }, {
   "system" : "ashby",
+  "key" : "engramme",
+  "company" : "Engramme",
+  "api" : "https://api.ashbyhq.com/posting-api/job-board/engramme",
+  "from" : "simplify"
+}, {
+  "system" : "ashby",
   "key" : "envoy",
   "company" : "Envoy",
   "api" : "https://api.ashbyhq.com/posting-api/job-board/envoy",
@@ -1815,6 +1821,12 @@
   "key" : "reflect-orbital",
   "company" : "Reflect Orbital",
   "api" : "https://api.ashbyhq.com/posting-api/job-board/reflect-orbital",
+  "from" : "simplify"
+}, {
+  "system" : "ashby",
+  "key" : "regent",
+  "company" : "REGENT",
+  "api" : "https://api.ashbyhq.com/posting-api/job-board/regent",
   "from" : "simplify"
 }, {
   "system" : "ashby",
@@ -3786,6 +3798,12 @@
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
+  "key" : "hearst",
+  "company" : "Hearst",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/hearst/jobs?content=true",
+  "from" : "simplify"
+}, {
+  "system" : "greenhouse",
   "key" : "hevenaerotech",
   "company" : "Heven AeroTech",
   "api" : "https://boards-api.greenhouse.io/v1/boards/hevenaerotech/jobs?content=true",
@@ -4029,6 +4047,12 @@
   "key" : "jobsatphamily",
   "company" : "Phamily",
   "api" : "https://boards-api.greenhouse.io/v1/boards/jobsatphamily/jobs?content=true",
+  "from" : "simplify"
+}, {
+  "system" : "greenhouse",
+  "key" : "jomboymedia",
+  "company" : "Jomboy Media",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/jomboymedia/jobs?content=true",
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
@@ -4371,6 +4395,12 @@
   "key" : "newtonresearch",
   "company" : "Newton Research",
   "api" : "https://boards-api.greenhouse.io/v1/boards/newtonresearch/jobs?content=true",
+  "from" : "simplify"
+}, {
+  "system" : "greenhouse",
+  "key" : "nex",
+  "company" : "Nex",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/nex/jobs?content=true",
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
@@ -5337,6 +5367,12 @@
   "key" : "vardaspace",
   "company" : "Varda Space",
   "api" : "https://boards-api.greenhouse.io/v1/boards/vardaspace/jobs?content=true",
+  "from" : "simplify"
+}, {
+  "system" : "greenhouse",
+  "key" : "vaticlabs",
+  "company" : "Vatic Investments",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/vaticlabs/jobs?content=true",
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
@@ -7053,6 +7089,12 @@
   "key" : "aoins.wd5.myworkdayjobs.com/autoowners",
   "company" : "Auto-Owners Insurance",
   "api" : "https://aoins.wd5.myworkdayjobs.com/wday/cxs/aoins/AutoOwners",
+  "from" : "simplify"
+}, {
+  "system" : "workday",
+  "key" : "apacheip.wd1.myworkdayjobs.com/apache_careers",
+  "company" : "Apache Industrial",
+  "api" : "https://apacheip.wd1.myworkdayjobs.com/wday/cxs/apacheip/apache_careers",
   "from" : "simplify"
 }, {
   "system" : "workday",
