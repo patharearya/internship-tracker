@@ -2400,12 +2400,6 @@
   "from" : "simplify"
 }, {
   "system" : "ashby",
-  "key" : "worldly",
-  "company" : "Worldly",
-  "api" : "https://api.ashbyhq.com/posting-api/job-board/worldly",
-  "from" : "simplify"
-}, {
-  "system" : "ashby",
   "key" : "xterra ai",
   "company" : "Xterra AI",
   "api" : "https://api.ashbyhq.com/posting-api/job-board/xterra%20ai",
@@ -3651,12 +3645,6 @@
   "key" : "geotab",
   "company" : "Geotab",
   "api" : "https://boards-api.greenhouse.io/v1/boards/geotab/jobs?content=true",
-  "from" : "simplify"
-}, {
-  "system" : "greenhouse",
-  "key" : "gingerlabsinc",
-  "company" : "Notability",
-  "api" : "https://boards-api.greenhouse.io/v1/boards/gingerlabsinc/jobs?content=true",
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
@@ -5076,18 +5064,6 @@
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
-  "key" : "stockx",
-  "company" : "StockX",
-  "api" : "https://boards-api.greenhouse.io/v1/boards/stockx/jobs?content=true",
-  "from" : "simplify"
-}, {
-  "system" : "greenhouse",
-  "key" : "strandtherapeutics",
-  "company" : "Strand Therapeutics",
-  "api" : "https://boards-api.greenhouse.io/v1/boards/strandtherapeutics/jobs?content=true",
-  "from" : "simplify"
-}, {
-  "system" : "greenhouse",
   "key" : "stratacareers",
   "company" : "Strata Decision Technology",
   "api" : "https://boards-api.greenhouse.io/v1/boards/stratacareers/jobs?content=true",
@@ -6372,12 +6348,6 @@
   "from" : "simplify"
 }, {
   "system" : "lever",
-  "key" : "secureframe",
-  "company" : "Secureframe",
-  "api" : "https://api.lever.co/v0/postings/secureframe?mode=json",
-  "from" : "simplify"
-}, {
-  "system" : "lever",
   "key" : "sep",
   "company" : "SEP",
   "api" : "https://api.lever.co/v0/postings/sep?mode=json",
@@ -7080,21 +7050,9 @@
   "from" : "simplify"
 }, {
   "system" : "workday",
-  "key" : "aristocrat.wd3.myworkdayjobs.com/aristocratexternalcareerssite",
-  "company" : "Aristocrat Leisure",
-  "api" : "https://aristocrat.wd3.myworkdayjobs.com/wday/cxs/aristocrat/aristocratexternalcareerssite",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
   "key" : "arlo.wd12.myworkdayjobs.com/external_careers",
   "company" : "Arlo Technologies",
   "api" : "https://arlo.wd12.myworkdayjobs.com/wday/cxs/arlo/external_careers",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
-  "key" : "arraytechinc.wd5.myworkdayjobs.com/array_careers",
-  "company" : "ARRAY Technologies",
-  "api" : "https://arraytechinc.wd5.myworkdayjobs.com/wday/cxs/arraytechinc/Array_Careers",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -7551,12 +7509,6 @@
   "key" : "beigene.wd5.myworkdayjobs.com/beigene",
   "company" : "BeOne",
   "api" : "https://beigene.wd5.myworkdayjobs.com/wday/cxs/beigene/beigene",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
-  "key" : "belk.wd1.myworkdayjobs.com/careers",
-  "company" : "Belk",
-  "api" : "https://belk.wd1.myworkdayjobs.com/wday/cxs/belk/careers",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -9588,12 +9540,6 @@
   "from" : "simplify"
 }, {
   "system" : "workday",
-  "key" : "henryschein.wd1.myworkdayjobs.com/external_careers",
-  "company" : "Henry Schein",
-  "api" : "https://henryschein.wd1.myworkdayjobs.com/wday/cxs/henryschein/External_Careers",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
   "key" : "highmarkhealth.wd1.myworkdayjobs.com/highmark",
   "company" : "Highmark Health",
   "api" : "https://highmarkhealth.wd1.myworkdayjobs.com/wday/cxs/highmarkhealth/highmark",
@@ -11196,12 +11142,6 @@
   "from" : "simplify"
 }, {
   "system" : "workday",
-  "key" : "osv-tifec.wd5.myworkdayjobs.com/fanthreesixty",
-  "company" : "FanThreeSixty",
-  "api" : "https://osv-tifec.wd5.myworkdayjobs.com/wday/cxs/osv_tifec/fanthreesixty",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
   "key" : "otis.wd504.myworkdayjobs.com/rec_ext_gateway",
   "company" : "Otis",
   "api" : "https://otis.wd504.myworkdayjobs.com/wday/cxs/otis/REC_Ext_Gateway",
@@ -11880,12 +11820,6 @@
   "from" : "simplify"
 }, {
   "system" : "workday",
-  "key" : "salesforce.wd12.myworkdayjobs.com/salesforce_research",
-  "company" : "Salesforce",
-  "api" : "https://salesforce.wd12.myworkdayjobs.com/wday/cxs/salesforce/Salesforce_Research",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
   "key" : "sallie-mae.wd5.myworkdayjobs.com/careers",
   "company" : "Sallie Mae",
   "api" : "https://sallie-mae.wd5.myworkdayjobs.com/wday/cxs/sallie_mae/Careers",
@@ -11949,12 +11883,6 @@
   "key" : "scgov.wd5.myworkdayjobs.com/scgov",
   "company" : "Sarasota County",
   "api" : "https://scgov.wd5.myworkdayjobs.com/wday/cxs/scgov/SCGOV",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
-  "key" : "schnucks.wd5.myworkdayjobs.com/schnuckscareers",
-  "company" : "Schnucks",
-  "api" : "https://schnucks.wd5.myworkdayjobs.com/wday/cxs/schnucks/SchnucksCareers",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -12674,7 +12602,7 @@
   "system" : "workday",
   "key" : "tmobile.wd1.myworkdayjobs.com/external",
   "company" : "T-Mobile",
-  "api" : "https://tmobile.wd1.myworkdayjobs.com/wday/cxs/tmobile/external",
+  "api" : "https://tmobile.wd1.myworkdayjobs.com/wday/cxs/tmobile/External",
   "from" : "simplify"
 }, {
   "system" : "workday",
