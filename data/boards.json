@@ -3492,12 +3492,6 @@
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
-  "key" : "forerunner",
-  "company" : "Forerunner",
-  "api" : "https://boards-api.greenhouse.io/v1/boards/forerunner/jobs?content=true",
-  "from" : "simplify"
-}, {
-  "system" : "greenhouse",
   "key" : "formic",
   "company" : "Formic",
   "api" : "https://boards-api.greenhouse.io/v1/boards/formic/jobs?content=true",
@@ -4632,12 +4626,6 @@
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
-  "key" : "prolaio",
-  "company" : "Prolaio",
-  "api" : "https://boards-api.greenhouse.io/v1/boards/prolaio/jobs?content=true",
-  "from" : "simplify"
-}, {
-  "system" : "greenhouse",
   "key" : "prophet",
   "company" : "Prophet",
   "api" : "https://boards-api.greenhouse.io/v1/boards/prophet/jobs?content=true",
@@ -5676,12 +5664,6 @@
   "from" : "simplify"
 }, {
   "system" : "lever",
-  "key" : "bioagilytix",
-  "company" : "BioAgilytix",
-  "api" : "https://api.lever.co/v0/postings/bioagilytix?mode=json",
-  "from" : "simplify"
-}, {
-  "system" : "lever",
   "key" : "bluerocktx",
   "company" : "BlueRock Therapeutics",
   "api" : "https://api.lever.co/v0/postings/bluerocktx?mode=json",
@@ -5967,12 +5949,6 @@
   "key" : "grid",
   "company" : "Grid",
   "api" : "https://api.lever.co/v0/postings/grid?mode=json",
-  "from" : "simplify"
-}, {
-  "system" : "lever",
-  "key" : "hannaandersson",
-  "company" : "Hanna Andersson",
-  "api" : "https://api.lever.co/v0/postings/hannaandersson?mode=json",
   "from" : "simplify"
 }, {
   "system" : "lever",
@@ -9084,12 +9060,6 @@
   "from" : "simplify"
 }, {
   "system" : "workday",
-  "key" : "freseniusglobal.wd3.myworkdayjobs.com/fk_careers",
-  "company" : "Fresenius Kabi",
-  "api" : "https://freseniusglobal.wd3.myworkdayjobs.com/wday/cxs/freseniusglobal/FK_Careers",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
   "key" : "freseniusmedicalcare.wd3.myworkdayjobs.com/fme",
   "company" : "Fresenius Medical Care",
   "api" : "https://freseniusmedicalcare.wd3.myworkdayjobs.com/wday/cxs/freseniusmedicalcare/fme",
@@ -9225,12 +9195,6 @@
   "key" : "genpt.wd1.myworkdayjobs.com/careers",
   "company" : "Genuine Parts Company",
   "api" : "https://genpt.wd1.myworkdayjobs.com/wday/cxs/genpt/Careers",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
-  "key" : "gensler.wd1.myworkdayjobs.com/genslercareers",
-  "company" : "Gensler",
-  "api" : "https://gensler.wd1.myworkdayjobs.com/wday/cxs/gensler/genslercareers",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -9962,7 +9926,7 @@
   "system" : "workday",
   "key" : "jci.wd5.myworkdayjobs.com/jci",
   "company" : "Johnson Controls",
-  "api" : "https://jci.wd5.myworkdayjobs.com/wday/cxs/jci/JCI",
+  "api" : "https://jci.wd5.myworkdayjobs.com/wday/cxs/jci/jci",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -10035,12 +9999,6 @@
   "key" : "juliusbaer.wd3.myworkdayjobs.com/external",
   "company" : "Julius Baer",
   "api" : "https://juliusbaer.wd3.myworkdayjobs.com/wday/cxs/juliusbaer/External",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
-  "key" : "justfab.wd1.myworkdayjobs.com/savagex",
-  "company" : "Savage X Fenty",
-  "api" : "https://justfab.wd1.myworkdayjobs.com/wday/cxs/justfab/savagex",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -10866,12 +10824,6 @@
   "from" : "simplify"
 }, {
   "system" : "workday",
-  "key" : "netflix.wd108.myworkdayjobs.com/netflix",
-  "company" : "Netflix",
-  "api" : "https://netflix.wd108.myworkdayjobs.com/wday/cxs/netflix/Netflix",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
   "key" : "newbalance.wd1.myworkdayjobs.com/careers",
   "company" : "New Balance",
   "api" : "https://newbalance.wd1.myworkdayjobs.com/wday/cxs/newbalance/careers",
@@ -11337,12 +11289,6 @@
   "key" : "polarsemi.wd501.myworkdayjobs.com/polar",
   "company" : "Polar Semiconductor",
   "api" : "https://polarsemi.wd501.myworkdayjobs.com/wday/cxs/polarsemi/Polar",
-  "from" : "simplify"
-}, {
-  "system" : "workday",
-  "key" : "premera.wd5.myworkdayjobs.com/premera",
-  "company" : "Premera Blue Cross",
-  "api" : "https://premera.wd5.myworkdayjobs.com/wday/cxs/premera/premera",
   "from" : "simplify"
 }, {
   "system" : "workday",
