@@ -696,6 +696,12 @@
   "from" : "simplify"
 }, {
   "system" : "ashby",
+  "key" : "f40d14d9-07f4-403d-802b-37453deccf0a",
+  "company" : "Klaviyo",
+  "api" : "https://api.ashbyhq.com/posting-api/job-board/f40d14d9-07f4-403d-802b-37453deccf0a",
+  "from" : "simplify"
+}, {
+  "system" : "ashby",
   "key" : "f7d8749a-72d6-407c-bf98-292ea630c73a",
   "company" : "Shield AI",
   "api" : "https://api.ashbyhq.com/posting-api/job-board/f7d8749a-72d6-407c-bf98-292ea630c73a",
@@ -1372,6 +1378,12 @@
   "company" : "Morning Consult",
   "api" : "https://api.ashbyhq.com/posting-api/job-board/morningconsult",
   "from" : "hand"
+}, {
+  "system" : "ashby",
+  "key" : "mossrobotics",
+  "company" : "Moss",
+  "api" : "https://api.ashbyhq.com/posting-api/job-board/mossrobotics",
+  "from" : "simplify"
 }, {
   "system" : "ashby",
   "key" : "mtesting.ai",
@@ -2205,6 +2217,12 @@
   "key" : "tonal",
   "company" : "Tonal",
   "api" : "https://api.ashbyhq.com/posting-api/job-board/tonal",
+  "from" : "simplify"
+}, {
+  "system" : "ashby",
+  "key" : "tonicai",
+  "company" : "Tonic",
+  "api" : "https://api.ashbyhq.com/posting-api/job-board/tonicai",
   "from" : "simplify"
 }, {
   "system" : "ashby",
@@ -4047,6 +4065,12 @@
   "key" : "k2spacecorporation",
   "company" : "K2 Space",
   "api" : "https://boards-api.greenhouse.io/v1/boards/k2spacecorporation/jobs?content=true",
+  "from" : "simplify"
+}, {
+  "system" : "greenhouse",
+  "key" : "kasa",
+  "company" : "Kasa Living",
+  "api" : "https://boards-api.greenhouse.io/v1/boards/kasa/jobs?content=true",
   "from" : "simplify"
 }, {
   "system" : "greenhouse",
@@ -6186,6 +6210,12 @@
   "from" : "simplify"
 }, {
   "system" : "lever",
+  "key" : "pivotal",
+  "company" : "Pivotal Aero",
+  "api" : "https://api.lever.co/v0/postings/pivotal?mode=json",
+  "from" : "simplify"
+}, {
+  "system" : "lever",
   "key" : "pivotenergy",
   "company" : "Pivot Energy",
   "api" : "https://api.lever.co/v0/postings/pivotenergy?mode=json",
@@ -7143,6 +7173,12 @@
   "key" : "athene.wd5.myworkdayjobs.com/athene_careers",
   "company" : "Athene",
   "api" : "https://athene.wd5.myworkdayjobs.com/wday/cxs/athene/athene_careers",
+  "from" : "simplify"
+}, {
+  "system" : "workday",
+  "key" : "atriumhospitality.wd5.myworkdayjobs.com/atriumhospitality",
+  "company" : "Atrium Hospitality",
+  "api" : "https://atriumhospitality.wd5.myworkdayjobs.com/wday/cxs/atriumhospitality/atriumhospitality",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -9297,6 +9333,12 @@
   "key" : "gnw.wd1.myworkdayjobs.com/gnw",
   "company" : "Genworth Financial",
   "api" : "https://gnw.wd1.myworkdayjobs.com/wday/cxs/gnw/GNW",
+  "from" : "simplify"
+}, {
+  "system" : "workday",
+  "key" : "godirect.wd5.myworkdayjobs.com/voya_jobs",
+  "company" : "Voya Financial",
+  "api" : "https://godirect.wd5.myworkdayjobs.com/wday/cxs/godirect/voya_jobs",
   "from" : "simplify"
 }, {
   "system" : "workday",
@@ -12963,6 +13005,12 @@
   "key" : "vermeer.wd5.myworkdayjobs.com/externalcareersite",
   "company" : "Vermeer",
   "api" : "https://vermeer.wd5.myworkdayjobs.com/wday/cxs/vermeer/externalcareersite",
+  "from" : "simplify"
+}, {
+  "system" : "workday",
+  "key" : "veteransunited.wd1.myworkdayjobs.com/vuhl",
+  "company" : "Veterans United",
+  "api" : "https://veteransunited.wd1.myworkdayjobs.com/wday/cxs/veteransunited/VUHL",
   "from" : "simplify"
 }, {
   "system" : "workday",
